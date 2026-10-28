@@ -1,0 +1,14 @@
+{
+  "project_id": "6bb60fc3-5755-4996-8261-068b6fbfb8ff",
+  "project_title": "Mitraca MSA",
+  "project_description": "Mitraca Manajemen Sistem Agent",
+  "resources": [
+    {
+      "id": "35101a84-da70-4ca3-9d16-9794b7c4c58c",
+      "resource_type": "github_repo",
+      "resource_ref": {
+        "url": "https://github.com/OmPio25/MitracaMSA"
+      }
+    }
+  ]
+}
