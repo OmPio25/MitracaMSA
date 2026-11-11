@@ -1026,7 +1026,7 @@ export default function ExplorerPage() {
               <table className="w-full text-left text-xs">
                 <thead className="bg-slate-50/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
                   <tr>
-                    <th className="py-3.5 px-4">No. Klaim & No. Polis</th>
+                    <th className="py-3.5 px-4">No. Polis & No. Klaim</th>
                     <th className="py-3.5 px-4">Tgl Settlement</th>
                     <th className="py-3.5 px-4">UW Year</th>
                     <th className="py-3.5 px-4">Sebab Klaim (Cause of Loss)</th>
@@ -1069,11 +1069,11 @@ export default function ExplorerPage() {
                               </span>
                             )}
                           </div>
-                          <span className="font-bold text-slate-900 dark:text-slate-100 block truncate max-w-[170px]" title={row.claimNo}>
-                            {row.claimNo}
+                          <span className="font-bold text-slate-900 dark:text-slate-100 block truncate max-w-[170px]" title={row.policyNo}>
+                            {row.policyNo}
                           </span>
-                          <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate max-w-[170px]" title={row.policyNo}>
-                            Polis: {row.policyNo}
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate max-w-[170px]" title={row.claimNo}>
+                            Klaim: {row.claimNo}
                           </span>
                         </td>
 
