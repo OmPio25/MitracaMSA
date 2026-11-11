@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ─── Org Chart Hierarchical Tree CSS ─────────────────────────────────────── */
+.org-tree {
+  display: flex;
+  justify-content: center;
+  width: max-content;
+  min-width: 100%;
+}
+
+.org-tree ul {
+  padding-top: 24px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding-left: 0;
+}
+
+.org-tree li {
+  list-style-type: none;
+  position: relative;
+  padding: 24px 14px 0 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Connectors from parent down to children horizontal line */
+.org-tree li::before,
+.org-tree li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 2px solid #94a3b8;
+  width: 50%;
+  height: 24px;
+}
+
+.org-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 2px solid #94a3b8;
+}
+
+/* Only child needs no horizontal connector */
+.org-tree li:only-child::after,
+.org-tree li:only-child::before {
+  display: none;
+}
+.org-tree li:only-child {
+  padding-top: 0;
+}
+
+.org-tree li:first-child::before,
+.org-tree li:last-child::after {
+  border: 0 none;
+}
+
+.org-tree li:last-child::before {
+  border-right: 2px solid #94a3b8;
+  border-radius: 0 8px 0 0;
+}
+
+.org-tree li:first-child::after {
+  border-radius: 8px 0 0 0;
+}
+
+/* Vertical connector dropping down from parent node */
+.org-tree ul ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 2px solid #94a3b8;
+  width: 0;
+  height: 24px;
+  transform: translateX(-50%);
+}
