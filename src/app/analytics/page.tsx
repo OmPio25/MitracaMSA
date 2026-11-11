@@ -219,7 +219,7 @@ export default function AnalyticsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50/50 py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <main className="min-h-screen bg-slate-50/50 dark:bg-[#0b0f19] py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* ── Page Header ──────────────────────────────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
@@ -228,10 +228,10 @@ export default function AnalyticsPage() {
               <BarChart2 className="w-6 h-6" />
             </span>
             <div>
-              <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
                 Analitik Produksi & Loss Ratio
               </h1>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Monitoring risiko underwriting, rasio klaim, dan portofolio keagenan
               </p>
             </div>
@@ -243,7 +243,7 @@ export default function AnalyticsPage() {
             <button
               onClick={() => handleApplyFilter()}
               disabled={isLoading}
-              className="flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-xs font-semibold shadow-sm transition disabled:opacity-50"
+              className="flex items-center gap-2 px-3.5 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl text-xs font-semibold shadow-sm transition disabled:opacity-50 cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
               Segarkan Data
@@ -254,8 +254,8 @@ export default function AnalyticsPage() {
 
       {/* ── Error Banner ─────────────────────────────────────────────────────── */}
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+        <div className="mb-6 p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
           <span>{error}</span>
         </div>
       )}
@@ -295,20 +295,20 @@ export default function AnalyticsPage() {
       {/* ── Konten Dashboard ─────────────────────────────────────────────────── */}
       {!hasAppliedFilter ? (
         /* Tampilan Awal: Data Belum Ditampilkan */
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-12 text-center shadow-sm">
-          <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-4 border border-blue-100 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-12 text-center shadow-sm">
+          <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto mb-4 border border-blue-100 dark:border-blue-800 shadow-sm">
             <Filter className="w-8 h-8" />
           </div>
-          <h3 className="text-base font-bold text-slate-900">
+          <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
             Data Belum Ditampilkan
           </h3>
-          <p className="text-xs text-slate-500 max-w-md mx-auto mt-2 leading-relaxed">
-            Silakan atur parameter filter pada panel di atas (Tahun Cutoff, Cabang, Kode Agen, atau UW Year), kemudian klik tombol <strong className="text-blue-600 font-semibold">Terapkan Filter</strong> (atau tekan tombol Enter saat memasukkan kode agen) untuk menghitung dan menampilkan laporan.
+          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto mt-2 leading-relaxed">
+            Silakan atur parameter filter pada panel di atas (Tahun Cutoff, Cabang, Kode Agen, atau UW Year), kemudian klik tombol <strong className="text-blue-600 dark:text-blue-400 font-semibold">Terapkan Filter</strong> (atau tekan tombol Enter saat memasukkan kode agen) untuk menghitung dan menampilkan laporan.
           </p>
           <div className="mt-6">
             <button
               onClick={handleApplyFilter}
-              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-sm hover:shadow transition inline-flex items-center gap-2"
+              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-sm hover:shadow transition inline-flex items-center gap-2 cursor-pointer"
             >
               <span>Terapkan Filter Sekarang</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -317,22 +317,22 @@ export default function AnalyticsPage() {
         </div>
       ) : isLoading ? (
         /* Loading Spinner */
-        <div className="bg-white rounded-2xl border border-slate-200 p-16 text-center shadow-sm">
-          <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-3" />
-          <h3 className="text-sm font-bold text-slate-800">Menghitung Agregasi Data & Loss Ratio...</h3>
-          <p className="text-xs text-slate-500 mt-1">Memproses transaksi polis dan klaim sesuai filter yang diterapkan</p>
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-16 text-center shadow-sm">
+          <RefreshCw className="w-8 h-8 text-blue-600 dark:text-blue-400 animate-spin mx-auto mb-3" />
+          <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">Menghitung Agregasi Data & Loss Ratio...</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Memproses transaksi polis dan klaim sesuai filter yang diterapkan</p>
         </div>
       ) : data ? (
         /* Data Analitik & Loss Ratio */
         <>
           {/* Target Agen Banner jika filter agen aktif */}
           {data.filter?.targetAgent && (
-            <div className="mb-6 p-4 rounded-xl bg-blue-50/80 border border-blue-200 flex items-center justify-between text-xs">
+            <div className="mb-6 p-4 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 flex items-center justify-between text-xs">
               <div className="flex items-center gap-2">
-                <span className="font-bold text-blue-900">
+                <span className="font-bold text-blue-900 dark:text-blue-200">
                   Agen Target: [{data.filter.targetAgent.agentCode}] {data.filter.targetAgent.name}
                 </span>
-                <span className="text-blue-700">
+                <span className="text-blue-700 dark:text-blue-300">
                   {data.filter.includeDownlines ? '(Termasuk Seluruh Downline Agensi)' : '(Hanya Agen Ini / Direct)'}
                 </span>
               </div>
@@ -341,13 +341,13 @@ export default function AnalyticsPage() {
 
           {/* Banner Informasi Jika Belum Ada Data Transaksi (Produksi / Klaim) */}
           {(data.kpi.totalPremi === 0 || data.kpi.totalClaim === 0) && (
-            <div className="mb-6 p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-amber-900 flex items-start gap-3 shadow-xs">
-              <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <div className="mb-6 p-4 rounded-2xl bg-amber-50/90 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 flex items-start gap-3 shadow-xs">
+              <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-bold text-xs uppercase tracking-wider text-amber-900">
+                <h4 className="font-bold text-xs uppercase tracking-wider text-amber-900 dark:text-amber-200">
                   Status Data Transaksi
                 </h4>
-                <p className="text-xs text-amber-800 mt-0.5 leading-relaxed">
+                <p className="text-xs text-amber-800 dark:text-amber-300 mt-0.5 leading-relaxed">
                   {data.diagnostics?.emptyReason ||
                     (userSession?.role === 'KACAB' || userSession?.role === 'PIC_CABANG'
                       ? `Belum ada data transaksi produksi maupun klaim untuk Cabang ${userSession.branchName || ''} pada periode Cutoff ini.`
@@ -355,7 +355,7 @@ export default function AnalyticsPage() {
                       ? `Belum ada data produksi maupun klaim untuk jaringan agen Anda (${userSession.agentCode || userSession.parentAgentCode || ''}) pada periode Cutoff ini.`
                       : 'Belum ada transaksi produksi maupun klaim yang tercatat pada filter ini.')}
                 </p>
-                <p className="text-[11px] text-amber-700 mt-1">
+                <p className="text-[11px] text-amber-700 dark:text-amber-400 mt-1">
                   Data analitik dan rasio klaim akan otomatis terbarui begitu file transaksi diunggah oleh Administrator.
                 </p>
               </div>
@@ -371,8 +371,8 @@ export default function AnalyticsPage() {
                 <div
                   className={`mb-6 p-4 rounded-2xl border shadow-xs transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                     isPersonal
-                      ? 'bg-gradient-to-r from-amber-500/10 via-amber-50/70 to-orange-50/40 border-amber-200/90 text-amber-950'
-                      : 'bg-gradient-to-r from-blue-500/10 via-blue-50/70 to-indigo-50/40 border-blue-200/90 text-blue-950'
+                      ? 'bg-gradient-to-r from-amber-500/10 via-amber-50/70 to-orange-50/40 dark:from-amber-950/40 dark:via-slate-900 dark:to-orange-950/30 border-amber-200/90 dark:border-amber-900/60 text-amber-950 dark:text-amber-200'
+                      : 'bg-gradient-to-r from-blue-500/10 via-blue-50/70 to-indigo-50/40 dark:from-blue-950/40 dark:via-slate-900 dark:to-indigo-950/30 border-blue-200/90 dark:border-blue-900/60 text-blue-950 dark:text-blue-200'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -384,12 +384,12 @@ export default function AnalyticsPage() {
                       {isPersonal ? <User className="w-5 h-5" /> : <Users className="w-5 h-5" />}
                     </div>
                     <div>
-                      <h4 className="text-xs font-black uppercase tracking-wider">
+                      <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-slate-100">
                         {isPersonal
                           ? 'Ringkasan Portofolio Personal (Pribadi Agen)'
                           : 'Ringkasan Portofolio Group (Leader + Downline)'}
                       </h4>
-                      <p className="text-xs text-slate-600 mt-0.5">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                         {isPersonal
                           ? `Metrik KPI dan grafik di bawah khusus menampilkan transaksi atas nama akun pribadi Anda [${userSession?.agentCode || userSession?.parentAgentCode || '-'}] ${userSession?.name || ''}.`
                           : `Metrik KPI dan grafik di bawah menampilkan akumulasi transaksi gabungan seluruh jaringan tim keagenan Anda.`}
@@ -398,14 +398,14 @@ export default function AnalyticsPage() {
                   </div>
 
                   {/* Quick Switcher Personal vs Group Tab */}
-                  <div className="flex items-center gap-1.5 p-1 bg-white/90 rounded-xl border border-slate-200/80 shadow-xs shrink-0">
+                  <div className="flex items-center gap-1.5 p-1 bg-white/90 dark:bg-slate-950 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-xs shrink-0">
                     <button
                       type="button"
                       onClick={() => setActiveTableTab('branch')}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
                         isPersonal
                           ? 'bg-amber-600 text-white shadow-sm'
-                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
                       }`}
                     >
                       <User className="w-3.5 h-3.5" />
@@ -414,10 +414,10 @@ export default function AnalyticsPage() {
                     <button
                       type="button"
                       onClick={() => setActiveTableTab('agent')}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
                         !isPersonal
                           ? 'bg-blue-600 text-white shadow-sm'
-                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
                       }`}
                     >
                       <Users className="w-3.5 h-3.5" />
@@ -435,8 +435,8 @@ export default function AnalyticsPage() {
                 <div
                   className={`mb-6 p-4 rounded-2xl border shadow-xs transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                     isTargetPersonal
-                      ? 'bg-gradient-to-r from-amber-500/10 via-amber-50/70 to-orange-50/40 border-amber-200/90 text-amber-950'
-                      : 'bg-gradient-to-r from-indigo-500/10 via-indigo-50/70 to-purple-50/40 border-indigo-200/90 text-indigo-950'
+                      ? 'bg-gradient-to-r from-amber-500/10 via-amber-50/70 to-orange-50/40 dark:from-amber-950/40 dark:via-slate-900 dark:to-orange-950/30 border-amber-200/90 dark:border-amber-900/60 text-amber-950 dark:text-amber-200'
+                      : 'bg-gradient-to-r from-indigo-500/10 via-indigo-50/70 to-purple-50/40 dark:from-indigo-950/40 dark:via-slate-900 dark:to-purple-950/30 border-indigo-200/90 dark:border-indigo-900/60 text-indigo-950 dark:text-indigo-200'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -448,12 +448,12 @@ export default function AnalyticsPage() {
                       {isTargetPersonal ? <User className="w-5 h-5" /> : <Users className="w-5 h-5" />}
                     </div>
                     <div>
-                      <h4 className="text-xs font-black uppercase tracking-wider">
+                      <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-slate-100">
                         {isTargetPersonal
                           ? `Ringkasan Portofolio Personal Target: [${data.filter.targetAgent.agentCode}] ${data.filter.targetAgent.name}`
                           : `Ringkasan Portofolio Group Target: [${data.filter.targetAgent.agentCode}] ${data.filter.targetAgent.name}`}
                       </h4>
-                      <p className="text-xs text-slate-600 mt-0.5">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                         {isTargetPersonal
                           ? `Metrik KPI dan grafik di bawah khusus menampilkan transaksi pribadi agen target (tanpa downline).`
                           : `Metrik KPI dan grafik di bawah menampilkan akumulasi transaksi tim keagenan (leader + downline).`}
@@ -462,14 +462,14 @@ export default function AnalyticsPage() {
                   </div>
 
                   {/* Quick Switcher Target Personal vs Group Tab */}
-                  <div className="flex items-center gap-1.5 p-1 bg-white/90 rounded-xl border border-slate-200/80 shadow-xs shrink-0">
+                  <div className="flex items-center gap-1.5 p-1 bg-white/90 dark:bg-slate-950 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-xs shrink-0">
                     <button
                       type="button"
                       onClick={() => setActiveTableTab('targetPersonal')}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
                         isTargetPersonal
                           ? 'bg-amber-600 text-white shadow-sm'
-                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
                       }`}
                     >
                       <User className="w-3.5 h-3.5" />
@@ -478,10 +478,10 @@ export default function AnalyticsPage() {
                     <button
                       type="button"
                       onClick={() => setActiveTableTab('targetGroup')}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
                         !isTargetPersonal
                           ? 'bg-indigo-600 text-white shadow-sm'
-                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
                       }`}
                     >
                       <Users className="w-3.5 h-3.5" />

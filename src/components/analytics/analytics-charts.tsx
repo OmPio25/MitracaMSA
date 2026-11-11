@@ -154,7 +154,7 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
       {/* ─────────────────────────────────────────────────────────────────────
           1. Grafik Tren Bulanan: Dual Line Chart (Premi MM vs Klaim MM)
       ──────────────────────────────────────────────────────────────────────── */}
-      <div className="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm relative flex flex-col justify-between">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm relative flex flex-col justify-between">
         <div>
           <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2">
@@ -162,7 +162,7 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
                 <TrendingUp className="w-4 h-4" />
               </span>
               <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-sm">Tren Bulanan: Premi MM vs Klaim MM</h3>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Tren Bulanan: Premi MM vs Klaim MM</h3>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400">Dual Line Chart pergerakan transaksi MM (Non-MM dikecualikan)</p>
               </div>
             </div>
@@ -210,7 +210,8 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
                         y1={y}
                         x2={padLeft + plotW}
                         y2={y}
-                        stroke="#e2e8f0"
+                        stroke="currentColor"
+                        className="stroke-slate-200 dark:stroke-slate-800"
                         strokeDasharray={ratio === 0 ? undefined : '3 3'}
                         strokeWidth="1"
                       />
@@ -219,8 +220,8 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
                         y={y + 3}
                         textAnchor="end"
                         fontSize="9"
-                        fill="#64748b"
-                        className="font-mono"
+                        fill="currentColor"
+                        className="font-mono fill-slate-500 dark:fill-slate-400"
                       >
                         {formatIDRCompact(val)}
                       </text>
@@ -302,9 +303,12 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
                         y={padTop + plotH + 16}
                         textAnchor="middle"
                         fontSize="9"
-                        fill={isHovered ? '#0f172a' : '#64748b'}
-                        fontWeight={isHovered ? 'bold' : 'normal'}
-                        className="cursor-pointer font-medium"
+                        fill="currentColor"
+                        className={`cursor-pointer font-medium ${
+                          isHovered
+                            ? 'fill-slate-900 dark:fill-slate-100 font-bold'
+                            : 'fill-slate-500 dark:fill-slate-400'
+                        }`}
                         onMouseEnter={() => setHoveredMonthIndex(i)}
                       >
                         {formatMonthYearLabel(m.month)}
@@ -375,16 +379,16 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
           )}
         </div>
 
-        <div className="pt-2 text-[10px] text-slate-400 flex items-center justify-between border-t border-slate-100 mt-2">
+        <div className="pt-2 text-[10px] text-slate-400 dark:text-slate-500 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 mt-2">
           <span>Arahkan kursor pada titik grafik untuk rincian bulan.</span>
-          <span className="font-medium text-slate-500">Mitraca Ingestion Engine</span>
+          <span className="font-medium text-slate-500 dark:text-slate-400">Mitraca Ingestion Engine</span>
         </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────────────
           2. Distribusi Kinerja Produk: Donut / Pie Chart Interaktif
       ──────────────────────────────────────────────────────────────────────── */}
-      <div className="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm relative flex flex-col justify-between">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm relative flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2">
@@ -392,7 +396,7 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
                 <PieChartIcon className="w-4 h-4" />
               </span>
               <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-sm">Distribusi Kinerja Lini Produk (Donut Chart)</h3>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Distribusi Kinerja Lini Produk (Donut Chart)</h3>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400">Pangsa premi & perbandingan loss ratio produk MM</p>
               </div>
             </div>
@@ -417,9 +421,9 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
                         key={slice.index}
                         d={slice.pathData}
                         fill={slice.color}
-                        stroke="#ffffff"
+                        stroke="currentColor"
+                        className="text-white dark:text-slate-900 transition-all duration-200 cursor-pointer hover:opacity-90"
                         strokeWidth={isHovered ? 3 : 1.5}
-                        className="transition-all duration-200 cursor-pointer hover:opacity-90"
                         style={{
                           transformOrigin: `${pieCx}px ${pieCy}px`,
                           transform: isHovered ? 'scale(1.05)' : 'scale(1)',
@@ -434,7 +438,7 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
                 {/* Donut Center Display */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
                   <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">Total Premi MM</span>
-                  <span className="text-sm font-black text-slate-900 dark:text-white font-mono">
+                  <span className="text-sm font-black text-slate-900 dark:text-slate-100 font-mono">
                     {formatIDRCompact(totalProductPremi)}
                   </span>
                   <span className="text-[10px] text-slate-500 dark:text-slate-400">

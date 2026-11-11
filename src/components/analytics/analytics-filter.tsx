@@ -106,7 +106,7 @@ export function AnalyticsFilter({
   const activeCutoffInfo = availableCutoffs.find((c) => String(c.year) === cutoffYear);
 
   return (
-    <div className="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm p-5 mb-8">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm p-5 mb-8">
       {/* Header Filter & Keterangan Cutoff Otomatis */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
@@ -114,7 +114,7 @@ export function AnalyticsFilter({
             <span className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400">
               <Calendar className="w-4 h-4" />
             </span>
-            <h2 className="font-bold text-slate-900 dark:text-white text-base">Filter Periode & Parameter Underwriting</h2>
+            <h2 className="font-bold text-slate-900 dark:text-slate-100 text-base">Filter Periode & Parameter Underwriting</h2>
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Sistem otomatis menerapkan filter <span className="font-semibold text-slate-700 dark:text-slate-300">Cutoff Year</span> (14 November tahun lalu s/d 13 November tahun ini).
@@ -167,28 +167,28 @@ export function AnalyticsFilter({
         {/* 2. Filter Cabang */}
         {userRole === 'KACAB' || userRole === 'PIC_CABANG' ? (
           <div>
-            <label className="block text-xs font-semibold text-emerald-800 mb-1.5 flex items-center gap-1">
-              <Building className="w-3.5 h-3.5 text-emerald-600" />
+            <label className="block text-xs font-semibold text-emerald-800 dark:text-emerald-300 mb-1.5 flex items-center gap-1">
+              <Building className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
               Cabang Penugasan
             </label>
-            <div className="w-full text-xs font-bold bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2 text-emerald-900 truncate">
+            <div className="w-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-lg px-3 py-2 text-emerald-900 dark:text-emerald-200 truncate">
               {userBranchName || 'Cabang Terkunci'}
             </div>
-            <span className="block text-[10px] text-emerald-700 mt-1">Data terkunci khusus cabang Anda</span>
+            <span className="block text-[10px] text-emerald-700 dark:text-emerald-400 mt-1">Data terkunci khusus cabang Anda</span>
           </div>
         ) : (userRole === 'AGENT' || userRole === 'OFFICER_AGENT') ? (
           <div>
-            <label className="block text-xs font-semibold text-amber-900 mb-1.5 flex items-center justify-between">
+            <label className="block text-xs font-semibold text-amber-900 dark:text-amber-300 mb-1.5 flex items-center justify-between">
               <span className="flex items-center gap-1">
-                <GitFork className="w-3.5 h-3.5 text-amber-600" />
+                <GitFork className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                 Maks. Kedalaman Hirarki
               </span>
-              <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">Testing Mode</span>
+              <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800/60 px-1.5 py-0.5 rounded">Testing Mode</span>
             </label>
             <select
               value={maxDepth}
               onChange={(e) => setMaxDepth && setMaxDepth(e.target.value)}
-              className="w-full text-xs font-bold bg-amber-50/90 border border-amber-300 rounded-lg px-3 py-2 text-amber-950 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition"
+              className="w-full text-xs font-bold bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 rounded-lg px-3 py-2 text-amber-950 dark:text-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition"
             >
               <option value="1">Maks. Level 1 (Direct Downline Saja)</option>
               <option value="2">Maks. Level 2 (Direct + Level 2)</option>
@@ -196,17 +196,17 @@ export function AnalyticsFilter({
               <option value="4">Maks. Level 4 (Default Maksimal)</option>
               <option value="ALL">Semua Level (Tanpa Batas)</option>
             </select>
-            <span className="block text-[10px] text-amber-700 mt-1">Mengatur batas kedalaman level downline group</span>
+            <span className="block text-[10px] text-amber-700 dark:text-amber-400 mt-1">Mengatur batas kedalaman level downline group</span>
           </div>
         ) : (
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
               Lingkup Cabang
             </label>
             <select
               value={selectedBranchId}
               onChange={(e) => setSelectedBranchId(e.target.value)}
-              className="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+              className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
             >
               <option value="">Semua Cabang (Nasional)</option>
               {branches.map((b) => (
@@ -220,7 +220,7 @@ export function AnalyticsFilter({
 
         {/* 3. Filter Agen & Agensi */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
             Kode / Nama Agen {userRole === 'AGENT' || userRole === 'OFFICER_AGENT' ? '(Akun Anda)' : ''}
           </label>
           <div className="relative">
@@ -236,8 +236,8 @@ export function AnalyticsFilter({
                   onApplyFilter();
                 }
               }}
-              className={`w-full text-xs font-medium border border-slate-300 rounded-lg px-3 py-2 pl-8 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition ${
-                userRole === 'AGENT' || userRole === 'OFFICER_AGENT' ? 'bg-amber-50/60 font-bold text-amber-950' : 'bg-slate-50'
+              className={`w-full text-xs font-medium border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 pl-8 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition ${
+                userRole === 'AGENT' || userRole === 'OFFICER_AGENT' ? 'bg-amber-50/60 dark:bg-amber-950/30 font-bold text-amber-950 dark:text-amber-200' : 'bg-slate-50 dark:bg-slate-950'
               }`}
             />
             <User className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
@@ -251,7 +251,7 @@ export function AnalyticsFilter({
                 onChange={(e) => setIncludeDownlines(e.target.checked)}
                 className="w-3.5 h-3.5 text-blue-600 rounded border-slate-300 focus:ring-blue-500"
               />
-              <span className="text-[11px] text-slate-600 flex items-center gap-1">
+              <span className="text-[11px] text-slate-600 dark:text-slate-400 flex items-center gap-1">
                 <GitFork className="w-3 h-3 text-blue-600" />
                 Sertakan seluruh downline agensi
               </span>
@@ -261,13 +261,13 @@ export function AnalyticsFilter({
 
         {/* 4. Filter Underwriting Year (UW Year) */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
             Underwriting Year (UW Year)
           </label>
           <select
             value={selectedUwYear}
             onChange={(e) => setSelectedUwYear(e.target.value)}
-            className="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+            className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
           >
             <option value="">Semua UW Year</option>
             {availableUwYears.map((uw) => (
@@ -281,27 +281,27 @@ export function AnalyticsFilter({
 
       {/* Row Kustom Tanggal jika dipilih CUSTOM */}
       {cutoffYear === 'CUSTOM' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 pt-3 border-t border-slate-100 bg-blue-50/40 p-3 rounded-xl border border-blue-100">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 bg-blue-50/40 dark:bg-blue-950/30 p-3 rounded-xl border border-blue-100 dark:border-blue-800">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Tanggal Mulai (Kustom)
             </label>
             <input
               type="date"
               value={customStartDate}
               onChange={(e) => setCustomStartDate(e.target.value)}
-              className="w-full text-xs bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Tanggal Selesai (Kustom)
             </label>
             <input
               type="date"
               value={customEndDate}
               onChange={(e) => setCustomEndDate(e.target.value)}
-              className="w-full text-xs bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
         </div>

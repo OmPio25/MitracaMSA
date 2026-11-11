@@ -46,7 +46,7 @@ export function AnalyticsKpiCards({ kpi, scopeMode = 'all' }: AnalyticsKpiProps)
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
       {/* 1. Total Premi MM (Gross Written Premium) */}
-      <div className="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm hover:shadow-md transition">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm hover:shadow-md transition">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
@@ -68,7 +68,7 @@ export function AnalyticsKpiCards({ kpi, scopeMode = 'all' }: AnalyticsKpiProps)
           </span>
         </div>
         <div className="mt-3">
-          <div className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <div className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
             {formatIDR(kpi.totalPremi)}
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-500 dark:text-slate-400">
@@ -82,7 +82,7 @@ export function AnalyticsKpiCards({ kpi, scopeMode = 'all' }: AnalyticsKpiProps)
       </div>
 
       {/* 2. Total Klaim MM Diselesaikan */}
-      <div className="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm hover:shadow-md transition">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm hover:shadow-md transition">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
@@ -104,7 +104,7 @@ export function AnalyticsKpiCards({ kpi, scopeMode = 'all' }: AnalyticsKpiProps)
           </span>
         </div>
         <div className="mt-3">
-          <div className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <div className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
             {formatIDR(kpi.totalClaim)}
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-500 dark:text-slate-400">
@@ -118,7 +118,7 @@ export function AnalyticsKpiCards({ kpi, scopeMode = 'all' }: AnalyticsKpiProps)
       </div>
 
       {/* 3. LOSS RATIO MM (DENGAN ALL LR SUB-BADGE UNTUK MANAGEMENT) */}
-      <div className={`rounded-2xl border p-5 shadow-sm hover:shadow-md transition ${lr.bgClass} dark:bg-slate-900/90 ${lr.borderClass} dark:border-slate-800`}>
+      <div className={`rounded-2xl border p-5 shadow-sm hover:shadow-md transition ${lr.bgClass} dark:bg-slate-900 ${lr.borderClass} dark:border-slate-800`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1">
@@ -137,9 +137,9 @@ export function AnalyticsKpiCards({ kpi, scopeMode = 'all' }: AnalyticsKpiProps)
             )}
           </div>
           <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold border ${lr.badgeClass}`}>
-            {lr.status === 'HEALTHY' && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
-            {lr.status === 'WARNING' && <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />}
-            {lr.status === 'CRITICAL' && <XCircle className="w-3.5 h-3.5 text-rose-600" />}
+            {lr.status === 'HEALTHY' && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />}
+            {lr.status === 'WARNING' && <AlertTriangle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />}
+            {lr.status === 'CRITICAL' && <XCircle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />}
             {lr.label}
           </span>
         </div>
@@ -166,7 +166,7 @@ export function AnalyticsKpiCards({ kpi, scopeMode = 'all' }: AnalyticsKpiProps)
       </div>
 
       {/* 4. Net Underwriting Margin MM */}
-      <div className="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm hover:shadow-md transition">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm hover:shadow-md transition">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
