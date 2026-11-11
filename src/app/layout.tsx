@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <head>
+      <body className="min-h-screen bg-slate-50 dark:bg-[#0b0f19] font-sans antialiased text-slate-900 dark:text-slate-100 transition-colors duration-200">
         {/* Anti-FOUC (Flash of Unstyled Content) Inline Script */}
         <script
           dangerouslySetInnerHTML={{
@@ -32,8 +32,6 @@ export default function RootLayout({
             `,
           }}
         />
-      </head>
-      <body className="min-h-screen bg-slate-50 dark:bg-[#0b0f19] font-sans antialiased text-slate-900 dark:text-slate-100 transition-colors duration-200">
         <BrandingProvider>
           <ThemeProvider>
             <AppShell>
