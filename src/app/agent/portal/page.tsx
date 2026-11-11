@@ -607,12 +607,12 @@ export default function AgentPortalPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <div className={`p-2.5 rounded-xl ${isHubMode ? 'bg-indigo-100/80 text-indigo-700' : 'bg-blue-100/80 text-blue-700'}`}>
+            <div className={`p-2.5 rounded-xl ${isHubMode ? 'bg-indigo-100/80 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400' : 'bg-blue-100/80 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400'}`}>
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2.5">
-                <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
                   {isNationalRole
                     ? 'Direktori & Pengawasan Keagenan Nasional'
                     : isBranchRole
@@ -620,25 +620,25 @@ export default function AgentPortalPage() {
                     : 'Portal Mandiri Agen & Asisten'}
                 </h1>
                 {isNationalRole && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-blue-100 text-blue-800 border border-blue-200">
-                    <Building2 className="w-3 h-3 text-blue-600" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-blue-100 dark:bg-blue-950/70 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                    <Building2 className="w-3 h-3 text-blue-600 dark:text-blue-400" />
                     <span>CAKUPAN NASIONAL</span>
                   </span>
                 )}
                 {isBranchRole && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
-                    <Building2 className="w-3 h-3 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                    <Building2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                     <span>CAKUPAN CABANG: {branchInfo?.name?.toUpperCase() || 'CABANG'}</span>
                   </span>
                 )}
                 {isReadOnly && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-purple-100 text-purple-800 border border-purple-200">
-                    <Shield className="w-3 h-3 text-purple-600" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-purple-100 dark:bg-purple-950/70 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                    <Shield className="w-3 h-3 text-purple-600 dark:text-purple-400" />
                     <span>{callerRole === 'AUDIT' ? 'AUDIT READ-ONLY' : 'PEMANTAUAN CABANG'}</span>
                   </span>
                 )}
               </div>
-              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
                 {isNationalRole
                   ? 'Pusat pengawasan keagenan seluruh Indonesia, direktori asisten operasional (Officer Agent), dan inspeksi portal agen.'
                   : isBranchRole
@@ -651,33 +651,33 @@ export default function AgentPortalPage() {
 
         <button
           onClick={fetchData}
-          className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 shadow-2xs transition self-start sm:self-auto cursor-pointer"
+          className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 shadow-2xs transition self-start sm:self-auto cursor-pointer"
         >
-          <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
+          <RefreshCw className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
           <span>Segarkan Data</span>
         </button>
       </div>
 
       {/* ── ALERTS ─────────────────────────────────────────────────────────── */}
       {successMsg && (
-        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm flex items-center justify-between shadow-xs animate-in fade-in duration-200">
+        <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/50 text-emerald-800 dark:text-emerald-300 text-xs sm:text-sm flex items-center justify-between shadow-xs animate-in fade-in duration-200">
           <div className="flex items-center gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span>{successMsg}</span>
           </div>
-          <button onClick={() => setSuccessMsg(null)} className="text-emerald-500 hover:text-emerald-700 p-1">
+          <button onClick={() => setSuccessMsg(null)} className="text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-300 p-1">
             <X className="w-4 h-4" />
           </button>
         </div>
       )}
 
       {errorMsg && (
-        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm flex items-center justify-between shadow-xs animate-in fade-in duration-200">
+        <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 text-rose-800 dark:text-rose-300 text-xs sm:text-sm flex items-center justify-between shadow-xs animate-in fade-in duration-200">
           <div className="flex items-center gap-2.5">
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+            <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
             <span>{errorMsg}</span>
           </div>
-          <button onClick={() => setErrorMsg(null)} className="text-rose-500 hover:text-rose-700 p-1">
+          <button onClick={() => setErrorMsg(null)} className="text-rose-500 hover:text-rose-700 dark:hover:text-rose-300 p-1">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -685,13 +685,13 @@ export default function AgentPortalPage() {
 
       {/* ── BANNER KHUSUS ROLE OFFICER_AGENT ─────────────────────────────────── */}
       {callerRole === 'OFFICER_AGENT' && (
-        <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-900 flex items-start gap-3 shadow-xs">
-          <Info className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+        <div className="p-4 rounded-2xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 text-amber-900 dark:text-amber-200 flex items-start gap-3 shadow-xs">
+          <Info className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
           <div className="text-xs sm:text-sm space-y-1">
             <p className="font-bold">
               Anda Masuk sebagai Staf Asisten Resmi (Officer Agent)
             </p>
-            <p className="text-amber-700 text-xs leading-relaxed">
+            <p className="text-amber-700 dark:text-amber-300/90 text-xs leading-relaxed">
               Anda memiliki hak akses penuh untuk memantau analitik performa, pohon hirarki jaringan, serta berkas polis & klaim atas nama agen pemilik. Manajemen penambahan atau penghapusan asisten dikelola langsung oleh Agen Pemilik.
             </p>
           </div>
@@ -702,77 +702,77 @@ export default function AgentPortalPage() {
       {isHubMode && nationalKPI && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-in fade-in duration-300">
           {/* Card 1: Total Master Agen */}
-          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 {isBranchRole ? 'Agen Cabang' : 'Master Agen Nasional'}
               </span>
-              <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
                 <Users className="w-4 h-4" />
               </div>
             </div>
             <div>
-              <p className="text-2xl font-black text-slate-900">
+              <p className="text-2xl font-black text-slate-900 dark:text-slate-100">
                 {nationalKPI.totalAgents.toLocaleString('id-ID')}
               </p>
-              <p className="text-xs text-slate-500 mt-1 truncate">
-                Status: <strong className="text-emerald-600">{nationalKPI.activeAgents.toLocaleString('id-ID')} Agen Aktif</strong>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
+                Status: <strong className="text-emerald-600 dark:text-emerald-400">{nationalKPI.activeAgents.toLocaleString('id-ID')} Agen Aktif</strong>
               </p>
             </div>
           </div>
 
           {/* Card 2: Total Staf Asisten (Officer Agent) */}
-          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 {isBranchRole ? 'Asisten Cabang' : 'Total Asisten Operasional'}
               </span>
-              <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                 <UserCheck className="w-4 h-4" />
               </div>
             </div>
             <div>
-              <p className="text-2xl font-black text-slate-900">
+              <p className="text-2xl font-black text-slate-900 dark:text-slate-100">
                 {nationalKPI.totalAssistants.toLocaleString('id-ID')}
               </p>
-              <p className="text-xs text-slate-500 mt-1 truncate">
-                Aktif: <strong className="text-emerald-600">{nationalKPI.activeAssistants}</strong> di <strong className="text-slate-800">{nationalKPI.agentsWithAssistants} Agen Induk</strong>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
+                Aktif: <strong className="text-emerald-600 dark:text-emerald-400">{nationalKPI.activeAssistants}</strong> di <strong className="text-slate-800 dark:text-slate-200">{nationalKPI.agentsWithAssistants} Agen Induk</strong>
               </p>
             </div>
           </div>
 
           {/* Card 3: Portofolio Premi */}
-          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 {isBranchRole ? 'Premi Produksi Cabang' : 'Total Premi Nasional'}
               </span>
-              <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
                 <Award className="w-4 h-4" />
               </div>
             </div>
             <div>
-              <p className="text-xl sm:text-2xl font-black text-indigo-700 truncate" title={formatIDR(nationalKPI.nationalGrossPremium)}>
+              <p className="text-xl sm:text-2xl font-black text-indigo-700 dark:text-indigo-400 truncate" title={formatIDR(nationalKPI.nationalGrossPremium)}>
                 {formatIDR(nationalKPI.nationalGrossPremium)}
               </p>
-              <p className="text-xs text-slate-500 mt-1 truncate">
-                Total Polis: <strong className="text-slate-800">{nationalKPI.nationalPolicyCount.toLocaleString('id-ID')} berkas</strong>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
+                Total Polis: <strong className="text-slate-800 dark:text-slate-200">{nationalKPI.nationalPolicyCount.toLocaleString('id-ID')} berkas</strong>
               </p>
             </div>
           </div>
 
           {/* Card 4: Rasio Klaim */}
-          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 {isBranchRole ? 'Loss Ratio Cabang' : 'Loss Ratio Nasional'}
               </span>
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                 nationalKPI.nationalLossRatio <= 50
-                  ? 'bg-emerald-50 text-emerald-600'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400'
                   : nationalKPI.nationalLossRatio <= 65
-                  ? 'bg-amber-50 text-amber-600'
-                  : 'bg-rose-50 text-rose-600'
+                  ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400'
+                  : 'bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400'
               }`}>
                 <TrendingUp className="w-4 h-4" />
               </div>
@@ -780,15 +780,15 @@ export default function AgentPortalPage() {
             <div>
               <p className={`text-2xl font-black ${
                 nationalKPI.nationalLossRatio <= 50
-                  ? 'text-emerald-700'
+                  ? 'text-emerald-700 dark:text-emerald-400'
                   : nationalKPI.nationalLossRatio <= 65
-                  ? 'text-amber-700'
-                  : 'text-rose-700'
+                  ? 'text-amber-700 dark:text-amber-400'
+                  : 'text-rose-700 dark:text-rose-400'
               }`}>
                 {nationalKPI.nationalLossRatio}%
               </p>
-              <p className="text-xs text-slate-500 mt-1 truncate">
-                Beban Klaim: <strong className="text-slate-800">{formatIDR(nationalKPI.nationalGrossClaim)}</strong>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
+                Beban Klaim: <strong className="text-slate-800 dark:text-slate-200">{formatIDR(nationalKPI.nationalGrossClaim)}</strong>
               </p>
             </div>
           </div>
@@ -797,13 +797,13 @@ export default function AgentPortalPage() {
 
       {/* ── TAB NAVIGASI HUB (SUPERADMIN, ADMIN, AUDIT, KACAB, PIC_CABANG) ── */}
       {isHubMode && (
-        <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
+        <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
           <button
             onClick={() => setActiveTab('assistants')}
             className={`flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer ${
               activeTab === 'assistants'
                 ? 'bg-blue-600 text-white shadow-sm'
-                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
             }`}
           >
             <Users className="w-4 h-4" />
@@ -819,7 +819,7 @@ export default function AgentPortalPage() {
             className={`flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer ${
               activeTab === 'inspect'
                 ? 'bg-blue-600 text-white shadow-sm'
-                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
             }`}
           >
             <Search className="w-4 h-4" />
@@ -834,14 +834,14 @@ export default function AgentPortalPage() {
       {/* ── BOX PENCARIAN INSPEKSI AGEN (TAB INSPECT) ────────────────────────── */}
       {isHubMode && activeTab === 'inspect' && (
         <div className="space-y-4">
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
+          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h3 className="font-bold text-sm text-slate-900 flex items-center gap-2">
-                  <Search className="w-4 h-4 text-blue-600" />
+                <h3 className="font-bold text-sm text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                  <Search className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   <span>Pencarian Agen untuk Diinspeksi</span>
                 </h3>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   Pilih salah satu agen untuk mensimulasikan dan melihat persis tampilan Digital Agency ID Card serta KPI personal miliknya.
                 </p>
               </div>
@@ -849,7 +849,7 @@ export default function AgentPortalPage() {
               {selectedAgentInfo && (
                 <button
                   onClick={handleClearInspection}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-lg transition self-start sm:self-auto cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 dark:hover:bg-rose-900/50 rounded-lg transition self-start sm:self-auto cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
                   <span>Tutup Inspeksi</span>
@@ -858,35 +858,35 @@ export default function AgentPortalPage() {
             </div>
 
             <div className="relative max-w-xl">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={agentSearchQuery}
                 onChange={(e) => handleSearchAgent(e.target.value)}
                 placeholder="Ketik Kode Agen, Nama Agen, atau Nama Cabang..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
               />
               {isSearchingAgent && (
                 <div className="absolute right-3.5 top-1/2 -translate-y-1/2">
-                  <RefreshCw className="w-3.5 h-3.5 text-blue-600 animate-spin" />
+                  <RefreshCw className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 animate-spin" />
                 </div>
               )}
 
               {/* Autocomplete Dropdown List */}
               {agentSearchResults.length > 0 && (
-                <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-xl max-h-60 overflow-y-auto divide-y divide-slate-100 z-30">
+                <div className="absolute left-0 right-0 top-full mt-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl max-h-60 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800 z-30">
                   {agentSearchResults.map((ag) => (
                     <button
                       key={ag.id}
                       onClick={() => handleSelectAgentToInspect(ag)}
-                      className="w-full text-left p-3 hover:bg-blue-50/80 transition flex items-center justify-between text-xs cursor-pointer"
+                      className="w-full text-left p-3 hover:bg-blue-50/80 dark:hover:bg-blue-950/40 transition flex items-center justify-between text-xs cursor-pointer"
                     >
                       <div>
-                        <p className="font-bold text-slate-900">{ag.name}</p>
-                        <p className="text-[11px] text-slate-500 font-mono">Kode: {ag.agentCode} • {ag.branchName}</p>
+                        <p className="font-bold text-slate-900 dark:text-slate-100">{ag.name}</p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Kode: {ag.agentCode} • {ag.branchName}</p>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                           {ag.peringkat || 'Partner'}
                         </span>
                         <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -898,14 +898,14 @@ export default function AgentPortalPage() {
             </div>
 
             {selectedAgentInfo && (
-              <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-between text-xs text-blue-900">
+              <div className="p-3 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50 rounded-xl flex items-center justify-between text-xs text-blue-900 dark:text-blue-200">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
+                  <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
                   <span>
                     Sedang menginspeksi: <strong>{selectedAgentInfo.name}</strong> ({selectedAgentInfo.agentCode}) - {selectedAgentInfo.branchName}
                   </span>
                 </div>
-                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-blue-200/70 text-blue-800">
+                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-blue-200/70 dark:bg-blue-900/70 text-blue-800 dark:text-blue-200">
                   INSPECTOR ACTIVE
                 </span>
               </div>
@@ -913,14 +913,14 @@ export default function AgentPortalPage() {
           </div>
 
           {!selectedAgentInfo && (
-            <div className="p-12 text-center bg-white rounded-2xl border border-dashed border-slate-300 space-y-3">
-              <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+            <div className="p-12 text-center bg-white dark:bg-slate-900/60 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 space-y-3">
+              <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto">
                 <Search className="w-6 h-6" />
               </div>
-              <h4 className="font-bold text-slate-800 text-sm">
+              <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm">
                 Belum Ada Agen yang Dipilih untuk Diinspeksi
               </h4>
-              <p className="text-xs text-slate-500 max-w-md mx-auto">
+              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
                 Gunakan kolom pencarian di atas untuk memilih salah satu dari ribuan agen nasional guna memuat Kartu Identitas Digital dan portofolio personal agen tersebut.
               </p>
             </div>
@@ -1062,39 +1062,39 @@ export default function AgentPortalPage() {
       {kpi && (!isHubMode || (isHubMode && activeTab === 'inspect')) && (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 animate-in fade-in duration-300">
           {/* Card 1: Portofolio Polis Pribadi */}
-          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 Polis Pribadi
               </span>
-              <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
                 <Layers className="w-4 h-4" />
               </div>
             </div>
             <div>
-              <p className="text-xl sm:text-2xl font-black text-slate-900">
+              <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100">
                 {kpi.personalPolicyCount.toLocaleString('id-ID')}{' '}
-                <span className="text-xs font-semibold text-slate-500">Polis</span>
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Polis</span>
               </p>
-              <p className="text-xs font-bold text-blue-600 mt-1 truncate">
+              <p className="text-xs font-bold text-blue-600 dark:text-blue-400 mt-1 truncate">
                 {formatIDR(kpi.personalGrossPremium)}
               </p>
             </div>
           </div>
 
           {/* Card 2: Klaim & Loss Ratio Pribadi */}
-          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 Loss Ratio Pribadi
               </span>
               <div
                 className={`w-7 h-7 rounded-lg flex items-center justify-center ${
                   kpi.personalLossRatio <= 50
-                    ? 'bg-emerald-50 text-emerald-600'
+                    ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400'
                     : kpi.personalLossRatio <= 65
-                    ? 'bg-amber-50 text-amber-600'
-                    : 'bg-rose-50 text-rose-600'
+                    ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400'
+                    : 'bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400'
                 }`}
               >
                 <TrendingUp className="w-4 h-4" />
@@ -1104,58 +1104,58 @@ export default function AgentPortalPage() {
               <p
                 className={`text-xl sm:text-2xl font-black ${
                   kpi.personalLossRatio <= 50
-                    ? 'text-emerald-700'
+                    ? 'text-emerald-700 dark:text-emerald-400'
                     : kpi.personalLossRatio <= 65
-                    ? 'text-amber-700'
-                    : 'text-rose-700'
+                    ? 'text-amber-700 dark:text-amber-400'
+                    : 'text-rose-700 dark:text-rose-400'
                 }`}
               >
                 {kpi.personalLossRatio}%
               </p>
-              <p className="text-xs text-slate-500 mt-1 truncate">
-                Beban Klaim: <span className="font-semibold text-slate-800">{formatIDR(kpi.personalGrossClaim)}</span>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
+                Beban Klaim: <span className="font-semibold text-slate-800 dark:text-slate-200">{formatIDR(kpi.personalGrossClaim)}</span>
               </p>
             </div>
           </div>
 
           {/* Card 3: Jaringan Tim Downline */}
-          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 Jaringan Tim
               </span>
-              <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center">
                 <Users className="w-4 h-4" />
               </div>
             </div>
             <div>
-              <p className="text-xl sm:text-2xl font-black text-purple-700">
+              <p className="text-xl sm:text-2xl font-black text-purple-700 dark:text-purple-400">
                 {kpi.directDownlinesCount}{' '}
-                <span className="text-xs font-semibold text-slate-500">Downline L1</span>
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Downline L1</span>
               </p>
-              <p className="text-xs text-slate-500 mt-1 truncate">
-                Total Jaringan: <strong className="text-slate-800">{kpi.totalNetworkDownlinesCount} Agen</strong>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
+                Total Jaringan: <strong className="text-slate-800 dark:text-slate-200">{kpi.totalNetworkDownlinesCount} Agen</strong>
               </p>
             </div>
           </div>
 
           {/* Card 4: Staf Asisten (Officer Agent) */}
-          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 Staf Asisten
               </span>
-              <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                 <UserCheck className="w-4 h-4" />
               </div>
             </div>
             <div>
-              <p className="text-xl sm:text-2xl font-black text-slate-900">
+              <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100">
                 {kpi.activeAssistants}{' '}
-                <span className="text-xs font-semibold text-slate-500">/ {kpi.totalAssistants} Aktif</span>
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">/ {kpi.totalAssistants} Aktif</span>
               </p>
-              <p className="text-xs text-slate-500 mt-1 truncate">
-                Status Operasional: <strong className="text-emerald-600">Siap Melayani</strong>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
+                Status Operasional: <strong className="text-emerald-600 dark:text-emerald-400">Siap Melayani</strong>
               </p>
             </div>
           </div>
@@ -1164,23 +1164,23 @@ export default function AgentPortalPage() {
 
       {/* ── BAGIAN MANAJEMEN ASISTEN PRIBADI / DIREKTORI HUB ───────── */}
       {(!isHubMode || (isHubMode && activeTab === 'assistants') || (isHubMode && activeTab === 'inspect' && selectedAgentInfo)) && (
-      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden animate-in fade-in duration-300">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs overflow-hidden animate-in fade-in duration-300">
         {/* Header Bagian */}
-        <div className="p-5 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-5 sm:p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
+              <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
                 <Users className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-base text-slate-900">
+                <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                   {isNationalRole
                     ? (activeTab === 'inspect' && selectedAgentInfo ? `Daftar Asisten Agen ${selectedAgentInfo.name}` : 'Direktori Seluruh Asisten Operasional Nasional')
                     : isBranchRole
                     ? (activeTab === 'inspect' && selectedAgentInfo ? `Daftar Asisten Agen ${selectedAgentInfo.name}` : `Direktori Asisten Cabang ${branchInfo?.name || ''}`)
                     : 'Daftar Asisten Operasional (Officer Agent)'}
                 </h3>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   {isNationalRole
                     ? (activeTab === 'inspect' && selectedAgentInfo ? `Staf asisten yang bertugas di bawah naungan agen ${selectedAgentInfo.name}.` : 'Seluruh staf asisten yang bertugas membantu operasional keagenan di berbagai cabang se-Indonesia.')
                     : isBranchRole
@@ -1202,7 +1202,7 @@ export default function AgentPortalPage() {
               </button>
             )}
             {isReadOnly && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 text-purple-700 text-xs font-bold rounded-xl border border-purple-200">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 text-xs font-bold rounded-xl border border-purple-200 dark:border-purple-800">
                 <Shield className="w-3.5 h-3.5" />
                 <span>{callerRole === 'AUDIT' ? 'Mode Audit (Hanya Lihat)' : 'Mode Pemantauan Cabang (Hanya Lihat)'}</span>
               </span>
@@ -1211,16 +1211,16 @@ export default function AgentPortalPage() {
         </div>
 
         {/* Search bar & Filter Cabang */}
-        <div className="p-4 border-b border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/40 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-1 max-w-2xl">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder={isHubMode && activeTab === 'assistants' ? "Cari nama asisten, email, agen induk, kode agen, atau cabang..." : "Cari asisten berdasarkan nama, email, atau telepon..."}
-                className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-xs placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                className="w-full pl-9 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl text-xs placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
               />
             </div>
 
@@ -1229,19 +1229,19 @@ export default function AgentPortalPage() {
                 <select
                   value={branchFilter}
                   onChange={(e) => setBranchFilter(e.target.value)}
-                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition font-medium cursor-pointer"
+                  className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition font-medium cursor-pointer"
                 >
-                  <option value="ALL">Semua Cabang ({assistants.length})</option>
+                  <option value="ALL" className="dark:bg-slate-900">Semua Cabang ({assistants.length})</option>
                   {branchList.map((b) => (
-                    <option key={b} value={b}>{b}</option>
+                    <option key={b} value={b} className="dark:bg-slate-900">{b}</option>
                   ))}
                 </select>
               </div>
             )}
           </div>
 
-          <div className="text-xs text-slate-500 font-semibold self-end sm:self-auto">
-            Total Asisten: <strong className="text-slate-800">{filteredAssistants.length}</strong>
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold self-end sm:self-auto">
+            Total Asisten: <strong className="text-slate-800 dark:text-slate-200">{filteredAssistants.length}</strong>
           </div>
         </div>
 
@@ -1249,7 +1249,7 @@ export default function AgentPortalPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-slate-50/80 border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider text-[11px]">
+              <tr className="bg-slate-50/80 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider text-[11px]">
                 <th className="py-3.5 px-4 w-12 text-center">No</th>
                 <th className="py-3.5 px-4">Nama Asisten</th>
                 <th className="py-3.5 px-4">Email Login</th>
@@ -1262,7 +1262,7 @@ export default function AgentPortalPage() {
                 {canManage && !isReadOnly && <th className="py-3.5 px-4 text-center w-28">Aksi</th>}
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium text-slate-700 dark:text-slate-300">
               {filteredAssistants.length === 0 ? (
                 <tr>
                   <td
@@ -1271,19 +1271,19 @@ export default function AgentPortalPage() {
                         ? (canManage && !isReadOnly ? 10 : 9)
                         : (canManage && !isReadOnly ? 8 : 7)
                     }
-                    className="py-12 text-center text-slate-400 text-xs"
+                    className="py-12 text-center text-slate-400 dark:text-slate-500 text-xs"
                   >
                     <div className="flex flex-col items-center justify-center space-y-2">
-                      <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                      <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-500">
                         <Users className="w-5 h-5" />
                       </div>
-                      <p className="font-semibold text-slate-600">
+                      <p className="font-semibold text-slate-600 dark:text-slate-300">
                         {searchTerm || branchFilter !== 'ALL'
                           ? 'Tidak ada asisten yang cocok dengan kriteria pencarian'
                           : 'Belum ada asisten operasional (Officer Agent) yang terdaftar'}
                       </p>
                       {canManage && !isReadOnly && !searchTerm && (
-                        <p className="text-slate-400 text-[11px] max-w-sm">
+                        <p className="text-slate-400 dark:text-slate-500 text-[11px] max-w-sm">
                           Klik tombol <strong>"Tambah Asisten Baru"</strong> di atas untuk mendaftarkan staf operasional.
                         </p>
                       )}
@@ -1292,15 +1292,15 @@ export default function AgentPortalPage() {
                 </tr>
               ) : (
                 filteredAssistants.map((assistant, idx) => (
-                  <tr key={assistant.id} className="hover:bg-slate-50/70 transition">
-                    <td className="py-3.5 px-4 text-center text-slate-400 font-mono text-[11px]">
+                  <tr key={assistant.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/50 transition">
+                    <td className="py-3.5 px-4 text-center text-slate-400 dark:text-slate-500 font-mono text-[11px]">
                       {idx + 1}
                     </td>
 
                     {/* Nama Asisten */}
-                    <td className="py-3.5 px-4 font-bold text-slate-900">
+                    <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-slate-100">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs shrink-0">
+                        <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold flex items-center justify-center text-xs shrink-0">
                           {assistant.name.charAt(0).toUpperCase()}
                         </div>
                         <span>{assistant.name}</span>
@@ -1309,8 +1309,8 @@ export default function AgentPortalPage() {
 
                     {/* Email Login */}
                     <td className="py-3.5 px-4">
-                      <div className="flex items-center gap-1.5 text-slate-600">
-                        <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
+                        <Mail className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
                         <span className="font-mono text-xs">{assistant.email}</span>
                       </div>
                     </td>
@@ -1318,12 +1318,12 @@ export default function AgentPortalPage() {
                     {/* No Telepon */}
                     <td className="py-3.5 px-4">
                       {assistant.phone ? (
-                        <div className="flex items-center gap-1.5 text-slate-600">
-                          <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                        <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
+                          <Phone className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
                           <span>{assistant.phone}</span>
                         </div>
                       ) : (
-                        <span className="text-slate-400 italic text-[11px]">-</span>
+                        <span className="text-slate-400 dark:text-slate-500 italic text-[11px]">-</span>
                       )}
                     </td>
 
@@ -1332,11 +1332,11 @@ export default function AgentPortalPage() {
                       <td className="py-3.5 px-4">
                         {assistant.agentName ? (
                           <div>
-                            <p className="font-bold text-slate-900">{assistant.agentName}</p>
-                            <p className="text-[10px] text-slate-500 font-mono">Kode: {assistant.agentCode || '-'}</p>
+                            <p className="font-bold text-slate-900 dark:text-slate-100">{assistant.agentName}</p>
+                            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Kode: {assistant.agentCode || '-'}</p>
                           </div>
                         ) : (
-                          <span className="text-slate-400 italic text-[11px]">-</span>
+                          <span className="text-slate-400 dark:text-slate-500 italic text-[11px]">-</span>
                         )}
                       </td>
                     )}
@@ -1344,8 +1344,8 @@ export default function AgentPortalPage() {
                     {/* Cabang (Khusus Hub Scope) */}
                     {isHubMode && activeTab === 'assistants' && (
                       <td className="py-3.5 px-4">
-                        <span className="inline-flex items-center gap-1 text-slate-700 font-medium">
-                          <Building2 className="w-3 h-3 text-slate-400 shrink-0" />
+                        <span className="inline-flex items-center gap-1 text-slate-700 dark:text-slate-300 font-medium">
+                          <Building2 className="w-3 h-3 text-slate-400 dark:text-slate-500 shrink-0" />
                           <span>{assistant.branchName || 'Kantor Pusat'}</span>
                         </span>
                       </td>
@@ -1356,8 +1356,8 @@ export default function AgentPortalPage() {
                       <span
                         className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                           assistant.isActive
-                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                            : 'bg-slate-100 text-slate-600 border border-slate-200'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700'
                         }`}
                       >
                         <span
@@ -1370,12 +1370,12 @@ export default function AgentPortalPage() {
                     </td>
 
                     {/* Login Terakhir */}
-                    <td className="py-3.5 px-4 text-slate-500 text-[11px]">
+                    <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400 text-[11px]">
                       {formatDate(assistant.lastLoginAt)}
                     </td>
 
                     {/* Tanggal Dibuat */}
-                    <td className="py-3.5 px-4 text-slate-500 text-[11px]">
+                    <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400 text-[11px]">
                       {formatDate(assistant.createdAt)}
                     </td>
 
@@ -1395,7 +1395,7 @@ export default function AgentPortalPage() {
                               setIsEditModalOpen(true);
                             }}
                             title="Edit Profil Asisten"
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition cursor-pointer"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-slate-800 transition cursor-pointer"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
                           </button>
@@ -1408,7 +1408,7 @@ export default function AgentPortalPage() {
                               setIsResetPwdModalOpen(true);
                             }}
                             title="Reset Password Asisten"
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition cursor-pointer"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800 transition cursor-pointer"
                           >
                             <KeyRound className="w-3.5 h-3.5" />
                           </button>
@@ -1419,8 +1419,8 @@ export default function AgentPortalPage() {
                             title={assistant.isActive ? 'Nonaktifkan Asisten' : 'Aktifkan Asisten'}
                             className={`p-1.5 rounded-lg transition cursor-pointer ${
                               assistant.isActive
-                                ? 'text-slate-400 hover:text-rose-600 hover:bg-rose-50'
-                                : 'text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100'
+                                ? 'text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800'
+                                : 'text-emerald-600 hover:text-emerald-700 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/60'
                             }`}
                           >
                             <Power className="w-3.5 h-3.5" />
@@ -1433,7 +1433,7 @@ export default function AgentPortalPage() {
                               setIsDeleteModalOpen(true);
                             }}
                             title="Hapus Akun Asisten"
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 transition cursor-pointer"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -1452,17 +1452,17 @@ export default function AgentPortalPage() {
       {/* ── MODAL: TAMBAH ASISTEN BARU ───────────────────────────────────────── */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-md w-full border border-slate-200 shadow-2xl p-6 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
+                <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
                   <UserPlus className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base text-slate-900">
+                  <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                     Tambah Asisten Baru
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     {isNationalRole
                       ? 'Daftarkan akun staf operasional (Officer Agent) di bawah naungan Master Agen'
                       : `Daftarkan akun staf operasional untuk agen ${profile?.name || ''}`}
@@ -1471,7 +1471,7 @@ export default function AgentPortalPage() {
               </div>
               <button
                 onClick={() => setIsAddModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100"
+                className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1481,19 +1481,19 @@ export default function AgentPortalPage() {
               {/* Pemilihan Agen Induk (Khusus Admin / Scope Nasional) */}
               {isNationalRole && (
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                     Agen Induk (Tempat Asisten Bertugas) <span className="text-rose-500">*</span>
                   </label>
                   {selectedParentAgent ? (
-                    <div className="flex items-center justify-between p-2.5 bg-blue-50/80 border border-blue-200 rounded-xl text-xs">
+                    <div className="flex items-center justify-between p-2.5 bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50 rounded-xl text-xs">
                       <div>
-                        <p className="font-bold text-slate-900">{selectedParentAgent.name}</p>
-                        <p className="text-[10px] text-slate-500 font-mono">Kode: {selectedParentAgent.agentCode} • {selectedParentAgent.branchName}</p>
+                        <p className="font-bold text-slate-900 dark:text-slate-100">{selectedParentAgent.name}</p>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Kode: {selectedParentAgent.agentCode} • {selectedParentAgent.branchName}</p>
                       </div>
                       <button
                         type="button"
                         onClick={() => setSelectedParentAgent(null)}
-                        className="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                        className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold cursor-pointer"
                       >
                         Ganti
                       </button>
@@ -1501,17 +1501,17 @@ export default function AgentPortalPage() {
                   ) : (
                     <div className="space-y-1.5 relative">
                       <div className="relative">
-                        <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+                        <Search className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                         <input
                           type="text"
                           value={parentAgentSearchQuery}
                           onChange={(e) => handleSearchParentAgent(e.target.value)}
                           placeholder="Cari nama/kode agen induk..."
-                          className="w-full pl-8 pr-3 py-1.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                          className="w-full pl-8 pr-3 py-1.5 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                         />
                       </div>
                       {parentAgentResults.length > 0 && (
-                        <div className="absolute left-0 right-0 top-full mt-1 max-h-36 overflow-y-auto border border-slate-200 rounded-xl bg-white shadow-xl divide-y divide-slate-100 text-xs z-30">
+                        <div className="absolute left-0 right-0 top-full mt-1 max-h-36 overflow-y-auto border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900 shadow-xl divide-y divide-slate-100 dark:divide-slate-800 text-xs z-30">
                           {parentAgentResults.map((ag) => (
                             <button
                               key={ag.id}
@@ -1521,11 +1521,11 @@ export default function AgentPortalPage() {
                                 setParentAgentResults([]);
                                 setParentAgentSearchQuery('');
                               }}
-                              className="w-full text-left p-2 hover:bg-blue-50 transition flex items-center justify-between cursor-pointer"
+                              className="w-full text-left p-2 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition flex items-center justify-between cursor-pointer"
                             >
                               <div>
-                                <span className="font-semibold text-slate-800">{ag.name}</span>
-                                <span className="text-[10px] text-slate-500 ml-2 font-mono">({ag.agentCode})</span>
+                                <span className="font-semibold text-slate-800 dark:text-slate-200">{ag.name}</span>
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 ml-2 font-mono">({ag.agentCode})</span>
                               </div>
                               <span className="text-[10px] text-slate-400">{ag.branchName}</span>
                             </button>
@@ -1537,7 +1537,7 @@ export default function AgentPortalPage() {
                 </div>
               )}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Nama Lengkap Asisten <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -1546,12 +1546,12 @@ export default function AgentPortalPage() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Contoh: Ani Suryani"
-                  className="w-full px-3.5 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                  className="w-full px-3.5 py-2 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Alamat Email (Login) <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -1560,12 +1560,12 @@ export default function AgentPortalPage() {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="asisten@email.com"
-                  className="w-full px-3.5 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition font-mono"
+                  className="w-full px-3.5 py-2 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Nomor Telepon / WhatsApp
                 </label>
                 <input
@@ -1573,12 +1573,12 @@ export default function AgentPortalPage() {
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="08123456789"
-                  className="w-full px-3.5 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                  className="w-full px-3.5 py-2 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Password Awal <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
@@ -1589,12 +1589,12 @@ export default function AgentPortalPage() {
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     placeholder="Minimal 6 karakter"
-                    className="w-full px-3.5 py-2 pr-10 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                    className="w-full px-3.5 py-2 pr-10 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPwd(!showPwd)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
                   >
                     {showPwd ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                   </button>
@@ -1602,7 +1602,7 @@ export default function AgentPortalPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Konfirmasi Password <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -1611,19 +1611,19 @@ export default function AgentPortalPage() {
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                   placeholder="Ulangi password"
-                  className="w-full px-3.5 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                  className="w-full px-3.5 py-2 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                 />
               </div>
 
-              <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-200 text-blue-900 text-[11px] leading-relaxed">
+              <div className="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50 text-blue-900 dark:text-blue-200 text-[11px] leading-relaxed">
                 Asisten akan mendapatkan hak akses peran <strong>Officer Agent</strong> dengan lingkup data yang identik dengan kode agen Anda.
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
+                  className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer"
                 >
                   Batal
                 </button>
@@ -1643,22 +1643,22 @@ export default function AgentPortalPage() {
       {/* ── MODAL: EDIT ASISTEN ──────────────────────────────────────────────── */}
       {isEditModalOpen && selectedAssistant && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-md w-full border border-slate-200 shadow-2xl p-6 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-amber-50 text-amber-600">
+                <div className="p-2 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400">
                   <Edit2 className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base text-slate-900">
+                  <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                     Edit Profil Asisten
                   </h3>
-                  <p className="text-xs text-slate-500">{selectedAssistant.email}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{selectedAssistant.email}</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsEditModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100"
+                className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1666,7 +1666,7 @@ export default function AgentPortalPage() {
 
             <form onSubmit={handleEditAssistant} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Nama Lengkap Asisten <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -1674,24 +1674,24 @@ export default function AgentPortalPage() {
                   required
                   value={editFormData.name}
                   onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
-                  className="w-full px-3.5 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                  className="w-full px-3.5 py-2 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Nomor Telepon / WhatsApp
                 </label>
                 <input
                   type="text"
                   value={editFormData.phone}
                   onChange={(e) => setEditFormData({ ...editFormData, phone: e.target.value })}
-                  className="w-full px-3.5 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                  className="w-full px-3.5 py-2 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Status Akun
                 </label>
                 <select
@@ -1699,18 +1699,18 @@ export default function AgentPortalPage() {
                   onChange={(e) =>
                     setEditFormData({ ...editFormData, isActive: e.target.value === 'active' })
                   }
-                  className="w-full px-3.5 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition bg-white"
+                  className="w-full px-3.5 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100"
                 >
-                  <option value="active">Aktif (Dapat Login)</option>
-                  <option value="inactive">Nonaktif (Akses Ditutup)</option>
+                  <option value="active" className="dark:bg-slate-900">Aktif (Dapat Login)</option>
+                  <option value="inactive" className="dark:bg-slate-900">Nonaktif (Akses Ditutup)</option>
                 </select>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsEditModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
+                  className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer"
                 >
                   Batal
                 </button>
@@ -1730,22 +1730,22 @@ export default function AgentPortalPage() {
       {/* ── MODAL: RESET PASSWORD ASISTEN ───────────────────────────────────── */}
       {isResetPwdModalOpen && selectedAssistant && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-md w-full border border-slate-200 shadow-2xl p-6 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
+                <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
                   <KeyRound className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base text-slate-900">
+                  <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                     Reset Password Asisten
                   </h3>
-                  <p className="text-xs text-slate-500">{selectedAssistant.name} ({selectedAssistant.email})</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{selectedAssistant.name} ({selectedAssistant.email})</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsResetPwdModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100"
+                className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1753,7 +1753,7 @@ export default function AgentPortalPage() {
 
             <form onSubmit={handleResetPassword} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Password Baru <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
@@ -1764,12 +1764,12 @@ export default function AgentPortalPage() {
                     value={resetPwdData.password}
                     onChange={(e) => setResetPwdData({ ...resetPwdData, password: e.target.value })}
                     placeholder="Minimal 6 karakter"
-                    className="w-full px-3.5 py-2 pr-10 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                    className="w-full px-3.5 py-2 pr-10 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPwd(!showPwd)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
                   >
                     {showPwd ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                   </button>
@@ -1777,7 +1777,7 @@ export default function AgentPortalPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Konfirmasi Password Baru <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -1788,19 +1788,19 @@ export default function AgentPortalPage() {
                     setResetPwdData({ ...resetPwdData, confirmPassword: e.target.value })
                   }
                   placeholder="Ulangi password baru"
-                  className="w-full px-3.5 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                  className="w-full px-3.5 py-2 text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                 />
               </div>
 
-              <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-900 text-[11px] leading-relaxed">
+              <div className="p-3 rounded-xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/50 text-amber-900 dark:text-amber-200 text-[11px] leading-relaxed">
                 Setelah password direset, asisten dapat langsung login menggunakan password baru ini.
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsResetPwdModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
+                  className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer"
                 >
                   Batal
                 </button>
@@ -1820,27 +1820,27 @@ export default function AgentPortalPage() {
       {/* ── MODAL: KONFIRMASI HAPUS ASISTEN ─────────────────────────────────── */}
       {isDeleteModalOpen && selectedAssistant && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-md w-full border border-slate-200 shadow-2xl p-6 space-y-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-rose-50 text-rose-600">
+              <div className="p-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400">
                 <Trash2 className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-base text-slate-900">
+                <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                   Hapus Akun Asisten?
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Tindakan ini akan menghapus akses login asisten secara permanen.
                 </p>
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1">
+            <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 space-y-1">
               <div>
-                Nama Asisten: <strong>{selectedAssistant.name}</strong>
+                Nama Asisten: <strong className="text-slate-900 dark:text-slate-100">{selectedAssistant.name}</strong>
               </div>
               <div>
-                Email Login: <strong>{selectedAssistant.email}</strong>
+                Email Login: <strong className="text-slate-900 dark:text-slate-100">{selectedAssistant.email}</strong>
               </div>
             </div>
 
@@ -1848,7 +1848,7 @@ export default function AgentPortalPage() {
               <button
                 type="button"
                 onClick={() => setIsDeleteModalOpen(false)}
-                className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
+                className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer"
               >
                 Batal
               </button>

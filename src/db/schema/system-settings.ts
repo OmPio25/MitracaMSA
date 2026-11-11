@@ -26,6 +26,8 @@ export interface AppBrandingValue {
   cardBlur?: CardBlur;
   cardMobileOpacity?: number; // 50 - 100 (%)
   cardDesktopOpacity?: number; // 50 - 100 (%)
+  // Application Interface Theme
+  defaultTheme?: 'light' | 'dark';
   updatedAt?: string;
 }
 

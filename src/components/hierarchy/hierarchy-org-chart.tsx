@@ -129,7 +129,7 @@ export function HierarchyOrgChart({
 
     if (s === 'TIDAK AKTIF') {
       return (
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700 border border-slate-300">
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
           <span className="w-1.5 h-1.5 rounded-full bg-slate-500" />
           Tidak Aktif
         </span>
@@ -137,7 +137,7 @@ export function HierarchyOrgChart({
     }
 
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
         {node.statusKeagenan}
       </span>
     );
@@ -150,14 +150,14 @@ export function HierarchyOrgChart({
 
     return (
       <div
-        className={`w-64 bg-white rounded-xl shadow-md border transition-all duration-150 text-left relative z-10 flex flex-col justify-between ${
+        className={`w-64 bg-white dark:bg-slate-900 rounded-xl shadow-md border transition-all duration-150 text-left relative z-10 flex flex-col justify-between ${
           node.uplineStatus === 'PENDING_UPLINE'
-            ? 'border-amber-300 ring-1 ring-amber-300 bg-amber-50/20'
+            ? 'border-amber-300 dark:border-amber-800/80 ring-1 ring-amber-300 dark:ring-amber-900/40 bg-amber-50/20 dark:bg-amber-950/20'
             : node.uplineStatus === 'UNREGISTERED_IN_MASTER'
-            ? 'border-rose-300 ring-1 ring-rose-300 bg-rose-50/20'
+            ? 'border-rose-300 dark:border-rose-800/80 ring-1 ring-rose-300 dark:ring-rose-900/40 bg-rose-50/20 dark:bg-rose-950/20'
             : level === 0
-            ? 'border-blue-400 ring-2 ring-blue-500/20 shadow-blue-100'
-            : 'border-slate-200 hover:border-slate-300'
+            ? 'border-blue-400 dark:border-blue-600 ring-2 ring-blue-500/20 dark:ring-blue-900/40 shadow-blue-100 dark:shadow-none'
+            : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
         }`}
       >
         <div className="p-3.5 space-y-2">
@@ -165,19 +165,19 @@ export function HierarchyOrgChart({
           <div className="flex items-center justify-between gap-1 flex-wrap">
             <div className="flex items-center gap-1 flex-wrap">
               {node.uplineStatus === 'ROOT' ? (
-                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
                   Root Agensi
                 </span>
               ) : node.uplineStatus === 'PENDING_UPLINE' ? (
-                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300">
+                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
                   Pending Upline
                 </span>
               ) : node.uplineStatus === 'UNREGISTERED_IN_MASTER' ? (
-                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-300">
+                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-800">
                   Unregistered
                 </span>
               ) : (
-                <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                   Terhubung
                 </span>
               )}
@@ -189,7 +189,7 @@ export function HierarchyOrgChart({
               <button
                 type="button"
                 onClick={() => onSelectAgent(node.agentCode)}
-                className="text-[10px] font-semibold text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-1.5 py-0.5 rounded flex items-center gap-0.5 transition"
+                className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/50 px-1.5 py-0.5 rounded flex items-center gap-0.5 transition"
                 title="Pusatkan bagan ke agen ini"
               >
                 <span>Fokus</span>
@@ -201,22 +201,22 @@ export function HierarchyOrgChart({
           {/* Agent Code & Name */}
           <div className="pt-1">
             <div className="flex items-center gap-1.5">
-              <span className="font-mono text-xs font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">
+              <span className="font-mono text-xs font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 px-1.5 py-0.5 rounded">
                 {node.agentCode}
               </span>
-              <span className="text-slate-400">·</span>
-              <span className="text-[11px] font-medium text-slate-500 truncate">
+              <span className="text-slate-400 dark:text-slate-600">·</span>
+              <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate">
                 {node.peringkat || 'Agen'}
               </span>
             </div>
             <h4
-              className="text-xs font-bold text-slate-900 mt-1 truncate"
+              className="text-xs font-bold text-slate-900 dark:text-slate-100 mt-1 truncate"
               title={node.name}
             >
               {node.name}
             </h4>
             {node.rawBranchName && (
-              <p className="text-[10px] text-slate-500 flex items-center gap-1 mt-0.5 truncate">
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5 truncate">
                 <Building className="w-2.5 h-2.5 shrink-0" />
                 {node.rawBranchName}
               </p>
@@ -224,16 +224,16 @@ export function HierarchyOrgChart({
           </div>
 
           {/* Mini KPI row */}
-          <div className="grid grid-cols-2 gap-1.5 pt-2 border-t border-slate-100 text-[10px]">
-            <div className="bg-slate-50 p-1.5 rounded">
-              <span className="text-slate-500 block">Premi</span>
-              <span className="font-bold text-slate-900 truncate block">
+          <div className="grid grid-cols-2 gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-800 text-[10px]">
+            <div className="bg-slate-50 dark:bg-slate-950/60 p-1.5 rounded">
+              <span className="text-slate-500 dark:text-slate-400 block">Premi</span>
+              <span className="font-bold text-slate-900 dark:text-slate-100 truncate block">
                 {formatIDR(node.totalProduction)}
               </span>
             </div>
-            <div className="bg-slate-50 p-1.5 rounded">
-              <span className="text-slate-500 block">Downlines</span>
-              <span className="font-bold text-blue-600 block">
+            <div className="bg-slate-50 dark:bg-slate-950/60 p-1.5 rounded">
+              <span className="text-slate-500 dark:text-slate-400 block">Downlines</span>
+              <span className="font-bold text-blue-600 dark:text-blue-400 block">
                 {node.downlinesCount} agen
               </span>
             </div>
@@ -247,7 +247,7 @@ export function HierarchyOrgChart({
             onClick={() => toggleNode(node.agentCode)}
             className={`w-full py-1.5 px-3 text-center text-[11px] font-bold rounded-b-xl border-t transition flex items-center justify-center gap-1.5 cursor-pointer ${
               isExpanded
-                ? 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-200'
+                ? 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800'
                 : 'bg-blue-600 hover:bg-blue-700 text-white border-blue-600 shadow-sm'
             }`}
           >
@@ -264,7 +264,7 @@ export function HierarchyOrgChart({
             )}
           </button>
         ) : (
-          <div className="py-1 px-3 text-center text-[10px] font-medium text-slate-400 bg-slate-50/80 rounded-b-xl border-t border-slate-100">
+          <div className="py-1 px-3 text-center text-[10px] font-medium text-slate-400 dark:text-slate-500 bg-slate-50/80 dark:bg-slate-950/50 rounded-b-xl border-t border-slate-100 dark:border-slate-800">
             Tanpa Downline
           </div>
         )}
@@ -293,8 +293,8 @@ export function HierarchyOrgChart({
 
   if (!tree || tree.length === 0) {
     return (
-      <div className="text-center py-12 bg-white rounded-xl border border-slate-200 p-8">
-        <p className="text-slate-500 text-sm">Tidak ada data agen yang dapat ditampilkan dalam bagan organisasi.</p>
+      <div className="text-center py-12 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8">
+        <p className="text-slate-500 dark:text-slate-400 text-sm">Tidak ada data agen yang dapat ditampilkan dalam bagan organisasi.</p>
       </div>
     );
   }
@@ -302,20 +302,20 @@ export function HierarchyOrgChart({
   return (
     <div className="space-y-4">
       {/* Org Chart Toolbar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold text-slate-700">Kontrol Bagan:</span>
+          <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Kontrol Bagan:</span>
           <button
             type="button"
             onClick={handleOpenLevel1Only}
-            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 transition cursor-pointer"
+            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 transition cursor-pointer"
           >
             Level 1 Saja (Default)
           </button>
           <button
             type="button"
             onClick={handleCollapseAll}
-            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
+            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition cursor-pointer"
           >
             Tutup Semua
           </button>
@@ -325,19 +325,19 @@ export function HierarchyOrgChart({
         <div className="flex items-center gap-3 flex-wrap">
           {/* Export buttons */}
           {(onExportXlsx || onExportPdf) && (
-            <div className="flex items-center gap-1.5 border-r border-slate-200 pr-3">
+            <div className="flex items-center gap-1.5 border-r border-slate-200 dark:border-slate-800 pr-3">
               {onExportXlsx && (
                 <button
                   type="button"
                   onClick={onExportXlsx}
                   disabled={isExportingXlsx}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 transition cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 transition cursor-pointer disabled:opacity-50"
                   title="Export Hirarki ke Excel (.xlsx)"
                 >
                   {isExportingXlsx ? (
-                    <RefreshCw className="w-3 h-3 animate-spin text-emerald-600" />
+                    <RefreshCw className="w-3 h-3 animate-spin text-emerald-600 dark:text-emerald-400" />
                   ) : (
-                    <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
+                    <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                   )}
                   <span>Excel</span>
                 </button>
@@ -348,13 +348,13 @@ export function HierarchyOrgChart({
                   type="button"
                   onClick={onExportPdf}
                   disabled={isExportingPdf}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-300 transition cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 dark:hover:bg-rose-900/60 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-800 transition cursor-pointer disabled:opacity-50"
                   title="Export Hirarki ke PDF (.pdf)"
                 >
                   {isExportingPdf ? (
-                    <RefreshCw className="w-3 h-3 animate-spin text-rose-600" />
+                    <RefreshCw className="w-3 h-3 animate-spin text-rose-600 dark:text-rose-400" />
                   ) : (
-                    <FileText className="w-3.5 h-3.5 text-rose-600" />
+                    <FileText className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
                   )}
                   <span>PDF</span>
                 </button>
@@ -364,12 +364,12 @@ export function HierarchyOrgChart({
 
           {/* Zoom Controls */}
           <div className="flex items-center gap-2">
-            <span className="text-[11px] text-slate-500 font-medium">Skala: {Math.round(zoom * 100)}%</span>
-            <div className="flex items-center bg-slate-100 rounded-lg p-0.5 border border-slate-200">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Skala: {Math.round(zoom * 100)}%</span>
+            <div className="flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700">
               <button
                 type="button"
                 onClick={handleZoomOut}
-                className="p-1.5 hover:bg-white rounded text-slate-700 transition cursor-pointer"
+                className="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded text-slate-700 dark:text-slate-300 transition cursor-pointer"
                 title="Perkecil (-)"
               >
                 <ZoomOut className="w-3.5 h-3.5" />
@@ -377,7 +377,7 @@ export function HierarchyOrgChart({
               <button
                 type="button"
                 onClick={handleZoomReset}
-                className="px-2 py-1 text-[11px] font-bold hover:bg-white rounded text-slate-700 transition cursor-pointer"
+                className="px-2 py-1 text-[11px] font-bold hover:bg-white dark:hover:bg-slate-700 rounded text-slate-700 dark:text-slate-300 transition cursor-pointer"
                 title="Reset Skala 100%"
               >
                 <RotateCcw className="w-3 h-3 inline mr-1" />
@@ -386,7 +386,7 @@ export function HierarchyOrgChart({
               <button
                 type="button"
                 onClick={handleZoomIn}
-                className="p-1.5 hover:bg-white rounded text-slate-700 transition cursor-pointer"
+                className="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded text-slate-700 dark:text-slate-300 transition cursor-pointer"
                 title="Perbesar (+)"
               >
                 <ZoomIn className="w-3.5 h-3.5" />
@@ -398,21 +398,21 @@ export function HierarchyOrgChart({
 
       {/* Multiple Roots Switcher Toolbar (saat melihat cabang atau daftar multi-root) */}
       {tree.length > 1 && activeRoot && (
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/90 rounded-xl p-3 shadow-xs">
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/40 border border-blue-200/90 dark:border-blue-800/80 rounded-xl p-3 shadow-xs">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
               <span className="px-2 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold shrink-0">
                 Pohon #{activeRootIndex + 1}
               </span>
               <div className="min-w-0">
-                <h4 className="text-xs font-bold text-slate-900 flex items-center gap-1.5 truncate">
+                <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5 truncate">
                   <span className="truncate">{activeRoot.name}</span>
-                  <span className="font-mono text-blue-700 bg-white px-1.5 py-0.5 rounded border border-blue-200 shrink-0">
+                  <span className="font-mono text-blue-700 dark:text-blue-300 bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-700 shrink-0">
                     {activeRoot.agentCode}
                   </span>
                 </h4>
-                <p className="text-[11px] text-slate-600 mt-0.5">
-                  Menampilkan 1 dari {tree.length} pohon root di filter ini · <span className="font-semibold text-blue-700">{activeRoot.downlinesCount} downlines</span>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5">
+                  Menampilkan 1 dari {tree.length} pohon root di filter ini · <span className="font-semibold text-blue-700 dark:text-blue-400">{activeRoot.downlinesCount} downlines</span>
                 </p>
               </div>
             </div>
@@ -427,7 +427,7 @@ export function HierarchyOrgChart({
                   setActiveRootIndex(newIdx);
                   setExpandedNodes(new Set([tree[newIdx].agentCode]));
                 }}
-                className="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 disabled:opacity-40 transition cursor-pointer"
+                className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 disabled:opacity-40 transition cursor-pointer"
               >
                 ← Sebelumnya
               </button>
@@ -439,7 +439,7 @@ export function HierarchyOrgChart({
                   setActiveRootIndex(newIdx);
                   setExpandedNodes(new Set([tree[newIdx].agentCode]));
                 }}
-                className="px-2.5 py-1.5 rounded-lg border border-blue-300 bg-white text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer max-w-[220px] sm:max-w-[280px] truncate"
+                className="px-2.5 py-1.5 rounded-lg border border-blue-300 dark:border-blue-700 bg-white dark:bg-slate-800 text-xs font-bold text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer max-w-[220px] sm:max-w-[280px] truncate"
               >
                 {tree.map((r, idx) => (
                   <option key={r.id || r.agentCode} value={idx}>
@@ -456,7 +456,7 @@ export function HierarchyOrgChart({
                   setActiveRootIndex(newIdx);
                   setExpandedNodes(new Set([tree[newIdx].agentCode]));
                 }}
-                className="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 disabled:opacity-40 transition cursor-pointer"
+                className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 disabled:opacity-40 transition cursor-pointer"
               >
                 Selanjutnya →
               </button>
@@ -468,7 +468,7 @@ export function HierarchyOrgChart({
       {/* Org Chart Canvas (Scrollable Horizontal & Vertical) */}
       <div
         ref={chartContainerRef}
-        className="w-full overflow-x-auto overflow-y-auto bg-slate-50/70 border border-slate-200 rounded-2xl p-8 sm:p-12 min-h-[500px] shadow-inner bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:20px_20px]"
+        className="w-full overflow-x-auto overflow-y-auto bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 sm:p-12 min-h-[500px] shadow-inner bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:20px_20px]"
       >
         <div
           className="org-tree transition-transform duration-200 origin-top"

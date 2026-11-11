@@ -17,6 +17,7 @@ export interface AppBranding {
   cardBlur?: 'none' | 'sm' | 'md' | 'xl' | '2xl';
   cardMobileOpacity?: number;
   cardDesktopOpacity?: number;
+  defaultTheme?: 'light' | 'dark';
   updatedAt?: string;
 }
 
@@ -35,6 +36,7 @@ const DEFAULT_BRANDING: AppBranding = {
   cardBlur: 'xl',
   cardMobileOpacity: 85,
   cardDesktopOpacity: 90,
+  defaultTheme: 'light',
 };
 
 interface BrandingContextType {

@@ -22,6 +22,7 @@ const DEFAULT_BRANDING: AppBrandingValue = {
   cardBlur: 'xl',
   cardMobileOpacity: 85,
   cardDesktopOpacity: 90,
+  defaultTheme: 'light',
 };
 
 /**
@@ -62,6 +63,7 @@ export async function GET() {
         cardBlur: value.cardBlur || DEFAULT_BRANDING.cardBlur,
         cardMobileOpacity: typeof value.cardMobileOpacity === 'number' ? value.cardMobileOpacity : DEFAULT_BRANDING.cardMobileOpacity,
         cardDesktopOpacity: typeof value.cardDesktopOpacity === 'number' ? value.cardDesktopOpacity : DEFAULT_BRANDING.cardDesktopOpacity,
+        defaultTheme: value.defaultTheme || DEFAULT_BRANDING.defaultTheme,
         updatedAt: value.updatedAt,
       },
     });
@@ -109,6 +111,7 @@ export async function POST(req: NextRequest) {
       cardBlur,
       cardMobileOpacity,
       cardDesktopOpacity,
+      defaultTheme,
     } = body;
 
     const cleanAppName = String(appName ?? '').trim();
@@ -215,6 +218,7 @@ export async function POST(req: NextRequest) {
       typeof cardMobileOpacity === 'number' ? Math.max(30, Math.min(100, Math.round(cardMobileOpacity))) : 85;
     const cleanCardDesktopOpacity =
       typeof cardDesktopOpacity === 'number' ? Math.max(30, Math.min(100, Math.round(cardDesktopOpacity))) : 90;
+    const cleanDefaultTheme: 'light' | 'dark' = defaultTheme === 'dark' ? 'dark' : 'light';
 
     const brandingPayload: AppBrandingValue = {
       appName: cleanAppName,
@@ -231,6 +235,7 @@ export async function POST(req: NextRequest) {
       cardBlur: cleanCardBlur as any,
       cardMobileOpacity: cleanCardMobileOpacity,
       cardDesktopOpacity: cleanCardDesktopOpacity,
+      defaultTheme: cleanDefaultTheme,
       updatedAt: new Date().toISOString(),
     };
 

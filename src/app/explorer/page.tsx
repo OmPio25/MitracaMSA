@@ -432,24 +432,24 @@ export default function ExplorerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/60 pb-16">
+    <div className="min-h-screen bg-slate-50/60 dark:bg-[#0b0f19] pb-16">
       {/* Header Bar */}
-      <div className="bg-white border-b border-slate-200">
+      <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2.5 mb-1.5">
-                <span className="p-2 rounded-xl bg-blue-100 text-blue-700">
+                <span className="p-2 rounded-xl bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300">
                   <Layers className="w-5 h-5" />
                 </span>
-                <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                <h1 className="text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
                   Eksplorasi Detail Polis & Klaim
                 </h1>
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-850">
                   Data Individual
                 </span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-500">
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                 Pencarian baris transaksi riil hasil ingestion Excel, termasuk 15 kolom dinamis objek pertanggungan (*JSONB*) dan riwayat klaim terkait.
               </p>
             </div>
@@ -469,7 +469,7 @@ export default function ExplorerPage() {
                 type="button"
                 onClick={() => (activeTab === 'POLICIES' ? fetchPolicies() : fetchClaims())}
                 disabled={isLoading}
-                className="p-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-600 transition disabled:opacity-50"
+                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition disabled:opacity-50"
                 title="Muat Ulang Data"
               >
                 <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin text-blue-600' : ''}`} />
@@ -478,7 +478,7 @@ export default function ExplorerPage() {
           </div>
 
           {/* Navigation Tab Switcher */}
-          <div className="flex items-center gap-3 mt-6 border-b border-slate-100">
+          <div className="flex items-center gap-3 mt-6 border-b border-slate-100 dark:border-slate-800">
             <button
               type="button"
               onClick={() => {
@@ -488,14 +488,14 @@ export default function ExplorerPage() {
               }}
               className={`flex items-center gap-2.5 pb-3 px-2 border-b-2 font-bold text-sm transition cursor-pointer ${
                 activeTab === 'POLICIES'
-                  ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-slate-500 hover:text-slate-800'
+                  ? 'border-blue-600 text-blue-600 dark:text-blue-400'
+                  : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               <FileText className="w-4 h-4" />
               <span>Daftar Polis Asuransi</span>
               {policiesData && (
-                <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600">
+                <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                   {policiesData.summary.totalItems.toLocaleString('id-ID')}
                 </span>
               )}
@@ -510,14 +510,14 @@ export default function ExplorerPage() {
               }}
               className={`flex items-center gap-2.5 pb-3 px-2 border-b-2 font-bold text-sm transition cursor-pointer ${
                 activeTab === 'CLAIMS'
-                  ? 'border-rose-600 text-rose-600'
-                  : 'border-transparent text-slate-500 hover:text-slate-800'
+                  ? 'border-rose-600 text-rose-600 dark:text-rose-400'
+                  : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               <ShieldAlert className="w-4 h-4" />
               <span>Daftar Klaim Asuransi</span>
               {claimsData && (
-                <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600">
+                <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                   {claimsData.summary.totalItems.toLocaleString('id-ID')}
                 </span>
               )}
@@ -530,44 +530,44 @@ export default function ExplorerPage() {
         {/* KPI Summary Cards */}
         {activeTab === 'POLICIES' && policiesData && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
                 <FileText className="w-6 h-6" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Polis Terfilter</p>
-                <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-0.5 truncate">
+                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Polis Terfilter</p>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 mt-0.5 truncate">
                   {policiesData.summary.totalItems.toLocaleString('id-ID')}
                 </h3>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                 <TrendingUp className="w-6 h-6" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Premi Bruto</p>
-                <h3 className="text-xl sm:text-2xl font-black text-emerald-700 mt-0.5 truncate">
+                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Premi Bruto</p>
+                <h3 className="text-xl sm:text-2xl font-black text-emerald-700 dark:text-emerald-400 mt-0.5 truncate">
                   {formatIdr(policiesData.summary.totalPremi)}
                 </h3>
                 {policiesData.summary.totalPremiMm !== undefined && (
-                  <p className="text-[10px] text-slate-500 mt-0.5 truncate">
-                    <span className="font-semibold text-blue-700">MM: {formatIdr(policiesData.summary.totalPremiMm)}</span>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">
+                    <span className="font-semibold text-blue-700 dark:text-blue-400">MM: {formatIdr(policiesData.summary.totalPremiMm)}</span>
                     <span className="mx-1">•</span>
-                    <span className="text-slate-500">Non-MM: {formatIdr(policiesData.summary.totalPremiNonMm || 0)}</span>
+                    <span className="text-slate-500 dark:text-slate-400">Non-MM: {formatIdr(policiesData.summary.totalPremiNonMm || 0)}</span>
                   </p>
                 )}
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
                 <Sparkles className="w-6 h-6" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total TSI (IDR)</p>
-                <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-0.5 truncate">
+                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total TSI (IDR)</p>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 mt-0.5 truncate">
                   {formatIdr(policiesData.summary.totalTsi)}
                 </h3>
               </div>
@@ -577,32 +577,32 @@ export default function ExplorerPage() {
 
         {activeTab === 'CLAIMS' && claimsData && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
                 <ShieldAlert className="w-6 h-6" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Klaim Terfilter</p>
-                <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-0.5 truncate">
+                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Klaim Terfilter</p>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 mt-0.5 truncate">
                   {claimsData.summary.totalItems.toLocaleString('id-ID')}
                 </h3>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
                 <AlertCircle className="w-6 h-6" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Gross Claim</p>
-                <h3 className="text-xl sm:text-2xl font-black text-rose-700 mt-0.5 truncate">
+                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Gross Claim</p>
+                <h3 className="text-xl sm:text-2xl font-black text-rose-700 dark:text-rose-400 mt-0.5 truncate">
                   {formatIdr(claimsData.summary.totalGrossClaim)}
                 </h3>
                 {claimsData.summary.totalGrossClaimMm !== undefined && (
-                  <p className="text-[10px] text-slate-500 mt-0.5 truncate">
-                    <span className="font-semibold text-emerald-700">MM: {formatIdr(claimsData.summary.totalGrossClaimMm)}</span>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">
+                    <span className="font-semibold text-emerald-700 dark:text-emerald-400">MM: {formatIdr(claimsData.summary.totalGrossClaimMm)}</span>
                     <span className="mx-1">•</span>
-                    <span className="text-slate-500">Non-MM: {formatIdr(claimsData.summary.totalGrossClaimNonMm || 0)}</span>
+                    <span className="text-slate-500 dark:text-slate-400">Non-MM: {formatIdr(claimsData.summary.totalGrossClaimNonMm || 0)}</span>
                   </p>
                 )}
               </div>
@@ -611,11 +611,11 @@ export default function ExplorerPage() {
         )}
 
         {/* Filter & Search Bar */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 shadow-sm space-y-4">
           <div className="flex flex-col md:flex-row gap-3">
             {/* Search Input */}
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+              <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-3.5" />
               <input
                 type="text"
                 value={search}
@@ -625,13 +625,13 @@ export default function ExplorerPage() {
                     ? 'Cari No. Polis, Nama Tertanggung, Kode Agen, Nama Agen, atau No. SPAU...'
                     : 'Cari No. Klaim, No. Polis Terkait, Sebab Klaim, atau Nama Produk...'
                 }
-                className="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition font-medium"
+                className="w-full text-xs sm:text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-10 py-2.5 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition font-medium"
               />
               {search && (
                 <button
                   type="button"
                   onClick={() => setSearch('')}
-                  className="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600"
+                  className="absolute right-3.5 top-3 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -646,7 +646,7 @@ export default function ExplorerPage() {
                   setSelectedBranchId(e.target.value);
                   setPage(1);
                 }}
-                className="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition font-medium"
+                className="w-full text-xs sm:text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition font-medium"
               >
                 <option value="ALL">Semua Cabang (Nasional)</option>
                 {branches.map((b) => (
@@ -663,8 +663,8 @@ export default function ExplorerPage() {
               onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
               className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border text-xs font-bold transition cursor-pointer ${
                 showAdvancedFilters
-                  ? 'bg-blue-50 border-blue-200 text-blue-700'
-                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                  ? 'bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300'
+                  : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-750'
               }`}
             >
               <Filter className="w-4 h-4" />
@@ -683,10 +683,10 @@ export default function ExplorerPage() {
 
           {/* Advanced Filter Collapse Box */}
           {showAdvancedFilters && (
-            <div className="pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 animate-in fade-in duration-200">
+            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 animate-in fade-in duration-200">
               {/* Product Filter */}
               <div>
-                <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
                   Nama Produk
                 </label>
                 <select
@@ -695,7 +695,7 @@ export default function ExplorerPage() {
                     setSelectedProduct(e.target.value);
                     setPage(1);
                   }}
-                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
+                  className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
                 >
                   <option value="ALL">Semua Produk</option>
                   {(activeTab === 'POLICIES' ? policyProducts : claimProducts).map((p) => (
@@ -710,7 +710,7 @@ export default function ExplorerPage() {
               {activeTab === 'POLICIES' ? (
                 <>
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
                       Status Polis
                     </label>
                     <select
@@ -719,7 +719,7 @@ export default function ExplorerPage() {
                         setSelectedStatus(e.target.value);
                         setPage(1);
                       }}
-                      className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
+                      className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
                     >
                       <option value="ALL">Semua Status</option>
                       {policyStatuses.map((s) => (
@@ -731,7 +731,7 @@ export default function ExplorerPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
                       Kategori Polis
                     </label>
                     <select
@@ -740,7 +740,7 @@ export default function ExplorerPage() {
                         setSelectedPolicyCategory(e.target.value as any);
                         setPage(1);
                       }}
-                      className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
+                      className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
                     >
                       <option value="ALL">Semua (MM & Non-MM)</option>
                       <option value="MM">Polis MM (Lengkap)</option>
@@ -751,7 +751,7 @@ export default function ExplorerPage() {
               ) : (
                 <>
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
                       Underwriting Year (UW)
                     </label>
                     <select
@@ -760,7 +760,7 @@ export default function ExplorerPage() {
                         setSelectedUwYear(e.target.value);
                         setPage(1);
                       }}
-                      className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
+                      className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
                     >
                       <option value="ALL">Semua UW Year</option>
                       {claimUwYears.map((y) => (
@@ -772,7 +772,7 @@ export default function ExplorerPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
                       Kategori Klaim
                     </label>
                     <select
@@ -781,7 +781,7 @@ export default function ExplorerPage() {
                         setSelectedClaimCategory(e.target.value as any);
                         setPage(1);
                       }}
-                      className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-rose-500/20 font-medium"
+                      className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-rose-500/20 font-medium"
                     >
                       <option value="ALL">Semua (MM & Non-MM)</option>
                       <option value="MM">Klaim MM (Lengkap)</option>
@@ -793,7 +793,7 @@ export default function ExplorerPage() {
 
               {/* Start Date */}
               <div>
-                <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
                   {activeTab === 'POLICIES' ? 'Mulai Polis Dari' : 'Settlement Klaim Dari'}
                 </label>
                 <input
@@ -803,13 +803,13 @@ export default function ExplorerPage() {
                     setStartDate(e.target.value);
                     setPage(1);
                   }}
-                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
+                  className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
                 />
               </div>
 
               {/* End Date */}
               <div>
-                <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
                   Sampai Dengan
                 </label>
                 <div className="flex items-center gap-2">
@@ -820,12 +820,12 @@ export default function ExplorerPage() {
                       setEndDate(e.target.value);
                       setPage(1);
                     }}
-                    className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
+                    className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
                   />
                   <button
                     type="button"
                     onClick={handleResetFilters}
-                    className="px-3 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-xl border border-rose-200 transition shrink-0"
+                    className="px-3 py-2 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-900/50 transition shrink-0"
                     title="Reset Filter"
                   >
                     Reset
@@ -838,14 +838,14 @@ export default function ExplorerPage() {
 
         {/* Success Alert */}
         {actionSuccessMessage && (
-          <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center justify-between shadow-xs animate-in fade-in duration-200">
+          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs flex items-center justify-between shadow-xs animate-in fade-in duration-200">
             <div className="flex items-center gap-3">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <p className="font-semibold">{actionSuccessMessage}</p>
             </div>
             <button
               onClick={() => setActionSuccessMessage(null)}
-              className="text-emerald-500 hover:text-emerald-700 p-1"
+              className="text-emerald-500 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-200 p-1"
             >
               <X className="w-4 h-4" />
             </button>
@@ -854,19 +854,19 @@ export default function ExplorerPage() {
 
         {/* Error Alert */}
         {errorMessage && (
-          <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+          <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-200 text-xs flex items-center gap-3">
+            <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0" />
             <p className="flex-1 font-medium">{errorMessage}</p>
           </div>
         )}
 
         {/* Main Data Table */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           {activeTab === 'POLICIES' ? (
             /* TAB POLIS TABLE */
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50/80 border-b border-slate-200 text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                <thead className="bg-slate-50/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
                   <tr>
                     <th className="py-3.5 px-4">No. Polis & SPAU</th>
                     <th className="py-3.5 px-4">Masa Berlaku</th>
@@ -879,20 +879,20 @@ export default function ExplorerPage() {
                     <th className="py-3.5 px-4 text-center">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                   {isLoading ? (
                     <tr>
-                      <td colSpan={9} className="py-12 text-center text-slate-400">
+                      <td colSpan={9} className="py-12 text-center text-slate-400 dark:text-slate-500">
                         <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-blue-600" />
                         <span>Memuat data polis dari database...</span>
                       </td>
                     </tr>
                   ) : !policiesData || policiesData.items.length === 0 ? (
                     <tr>
-                      <td colSpan={9} className="py-12 text-center text-slate-500">
-                        <FileText className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-                        <p className="font-semibold text-slate-700">Tidak ada data polis ditemukan</p>
-                        <p className="text-xs text-slate-400 mt-0.5">
+                      <td colSpan={9} className="py-12 text-center text-slate-500 dark:text-slate-400">
+                        <FileText className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
+                        <p className="font-semibold text-slate-700 dark:text-slate-300">Tidak ada data polis ditemukan</p>
+                        <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
                           Coba sesuaikan kata kunci pencarian atau ubah filter cabang Anda.
                         </p>
                       </td>
@@ -902,45 +902,45 @@ export default function ExplorerPage() {
                       const isNew = row.policyStatus?.toLowerCase() === 'new';
                       const isEndorse = row.policyStatus?.toLowerCase().includes('endorse');
                       return (
-                        <tr key={row.id} className="hover:bg-blue-50/30 transition">
+                        <tr key={row.id} className="hover:bg-blue-50/30 dark:hover:bg-slate-800/50 transition">
                           <td className="py-3 px-4 font-mono">
                             <div className="flex items-center gap-1.5 mb-1">
                               {row.isMm ? (
-                                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-blue-100 text-blue-800 border border-blue-200">
+                                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
                                   Polis MM
                                 </span>
                               ) : (
-                                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-slate-100 text-slate-600 border border-slate-300">
+                                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
                                   Non-MM
                                 </span>
                               )}
                             </div>
-                            <span className="font-bold text-slate-900 block truncate max-w-[170px]" title={row.policyNo}>
+                            <span className="font-bold text-slate-900 dark:text-slate-100 block truncate max-w-[170px]" title={row.policyNo}>
                               {row.policyNo}
                             </span>
                             {row.spauNo && (
-                              <span className="text-[10px] text-slate-400 block truncate max-w-[170px]">
+                              <span className="text-[10px] text-slate-400 dark:text-slate-500 block truncate max-w-[170px]">
                                 SPAU: {row.spauNo}
                               </span>
                             )}
                           </td>
 
-                          <td className="py-3 px-4 text-slate-600 whitespace-nowrap">
-                            <span className="block font-medium">{row.startPeriod || '-'}</span>
-                            <span className="text-[10px] text-slate-400 block">s/d {row.endPeriod || '-'}</span>
+                          <td className="py-3 px-4 text-slate-600 dark:text-slate-400 whitespace-nowrap">
+                            <span className="block font-medium text-slate-800 dark:text-slate-200">{row.startPeriod || '-'}</span>
+                            <span className="text-[10px] text-slate-400 dark:text-slate-500 block">s/d {row.endPeriod || '-'}</span>
                           </td>
 
-                          <td className="py-3 px-4 font-semibold text-slate-800">
+                          <td className="py-3 px-4 font-semibold text-slate-800 dark:text-slate-200">
                             <span className="truncate block max-w-[180px]" title={row.insuredName || '-'}>
                               {row.insuredName || '-'}
                             </span>
                           </td>
 
                           <td className="py-3 px-4">
-                            <span className="font-bold text-slate-900 block truncate max-w-[160px]" title={row.product}>
+                            <span className="font-bold text-slate-900 dark:text-slate-100 block truncate max-w-[160px]" title={row.product}>
                               {row.product || '-'}
                             </span>
-                            <span className="text-[10px] text-slate-500 block truncate max-w-[160px]" title={row.coverage}>
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate max-w-[160px]" title={row.coverage}>
                               {row.coverage || '-'}
                             </span>
                           </td>
@@ -948,30 +948,30 @@ export default function ExplorerPage() {
                           <td className="py-3 px-4">
                             {row.isMm ? (
                               <>
-                                <span className="font-bold text-slate-900 block truncate max-w-[160px]">
+                                <span className="font-bold text-slate-900 dark:text-slate-100 block truncate max-w-[160px]">
                                   {row.agentName || row.agentRealName || row.sourceAgentId}
                                 </span>
-                                <span className="text-[10px] text-slate-500 block truncate max-w-[160px]">
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate max-w-[160px]">
                                   {row.branchName || row.rawBranch || 'Cabang -'}
                                 </span>
                               </>
                             ) : (
                               <>
-                                <span className="font-medium text-slate-400 italic block truncate max-w-[160px]">
+                                <span className="font-medium text-slate-400 dark:text-slate-500 italic block truncate max-w-[160px]">
                                   Non-MM (Tanpa Agen)
                                 </span>
-                                <span className="text-[10px] text-slate-500 block truncate max-w-[160px]">
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate max-w-[160px]">
                                   {row.branchName || row.rawBranch || 'Cabang -'}
                                 </span>
                               </>
                             )}
                           </td>
 
-                          <td className="py-3 px-4 text-right font-mono font-bold text-emerald-700 whitespace-nowrap">
+                          <td className="py-3 px-4 text-right font-mono font-bold text-emerald-700 dark:text-emerald-400 whitespace-nowrap">
                             {formatIdr(row.nilaiPremi)}
                           </td>
 
-                          <td className="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
+                          <td className="py-3 px-4 text-right font-mono text-slate-700 dark:text-slate-300 whitespace-nowrap">
                             {formatIdr(row.tsiInIdr || row.tsi)}
                           </td>
 
@@ -979,10 +979,10 @@ export default function ExplorerPage() {
                             <span
                               className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${
                                 isNew
-                                  ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                                  ? 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
                                   : isEndorse
-                                  ? 'bg-amber-100 text-amber-800 border border-amber-200'
-                                  : 'bg-slate-100 text-slate-700 border border-slate-200'
+                                  ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800'
+                                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
                               }`}
                             >
                               {row.policyStatus || 'Aktif'}
@@ -994,7 +994,7 @@ export default function ExplorerPage() {
                               <button
                                 type="button"
                                 onClick={() => handleOpenPolicyDetail(row.id)}
-                                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 text-[11px] font-bold transition cursor-pointer"
+                                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-[11px] font-bold transition cursor-pointer"
                                 title="Lihat Detail Polis & Objek"
                               >
                                 <Eye className="w-3.5 h-3.5" />
@@ -1004,7 +1004,7 @@ export default function ExplorerPage() {
                                 <button
                                   type="button"
                                   onClick={() => handleOpenReassignModal('POLICY', row)}
-                                  className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-purple-50 text-purple-700 hover:bg-purple-100 text-[11px] font-bold transition cursor-pointer"
+                                  className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/60 text-[11px] font-bold transition cursor-pointer"
                                   title="Alihkan Agen Polis Ini"
                                 >
                                   <UserCheck className="w-3.5 h-3.5" />
@@ -1024,7 +1024,7 @@ export default function ExplorerPage() {
             /* TAB KLAIM TABLE */
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50/80 border-b border-slate-200 text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                <thead className="bg-slate-50/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
                   <tr>
                     <th className="py-3.5 px-4">No. Klaim & No. Polis</th>
                     <th className="py-3.5 px-4">Tgl Settlement</th>
@@ -1036,65 +1036,65 @@ export default function ExplorerPage() {
                     <th className="py-3.5 px-4 text-center">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                   {isLoading ? (
                     <tr>
-                      <td colSpan={8} className="py-12 text-center text-slate-400">
+                      <td colSpan={8} className="py-12 text-center text-slate-400 dark:text-slate-500">
                         <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-rose-600" />
                         <span>Memuat data klaim dari database...</span>
                       </td>
                     </tr>
                   ) : !claimsData || claimsData.items.length === 0 ? (
                     <tr>
-                      <td colSpan={8} className="py-12 text-center text-slate-500">
-                        <ShieldAlert className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-                        <p className="font-semibold text-slate-700">Tidak ada data klaim ditemukan</p>
-                        <p className="text-xs text-slate-400 mt-0.5">
+                      <td colSpan={8} className="py-12 text-center text-slate-500 dark:text-slate-400">
+                        <ShieldAlert className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
+                        <p className="font-semibold text-slate-700 dark:text-slate-300">Tidak ada data klaim ditemukan</p>
+                        <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
                           Coba sesuaikan kata kunci pencarian atau ganti filter underwriting year.
                         </p>
                       </td>
                     </tr>
                   ) : (
                     claimsData.items.map((row) => (
-                      <tr key={row.id} className="hover:bg-rose-50/30 transition">
+                      <tr key={row.id} className="hover:bg-rose-50/30 dark:hover:bg-slate-800/50 transition">
                         <td className="py-3 px-4 font-mono">
                           <div className="flex items-center gap-1.5 mb-1">
                             {row.isMm ? (
-                              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                                 Klaim MM
                               </span>
                             ) : (
-                              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-slate-100 text-slate-600 border border-slate-300">
+                              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
                                 Non-MM
                               </span>
                             )}
                           </div>
-                          <span className="font-bold text-slate-900 block truncate max-w-[170px]" title={row.claimNo}>
+                          <span className="font-bold text-slate-900 dark:text-slate-100 block truncate max-w-[170px]" title={row.claimNo}>
                             {row.claimNo}
                           </span>
-                          <span className="text-[10px] text-slate-500 block truncate max-w-[170px]" title={row.policyNo}>
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate max-w-[170px]" title={row.policyNo}>
                             Polis: {row.policyNo}
                           </span>
                         </td>
 
-                        <td className="py-3 px-4 text-slate-700 font-medium whitespace-nowrap">
+                        <td className="py-3 px-4 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap">
                           {row.dateOfSettlement || '-'}
                         </td>
 
                         <td className="py-3 px-4 text-center">
-                          <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700 border border-slate-200">
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                             {row.uwYear || '-'}
                           </span>
                         </td>
 
                         <td className="py-3 px-4">
-                          <span className="font-semibold text-slate-900 block truncate max-w-[180px]" title={row.causeOfLoss}>
+                          <span className="font-semibold text-slate-900 dark:text-slate-100 block truncate max-w-[180px]" title={row.causeOfLoss}>
                             {row.causeOfLoss || '-'}
                           </span>
                         </td>
 
                         <td className="py-3 px-4">
-                          <span className="text-slate-800 block truncate max-w-[150px]" title={row.namaProduk}>
+                          <span className="text-slate-800 dark:text-slate-200 block truncate max-w-[150px]" title={row.namaProduk}>
                             {row.namaProduk && row.namaProduk !== '[object Object]' ? row.namaProduk : '-'}
                           </span>
                         </td>
@@ -1102,26 +1102,26 @@ export default function ExplorerPage() {
                         <td className="py-3 px-4">
                           {row.isMm ? (
                             <>
-                              <span className="font-bold text-slate-900 block truncate max-w-[160px]">
+                              <span className="font-bold text-slate-900 dark:text-slate-100 block truncate max-w-[160px]">
                                 {row.agentRealName || row.sourceAgentId || '-'}
                               </span>
-                              <span className="text-[10px] text-slate-500 block truncate max-w-[160px]">
+                              <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate max-w-[160px]">
                                 {row.branchName || row.rawBranch || 'Cabang -'}
                               </span>
                             </>
                           ) : (
                             <>
-                              <span className="font-medium text-slate-400 italic block truncate max-w-[160px]">
+                              <span className="font-medium text-slate-400 dark:text-slate-500 italic block truncate max-w-[160px]">
                                 Non-MM (Tanpa Agen)
                               </span>
-                              <span className="text-[10px] text-slate-500 block truncate max-w-[160px]">
+                              <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate max-w-[160px]">
                                 {row.branchName || row.rawBranch || 'Cabang -'}
                               </span>
                             </>
                           )}
                         </td>
 
-                        <td className="py-3 px-4 text-right font-mono font-bold text-rose-700 whitespace-nowrap">
+                        <td className="py-3 px-4 text-right font-mono font-bold text-rose-700 dark:text-rose-400 whitespace-nowrap">
                           {formatIdr(row.grossClaim)}
                         </td>
 
@@ -1130,7 +1130,7 @@ export default function ExplorerPage() {
                             <button
                               type="button"
                               onClick={() => handleOpenClaimDetail(row)}
-                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-100 text-[11px] font-bold transition cursor-pointer"
+                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 hover:bg-rose-100 dark:hover:bg-rose-900/60 text-[11px] font-bold transition cursor-pointer"
                               title="Lihat Detail Klaim"
                             >
                               <Eye className="w-3.5 h-3.5" />
@@ -1140,7 +1140,7 @@ export default function ExplorerPage() {
                               <button
                                 type="button"
                                 onClick={() => handleOpenReassignModal('CLAIM', row)}
-                                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-purple-50 text-purple-700 hover:bg-purple-100 text-[11px] font-bold transition cursor-pointer"
+                                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/60 text-[11px] font-bold transition cursor-pointer"
                                 title="Alihkan Agen Klaim Ini"
                               >
                                 <UserCheck className="w-3.5 h-3.5" />
@@ -1158,8 +1158,8 @@ export default function ExplorerPage() {
           )}
 
           {/* Pagination Controls */}
-          <div className="bg-slate-50/80 px-4 py-3 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-2 text-slate-600">
+          <div className="bg-slate-50/80 dark:bg-slate-950/80 px-4 py-3 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
               <span>Baris per halaman:</span>
               <select
                 value={limit}
@@ -1167,17 +1167,17 @@ export default function ExplorerPage() {
                   setLimit(parseInt(e.target.value, 10));
                   setPage(1);
                 }}
-                className="bg-white border border-slate-200 rounded-lg px-2 py-1 font-semibold text-slate-800 focus:outline-none"
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-2 py-1 font-semibold text-slate-800 dark:text-slate-200 focus:outline-none"
               >
                 <option value={10}>10</option>
                 <option value={20}>20</option>
                 <option value={50}>50</option>
                 <option value={100}>100</option>
               </select>
-              <span className="text-slate-400">|</span>
+              <span className="text-slate-400 dark:text-slate-600">|</span>
               <span>
-                Halaman <strong className="text-slate-800">{page}</strong> dari{' '}
-                <strong className="text-slate-800">
+                Halaman <strong className="text-slate-800 dark:text-slate-200">{page}</strong> dari{' '}
+                <strong className="text-slate-800 dark:text-slate-200">
                   {activeTab === 'POLICIES'
                     ? policiesData?.pagination.totalPages || 1
                     : claimsData?.pagination.totalPages || 1}
@@ -1190,12 +1190,12 @@ export default function ExplorerPage() {
                 type="button"
                 onClick={() => setPage((prev) => Math.max(1, prev - 1))}
                 disabled={page <= 1 || isLoading}
-                className="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 disabled:opacity-40 transition"
+                className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 disabled:opacity-40 transition"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
 
-              <span className="px-3 py-1 font-mono font-bold text-slate-800 bg-white border border-slate-200 rounded-lg">
+              <span className="px-3 py-1 font-mono font-bold text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg">
                 {page}
               </span>
 
@@ -1215,7 +1215,7 @@ export default function ExplorerPage() {
                       ? policiesData?.pagination.totalPages || 1
                       : claimsData?.pagination.totalPages || 1)
                 }
-                className="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 disabled:opacity-40 transition"
+                className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 disabled:opacity-40 transition"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -1227,31 +1227,33 @@ export default function ExplorerPage() {
       {/* ── DETAIL MODAL / DRAWER ──────────────────────────────────────────────── */}
       {isDetailModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-950/50">
               <div className="flex items-center gap-3">
                 <span
                   className={`p-2.5 rounded-xl ${
-                    selectedPolicyDetail ? 'bg-blue-100 text-blue-700' : 'bg-rose-100 text-rose-700'
+                    selectedPolicyDetail
+                      ? 'bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300'
+                      : 'bg-rose-100 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300'
                   }`}
                 >
                   {selectedPolicyDetail ? <FileText className="w-5 h-5" /> : <ShieldAlert className="w-5 h-5" />}
                 </span>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-base font-black text-slate-900 font-mono">
+                    <h3 className="text-base font-black text-slate-900 dark:text-slate-100 font-mono">
                       {selectedPolicyDetail ? selectedPolicyDetail.policyNo : selectedClaimDetail?.claimNo}
                     </h3>
                     <span
                       className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
                         selectedPolicyDetail
                           ? selectedPolicyDetail.isMm
-                            ? 'bg-blue-100 text-blue-800'
-                            : 'bg-slate-100 text-slate-700'
+                            ? 'bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                           : selectedClaimDetail?.isMm
-                          ? 'bg-rose-100 text-rose-800'
-                          : 'bg-slate-100 text-slate-700'
+                          ? 'bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                       }`}
                     >
                       {selectedPolicyDetail
@@ -1263,7 +1265,7 @@ export default function ExplorerPage() {
                         : 'DETAIL KLAIM ASURANSI (NON-MM)'}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 mt-0.5">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     {selectedPolicyDetail
                       ? `Tertanggung: ${selectedPolicyDetail.insuredName || '-'}`
                       : `Polis Terkait: ${selectedClaimDetail?.policyNo || '-'}`}
@@ -1274,7 +1276,7 @@ export default function ExplorerPage() {
               <button
                 type="button"
                 onClick={() => setIsDetailModalOpen(false)}
-                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+                className="p-2 rounded-xl text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1283,7 +1285,7 @@ export default function ExplorerPage() {
             {/* Modal Body Scrollable */}
             <div className="p-6 overflow-y-auto space-y-6">
               {isDetailLoading ? (
-                <div className="py-16 text-center text-slate-400">
+                <div className="py-16 text-center text-slate-400 dark:text-slate-500">
                   <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2 text-blue-600" />
                   <p className="font-semibold text-sm">Mengambil detail lengkap dari server...</p>
                 </div>
@@ -1291,56 +1293,56 @@ export default function ExplorerPage() {
                 /* DETAIL POLIS CONTENT */
                 <>
                   {/* 1. Header Information Grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 dark:bg-slate-950/60 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Status Polis</span>
-                      <span className="text-xs font-extrabold text-slate-800">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Status Polis</span>
+                      <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200">
                         {selectedPolicyDetail.policyStatus || 'Aktif'}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">SPAU No</span>
-                      <span className="text-xs font-mono font-bold text-slate-800 truncate block">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">SPAU No</span>
+                      <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200 truncate block">
                         {selectedPolicyDetail.spauNo || '-'}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Masa Pertanggungan</span>
-                      <span className="text-xs font-semibold text-slate-800 block">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Masa Pertanggungan</span>
+                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 block">
                         {selectedPolicyDetail.startPeriod || '-'}
                       </span>
-                      <span className="text-[10px] text-slate-400 block">s/d {selectedPolicyDetail.endPeriod || '-'}</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 block">s/d {selectedPolicyDetail.endPeriod || '-'}</span>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Bulan / Periode</span>
-                      <span className="text-xs font-semibold text-slate-800 block">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Bulan / Periode</span>
+                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 block">
                         {selectedPolicyDetail.bulan} ({selectedPolicyDetail.period})
                       </span>
                     </div>
                   </div>
 
                   {/* 2. Rincian Finansial Card */}
-                  <div className="border border-slate-200 rounded-2xl p-4 space-y-3">
-                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                      <TrendingUp className="w-4 h-4 text-emerald-600" />
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-3">
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                      <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       Rincian Finansial & Nilai Pertanggungan
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                      <div className="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100">
-                        <span className="text-[11px] font-semibold text-emerald-700 block">Nilai Premi Bruto</span>
-                        <span className="text-base font-black text-emerald-800 font-mono mt-0.5 block">
+                      <div className="bg-emerald-50/50 dark:bg-emerald-950/30 p-3 rounded-xl border border-emerald-100 dark:border-emerald-900/40">
+                        <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 block">Nilai Premi Bruto</span>
+                        <span className="text-base font-black text-emerald-800 dark:text-emerald-300 font-mono mt-0.5 block">
                           {formatIdr(selectedPolicyDetail.nilaiPremi)}
                         </span>
                       </div>
-                      <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                        <span className="text-[11px] font-semibold text-slate-500 block">Total Sum Insured (TSI IDR)</span>
-                        <span className="text-base font-black text-slate-800 font-mono mt-0.5 block">
+                      <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Total Sum Insured (TSI IDR)</span>
+                        <span className="text-base font-black text-slate-800 dark:text-slate-200 font-mono mt-0.5 block">
                           {formatIdr(selectedPolicyDetail.tsiInIdr || selectedPolicyDetail.tsi)}
                         </span>
                       </div>
-                      <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                        <span className="text-[11px] font-semibold text-slate-500 block">Nilai Komisi Agensi</span>
-                        <span className="text-base font-bold text-slate-700 font-mono mt-0.5 block">
+                      <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Nilai Komisi Agensi</span>
+                        <span className="text-base font-bold text-slate-700 dark:text-slate-300 font-mono mt-0.5 block">
                           {formatIdr(selectedPolicyDetail.nilaiKomisi)}
                         </span>
                       </div>
@@ -1348,13 +1350,13 @@ export default function ExplorerPage() {
                   </div>
 
                   {/* 3. Dinamis: Objek Pertanggungan (JSONB Object Information 1 - 15) */}
-                  <div className="border border-slate-200 rounded-2xl p-4 space-y-3 bg-gradient-to-br from-white to-slate-50/80">
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-3 bg-gradient-to-br from-white dark:from-slate-900 to-slate-50/80 dark:to-slate-950/60">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                        <Car className="w-4 h-4 text-blue-600" />
+                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                        <Car className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                         Rincian Objek Pertanggungan (Object Information 1 s/d 15)
                       </h4>
-                      <span className="text-[10px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
+                      <span className="text-[10px] font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-800">
                         PostgreSQL JSONB Engine
                       </span>
                     </div>
@@ -1369,12 +1371,12 @@ export default function ExplorerPage() {
                           return (
                             <div
                               key={key}
-                              className="p-2.5 rounded-xl bg-white border border-slate-200 shadow-2xs hover:border-blue-300 transition"
+                              className="p-2.5 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 shadow-2xs hover:border-blue-300 dark:hover:border-blue-600 transition"
                             >
-                              <span className="text-[10px] uppercase font-bold text-slate-400 block truncate">
+                              <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-400 block truncate">
                                 {formattedKey}
                               </span>
-                              <span className="text-xs font-bold text-slate-800 truncate block mt-0.5">
+                              <span className="text-xs font-bold text-slate-800 dark:text-slate-100 truncate block mt-0.5">
                                 {String(val || '-')}
                               </span>
                             </div>
@@ -1382,51 +1384,51 @@ export default function ExplorerPage() {
                         })}
                       </div>
                     ) : (
-                      <p className="text-xs text-slate-400 italic py-2">
+                      <p className="text-xs text-slate-400 dark:text-slate-500 italic py-2">
                         Tidak ada metadata rincian objek tersimpan untuk polis ini.
                       </p>
                     )}
                   </div>
 
                   {/* 4. Profil Agen & Cabang Penanggung */}
-                  <div className="border border-slate-200 rounded-2xl p-4 space-y-3">
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-3">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                        <Users className="w-4 h-4 text-purple-600" />
+                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                        <Users className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                         Profil Agen & Kantor Cabang
                       </h4>
                       {canReassign && (
                         <button
                           type="button"
                           onClick={() => handleOpenReassignModal('POLICY', selectedPolicyDetail)}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200 text-xs font-bold transition shadow-xs cursor-pointer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/60 border border-purple-200 dark:border-purple-800 text-xs font-bold transition shadow-xs cursor-pointer"
                         >
-                          <UserCheck className="w-3.5 h-3.5 text-purple-600" />
+                          <UserCheck className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                           <span>Alihkan Agen</span>
                         </button>
                       )}
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                      <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-100 dark:border-slate-800 space-y-1">
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-500">Nama Agen:</span>
-                          <strong className="text-slate-900">
+                          <span className="text-slate-500 dark:text-slate-400">Nama Agen:</span>
+                          <strong className="text-slate-900 dark:text-slate-100">
                             {selectedPolicyDetail.isMm
                               ? (selectedPolicyDetail.agentName || selectedPolicyDetail.agentRealName || '-')
                               : 'Non-MM (Tanpa Agen)'}
                           </strong>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-500">Kode Agen:</span>
-                          <strong className="font-mono text-purple-700">
+                          <span className="text-slate-500 dark:text-slate-400">Kode Agen:</span>
+                          <strong className="font-mono text-purple-700 dark:text-purple-400">
                             {selectedPolicyDetail.isMm
                               ? (selectedPolicyDetail.sourceAgentId || selectedPolicyDetail.agentRealCode || '-')
                               : 'NON-MM'}
                           </strong>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-500">Peringkat:</span>
-                          <span className="text-slate-700">
+                          <span className="text-slate-500 dark:text-slate-400">Peringkat:</span>
+                          <span className="text-slate-700 dark:text-slate-300">
                             {selectedPolicyDetail.isMm
                               ? (selectedPolicyDetail.agentPeringkat || 'Agent')
                               : '-'}
@@ -1434,20 +1436,20 @@ export default function ExplorerPage() {
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-100 dark:border-slate-800 space-y-1">
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-500">Cabang Resmi:</span>
-                          <strong className="text-slate-900">
+                          <span className="text-slate-500 dark:text-slate-400">Cabang Resmi:</span>
+                          <strong className="text-slate-900 dark:text-slate-100">
                             {selectedPolicyDetail.branchName || selectedPolicyDetail.rawBranch || '-'}
                           </strong>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-500">Representative:</span>
-                          <span className="text-slate-700">{selectedPolicyDetail.representative || '-'}</span>
+                          <span className="text-slate-500 dark:text-slate-400">Representative:</span>
+                          <span className="text-slate-700 dark:text-slate-300">{selectedPolicyDetail.representative || '-'}</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-500">Hierarchy Path:</span>
-                          <span className="font-mono text-[10px] text-slate-500 truncate max-w-[150px]">
+                          <span className="text-slate-500 dark:text-slate-400">Hierarchy Path:</span>
+                          <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400 truncate max-w-[150px]">
                             {selectedPolicyDetail.agentMaterializedPath || '-'}
                           </span>
                         </div>
@@ -1456,46 +1458,46 @@ export default function ExplorerPage() {
                   </div>
 
                   {/* 5. Riwayat Klaim Terkait pada Polis Ini */}
-                  <div className="border border-slate-200 rounded-2xl p-4 space-y-3">
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-3">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                        <ShieldAlert className="w-4 h-4 text-rose-600" />
+                      <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                        <ShieldAlert className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                         Riwayat Klaim Terkait Polis Ini ({relatedClaims.length})
                       </h4>
                       {relatedClaims.length > 0 && (
-                        <span className="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
+                        <span className="text-[10px] font-bold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 px-2 py-0.5 rounded-full border border-rose-200 dark:border-rose-800">
                           Polis Pernah Klaim
                         </span>
                       )}
                     </div>
 
                     {relatedClaims.length > 0 ? (
-                      <div className="divide-y divide-slate-100 border border-slate-200 rounded-xl overflow-hidden">
+                      <div className="divide-y divide-slate-100 dark:divide-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
                         {relatedClaims.map((claim) => (
-                          <div key={claim.id} className="p-3 text-xs flex items-center justify-between hover:bg-slate-50">
+                          <div key={claim.id} className="p-3 text-xs flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50">
                             <div>
                               <div className="flex items-center gap-2">
-                                <span className="font-mono font-bold text-slate-900">{claim.claimNo}</span>
+                                <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{claim.claimNo}</span>
                                 {claim.isMm ? (
-                                  <span className="text-[9px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200 px-1.5 py-0.2 rounded">
+                                  <span className="text-[9px] font-extrabold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 px-1.5 py-0.2 rounded">
                                     Klaim MM
                                   </span>
                                 ) : (
-                                  <span className="text-[9px] font-semibold bg-slate-100 text-slate-600 border border-slate-300 px-1.5 py-0.2 rounded">
+                                  <span className="text-[9px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 px-1.5 py-0.2 rounded">
                                     Non-MM
                                   </span>
                                 )}
-                                <span className="text-[10px] text-slate-500 font-semibold bg-slate-100 px-1.5 py-0.2 rounded">
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold bg-slate-100 dark:bg-slate-800 px-1.5 py-0.2 rounded">
                                   Settled: {claim.dateOfSettlement || '-'}
                                 </span>
                               </div>
-                              <p className="text-slate-600 text-[11px] mt-0.5">Sebab: {claim.causeOfLoss || '-'}</p>
+                              <p className="text-slate-600 dark:text-slate-400 text-[11px] mt-0.5">Sebab: {claim.causeOfLoss || '-'}</p>
                             </div>
                             <div className="text-right">
-                              <span className="font-mono font-bold text-rose-700 block">
+                              <span className="font-mono font-bold text-rose-700 dark:text-rose-400 block">
                                 {formatIdr(claim.grossClaim)}
                               </span>
-                              <span className="text-[10px] text-slate-400 block">
+                              <span className="text-[10px] text-slate-400 dark:text-slate-500 block">
                                 Indemnity: {formatIdr(claim.indemnity)}
                               </span>
                             </div>
@@ -1503,8 +1505,8 @@ export default function ExplorerPage() {
                         ))}
                       </div>
                     ) : (
-                      <div className="p-3 rounded-xl bg-emerald-50/60 border border-emerald-100 text-emerald-800 text-xs flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <div className="p-3 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-xs flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                         <span>Polis ini bersih tanpa riwayat klaim terdaftar (Loss Ratio: 0%).</span>
                       </div>
                     )}
@@ -1513,55 +1515,55 @@ export default function ExplorerPage() {
               ) : selectedClaimDetail ? (
                 /* DETAIL KLAIM CONTENT */
                 <>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 dark:bg-slate-950/60 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">No. Klaim</span>
-                      <span className="text-xs font-mono font-bold text-slate-900 block truncate">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">No. Klaim</span>
+                      <span className="text-xs font-mono font-bold text-slate-900 dark:text-slate-100 block truncate">
                         {selectedClaimDetail.claimNo}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">No. Polis Terkait</span>
-                      <span className="text-xs font-mono font-bold text-slate-800 block truncate">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">No. Polis Terkait</span>
+                      <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200 block truncate">
                         {selectedClaimDetail.policyNo}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Tgl Settlement</span>
-                      <span className="text-xs font-semibold text-slate-800 block">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Tgl Settlement</span>
+                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 block">
                         {selectedClaimDetail.dateOfSettlement || '-'}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Underwriting Year</span>
-                      <span className="text-xs font-extrabold text-slate-800 block">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Underwriting Year</span>
+                      <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 block">
                         Tahun {selectedClaimDetail.uwYear || '-'}
                       </span>
                     </div>
                   </div>
 
                   {/* Financial Breakdown */}
-                  <div className="border border-slate-200 rounded-2xl p-4 space-y-3">
-                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                      <ShieldAlert className="w-4 h-4 text-rose-600" />
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-3">
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                      <ShieldAlert className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                       Rincian Finansial Klaim
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="bg-rose-50/60 p-3.5 rounded-xl border border-rose-100">
-                        <span className="text-[11px] font-semibold text-rose-700 block">Gross Claim (Beban Klaim)</span>
-                        <span className="text-lg font-black text-rose-800 font-mono mt-0.5 block">
+                      <div className="bg-rose-50/60 dark:bg-rose-950/40 p-3.5 rounded-xl border border-rose-100 dark:border-rose-900/50">
+                        <span className="text-[11px] font-semibold text-rose-700 dark:text-rose-400 block">Gross Claim (Beban Klaim)</span>
+                        <span className="text-lg font-black text-rose-800 dark:text-rose-300 font-mono mt-0.5 block">
                           {formatIdr(selectedClaimDetail.grossClaim)}
                         </span>
                       </div>
-                      <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-                        <span className="text-[11px] font-semibold text-slate-600 block">Indemnity Paid</span>
-                        <span className="text-base font-bold text-slate-800 font-mono mt-0.5 block">
+                      <div className="bg-slate-50 dark:bg-slate-950/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block">Indemnity Paid</span>
+                        <span className="text-base font-bold text-slate-800 dark:text-slate-200 font-mono mt-0.5 block">
                           {formatIdr(selectedClaimDetail.indemnity)}
                         </span>
                       </div>
-                      <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-                        <span className="text-[11px] font-semibold text-slate-600 block">Deductible Applied</span>
-                        <span className="text-base font-bold text-slate-800 font-mono mt-0.5 block">
+                      <div className="bg-slate-50 dark:bg-slate-950/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block">Deductible Applied</span>
+                        <span className="text-base font-bold text-slate-800 dark:text-slate-200 font-mono mt-0.5 block">
                           {formatIdr(selectedClaimDetail.deductible)}
                         </span>
                       </div>
@@ -1569,44 +1571,44 @@ export default function ExplorerPage() {
                   </div>
 
                   {/* Cause of Loss */}
-                  <div className="border border-slate-200 rounded-2xl p-4 space-y-2">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-2">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">
                       Penyebab Kerugian (Cause of Loss)
                     </span>
-                    <p className="text-sm font-semibold text-slate-900 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-950/60 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
                       {selectedClaimDetail.causeOfLoss || 'Tidak disebutkan'}
                     </p>
                   </div>
 
                   {/* Agent & Branch */}
-                  <div className="border border-slate-200 rounded-2xl p-4 space-y-2">
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">
                         Agen & Cabang Pelapor
                       </span>
                       {canReassign && (
                         <button
                           type="button"
                           onClick={() => handleOpenReassignModal('CLAIM', selectedClaimDetail)}
-                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200 text-xs font-bold transition shadow-xs cursor-pointer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/60 border border-purple-200 dark:border-purple-800 text-xs font-bold transition shadow-xs cursor-pointer"
                         >
-                          <UserCheck className="w-3.5 h-3.5 text-purple-600" />
+                          <UserCheck className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                           <span>Alihkan Agen</span>
                         </button>
                       )}
                     </div>
-                    <div className="flex items-center justify-between text-xs bg-slate-50 p-3 rounded-xl border border-slate-100">
+                    <div className="flex items-center justify-between text-xs bg-slate-50 dark:bg-slate-950/60 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
                       <div>
-                        <span className="text-slate-500">Agen: </span>
-                        <strong className="text-slate-900">
+                        <span className="text-slate-500 dark:text-slate-400">Agen: </span>
+                        <strong className="text-slate-900 dark:text-slate-100">
                           {selectedClaimDetail.isMm
                             ? (selectedClaimDetail.agentRealName || selectedClaimDetail.sourceAgentId || '-')
                             : 'Non-MM (Tanpa Kode Agen)'}
                         </strong>
                       </div>
                       <div>
-                        <span className="text-slate-500">Cabang: </span>
-                        <strong className="text-slate-900">
+                        <span className="text-slate-500 dark:text-slate-400">Cabang: </span>
+                        <strong className="text-slate-900 dark:text-slate-100">
                           {selectedClaimDetail.branchName || selectedClaimDetail.rawBranch || '-'}
                         </strong>
                       </div>
@@ -1617,11 +1619,11 @@ export default function ExplorerPage() {
             </div>
 
             {/* Modal Footer */}
-            <div className="px-6 py-3.5 border-t border-slate-100 bg-slate-50 flex items-center justify-end">
+            <div className="px-6 py-3.5 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 flex items-center justify-end">
               <button
                 type="button"
                 onClick={() => setIsDetailModalOpen(false)}
-                className="px-5 py-2 rounded-xl text-xs font-bold text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 transition cursor-pointer"
+                className="px-5 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition cursor-pointer"
               >
                 Tutup Jendela
               </button>
@@ -1633,27 +1635,27 @@ export default function ExplorerPage() {
       {/* ── MODAL ALIH KAN AGEN ──────────────────────────────────────────────── */}
       {isReassignModalOpen && reassignTarget && (
         <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-purple-50/50">
+            <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-purple-50/50 dark:bg-purple-950/40">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-purple-100 text-purple-700">
+                <div className="p-2.5 rounded-xl bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300">
                   <UserCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-slate-900">
+                  <h3 className="text-base font-black text-slate-900 dark:text-slate-100">
                     Alihkan Agen {reassignTarget.type === 'POLICY' ? 'Polis' : 'Klaim'}
                   </h3>
-                  <p className="text-xs text-slate-500 mt-0.5">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     {reassignTarget.type === 'POLICY' ? 'Nomor Polis: ' : 'Nomor Klaim: '}
-                    <span className="font-mono font-bold text-slate-800">{reassignTarget.number}</span>
+                    <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{reassignTarget.number}</span>
                   </p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setIsReassignModalOpen(false)}
-                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+                className="p-2 rounded-xl text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1662,20 +1664,20 @@ export default function ExplorerPage() {
             {/* Modal Body */}
             <div className="p-6 overflow-y-auto space-y-4">
               {/* Info Agen Saat Ini */}
-              <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+              <div className="p-3.5 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-2xl">
+                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
                   Agen Saat Ini (Terdaftar)
                 </span>
                 <div className="flex items-center justify-between text-xs">
                   <div>
-                    <p className="font-bold text-slate-800">
+                    <p className="font-bold text-slate-800 dark:text-slate-200">
                       {reassignTarget.currentAgentName || 'Tanpa Nama'}
                     </p>
-                    <p className="text-[11px] text-slate-500">
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">
                       Cabang: {reassignTarget.currentBranchName || '-'}
                     </p>
                   </div>
-                  <span className="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg font-mono font-bold text-xs">
+                  <span className="px-2.5 py-1 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg font-mono font-bold text-xs">
                     {reassignTarget.currentAgentCode || '-'}
                   </span>
                 </div>
@@ -1683,21 +1685,21 @@ export default function ExplorerPage() {
 
               {/* Cari Agen Baru */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                   Cari & Pilih Agen Pengganti (Target) <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
-                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     value={reassignSearchQuery}
                     onChange={(e) => setReassignSearchQuery(e.target.value)}
                     placeholder="Ketik Kode Agen atau Nama Agen..."
-                    className="w-full pl-9 pr-9 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 font-medium"
+                    className="w-full pl-9 pr-9 py-2.5 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 font-medium"
                     autoFocus
                   />
                   {isSearchingAgent && (
-                    <RefreshCw className="w-4 h-4 text-purple-600 animate-spin absolute right-3 top-1/2 -translate-y-1/2" />
+                    <RefreshCw className="w-4 h-4 text-purple-600 dark:text-purple-400 animate-spin absolute right-3 top-1/2 -translate-y-1/2" />
                   )}
                   {reassignSearchQuery && !isSearchingAgent && (
                     <button
@@ -1706,7 +1708,7 @@ export default function ExplorerPage() {
                         setReassignSearchQuery('');
                         setReassignSearchResults([]);
                       }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
                     >
                       <X className="w-3.5 h-3.5" />
                     </button>
@@ -1715,7 +1717,7 @@ export default function ExplorerPage() {
 
                 {/* Search Results Dropdown List */}
                 {reassignSearchResults.length > 0 && (
-                  <div className="mt-2 border border-slate-200 rounded-2xl max-h-48 overflow-y-auto divide-y divide-slate-100 bg-white shadow-lg">
+                  <div className="mt-2 border border-slate-200 dark:border-slate-800 rounded-2xl max-h-48 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900 shadow-lg">
                     {reassignSearchResults.map((agent: any) => {
                       const isSelected = selectedTargetAgent?.id === agent.id;
                       return (
@@ -1726,29 +1728,29 @@ export default function ExplorerPage() {
                             setReassignSearchResults([]);
                             setReassignSearchQuery(`${agent.agentCode} - ${agent.name}`);
                           }}
-                          className={`p-3 text-xs flex items-center justify-between hover:bg-purple-50/60 cursor-pointer transition ${
-                            isSelected ? 'bg-purple-50 text-purple-900 font-bold' : ''
+                          className={`p-3 text-xs flex items-center justify-between hover:bg-purple-50/60 dark:hover:bg-purple-950/40 cursor-pointer transition ${
+                            isSelected ? 'bg-purple-50 dark:bg-purple-950/60 text-purple-900 dark:text-purple-200 font-bold' : ''
                           }`}
                         >
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="font-mono font-bold text-purple-700 bg-purple-100/70 px-1.5 py-0.5 rounded text-[10px]">
+                              <span className="font-mono font-bold text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-900/60 px-1.5 py-0.5 rounded text-[10px]">
                                 {agent.agentCode}
                               </span>
-                              <span className="font-bold text-slate-800">{agent.name}</span>
+                              <span className="font-bold text-slate-800 dark:text-slate-200">{agent.name}</span>
                             </div>
-                            <p className="text-[10px] text-slate-500 mt-0.5">
+                            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
                               {agent.peringkat || 'Agent'} &bull; {agent.rawBranchName || 'Semua Cabang'}
                             </p>
                           </div>
-                          {isSelected && <Check className="w-4 h-4 text-purple-600" />}
+                          {isSelected && <Check className="w-4 h-4 text-purple-600 dark:text-purple-400" />}
                         </div>
                       );
                     })}
                   </div>
                 )}
                 {reassignSearchQuery && !isSearchingAgent && reassignSearchResults.length === 0 && !selectedTargetAgent && (
-                  <p className="text-[11px] text-slate-400 mt-1.5 italic">
+                  <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1.5 italic">
                     Tidak ditemukan agen dengan kata kunci tersebut.
                   </p>
                 )}
@@ -1756,15 +1758,15 @@ export default function ExplorerPage() {
 
               {/* Selected Target Preview */}
               {selectedTargetAgent && (
-                <div className="p-3.5 bg-purple-50/70 border border-purple-200 rounded-2xl flex items-center justify-between">
+                <div className="p-3.5 bg-purple-50/70 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 rounded-2xl flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] font-bold text-purple-600 uppercase tracking-wider block">
+                    <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider block">
                       Agen Target Terpilih
                     </span>
-                    <p className="text-xs font-black text-purple-900 mt-0.5">
+                    <p className="text-xs font-black text-purple-900 dark:text-purple-200 mt-0.5">
                       {selectedTargetAgent.name}
                     </p>
-                    <p className="text-[11px] text-purple-700">
+                    <p className="text-[11px] text-purple-700 dark:text-purple-300">
                       Peringkat: {selectedTargetAgent.peringkat || 'Agent'} &bull; {selectedTargetAgent.rawBranchName || '-'}
                     </p>
                   </div>
@@ -1777,8 +1779,8 @@ export default function ExplorerPage() {
               )}
 
               {/* Notice */}
-              <div className="p-3 bg-amber-50/80 border border-amber-200/80 rounded-xl text-amber-800 text-[11px] flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div className="p-3 bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-900/50 rounded-xl text-amber-800 dark:text-amber-200 text-[11px] flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                 <p>
                   Perubahan ini akan langsung memperbarui kepemilikan produksi/klaim, cabang terkait, serta tercatat secara permanen di riwayat <strong>Audit Log</strong> sistem.
                 </p>
@@ -1786,12 +1788,12 @@ export default function ExplorerPage() {
             </div>
 
             {/* Modal Footer */}
-            <div className="px-6 py-3.5 border-t border-slate-100 bg-slate-50 flex items-center justify-end gap-2">
+            <div className="px-6 py-3.5 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 flex items-center justify-end gap-2">
               <button
                 type="button"
                 onClick={() => setIsReassignModalOpen(false)}
                 disabled={isSubmittingReassign}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 transition"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
               >
                 Batal
               </button>

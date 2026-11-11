@@ -21,7 +21,7 @@ function ShellInner({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 relative flex flex-col">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0b0f19] relative flex flex-col transition-colors duration-200">
       {/* Floating Left Sidebar */}
       <FloatingSidebar />
 
@@ -29,10 +29,10 @@ function ShellInner({ children }: { children: React.ReactNode }) {
       <div className="md:hidden fixed top-3 left-3 z-30">
         <button
           onClick={toggleMobile}
-          className="p-2 rounded-xl bg-white/90 backdrop-blur border border-slate-200 shadow-md text-slate-700 hover:text-slate-900 hover:bg-white active:scale-95 transition flex items-center gap-2"
+          className="p-2 rounded-xl bg-white/90 dark:bg-slate-900/90 backdrop-blur border border-slate-200 dark:border-slate-800 shadow-md text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-800 active:scale-95 transition flex items-center gap-2"
           aria-label="Buka Menu Navigasi"
         >
-          <Menu className="w-5 h-5 text-slate-700" />
+          <Menu className="w-5 h-5 text-slate-700 dark:text-slate-200" />
         </button>
       </div>
 

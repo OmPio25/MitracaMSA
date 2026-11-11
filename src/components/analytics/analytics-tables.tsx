@@ -213,9 +213,9 @@ export function AnalyticsTables({
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden mb-12">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden mb-12">
       {/* ── HEADER TABS NAVIGATION ─────────────────────────────────────────── */}
-      <div className="border-b border-slate-200 bg-slate-50/70 px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2">
           {/* TAB 1: Kinerja Personal (Agent) ATAU Kinerja Cabang (Non-Agent) */}
           {isAgentRole ? (
@@ -224,7 +224,7 @@ export function AnalyticsTables({
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
                 activeTab === 'branch'
                   ? 'bg-amber-600 text-white shadow-sm'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
               }`}
             >
               <User className="w-4 h-4" />
@@ -236,7 +236,7 @@ export function AnalyticsTables({
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
                 activeTab === 'branch'
                   ? 'bg-blue-600 text-white shadow-sm'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
               }`}
             >
               <Building2 className="w-4 h-4" />
@@ -251,7 +251,7 @@ export function AnalyticsTables({
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
                 activeTab === 'agent'
                   ? 'bg-blue-600 text-white shadow-sm'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
               }`}
             >
               <Users className="w-4 h-4" />
@@ -263,7 +263,7 @@ export function AnalyticsTables({
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
                 activeTab === 'allAgents'
                   ? 'bg-blue-600 text-white shadow-sm'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
               }`}
             >
               <Users className="w-4 h-4" />
@@ -278,7 +278,7 @@ export function AnalyticsTables({
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
                 activeTab === 'targetPersonal'
                   ? 'bg-amber-600 text-white shadow-sm'
-                  : 'bg-amber-50 text-amber-900 hover:bg-amber-100 border border-amber-300'
+                  : 'bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 hover:bg-amber-100 dark:hover:bg-amber-900/60 border border-amber-300 dark:border-amber-800'
               }`}
             >
               <Target className="w-4 h-4" />
@@ -293,7 +293,7 @@ export function AnalyticsTables({
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
                 activeTab === 'targetGroup'
                   ? 'bg-indigo-600 text-white shadow-sm'
-                  : 'bg-indigo-50 text-indigo-900 hover:bg-indigo-100 border border-indigo-300'
+                  : 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-300 dark:border-indigo-800'
               }`}
             >
               <Sparkles className="w-4 h-4" />
@@ -307,7 +307,7 @@ export function AnalyticsTables({
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
               activeTab === 'cause'
                 ? 'bg-blue-600 text-white shadow-sm'
-                : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
             }`}
           >
             <AlertOctagon className="w-4 h-4" />
@@ -329,9 +329,9 @@ export function AnalyticsTables({
               setSearchQuery(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full text-xs bg-white border border-slate-300 rounded-xl px-3 py-2 pl-8 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+            className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 pl-8 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
           />
-          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
+          <Search className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 absolute left-2.5 top-2.5" />
         </div>
       </div>
 
@@ -342,7 +342,7 @@ export function AnalyticsTables({
         isAgentRole ? (
           /* Role Agent: Tampilan Ringkas Kinerja Pribadi */
           <div className="p-6">
-            <div className="bg-gradient-to-r from-amber-500/10 via-amber-50 to-orange-50/50 border border-amber-200/80 rounded-2xl p-5 mb-5">
+            <div className="bg-gradient-to-r from-amber-500/10 via-amber-50 to-orange-50/50 dark:from-amber-950/30 dark:via-slate-900/40 dark:to-orange-950/20 border border-amber-200/80 dark:border-amber-900/50 rounded-2xl p-5 mb-5">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2 mb-1.5">
@@ -350,31 +350,31 @@ export function AnalyticsTables({
                       <User className="w-3 h-3" />
                       KINERJA PRIBADI
                     </span>
-                    <span className="text-xs font-bold text-slate-600">
+                    <span className="text-xs font-bold text-slate-600 dark:text-slate-400">
                       {personalPerformance?.agentCode || '-'} • {personalPerformance?.branchName || '-'}
                     </span>
                   </div>
-                  <h3 className="text-base font-extrabold text-slate-900">
+                  <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
                     {personalPerformance?.agentName || 'Portofolio Agen'} ({personalPerformance?.peringkat || 'Partner'})
                   </h3>
-                  <p className="text-xs text-slate-600 mt-1 max-w-2xl leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 max-w-2xl leading-relaxed">
                     Tabel ini menampilkan kinerja khusus atas nama pribadi akun Anda (tidak menggabungkan produksi downline).
                     Untuk melihat akumulasi portofolio seluruh tim keagenan, silakan klik tab <strong>Kinerja Group</strong> di atas.
                   </p>
                 </div>
 
                 {personalPerformance && (
-                  <div className="flex items-center gap-4 bg-white/90 backdrop-blur rounded-xl px-4 py-3 border border-amber-200/80 shadow-xs shrink-0">
+                  <div className="flex items-center gap-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur rounded-xl px-4 py-3 border border-amber-200/80 dark:border-amber-900/50 shadow-xs shrink-0">
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Personal Loss Ratio</span>
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Personal Loss Ratio</span>
                       <span className={`px-2.5 py-0.5 rounded-md text-xs font-extrabold border inline-block mt-0.5 ${personalPerformance.lossRatioEval.badgeClass}`}>
                         {personalPerformance.lossRatioEval.ratioFormatted}
                       </span>
                     </div>
-                    <div className="h-8 w-px bg-slate-200" />
+                    <div className="h-8 w-px bg-slate-200 dark:bg-slate-800" />
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Status Underwriting</span>
-                      <span className="text-xs font-bold text-slate-800 block mt-0.5">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Status Underwriting</span>
+                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block mt-0.5">
                         {personalPerformance.lossRatioEval.label}
                       </span>
                     </div>
@@ -384,10 +384,10 @@ export function AnalyticsTables({
             </div>
 
             {/* Tabel Baris Personal (Ringkas 5 Kolom) */}
-            <div className="overflow-x-auto border border-slate-200 rounded-xl shadow-xs">
+            <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-700 font-bold uppercase tracking-wider text-[11px]">
+                  <tr className="bg-slate-100/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider text-[11px]">
                     <th className="py-3.5 px-5">Profil Agen Pribadi</th>
                     <th className="py-3.5 px-4">Peringkat & Cabang</th>
                     <th className="py-3.5 px-5 text-right">Total Premi Pribadi (Polis)</th>
@@ -395,45 +395,45 @@ export function AnalyticsTables({
                     <th className="py-3.5 px-5 text-center">Loss Ratio & Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                   {personalPerformance ? (
-                    <tr className="bg-amber-50/40 hover:bg-amber-50/70 transition">
+                    <tr className="bg-amber-50/40 dark:bg-amber-950/20 hover:bg-amber-50/70 dark:hover:bg-amber-950/30 transition">
                       <td className="py-4 px-5">
                         <div className="flex items-center gap-2">
                           <span className="p-1.5 rounded-lg bg-amber-500 text-white shadow-xs">
                             <Crown className="w-4 h-4 fill-white" />
                           </span>
                           <div>
-                            <div className="font-extrabold text-slate-900 text-sm">
+                            <div className="font-extrabold text-slate-900 dark:text-slate-100 text-sm">
                               {personalPerformance.agentName}
                             </div>
-                            <div className="text-[11px] text-slate-500 font-mono mt-0.5">
-                              Kode: <strong className="text-amber-900">{personalPerformance.agentCode}</strong> • Akun Pribadi Anda
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+                              Kode: <strong className="text-amber-900 dark:text-amber-300">{personalPerformance.agentCode}</strong> • Akun Pribadi Anda
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="py-4 px-4">
-                        <div className="font-bold text-slate-800 text-xs">
+                        <div className="font-bold text-slate-800 dark:text-slate-200 text-xs">
                           {personalPerformance.peringkat}
                         </div>
-                        <div className="text-[11px] text-slate-500 mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                           {personalPerformance.branchName}
                         </div>
                       </td>
                       <td className="py-4 px-5 text-right">
-                        <div className="font-extrabold text-slate-900 text-sm">
+                        <div className="font-extrabold text-slate-900 dark:text-slate-100 text-sm">
                           {formatIDR(personalPerformance.premi)}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                           {personalPerformance.policyCount} Polis Aktif
                         </div>
                       </td>
                       <td className="py-4 px-5 text-right">
-                        <div className={`font-extrabold text-sm ${personalPerformance.claim > 0 ? 'text-rose-700' : 'text-slate-800'}`}>
+                        <div className={`font-extrabold text-sm ${personalPerformance.claim > 0 ? 'text-rose-700 dark:text-rose-400' : 'text-slate-800 dark:text-slate-200'}`}>
                           {formatIDR(personalPerformance.claim)}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                           {personalPerformance.claimCount} Kasus Klaim
                         </div>
                       </td>
@@ -447,7 +447,7 @@ export function AnalyticsTables({
                     </tr>
                   ) : (
                     <tr>
-                      <td colSpan={5} className="py-8 text-center text-slate-400">
+                      <td colSpan={5} className="py-8 text-center text-slate-400 dark:text-slate-500">
                         Tidak ada data portofolio pribadi pada periode ini.
                       </td>
                     </tr>
@@ -461,51 +461,51 @@ export function AnalyticsTables({
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-700 font-bold uppercase tracking-wider text-[11px]">
+                <tr className="bg-slate-100/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider text-[11px]">
                   <th className="py-3.5 px-5">Cabang & Wilayah</th>
                   <th className="py-3.5 px-5 text-right">Total Premi (Polis)</th>
                   <th className="py-3.5 px-5 text-right">Total Klaim (Kasus)</th>
                   <th className="py-3.5 px-5 text-center">Loss Ratio & Status Underwriting</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                 {filteredBranches.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="py-8 text-center text-slate-400">
+                    <td colSpan={4} className="py-8 text-center text-slate-400 dark:text-slate-500">
                       Tidak ada data cabang yang sesuai kriteria pencarian.
                     </td>
                   </tr>
                 ) : (
                   getPagedData(filteredBranches).map((b) => (
-                    <tr key={b.branchId} className="hover:bg-slate-50/80 transition">
+                    <tr key={b.branchId} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
                       <td className="py-3.5 px-5">
                         <div className="flex items-center gap-2.5">
-                          <span className="p-1.5 rounded-lg bg-blue-100 text-blue-800">
+                          <span className="p-1.5 rounded-lg bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300">
                             <Building2 className="w-4 h-4" />
                           </span>
                           <div>
-                            <div className="font-extrabold text-slate-900 text-xs">
+                            <div className="font-extrabold text-slate-900 dark:text-slate-100 text-xs">
                               {b.branchName}
                             </div>
-                            <div className="text-[11px] text-slate-500 font-mono mt-0.5">
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
                               Kode Cabang: <strong>{b.branchCode}</strong>
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="py-3.5 px-5 text-right">
-                        <div className="font-bold text-slate-900 text-xs">
+                        <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">
                           {formatIDR(b.premi)}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                           {b.policyCount} Polis
                         </div>
                       </td>
                       <td className="py-3.5 px-5 text-right">
-                        <div className={`font-bold text-xs ${b.claim > 0 ? 'text-rose-700' : 'text-slate-800'}`}>
+                        <div className={`font-bold text-xs ${b.claim > 0 ? 'text-rose-700 dark:text-rose-400' : 'text-slate-800 dark:text-slate-200'}`}>
                           {formatIDR(b.claim)}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                           {b.claimCount} Kasus
                         </div>
                       </td>
@@ -533,7 +533,7 @@ export function AnalyticsTables({
         <div className="p-6">
           {/* Summary Total Agen Banner */}
           {allAgentsSummary && (
-            <div className="bg-gradient-to-r from-blue-500/10 via-blue-50 to-indigo-50/50 border border-blue-200/80 rounded-2xl p-5 mb-5">
+            <div className="bg-gradient-to-r from-blue-500/10 via-blue-50 to-indigo-50/50 dark:from-blue-950/30 dark:via-slate-900/40 dark:to-indigo-950/20 border border-blue-200/80 dark:border-blue-900/50 rounded-2xl p-5 mb-5">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
@@ -541,43 +541,43 @@ export function AnalyticsTables({
                       <Users className="w-3 h-3" />
                       {isBranchRole ? `KINERJA AGEN CABANG (${userBranchName || 'CABANG'})` : 'SUMMARY KINERJA SELURUH AGEN NASIONAL'}
                     </span>
-                    <span className="text-xs font-bold text-slate-600">
+                    <span className="text-xs font-bold text-slate-600 dark:text-slate-400">
                       {allAgentsSummary.totalAgents} Agen Aktif Terdaftar
                     </span>
                   </div>
-                  <h3 className="text-base font-extrabold text-slate-900">
+                  <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
                     {isBranchRole
                       ? `Portofolio Agen Terdaftar di Cabang ${userBranchName || ''}`
                       : 'Akumulasi Portofolio Produksi & Klaim Seluruh Agen'}
                   </h3>
-                  <p className="text-xs text-slate-600 mt-1 max-w-2xl leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 max-w-2xl leading-relaxed">
                     Daftar di bawah menyajikan rincian portofolio per agen dengan format ringkas 5 kolom (minimal 50 agen per halaman).
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 shrink-0">
-                  <div className="bg-white/90 backdrop-blur rounded-xl px-3.5 py-2.5 border border-blue-100 shadow-xs">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Total Premi (Polis)</span>
-                    <div className="font-extrabold text-slate-900 text-xs mt-0.5">
+                  <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur rounded-xl px-3.5 py-2.5 border border-blue-100 dark:border-slate-800 shadow-xs">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Total Premi (Polis)</span>
+                    <div className="font-extrabold text-slate-900 dark:text-slate-100 text-xs mt-0.5">
                       {formatIDR(allAgentsSummary.totalPremi)}
                     </div>
-                    <div className="text-[10px] text-slate-500">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400">
                       {allAgentsSummary.totalPolicies} Polis Aktif
                     </div>
                   </div>
 
-                  <div className="bg-white/90 backdrop-blur rounded-xl px-3.5 py-2.5 border border-blue-100 shadow-xs">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Total Klaim (Kasus)</span>
-                    <div className="font-extrabold text-rose-700 text-xs mt-0.5">
+                  <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur rounded-xl px-3.5 py-2.5 border border-blue-100 dark:border-slate-800 shadow-xs">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Total Klaim (Kasus)</span>
+                    <div className="font-extrabold text-rose-700 dark:text-rose-400 text-xs mt-0.5">
                       {formatIDR(allAgentsSummary.totalClaim)}
                     </div>
-                    <div className="text-[10px] text-slate-500">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400">
                       {allAgentsSummary.totalClaimsCount} Kasus Klaim
                     </div>
                   </div>
 
-                  <div className="bg-white/90 backdrop-blur rounded-xl px-3.5 py-2.5 border border-blue-100 shadow-xs col-span-2 sm:col-span-1">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Agregat Loss Ratio</span>
+                  <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur rounded-xl px-3.5 py-2.5 border border-blue-100 dark:border-slate-800 shadow-xs col-span-2 sm:col-span-1">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Agregat Loss Ratio</span>
                     <span className={`px-2 py-0.5 rounded-md text-xs font-extrabold border inline-block mt-0.5 ${allAgentsSummary.lossRatioEval.badgeClass}`}>
                       {allAgentsSummary.lossRatioEval.ratioFormatted}
                     </span>
@@ -588,10 +588,10 @@ export function AnalyticsTables({
           )}
 
           {/* Tabel All Agents (Ringkas 5 Kolom, 50 Rows Per Page) */}
-          <div className="overflow-x-auto border border-slate-200 rounded-xl shadow-xs">
+          <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-700 font-bold uppercase tracking-wider text-[11px]">
+                <tr className="bg-slate-100/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider text-[11px]">
                   <th className="py-3.5 px-5">Profil Agen</th>
                   <th className="py-3.5 px-4">Peringkat & Cabang</th>
                   <th className="py-3.5 px-5 text-right">Total Premi (Polis)</th>
@@ -599,52 +599,52 @@ export function AnalyticsTables({
                   <th className="py-3.5 px-5 text-center">Loss Ratio & Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                 {filteredAllAgents.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-slate-400">
+                    <td colSpan={5} className="py-8 text-center text-slate-400 dark:text-slate-500">
                       Tidak ada data agen yang sesuai kriteria pencarian.
                     </td>
                   </tr>
                 ) : (
                   getPagedData(filteredAllAgents).map((ag) => (
-                    <tr key={ag.agentId} className="hover:bg-slate-50/80 transition">
+                    <tr key={ag.agentId} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
                       <td className="py-3.5 px-5">
                         <div className="flex items-center gap-2.5">
-                          <span className="p-1.5 rounded-lg bg-slate-100 text-slate-700">
+                          <span className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                             <User className="w-3.5 h-3.5" />
                           </span>
                           <div>
-                            <div className="font-extrabold text-slate-900 text-xs">
+                            <div className="font-extrabold text-slate-900 dark:text-slate-100 text-xs">
                               {ag.agentName}
                             </div>
-                            <div className="text-[11px] text-slate-500 font-mono mt-0.5">
-                              Kode: <strong className="text-slate-700">{ag.agentCode}</strong>
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+                              Kode: <strong className="text-slate-700 dark:text-slate-300">{ag.agentCode}</strong>
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="py-3.5 px-4">
-                        <div className="font-bold text-slate-800 text-xs">
+                        <div className="font-bold text-slate-800 dark:text-slate-200 text-xs">
                           {ag.peringkat}
                         </div>
-                        <div className="text-[11px] text-slate-500 mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                           {ag.branchName}
                         </div>
                       </td>
                       <td className="py-3.5 px-5 text-right">
-                        <div className="font-bold text-slate-900 text-xs">
+                        <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">
                           {formatIDR(ag.premi)}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                           {ag.policyCount} Polis
                         </div>
                       </td>
                       <td className="py-3.5 px-5 text-right">
-                        <div className={`font-bold text-xs ${ag.claim > 0 ? 'text-rose-700' : 'text-slate-700'}`}>
+                        <div className={`font-bold text-xs ${ag.claim > 0 ? 'text-rose-700 dark:text-rose-400' : 'text-slate-700 dark:text-slate-300'}`}>
                           {formatIDR(ag.claim)}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                           {ag.claimCount} Kasus
                         </div>
                       </td>
@@ -669,7 +669,7 @@ export function AnalyticsTables({
          ═══════════════════════════════════════════════════════════════════════ */}
       {!isAgentRole && activeTab === 'targetPersonal' && (
         <div className="p-6">
-          <div className="bg-gradient-to-r from-amber-500/10 via-amber-50 to-orange-50/50 border border-amber-200/80 rounded-2xl p-5 mb-5">
+          <div className="bg-gradient-to-r from-amber-500/10 via-amber-50 to-orange-50/50 dark:from-amber-950/30 dark:via-slate-900/40 dark:to-orange-950/20 border border-amber-200/80 dark:border-amber-900/50 rounded-2xl p-5 mb-5">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1.5">
@@ -677,31 +677,31 @@ export function AnalyticsTables({
                     <Target className="w-3 h-3" />
                     TARGET FILTER PERSONAL
                   </span>
-                  <span className="text-xs font-bold text-slate-600">
+                  <span className="text-xs font-bold text-slate-600 dark:text-slate-400">
                     {personalPerformance?.agentCode || targetAgentInfo?.agentCode || '-'} • {personalPerformance?.branchName || '-'}
                   </span>
                 </div>
-                <h3 className="text-base font-extrabold text-slate-900">
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
                   {personalPerformance?.agentName || targetAgentInfo?.name || 'Agen Terpilih'} ({personalPerformance?.peringkat || '-'})
                 </h3>
-                <p className="text-xs text-slate-600 mt-1 max-w-2xl leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 max-w-2xl leading-relaxed">
                   Tabel ini menyajikan portofolio transaksi atas nama <strong>pribadi</strong> agen ini (tidak termasuk polis downline).
                   Untuk melihat akumulasi portofolio tim keagenan yang dipimpinnya, silakan klik tab <strong>4. Kinerja Group Agent</strong> di atas.
                 </p>
               </div>
 
               {personalPerformance && (
-                <div className="flex items-center gap-4 bg-white/90 backdrop-blur rounded-xl px-4 py-3 border border-amber-200/80 shadow-xs shrink-0">
+                <div className="flex items-center gap-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur rounded-xl px-4 py-3 border border-amber-200/80 dark:border-amber-900/50 shadow-xs shrink-0">
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Personal Loss Ratio</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Personal Loss Ratio</span>
                     <span className={`px-2.5 py-0.5 rounded-md text-xs font-extrabold border inline-block mt-0.5 ${personalPerformance.lossRatioEval.badgeClass}`}>
                       {personalPerformance.lossRatioEval.ratioFormatted}
                     </span>
                   </div>
-                  <div className="h-8 w-px bg-slate-200" />
+                  <div className="h-8 w-px bg-slate-200 dark:bg-slate-800" />
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Status Underwriting</span>
-                    <span className="text-xs font-bold text-slate-800 block mt-0.5">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Status Underwriting</span>
+                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block mt-0.5">
                       {personalPerformance.lossRatioEval.label}
                     </span>
                   </div>
@@ -711,10 +711,10 @@ export function AnalyticsTables({
           </div>
 
           {/* Tabel Personal Agen Target (5 Kolom Ringkas) */}
-          <div className="overflow-x-auto border border-slate-200 rounded-xl shadow-xs">
+          <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-700 font-bold uppercase tracking-wider text-[11px]">
+                <tr className="bg-slate-100/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider text-[11px]">
                   <th className="py-3.5 px-5">Profil Agen Pribadi</th>
                   <th className="py-3.5 px-4">Peringkat & Cabang</th>
                   <th className="py-3.5 px-5 text-right">Total Premi Pribadi (Polis)</th>
@@ -722,45 +722,45 @@ export function AnalyticsTables({
                   <th className="py-3.5 px-5 text-center">Loss Ratio & Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                 {personalPerformance ? (
-                  <tr className="bg-amber-50/40 hover:bg-amber-50/70 transition">
+                  <tr className="bg-amber-50/40 dark:bg-amber-950/20 hover:bg-amber-50/70 dark:hover:bg-amber-950/30 transition">
                     <td className="py-4 px-5">
                       <div className="flex items-center gap-2">
                         <span className="p-1.5 rounded-lg bg-amber-500 text-white shadow-xs">
                           <Crown className="w-4 h-4 fill-white" />
                         </span>
                         <div>
-                          <div className="font-extrabold text-slate-900 text-sm">
+                          <div className="font-extrabold text-slate-900 dark:text-slate-100 text-sm">
                             {personalPerformance.agentName}
                           </div>
-                          <div className="text-[11px] text-slate-500 font-mono mt-0.5">
-                            Kode: <strong className="text-amber-900">{personalPerformance.agentCode}</strong> • Portofolio Pribadi
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+                            Kode: <strong className="text-amber-900 dark:text-amber-300">{personalPerformance.agentCode}</strong> • Portofolio Pribadi
                           </div>
                         </div>
                       </div>
                     </td>
                     <td className="py-4 px-4">
-                      <div className="font-bold text-slate-800 text-xs">
+                      <div className="font-bold text-slate-800 dark:text-slate-200 text-xs">
                         {personalPerformance.peringkat}
                       </div>
-                      <div className="text-[11px] text-slate-500 mt-0.5">
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                         {personalPerformance.branchName}
                       </div>
                     </td>
                     <td className="py-4 px-5 text-right">
-                      <div className="font-extrabold text-slate-900 text-sm">
+                      <div className="font-extrabold text-slate-900 dark:text-slate-100 text-sm">
                         {formatIDR(personalPerformance.premi)}
                       </div>
-                      <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                         {personalPerformance.policyCount} Polis Aktif
                       </div>
                     </td>
                     <td className="py-4 px-5 text-right">
-                      <div className={`font-extrabold text-sm ${personalPerformance.claim > 0 ? 'text-rose-700' : 'text-slate-800'}`}>
+                      <div className={`font-extrabold text-sm ${personalPerformance.claim > 0 ? 'text-rose-700 dark:text-rose-400' : 'text-slate-800 dark:text-slate-200'}`}>
                         {formatIDR(personalPerformance.claim)}
                       </div>
-                      <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                         {personalPerformance.claimCount} Kasus Klaim
                       </div>
                     </td>
@@ -774,7 +774,7 @@ export function AnalyticsTables({
                   </tr>
                 ) : (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-slate-400">
+                    <td colSpan={5} className="py-8 text-center text-slate-400 dark:text-slate-500">
                       Tidak ada data transaksi pribadi untuk agen ini pada periode yang dipilih.
                     </td>
                   </tr>
@@ -792,7 +792,7 @@ export function AnalyticsTables({
       {(isAgentRole ? activeTab === 'agent' : activeTab === 'targetGroup') && (
         <div className="overflow-x-auto">
           {/* Baris Kontrol TreeView & Info Leader */}
-          <div className="bg-gradient-to-r from-blue-50/90 via-blue-50/50 to-slate-50 border-b border-blue-100 px-6 py-3 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs text-blue-900">
+          <div className="bg-gradient-to-r from-blue-50/90 via-blue-50/50 to-slate-50 dark:from-blue-950/40 dark:via-slate-900/40 dark:to-slate-900 border-b border-blue-100 dark:border-slate-800 px-6 py-3 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs text-blue-900 dark:text-blue-300">
             <div className="flex items-center gap-2">
               <Crown className="w-4 h-4 text-amber-600 fill-amber-500 shrink-0" />
               <span>
@@ -802,8 +802,8 @@ export function AnalyticsTables({
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-[11px] text-slate-600 font-semibold">Cakupan Pohon:</span>
-              <div className="inline-flex rounded-xl border border-blue-200 bg-white p-0.5 text-xs shadow-xs">
+              <span className="text-[11px] text-slate-600 dark:text-slate-400 font-semibold">Cakupan Pohon:</span>
+              <div className="inline-flex rounded-xl border border-blue-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-0.5 text-xs shadow-xs">
                 <button
                   type="button"
                   onClick={() => {
@@ -813,7 +813,7 @@ export function AnalyticsTables({
                   className={`px-3 py-1 rounded-lg text-[11px] font-bold transition ${
                     treeViewScope === 'active'
                       ? 'bg-blue-600 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-blue-600'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400'
                   }`}
                 >
                   Pohon Beraktivitas / Terkait ({agentPerformance.filter((a) => a.isLeader || a.hasActivity || a.isAncestorOfActive).length})
@@ -827,7 +827,7 @@ export function AnalyticsTables({
                   className={`px-3 py-1 rounded-lg text-[11px] font-bold transition ${
                     treeViewScope === 'all'
                       ? 'bg-blue-600 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-blue-600'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400'
                   }`}
                 >
                   Seluruh Jaringan Tim ({agentPerformance.length})
@@ -839,7 +839,7 @@ export function AnalyticsTables({
           {/* Tabel TreeView (Ringkas 5 Kolom, Opsi 1 Panah ↳) */}
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-700 font-bold uppercase tracking-wider text-[11px]">
+              <tr className="bg-slate-100/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider text-[11px]">
                 <th className="py-3.5 px-5">Agen & Silsilah Jaringan</th>
                 <th className="py-3.5 px-4">Peringkat & Cabang</th>
                 <th className="py-3.5 px-5 text-right">Total Premi (Polis)</th>
@@ -847,10 +847,10 @@ export function AnalyticsTables({
                 <th className="py-3.5 px-5 text-center">Loss Ratio & Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
               {orderedGroupAgents.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-slate-400">
+                  <td colSpan={5} className="py-8 text-center text-slate-400 dark:text-slate-500">
                     Tidak ada data jaringan agen yang sesuai kriteria pencarian.
                   </td>
                 </tr>
@@ -865,7 +865,7 @@ export function AnalyticsTables({
                     <tr
                       key={ag.agentId}
                       className={`transition ${
-                        isCurrentLeader ? 'bg-amber-50/50 hover:bg-amber-50/80 font-medium' : 'hover:bg-slate-50/80'
+                        isCurrentLeader ? 'bg-amber-50/50 dark:bg-amber-950/20 hover:bg-amber-50/80 dark:hover:bg-amber-950/30 font-medium' : 'hover:bg-slate-50/80 dark:hover:bg-slate-800/50'
                       }`}
                     >
                       {/* 1. Agen & Silsilah Jaringan */}
@@ -878,11 +878,11 @@ export function AnalyticsTables({
                             {ag.relativeDepth === 0 || isCurrentLeader ? (
                               <Crown className="w-4 h-4 text-amber-500 fill-amber-400 shrink-0" />
                             ) : (
-                              <CornerDownRight className="w-3.5 h-3.5 text-slate-400 shrink-0 stroke-[2.2]" />
+                              <CornerDownRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0 stroke-[2.2]" />
                             )}
                             <span
                               className={`font-bold text-xs ${
-                                isCurrentLeader ? 'text-amber-950 font-black' : 'text-slate-900'
+                                isCurrentLeader ? 'text-amber-950 dark:text-amber-200 font-black' : 'text-slate-900 dark:text-slate-100'
                               }`}
                             >
                               {ag.agentName}
@@ -890,19 +890,19 @@ export function AnalyticsTables({
 
                             {/* Badge Level atau Leader */}
                             {isCurrentLeader ? (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-950 border border-amber-300 shadow-xs">
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 dark:bg-amber-900/60 text-amber-950 dark:text-amber-200 border border-amber-300 dark:border-amber-700 shadow-xs">
                                 👑 Leader {isAgentRole ? '(Anda)' : `[${ag.agentCode}]`}
                               </span>
                             ) : (
                               <span
                                 className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold border ${
                                   ag.relativeDepth === 1
-                                    ? 'bg-blue-50 text-blue-800 border-blue-200'
+                                    ? 'bg-blue-50 dark:bg-blue-950/50 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800'
                                     : ag.relativeDepth === 2
-                                    ? 'bg-indigo-50 text-indigo-800 border-indigo-200'
+                                    ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-800 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800'
                                     : ag.relativeDepth === 3
-                                    ? 'bg-purple-50 text-purple-800 border-purple-200'
-                                    : 'bg-slate-100 text-slate-700 border-slate-200'
+                                    ? 'bg-purple-50 dark:bg-purple-950/50 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-800'
+                                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
                                 }`}
                               >
                                 Level {ag.relativeDepth ?? 1} {ag.relativeDepth === 1 ? '(Direct)' : ''}
@@ -910,26 +910,26 @@ export function AnalyticsTables({
                             )}
 
                             {!ag.hasActivity && !isCurrentLeader && (
-                              <span className="text-[10px] text-slate-500 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded font-medium shrink-0">
+                              <span className="text-[10px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-1.5 py-0.5 rounded font-medium shrink-0">
                                 Jembatan Hirarki • Rp 0
                               </span>
                             )}
                           </div>
 
                           {/* Sub-line: Kode Agen & Upline Langsung */}
-                          <div className="text-[11px] text-slate-500 mt-1 pl-5">
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 pl-5">
                             {isCurrentLeader ? (
                               <span className="font-mono">
-                                Kode: <strong className="text-slate-700">{ag.agentCode}</strong> • Root Leader Jaringan
+                                Kode: <strong className="text-slate-700 dark:text-slate-300">{ag.agentCode}</strong> • Root Leader Jaringan
                               </span>
                             ) : (
                               <span>
                                 <span className="font-mono">
-                                  Kode: <strong className="text-slate-700">{ag.agentCode}</strong>
+                                  Kode: <strong className="text-slate-700 dark:text-slate-300">{ag.agentCode}</strong>
                                 </span>
-                                <span className="mx-1.5 text-slate-300">•</span>
+                                <span className="mx-1.5 text-slate-300 dark:text-slate-600">•</span>
                                 <span>
-                                  Upline Langsung: <strong className="text-slate-700">{ag.uplineAgentName || 'Upline Terdaftar'}</strong> ({ag.uplineAgentCode || '-'})
+                                  Upline Langsung: <strong className="text-slate-700 dark:text-slate-300">{ag.uplineAgentName || 'Upline Terdaftar'}</strong> ({ag.uplineAgentCode || '-'})
                                 </span>
                               </span>
                             )}
@@ -939,30 +939,30 @@ export function AnalyticsTables({
 
                       {/* 2. Peringkat & Cabang */}
                       <td className="py-3.5 px-4">
-                        <div className="font-bold text-slate-800 text-xs">
+                        <div className="font-bold text-slate-800 dark:text-slate-200 text-xs">
                           {ag.peringkat}
                         </div>
-                        <div className="text-[11px] text-slate-500 mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                           {ag.branchName}
                         </div>
                       </td>
 
                       {/* 3. Total Premi (Polis) */}
                       <td className="py-3.5 px-5 text-right">
-                        <div className="font-bold text-slate-900 text-xs">
+                        <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">
                           {formatIDR(ag.premi)}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                           {ag.policyCount} Polis
                         </div>
                       </td>
 
                       {/* 4. Total Klaim (Kasus) */}
                       <td className="py-3.5 px-5 text-right">
-                        <div className={`font-bold text-xs ${ag.claim > 0 ? 'text-rose-700' : 'text-slate-700'}`}>
+                        <div className={`font-bold text-xs ${ag.claim > 0 ? 'text-rose-700 dark:text-rose-400' : 'text-slate-700 dark:text-slate-300'}`}>
                           {formatIDR(ag.claim)}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                           {ag.claimCount} Kasus
                         </div>
                       </td>
@@ -991,7 +991,7 @@ export function AnalyticsTables({
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="bg-slate-100/70 border-b border-slate-200 text-slate-600 font-semibold uppercase tracking-wider text-[11px]">
+              <tr className="bg-slate-100/70 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-semibold uppercase tracking-wider text-[11px]">
                 <th className="py-3 px-4">Penyebab Klaim (Cause of Loss)</th>
                 <th className="py-3 px-4 text-center">Kasus Klaim</th>
                 <th className="py-3 px-4 text-right">Total Klaim (IDR)</th>
@@ -999,25 +999,25 @@ export function AnalyticsTables({
                 <th className="py-3 px-4 text-right">Rata-rata per Kasus (IDR)</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
               {filteredCauses.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-slate-400">
+                  <td colSpan={5} className="py-8 text-center text-slate-400 dark:text-slate-500">
                     Tidak ada data penyebab klaim yang ditemukan.
                   </td>
                 </tr>
               ) : (
                 filteredCauses.map((c) => (
-                  <tr key={c.cause} className="hover:bg-slate-50/80 transition">
-                    <td className="py-3 px-4 font-bold text-slate-900">{c.cause}</td>
-                    <td className="py-3 px-4 text-center font-semibold text-slate-700">{c.claimCount}</td>
-                    <td className="py-3 px-4 text-right font-bold text-rose-700">
+                  <tr key={c.cause} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
+                    <td className="py-3 px-4 font-bold text-slate-900 dark:text-slate-100">{c.cause}</td>
+                    <td className="py-3 px-4 text-center font-semibold text-slate-700 dark:text-slate-300">{c.claimCount}</td>
+                    <td className="py-3 px-4 text-right font-bold text-rose-700 dark:text-rose-400">
                       {formatIDR(c.claim)}
                     </td>
-                    <td className="py-3 px-4 text-right font-semibold text-slate-700">
+                    <td className="py-3 px-4 text-right font-semibold text-slate-700 dark:text-slate-300">
                       {c.pctOfTotal}%
                     </td>
-                    <td className="py-3 px-4 text-right text-slate-600 font-medium">
+                    <td className="py-3 px-4 text-right text-slate-600 dark:text-slate-400 font-medium">
                       {formatIDR(c.averagePerClaim)}
                     </td>
                   </tr>
@@ -1030,7 +1030,7 @@ export function AnalyticsTables({
 
       {/* ── PAGINATION FOOTER (MINIMAL 50 ENTRI PER HALAMAN) ────────────────── */}
       {activeItemCount > pageSize && (
-        <div className="px-6 py-3 border-t border-slate-200 bg-slate-50/50 flex items-center justify-between text-xs text-slate-600">
+        <div className="px-6 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
           <div>
             Menampilkan data {(currentPage - 1) * pageSize + 1} s/d{' '}
             {Math.min(currentPage * pageSize, activeItemCount)} dari {activeItemCount} entri (Halaman {pageSize} entri)
@@ -1039,11 +1039,11 @@ export function AnalyticsTables({
             <button
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
               disabled={currentPage === 1}
-              className="p-1.5 rounded-lg border border-slate-300 disabled:opacity-40 hover:bg-slate-100"
+              className="p-1.5 rounded-lg border border-slate-300 dark:border-slate-700 disabled:opacity-40 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="font-bold">
+            <span className="font-bold text-slate-700 dark:text-slate-300">
               Halaman {currentPage} dari {Math.ceil(activeItemCount / pageSize)}
             </span>
             <button
@@ -1053,7 +1053,7 @@ export function AnalyticsTables({
                 )
               }
               disabled={currentPage >= Math.ceil(activeItemCount / pageSize)}
-              className="p-1.5 rounded-lg border border-slate-300 disabled:opacity-40 hover:bg-slate-100"
+              className="p-1.5 rounded-lg border border-slate-300 dark:border-slate-700 disabled:opacity-40 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
             >
               <ChevronRight className="w-4 h-4" />
             </button>

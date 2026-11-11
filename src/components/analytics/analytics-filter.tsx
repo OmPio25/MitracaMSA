@@ -106,31 +106,31 @@ export function AnalyticsFilter({
   const activeCutoffInfo = availableCutoffs.find((c) => String(c.year) === cutoffYear);
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-5 mb-8">
+    <div className="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm p-5 mb-8">
       {/* Header Filter & Keterangan Cutoff Otomatis */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-blue-50 text-blue-600">
+            <span className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400">
               <Calendar className="w-4 h-4" />
             </span>
-            <h2 className="font-bold text-slate-900 text-base">Filter Periode & Parameter Underwriting</h2>
+            <h2 className="font-bold text-slate-900 dark:text-white text-base">Filter Periode & Parameter Underwriting</h2>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
-            Sistem otomatis menerapkan filter <span className="font-semibold text-slate-700">Cutoff Year</span> (14 November tahun lalu s/d 13 November tahun ini).
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Sistem otomatis menerapkan filter <span className="font-semibold text-slate-700 dark:text-slate-300">Cutoff Year</span> (14 November tahun lalu s/d 13 November tahun ini).
           </p>
         </div>
 
         {/* Legend Indikator Loss Ratio Sesuai Aturan */}
-        <div className="flex items-center gap-2 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 text-xs">
-          <span className="text-slate-500 font-medium">Standar Underwriting:</span>
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-semibold border border-emerald-300">
+        <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-950 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+          <span className="text-slate-500 dark:text-slate-400 font-medium">Standar Underwriting:</span>
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 font-semibold border border-emerald-300 dark:border-emerald-800/60">
             🟢 Sehat (&lt;35%)
           </span>
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-semibold border border-amber-300">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300 dark:border-amber-800/60">
             🟡 Waspada (=35%)
           </span>
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-rose-100 text-rose-800 font-semibold border border-rose-300">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-rose-100 dark:bg-rose-950/70 text-rose-800 dark:text-rose-300 font-semibold border border-rose-300 dark:border-rose-800/60">
             🔴 Kritis (&gt;35%)
           </span>
         </div>
@@ -140,14 +140,14 @@ export function AnalyticsFilter({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
         {/* 1. Filter Cutoff Year */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1.5 flex items-center justify-between">
+          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
             <span>Tahun Cutoff (Fixed Cycle)</span>
-            <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">Otomatis</span>
+            <span className="text-[10px] text-blue-600 dark:text-blue-400 font-bold bg-blue-50 dark:bg-blue-950/70 px-1.5 py-0.5 rounded">Otomatis</span>
           </label>
           <select
             value={cutoffYear}
             onChange={(e) => setCutoffYear(e.target.value)}
-            className="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+            className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950/80 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
           >
             {availableCutoffs.map((c) => (
               <option key={c.year} value={String(c.year)}>
@@ -158,7 +158,7 @@ export function AnalyticsFilter({
             <option value="CUSTOM">Kustom Tanggal Rentang</option>
           </select>
           {activeCutoffInfo && cutoffYear !== 'ALL' && cutoffYear !== 'CUSTOM' && (
-            <span className="block text-[11px] text-slate-500 mt-1">
+            <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-1">
               Rentang: {activeCutoffInfo.startDate} s/d {activeCutoffInfo.endDate}
             </span>
           )}
@@ -308,12 +308,12 @@ export function AnalyticsFilter({
       )}
 
       {/* Action Buttons: Terapkan Filter, Reset, Export Excel */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-5 pt-4 border-t border-slate-100">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-5 pt-4 border-t border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-2">
           <button
             onClick={onApplyFilter}
             disabled={isLoading}
-            className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold text-xs rounded-xl shadow-sm hover:shadow transition flex items-center gap-2"
+            className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold text-xs rounded-xl shadow-sm hover:shadow transition flex items-center gap-2 cursor-pointer"
           >
             {isLoading ? (
               <>
@@ -329,7 +329,7 @@ export function AnalyticsFilter({
           <button
             onClick={onResetFilter}
             disabled={isLoading}
-            className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs rounded-xl transition flex items-center gap-1.5"
+            className="px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-medium text-xs rounded-xl transition flex items-center gap-1.5 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             Reset
@@ -342,7 +342,7 @@ export function AnalyticsFilter({
             onClick={onExportPdf}
             disabled={!hasAppliedFilter || isExportingPdf || isLoading}
             title={!hasAppliedFilter ? 'Terapkan filter terlebih dahulu untuk mengekspor' : 'Ekspor Ringkasan Eksekutif ke PDF'}
-            className="px-4 py-2 bg-rose-600 hover:bg-rose-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-medium text-xs rounded-xl shadow-sm hover:shadow transition flex items-center gap-1.5"
+            className="px-4 py-2 bg-rose-600 hover:bg-rose-700 disabled:bg-slate-200 dark:disabled:bg-slate-800 disabled:text-slate-400 dark:disabled:text-slate-600 disabled:cursor-not-allowed text-white font-medium text-xs rounded-xl shadow-sm hover:shadow transition flex items-center gap-1.5 cursor-pointer"
           >
             <FileText className="w-4 h-4" />
             {isExportingPdf ? 'Membuat PDF...' : 'Ekspor Ringkasan Eksekutif (.pdf)'}
@@ -353,7 +353,7 @@ export function AnalyticsFilter({
             onClick={onExportXlsx}
             disabled={!hasAppliedFilter || isExportingXlsx || isLoading}
             title={!hasAppliedFilter ? 'Terapkan filter terlebih dahulu untuk mengekspor' : 'Ekspor Laporan ke Excel'}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-medium text-xs rounded-xl shadow-sm hover:shadow transition flex items-center gap-1.5"
+            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-200 dark:disabled:bg-slate-800 disabled:text-slate-400 dark:disabled:text-slate-600 disabled:cursor-not-allowed text-white font-medium text-xs rounded-xl shadow-sm hover:shadow transition flex items-center gap-1.5 cursor-pointer"
           >
             <FileSpreadsheet className="w-4 h-4" />
             {isExportingXlsx ? 'Membuat Excel...' : 'Ekspor Laporan Analitik (.xlsx)'}

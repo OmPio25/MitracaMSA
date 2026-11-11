@@ -551,21 +551,21 @@ export default function AdminUsersPage() {
   const getRoleBadgeStyle = (r: string) => {
     switch (r) {
       case 'SUPERADMIN':
-        return 'bg-purple-100 text-purple-800 border-purple-300';
+        return 'bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 border-purple-300 dark:border-purple-800';
       case 'ADMIN':
-        return 'bg-blue-100 text-blue-800 border-blue-300';
+        return 'bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border-blue-300 dark:border-blue-800';
       case 'KACAB':
-        return 'bg-emerald-100 text-emerald-800 border-emerald-300';
+        return 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800';
       case 'PIC_CABANG':
-        return 'bg-teal-100 text-teal-800 border-teal-300';
+        return 'bg-teal-100 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border-teal-300 dark:border-teal-800';
       case 'AGENT':
-        return 'bg-amber-100 text-amber-800 border-amber-300';
+        return 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800';
       case 'OFFICER_AGENT':
-        return 'bg-orange-100 text-orange-800 border-orange-300';
+        return 'bg-orange-100 dark:bg-orange-950/60 text-orange-800 dark:text-orange-300 border-orange-300 dark:border-orange-800';
       case 'AUDIT':
-        return 'bg-slate-200 text-slate-800 border-slate-300';
+        return 'bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 border-slate-300 dark:border-slate-700';
       default:
-        return 'bg-slate-100 text-slate-700 border-slate-300';
+        return 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700';
     }
   };
 
@@ -575,7 +575,7 @@ export default function AdminUsersPage() {
   const inactiveUsers = totalUsers - activeUsers;
 
   return (
-    <main className="min-h-screen bg-slate-50/50 py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <main className="min-h-screen bg-slate-50/50 dark:bg-[#0b0f19] py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* ── Page Header ──────────────────────────────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
@@ -585,14 +585,14 @@ export default function AdminUsersPage() {
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
                   Manajemen Pengguna & Hak Akses
                 </h1>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-300">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 border border-purple-300 dark:border-purple-800">
                   SUPERADMIN ONLY
                 </span>
               </div>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Buat dan kelola akun login pengguna beserta pembatasan data scoping (7 Peran RBAC)
               </p>
             </div>
@@ -605,7 +605,7 @@ export default function AdminUsersPage() {
               resetCreateForm();
               setIsCreateModalOpen(true);
             }}
-            className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md hover:shadow-lg transition"
+            className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md hover:shadow-lg transition cursor-pointer"
           >
             <UserPlus className="w-4 h-4" />
             + Buat User Baru
@@ -614,32 +614,32 @@ export default function AdminUsersPage() {
       </div>
 
       {/* ── Submenu Pengaturan ─────────────────────────────────────────────────── */}
-      <div className="bg-white border border-slate-200 rounded-xl p-1.5 shadow-sm flex flex-wrap gap-1.5 items-center mb-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-1.5 shadow-sm flex flex-wrap gap-1.5 items-center mb-6">
         <Link
           href="/admin/users"
-          className="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200 transition"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold bg-purple-50 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 transition"
         >
           <Users className="w-3.5 h-3.5" />
           Kelola User Akses
-          <span className="text-[10px] bg-purple-100 text-purple-700 font-extrabold px-1.5 py-0.2 rounded border border-purple-200">
+          <span className="text-[10px] bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 font-extrabold px-1.5 py-0.2 rounded border border-purple-200 dark:border-purple-800">
             Superadmin
           </span>
         </Link>
 
         <Link
           href="/admin/branches"
-          className="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
         >
           <Building2 className="w-3.5 h-3.5" />
           Master Cabang
-          <span className="text-[10px] bg-blue-100 text-blue-700 font-bold px-1.5 py-0.2 rounded border border-blue-200">
+          <span className="text-[10px] bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold px-1.5 py-0.2 rounded border border-blue-200 dark:border-blue-800">
             Admin
           </span>
         </Link>
 
         <Link
           href="/settings/change-password"
-          className="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
         >
           <KeyRound className="w-3.5 h-3.5" />
           Ganti Password
@@ -648,56 +648,56 @@ export default function AdminUsersPage() {
 
       {/* ── KPI Ringkasan Akun ─────────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-sm flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-4 shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Akun</span>
-            <div className="text-2xl font-black text-slate-900 mt-1">{totalUsers}</div>
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Akun</span>
+            <div className="text-2xl font-black text-slate-900 dark:text-slate-100 mt-1">{totalUsers}</div>
           </div>
-          <span className="p-2.5 rounded-xl bg-blue-50 text-blue-600">
+          <span className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
             <Users className="w-5 h-5" />
           </span>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-sm flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-4 shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Akun Aktif</span>
-            <div className="text-2xl font-black text-emerald-700 mt-1">{activeUsers}</div>
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Akun Aktif</span>
+            <div className="text-2xl font-black text-emerald-700 dark:text-emerald-400 mt-1">{activeUsers}</div>
           </div>
-          <span className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600">
+          <span className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
             <CheckCircle2 className="w-5 h-5" />
           </span>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-sm flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-4 shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Akun Nonaktif</span>
-            <div className="text-2xl font-black text-slate-500 mt-1">{inactiveUsers}</div>
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Akun Nonaktif</span>
+            <div className="text-2xl font-black text-slate-500 dark:text-slate-400 mt-1">{inactiveUsers}</div>
           </div>
-          <span className="p-2.5 rounded-xl bg-slate-100 text-slate-600">
+          <span className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
             <XCircle className="w-5 h-5" />
           </span>
         </div>
       </div>
 
       {/* ── Filter & Search Bar ───────────────────────────────────────────────── */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 mb-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-4 mb-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div className="relative flex-1 max-w-md">
           <input
             type="text"
             placeholder="Cari berdasarkan nama atau email..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 pl-9 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+            className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 pl-9 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
           />
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-500 font-semibold">Filter Peran:</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Filter Peran:</span>
           <select
             value={selectedRoleFilter}
             onChange={(e) => setSelectedRoleFilter(e.target.value)}
-            className="text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+            className="text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           >
             <option value="ALL">Semua Peran (7 Role)</option>
             <option value="SUPERADMIN">SUPERADMIN</option>
@@ -712,7 +712,7 @@ export default function AdminUsersPage() {
           <button
             onClick={() => fetchUsers()}
             disabled={isLoading}
-            className="p-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 transition"
+            className="p-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition cursor-pointer"
             title="Segarkan Data"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
@@ -722,18 +722,18 @@ export default function AdminUsersPage() {
 
       {/* ── Error Banner ─────────────────────────────────────────────────────── */}
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+        <div className="mb-6 p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {/* ── Tabel Pengguna ───────────────────────────────────────────────────── */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden mb-12">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden mb-12">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="bg-slate-100/70 border-b border-slate-200 text-slate-600 font-semibold uppercase tracking-wider text-[11px]">
+              <tr className="bg-slate-100/70 dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
                 <th className="py-3 px-4">Nama Lengkap & Kontak</th>
                 <th className="py-3 px-4">Peran (Role)</th>
                 <th className="py-3 px-4">Cakupan Data (Scoping)</th>
@@ -742,32 +742,32 @@ export default function AdminUsersPage() {
                 <th className="py-3 px-4 text-right">Aksi</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {isLoading ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-slate-400">
-                    <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-blue-600" />
+                  <td colSpan={6} className="py-12 text-center text-slate-400 dark:text-slate-500">
+                    <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-blue-600 dark:text-blue-400" />
                     Memuat daftar pengguna...
                   </td>
                 </tr>
               ) : usersList.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-slate-400">
+                  <td colSpan={6} className="py-12 text-center text-slate-400 dark:text-slate-500">
                     Tidak ada pengguna yang sesuai kriteria pencarian.
                   </td>
                 </tr>
               ) : (
                 usersList.map((u) => (
-                  <tr key={u.id} className="hover:bg-slate-50/80 transition">
+                  <tr key={u.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-slate-900 text-sm">{u.name}</div>
-                      <div className="text-slate-500 font-mono text-[11px] flex items-center gap-1.5 mt-0.5">
-                        <Mail className="w-3 h-3 text-slate-400" />
+                      <div className="font-bold text-slate-900 dark:text-slate-100 text-sm">{u.name}</div>
+                      <div className="text-slate-500 dark:text-slate-400 font-mono text-[11px] flex items-center gap-1.5 mt-0.5">
+                        <Mail className="w-3 h-3 text-slate-400 dark:text-slate-500" />
                         {u.email}
                       </div>
                       {u.phone && (
-                        <div className="text-slate-500 text-[10px] flex items-center gap-1.5 mt-0.5">
-                          <Phone className="w-3 h-3 text-slate-400" />
+                        <div className="text-slate-500 dark:text-slate-400 text-[10px] flex items-center gap-1.5 mt-0.5">
+                          <Phone className="w-3 h-3 text-slate-400 dark:text-slate-500" />
                           {u.phone}
                         </div>
                       )}
@@ -781,38 +781,38 @@ export default function AdminUsersPage() {
 
                     <td className="py-3.5 px-4">
                       {u.role === 'KACAB' || u.role === 'PIC_CABANG' ? (
-                        <div className="flex items-center gap-1.5 text-slate-800">
-                          <Building className="w-3.5 h-3.5 text-emerald-600" />
+                        <div className="flex items-center gap-1.5 text-slate-800 dark:text-slate-200">
+                          <Building className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                           <span className="font-semibold">
                             Cabang {u.branchCode ? `[${u.branchCode}] ` : ''}{u.branchName || 'Belum Terhubung'}
                           </span>
                         </div>
                       ) : u.role === 'AGENT' ? (
-                        <div className="flex items-center gap-1.5 text-slate-800">
-                          <GitFork className="w-3.5 h-3.5 text-amber-600" />
+                        <div className="flex items-center gap-1.5 text-slate-800 dark:text-slate-200">
+                          <GitFork className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                           <span className="font-semibold">
                             Agen [{u.agentCode || '-'}] {u.agentName || ''}
                           </span>
                         </div>
                       ) : u.role === 'OFFICER_AGENT' ? (
-                        <div className="flex items-center gap-1.5 text-slate-800">
-                          <Users className="w-3.5 h-3.5 text-orange-600" />
+                        <div className="flex items-center gap-1.5 text-slate-800 dark:text-slate-200">
+                          <Users className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400" />
                           <span className="font-semibold">
                             Asisten dari: [{u.parentAgentCode || '-'}] {u.parentAgentName || ''}
                           </span>
                         </div>
                       ) : (
-                        <span className="text-slate-500 font-medium">Skup Nasional Penuh</span>
+                        <span className="text-slate-500 dark:text-slate-400 font-medium">Skup Nasional Penuh</span>
                       )}
                     </td>
 
                     <td className="py-3.5 px-4 text-center">
                       <button
                         onClick={() => handleToggleActive(u)}
-                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold border transition ${
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold border transition cursor-pointer ${
                           u.isActive
-                            ? 'bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100'
-                            : 'bg-slate-100 text-slate-500 border-slate-300 hover:bg-slate-200'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/50'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
                         }`}
                         title="Klik untuk mengubah status aktif"
                       >
@@ -821,7 +821,7 @@ export default function AdminUsersPage() {
                       </button>
                     </td>
 
-                    <td className="py-3.5 px-4 text-slate-500">
+                    <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400">
                       {u.lastLoginAt
                         ? new Date(u.lastLoginAt).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' })
                         : 'Belum pernah login'}
@@ -831,7 +831,7 @@ export default function AdminUsersPage() {
                       <div className="flex items-center justify-end gap-1.5">
                         <button
                           onClick={() => handleOpenEditModal(u)}
-                          className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-amber-600 hover:bg-amber-50 transition"
+                          className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/40 transition cursor-pointer"
                           title="Edit Data Pengguna"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
@@ -844,14 +844,14 @@ export default function AdminUsersPage() {
                             setModalSuccess(null);
                             setIsResetPasswordModalOpen(true);
                           }}
-                          className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition"
+                          className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition cursor-pointer"
                           title="Reset Password"
                         >
                           <KeyRound className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleDeleteUser(u)}
-                          className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-rose-600 hover:bg-rose-50 transition"
+                          className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition cursor-pointer"
                           title="Hapus Pengguna"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -869,35 +869,35 @@ export default function AdminUsersPage() {
       {/* ── MODAL: BUAT USER BARU ────────────────────────────────────────────── */}
       {isCreateModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 sm:p-8 border border-slate-100 my-8">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-lg w-full p-6 sm:p-8 border border-slate-100 dark:border-slate-800 my-8">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
-                <span className="p-2 rounded-xl bg-blue-50 text-blue-600">
+                <span className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
                   <UserPlus className="w-5 h-5" />
                 </span>
                 <div>
-                  <h3 className="font-extrabold text-slate-900 text-base">Buat User Akses Baru</h3>
-                  <p className="text-[11px] text-slate-500">Isi data akun login dan tentukan batasan data scoping</p>
+                  <h3 className="font-extrabold text-slate-900 dark:text-slate-100 text-base">Buat User Akses Baru</h3>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">Isi data akun login dan tentukan batasan data scoping</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsCreateModalOpen(false)}
-                className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition"
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {modalError && (
-              <div className="mt-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+              <div className="mt-4 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
                 <span>{modalError}</span>
               </div>
             )}
 
             {modalSuccess && (
-              <div className="mt-4 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <div className="mt-4 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>{modalSuccess}</span>
               </div>
             )}
@@ -905,7 +905,7 @@ export default function AdminUsersPage() {
             <form onSubmit={handleCreateUser} className="space-y-4 mt-4">
               {/* Nama Lengkap */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Nama Lengkap <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
@@ -915,16 +915,16 @@ export default function AdminUsersPage() {
                     placeholder="Contoh: Budi Santoso"
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
-                    className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 pl-9 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 pl-9 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
-                  <User className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                  <User className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                 </div>
               </div>
 
               {/* Email & Telepon */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                     Email Login <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
@@ -934,14 +934,14 @@ export default function AdminUsersPage() {
                       placeholder="user@mitraca.com"
                       value={formEmail}
                       onChange={(e) => setFormEmail(e.target.value)}
-                      className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 pl-9 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                      className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 pl-9 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                     />
-                    <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                    <Mail className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                     No. Handphone (Opsional)
                   </label>
                   <div className="relative">
@@ -950,9 +950,9 @@ export default function AdminUsersPage() {
                       placeholder="08123456789"
                       value={formPhone}
                       onChange={(e) => setFormPhone(e.target.value)}
-                      className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 pl-9 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                      className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 pl-9 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                     />
-                    <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                    <Phone className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                   </div>
                 </div>
               </div>
@@ -960,13 +960,13 @@ export default function AdminUsersPage() {
               {/* Password & Generator */}
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="block text-xs font-bold text-slate-700">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
                     Password Awal <span className="text-rose-500">*</span>
                   </label>
                   <button
                     type="button"
                     onClick={generateRandomPassword}
-                    className="text-[10px] text-blue-600 font-bold hover:underline flex items-center gap-1"
+                    className="text-[10px] text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     <Sparkles className="w-3 h-3 text-amber-500" />
                     Buat Acak
@@ -978,13 +978,13 @@ export default function AdminUsersPage() {
                     required
                     value={formPassword}
                     onChange={(e) => setFormPassword(e.target.value)}
-                    className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 pl-9 pr-16 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full text-xs font-mono bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 pl-9 pr-16 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
-                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                  <Lock className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-2.5 top-2 text-[10px] font-bold text-slate-500 hover:text-slate-800 bg-slate-200 px-2 py-0.5 rounded"
+                    className="absolute right-2.5 top-2 text-[10px] font-bold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded cursor-pointer"
                   >
                     {showPassword ? 'Sembunyi' : 'Lihat'}
                   </button>
@@ -993,7 +993,7 @@ export default function AdminUsersPage() {
 
               {/* Pilihan Peran (7 Roles) */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Pilih Peran Pengguna (Role) <span className="text-rose-500">*</span>
                 </label>
                 <select
@@ -1006,7 +1006,7 @@ export default function AdminUsersPage() {
                     setFormParentAgentId('');
                     setSelectedParentAgentDisplay(null);
                   }}
-                  className="w-full text-xs font-bold bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                  className="w-full text-xs font-bold bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                 >
                   <option value="SUPERADMIN">SUPERADMIN — Skup Nasional Penuh & Konfigurasi</option>
                   <option value="ADMIN">ADMIN — Skup Nasional & Izin Upload Ingestion</option>
@@ -1020,16 +1020,16 @@ export default function AdminUsersPage() {
 
               {/* DYNAMIC SCOPING: 1. Jika KACAB atau PIC_CABANG -> Pilih Cabang */}
               {(formRole === 'KACAB' || formRole === 'PIC_CABANG') && (
-                <div className="p-3 bg-emerald-50/60 rounded-xl border border-emerald-200">
-                  <label className="block text-xs font-bold text-emerald-900 mb-1 flex items-center gap-1.5">
-                    <Building className="w-4 h-4 text-emerald-700" />
+                <div className="p-3 bg-emerald-50/60 dark:bg-emerald-950/30 rounded-xl border border-emerald-200 dark:border-emerald-800">
+                  <label className="block text-xs font-bold text-emerald-900 dark:text-emerald-200 mb-1 flex items-center gap-1.5">
+                    <Building className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
                     Hubungkan ke Cabang <span className="text-rose-500">*</span>
                   </label>
                   <select
                     required
                     value={formBranchId}
                     onChange={(e) => setFormBranchId(e.target.value)}
-                    className="w-full text-xs font-semibold bg-white border border-emerald-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                    className="w-full text-xs font-semibold bg-white dark:bg-slate-950 border border-emerald-300 dark:border-emerald-700 rounded-lg px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   >
                     <option value="">-- Pilih Cabang --</option>
                     {branches.map((b) => (
@@ -1038,7 +1038,7 @@ export default function AdminUsersPage() {
                       </option>
                     ))}
                   </select>
-                  <p className="text-[10px] text-emerald-700 mt-1 leading-tight">
+                  <p className="text-[10px] text-emerald-700 dark:text-emerald-400 mt-1 leading-tight">
                     Data transaksi, polis, klaim, dan agen pengguna ini akan terisolasi hanya pada cabang yang dipilih.
                   </p>
                 </div>
@@ -1046,19 +1046,19 @@ export default function AdminUsersPage() {
 
               {/* DYNAMIC SCOPING: 2. Jika AGENT -> Cari Agen di Database */}
               {formRole === 'AGENT' && (
-                <div className="p-3 bg-amber-50/60 rounded-xl border border-amber-200">
-                  <label className="block text-xs font-bold text-amber-900 mb-1 flex items-center gap-1.5">
-                    <GitFork className="w-4 h-4 text-amber-700" />
+                <div className="p-3 bg-amber-50/60 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800">
+                  <label className="block text-xs font-bold text-amber-900 dark:text-amber-200 mb-1 flex items-center gap-1.5">
+                    <GitFork className="w-4 h-4 text-amber-700 dark:text-amber-400" />
                     Hubungkan ke Profil Agen <span className="text-rose-500">*</span>
                   </label>
 
                   {selectedAgentDisplay ? (
-                    <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-amber-300">
+                    <div className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-slate-950 border border-amber-300 dark:border-amber-700">
                       <div>
-                        <span className="font-bold text-xs text-amber-950">
+                        <span className="font-bold text-xs text-amber-950 dark:text-amber-200">
                           [{selectedAgentDisplay.agentCode}] {selectedAgentDisplay.name}
                         </span>
-                        <div className="text-[10px] text-slate-500">
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">
                           {selectedAgentDisplay.peringkat || 'Agen'} · {selectedAgentDisplay.rawBranchName || 'Cabang'}
                         </div>
                       </div>
@@ -1069,7 +1069,7 @@ export default function AdminUsersPage() {
                           setFormAgentId('');
                           setAgentSearchQuery('');
                         }}
-                        className="text-xs text-rose-600 font-bold hover:underline"
+                        className="text-xs text-rose-600 dark:text-rose-400 font-bold hover:underline cursor-pointer"
                       >
                         Ganti
                       </button>
@@ -1081,10 +1081,10 @@ export default function AdminUsersPage() {
                         placeholder="Ketik kode agen atau nama (min. 2 karakter)..."
                         value={agentSearchQuery}
                         onChange={(e) => setAgentSearchQuery(e.target.value)}
-                        className="w-full text-xs bg-white border border-amber-300 rounded-lg px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                        className="w-full text-xs bg-white dark:bg-slate-950 border border-amber-300 dark:border-amber-700 rounded-lg px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
                       />
                       {agentSearchResults.length > 0 && (
-                        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg z-20 max-h-48 overflow-y-auto">
+                        <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg z-20 max-h-48 overflow-y-auto">
                           {agentSearchResults.map((ag) => (
                             <button
                               key={ag.id}
@@ -1094,12 +1094,12 @@ export default function AdminUsersPage() {
                                 setSelectedAgentDisplay(ag);
                                 setAgentSearchResults([]);
                               }}
-                              className="w-full text-left px-3 py-2 hover:bg-amber-50 text-xs border-b border-slate-100 last:border-0"
+                              className="w-full text-left px-3 py-2 hover:bg-amber-50 dark:hover:bg-amber-950/40 text-xs border-b border-slate-100 dark:border-slate-800 last:border-0 cursor-pointer"
                             >
-                              <div className="font-bold text-slate-900">
+                              <div className="font-bold text-slate-900 dark:text-slate-100">
                                 [{ag.agentCode}] {ag.name}
                               </div>
-                              <div className="text-[10px] text-slate-500">
+                              <div className="text-[10px] text-slate-500 dark:text-slate-400">
                                 {ag.peringkat || 'Agen'} · {ag.rawBranchName || '-'}
                               </div>
                             </button>
@@ -1108,7 +1108,7 @@ export default function AdminUsersPage() {
                       )}
                     </div>
                   )}
-                  <p className="text-[10px] text-amber-700 mt-1 leading-tight">
+                  <p className="text-[10px] text-amber-700 dark:text-amber-400 mt-1 leading-tight">
                     Pengguna hanya akan dapat melihat data diri sendiri dan seluruh pohon downline di bawah jalurnya.
                   </p>
                 </div>
@@ -1116,19 +1116,19 @@ export default function AdminUsersPage() {
 
               {/* DYNAMIC SCOPING: 3. Jika OFFICER_AGENT -> Pilih Owner Agent */}
               {formRole === 'OFFICER_AGENT' && (
-                <div className="p-3 bg-orange-50/60 rounded-xl border border-orange-200">
-                  <label className="block text-xs font-bold text-orange-900 mb-1 flex items-center gap-1.5">
-                    <Users className="w-4 h-4 text-orange-700" />
+                <div className="p-3 bg-orange-50/60 dark:bg-orange-950/30 rounded-xl border border-orange-200 dark:border-orange-800">
+                  <label className="block text-xs font-bold text-orange-900 dark:text-orange-200 mb-1 flex items-center gap-1.5">
+                    <Users className="w-4 h-4 text-orange-700 dark:text-orange-400" />
                     Pilih Agen Pemilik (Owner Agent) <span className="text-rose-500">*</span>
                   </label>
 
                   {selectedParentAgentDisplay ? (
-                    <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-orange-300">
+                    <div className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-slate-950 border border-orange-300 dark:border-orange-700">
                       <div>
-                        <span className="font-bold text-xs text-orange-950">
+                        <span className="font-bold text-xs text-orange-950 dark:text-orange-200">
                           [{selectedParentAgentDisplay.agentCode}] {selectedParentAgentDisplay.name}
                         </span>
-                        <div className="text-[10px] text-slate-500">
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">
                           {selectedParentAgentDisplay.peringkat || 'Agen'} · {selectedParentAgentDisplay.rawBranchName || 'Cabang'}
                         </div>
                       </div>
@@ -1139,7 +1139,7 @@ export default function AdminUsersPage() {
                           setFormParentAgentId('');
                           setParentAgentSearchQuery('');
                         }}
-                        className="text-xs text-rose-600 font-bold hover:underline"
+                        className="text-xs text-rose-600 dark:text-rose-400 font-bold hover:underline cursor-pointer"
                       >
                         Ganti
                       </button>
@@ -1151,10 +1151,10 @@ export default function AdminUsersPage() {
                         placeholder="Ketik kode/nama agen pemilik (min. 2 karakter)..."
                         value={parentAgentSearchQuery}
                         onChange={(e) => setParentAgentSearchQuery(e.target.value)}
-                        className="w-full text-xs bg-white border border-orange-300 rounded-lg px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full text-xs bg-white dark:bg-slate-950 border border-orange-300 dark:border-orange-700 rounded-lg px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                       />
                       {parentAgentSearchResults.length > 0 && (
-                        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg z-20 max-h-48 overflow-y-auto">
+                        <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg z-20 max-h-48 overflow-y-auto">
                           {parentAgentSearchResults.map((ag) => (
                             <button
                               key={ag.id}
@@ -1164,12 +1164,12 @@ export default function AdminUsersPage() {
                                 setSelectedParentAgentDisplay(ag);
                                 setParentAgentSearchResults([]);
                               }}
-                              className="w-full text-left px-3 py-2 hover:bg-orange-50 text-xs border-b border-slate-100 last:border-0"
+                              className="w-full text-left px-3 py-2 hover:bg-orange-50 dark:hover:bg-orange-950/40 text-xs border-b border-slate-100 dark:border-slate-800 last:border-0 cursor-pointer"
                             >
-                              <div className="font-bold text-slate-900">
+                              <div className="font-bold text-slate-900 dark:text-slate-100">
                                 [{ag.agentCode}] {ag.name}
                               </div>
-                              <div className="text-[10px] text-slate-500">
+                              <div className="text-[10px] text-slate-500 dark:text-slate-400">
                                 {ag.peringkat || 'Agen'} · {ag.rawBranchName || '-'}
                               </div>
                             </button>
@@ -1178,7 +1178,7 @@ export default function AdminUsersPage() {
                       )}
                     </div>
                   )}
-                  <p className="text-[10px] text-orange-700 mt-1 leading-tight">
+                  <p className="text-[10px] text-orange-700 dark:text-orange-400 mt-1 leading-tight">
                     Staf officer ini akan mewarisi cakupan hak akses yang identik dengan Agen Pemilik yang dipilih.
                   </p>
                 </div>
@@ -1190,26 +1190,26 @@ export default function AdminUsersPage() {
                   type="checkbox"
                   checked={formIsActive}
                   onChange={(e) => setFormIsActive(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500"
+                  className="w-4 h-4 text-blue-600 rounded border-slate-300 dark:border-slate-700 focus:ring-blue-500"
                 />
-                <span className="text-xs font-semibold text-slate-700">
+                <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                   Aktifkan akun ini segera setelah dibuat
                 </span>
               </label>
 
               {/* Modal Buttons */}
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsCreateModalOpen(false)}
-                  className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition"
+                  className="px-4 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs rounded-xl transition cursor-pointer"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-2"
+                  className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-2 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -1232,37 +1232,37 @@ export default function AdminUsersPage() {
       {/* ── MODAL: EDIT USER ──────────────────────────────────────────────────── */}
       {isEditModalOpen && selectedUserForEdit && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 sm:p-8 border border-slate-100 my-8 animate-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-lg w-full p-6 sm:p-8 border border-slate-100 dark:border-slate-800 my-8 animate-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
-                <span className="p-2 rounded-xl bg-amber-50 text-amber-600">
+                <span className="p-2 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400">
                   <Edit2 className="w-5 h-5" />
                 </span>
                 <div>
-                  <h3 className="font-extrabold text-slate-900 text-base">Edit Data Pengguna</h3>
-                  <p className="text-[11px] text-slate-500">
+                  <h3 className="font-extrabold text-slate-900 dark:text-slate-100 text-base">Edit Data Pengguna</h3>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
                     Perbarui profil, hak akses peran, atau cakupan data scoping akun
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsEditModalOpen(false)}
-                className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition"
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {editModalError && (
-              <div className="mt-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+              <div className="mt-4 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
                 <span>{editModalError}</span>
               </div>
             )}
 
             {editModalSuccess && (
-              <div className="mt-4 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <div className="mt-4 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>{editModalSuccess}</span>
               </div>
             )}
@@ -1270,7 +1270,7 @@ export default function AdminUsersPage() {
             <form onSubmit={handleUpdateUser} className="space-y-4 mt-4">
               {/* Nama Lengkap */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Nama Lengkap <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
@@ -1280,16 +1280,16 @@ export default function AdminUsersPage() {
                     placeholder="Contoh: Budi Santoso"
                     value={editName}
                     onChange={(e) => setEditName(e.target.value)}
-                    className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 pl-9 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 pl-9 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
-                  <User className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                  <User className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                 </div>
               </div>
 
               {/* Email & Telepon */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                     Email Login <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
@@ -1299,14 +1299,14 @@ export default function AdminUsersPage() {
                       placeholder="user@mitraca.com"
                       value={editEmail}
                       onChange={(e) => setEditEmail(e.target.value)}
-                      className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 pl-9 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                      className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 pl-9 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                     />
-                    <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                    <Mail className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                     No. Handphone (Opsional)
                   </label>
                   <div className="relative">
@@ -1315,18 +1315,18 @@ export default function AdminUsersPage() {
                       placeholder="08123456789"
                       value={editPhone}
                       onChange={(e) => setEditPhone(e.target.value)}
-                      className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 pl-9 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                      className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 pl-9 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                     />
-                    <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                    <Phone className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                   </div>
                 </div>
               </div>
 
               {/* Status Akun */}
-              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800">
                 <div>
-                  <span className="text-xs font-bold text-slate-800">Status Akun</span>
-                  <p className="text-[10px] text-slate-500">
+                  <span className="text-xs font-bold text-slate-800 dark:text-slate-200">Status Akun</span>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400">
                     Pengguna nonaktif tidak akan dapat melakukan login ke dalam sistem.
                   </p>
                 </div>
@@ -1337,8 +1337,8 @@ export default function AdminUsersPage() {
                     onChange={(e) => setEditIsActive(e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
-                  <span className="ml-2 text-xs font-extrabold text-slate-700">
+                  <div className="w-11 h-6 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                  <span className="ml-2 text-xs font-extrabold text-slate-700 dark:text-slate-300">
                     {editIsActive ? 'Aktif' : 'Nonaktif'}
                   </span>
                 </label>
@@ -1346,7 +1346,7 @@ export default function AdminUsersPage() {
 
               {/* Pilihan Peran (7 Roles) */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Pilih Peran Pengguna (Role) <span className="text-rose-500">*</span>
                 </label>
                 <select
@@ -1366,7 +1366,7 @@ export default function AdminUsersPage() {
                       setSelectedEditParentAgentDisplay(null);
                     }
                   }}
-                  className="w-full text-xs font-bold bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                  className="w-full text-xs font-bold bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                 >
                   <option value="SUPERADMIN">SUPERADMIN — Skup Nasional Penuh & Konfigurasi</option>
                   <option value="ADMIN">ADMIN — Skup Nasional & Izin Upload Ingestion</option>
@@ -1380,16 +1380,16 @@ export default function AdminUsersPage() {
 
               {/* DYNAMIC SCOPING: 1. Jika KACAB atau PIC_CABANG -> Pilih Cabang */}
               {(editRole === 'KACAB' || editRole === 'PIC_CABANG') && (
-                <div className="p-3 bg-emerald-50/60 rounded-xl border border-emerald-200">
-                  <label className="block text-xs font-bold text-emerald-900 mb-1 flex items-center gap-1.5">
-                    <Building className="w-4 h-4 text-emerald-700" />
+                <div className="p-3 bg-emerald-50/60 dark:bg-emerald-950/30 rounded-xl border border-emerald-200 dark:border-emerald-800">
+                  <label className="block text-xs font-bold text-emerald-900 dark:text-emerald-200 mb-1 flex items-center gap-1.5">
+                    <Building className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
                     Hubungkan ke Cabang <span className="text-rose-500">*</span>
                   </label>
                   <select
                     required
                     value={editBranchId}
                     onChange={(e) => setEditBranchId(e.target.value)}
-                    className="w-full text-xs font-semibold bg-white border border-emerald-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                    className="w-full text-xs font-semibold bg-white dark:bg-slate-950 border border-emerald-300 dark:border-emerald-700 rounded-lg px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                   >
                     <option value="">-- Pilih Cabang --</option>
                     {branches.map((b) => (
@@ -1398,7 +1398,7 @@ export default function AdminUsersPage() {
                       </option>
                     ))}
                   </select>
-                  <p className="text-[10px] text-emerald-700 mt-1 leading-tight">
+                  <p className="text-[10px] text-emerald-700 dark:text-emerald-400 mt-1 leading-tight">
                     Data transaksi, polis, klaim, dan agen pengguna ini akan terisolasi hanya pada cabang yang dipilih.
                   </p>
                 </div>
@@ -1406,19 +1406,19 @@ export default function AdminUsersPage() {
 
               {/* DYNAMIC SCOPING: 2. Jika AGENT -> Cari Agen di Database */}
               {editRole === 'AGENT' && (
-                <div className="p-3 bg-amber-50/60 rounded-xl border border-amber-200">
-                  <label className="block text-xs font-bold text-amber-900 mb-1 flex items-center gap-1.5">
-                    <GitFork className="w-4 h-4 text-amber-700" />
+                <div className="p-3 bg-amber-50/60 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800">
+                  <label className="block text-xs font-bold text-amber-900 dark:text-amber-200 mb-1 flex items-center gap-1.5">
+                    <GitFork className="w-4 h-4 text-amber-700 dark:text-amber-400" />
                     Hubungkan ke Profil Agen <span className="text-rose-500">*</span>
                   </label>
 
                   {selectedEditAgentDisplay ? (
-                    <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-amber-300">
+                    <div className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-slate-950 border border-amber-300 dark:border-amber-700">
                       <div>
-                        <span className="font-bold text-xs text-amber-950">
+                        <span className="font-bold text-xs text-amber-950 dark:text-amber-200">
                           [{selectedEditAgentDisplay.agentCode}] {selectedEditAgentDisplay.name}
                         </span>
-                        <div className="text-[10px] text-slate-500">
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">
                           {selectedEditAgentDisplay.peringkat || 'Agen'} · {selectedEditAgentDisplay.rawBranchName || 'Cabang'}
                         </div>
                       </div>
@@ -1429,7 +1429,7 @@ export default function AdminUsersPage() {
                           setEditAgentId('');
                           setEditAgentSearchQuery('');
                         }}
-                        className="text-xs text-rose-600 font-bold hover:underline"
+                        className="text-xs text-rose-600 dark:text-rose-400 font-bold hover:underline cursor-pointer"
                       >
                         Ganti
                       </button>
@@ -1441,12 +1441,12 @@ export default function AdminUsersPage() {
                         placeholder="Ketik minimal 2 karakter (nama atau kode agen)..."
                         value={editAgentSearchQuery}
                         onChange={(e) => setEditAgentSearchQuery(e.target.value)}
-                        className="w-full text-xs bg-white border border-amber-300 rounded-lg px-3 py-2 pl-8 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                        className="w-full text-xs bg-white dark:bg-slate-950 border border-amber-300 dark:border-amber-700 rounded-lg px-3 py-2 pl-8 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
                       />
-                      <Search className="w-3.5 h-3.5 text-amber-600 absolute left-2.5 top-2.5" />
+                      <Search className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 absolute left-2.5 top-2.5" />
 
                       {editAgentSearchResults.length > 0 && (
-                        <div className="absolute z-20 top-full left-0 right-0 mt-1 bg-white border border-amber-300 rounded-lg shadow-xl max-h-48 overflow-y-auto divide-y divide-slate-100">
+                        <div className="absolute z-20 top-full left-0 right-0 mt-1 bg-white dark:bg-slate-900 border border-amber-300 dark:border-amber-700 rounded-lg shadow-xl max-h-48 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
                           {editAgentSearchResults.map((ag) => (
                             <button
                               key={ag.id}
@@ -1456,13 +1456,13 @@ export default function AdminUsersPage() {
                                 setSelectedEditAgentDisplay(ag);
                                 setEditAgentSearchResults([]);
                               }}
-                              className="w-full text-left p-2 hover:bg-amber-50 transition flex items-center justify-between text-xs"
+                              className="w-full text-left p-2 hover:bg-amber-50 dark:hover:bg-amber-950/40 transition flex items-center justify-between text-xs cursor-pointer"
                             >
                               <div>
-                                <span className="font-bold text-slate-900">[{ag.agentCode}] {ag.name}</span>
-                                <span className="text-[10px] text-slate-400 ml-2">({ag.peringkat || 'Agen'})</span>
+                                <span className="font-bold text-slate-900 dark:text-slate-100">[{ag.agentCode}] {ag.name}</span>
+                                <span className="text-[10px] text-slate-400 dark:text-slate-500 ml-2">({ag.peringkat || 'Agen'})</span>
                               </div>
-                              <span className="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-semibold">
+                              <span className="text-[10px] bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 px-1.5 py-0.5 rounded font-semibold">
                                 {ag.rawBranchName || 'Pilih'}
                               </span>
                             </button>
@@ -1471,7 +1471,7 @@ export default function AdminUsersPage() {
                       )}
                     </div>
                   )}
-                  <p className="text-[10px] text-amber-700 mt-1 leading-tight">
+                  <p className="text-[10px] text-amber-700 dark:text-amber-400 mt-1 leading-tight">
                     Pengguna ini hanya dapat melihat pohon agensinya sendiri dan seluruh downline di bawahnya.
                   </p>
                 </div>
@@ -1479,19 +1479,19 @@ export default function AdminUsersPage() {
 
               {/* DYNAMIC SCOPING: 3. Jika OFFICER_AGENT -> Cari Agen Pemilik */}
               {editRole === 'OFFICER_AGENT' && (
-                <div className="p-3 bg-orange-50/60 rounded-xl border border-orange-200">
-                  <label className="block text-xs font-bold text-orange-900 mb-1 flex items-center gap-1.5">
-                    <Users className="w-4 h-4 text-orange-700" />
+                <div className="p-3 bg-orange-50/60 dark:bg-orange-950/30 rounded-xl border border-orange-200 dark:border-orange-800">
+                  <label className="block text-xs font-bold text-orange-900 dark:text-orange-200 mb-1 flex items-center gap-1.5">
+                    <Users className="w-4 h-4 text-orange-700 dark:text-orange-400" />
                     Pilih Agen Pemilik / Atasan <span className="text-rose-500">*</span>
                   </label>
 
                   {selectedEditParentAgentDisplay ? (
-                    <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-orange-300">
+                    <div className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-slate-950 border border-orange-300 dark:border-orange-700">
                       <div>
-                        <span className="font-bold text-xs text-orange-950">
+                        <span className="font-bold text-xs text-orange-950 dark:text-orange-200">
                           [{selectedEditParentAgentDisplay.agentCode}] {selectedEditParentAgentDisplay.name}
                         </span>
-                        <div className="text-[10px] text-slate-500">
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">
                           {selectedEditParentAgentDisplay.peringkat || 'Agen Leader'} · {selectedEditParentAgentDisplay.rawBranchName || 'Cabang'}
                         </div>
                       </div>
@@ -1502,7 +1502,7 @@ export default function AdminUsersPage() {
                           setEditParentAgentId('');
                           setEditParentAgentSearchQuery('');
                         }}
-                        className="text-xs text-rose-600 font-bold hover:underline"
+                        className="text-xs text-rose-600 dark:text-rose-400 font-bold hover:underline cursor-pointer"
                       >
                         Ganti
                       </button>
@@ -1514,12 +1514,12 @@ export default function AdminUsersPage() {
                         placeholder="Ketik minimal 2 karakter (nama atau kode agen pemilik)..."
                         value={editParentAgentSearchQuery}
                         onChange={(e) => setEditParentAgentSearchQuery(e.target.value)}
-                        className="w-full text-xs bg-white border border-orange-300 rounded-lg px-3 py-2 pl-8 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full text-xs bg-white dark:bg-slate-950 border border-orange-300 dark:border-orange-700 rounded-lg px-3 py-2 pl-8 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                       />
-                      <Search className="w-3.5 h-3.5 text-orange-600 absolute left-2.5 top-2.5" />
+                      <Search className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400 absolute left-2.5 top-2.5" />
 
                       {editParentAgentSearchResults.length > 0 && (
-                        <div className="absolute z-20 top-full left-0 right-0 mt-1 bg-white border border-orange-300 rounded-lg shadow-xl max-h-48 overflow-y-auto divide-y divide-slate-100">
+                        <div className="absolute z-20 top-full left-0 right-0 mt-1 bg-white dark:bg-slate-900 border border-orange-300 dark:border-orange-700 rounded-lg shadow-xl max-h-48 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
                           {editParentAgentSearchResults.map((pag) => (
                             <button
                               key={pag.id}
@@ -1529,13 +1529,13 @@ export default function AdminUsersPage() {
                                 setSelectedEditParentAgentDisplay(pag);
                                 setEditParentAgentSearchResults([]);
                               }}
-                              className="w-full text-left p-2 hover:bg-orange-50 transition flex items-center justify-between text-xs"
+                              className="w-full text-left p-2 hover:bg-orange-50 dark:hover:bg-orange-950/40 transition flex items-center justify-between text-xs cursor-pointer"
                             >
                               <div>
-                                <span className="font-bold text-slate-900">[{pag.agentCode}] {pag.name}</span>
-                                <span className="text-[10px] text-slate-400 ml-2">({pag.peringkat || 'Leader'})</span>
+                                <span className="font-bold text-slate-900 dark:text-slate-100">[{pag.agentCode}] {pag.name}</span>
+                                <span className="text-[10px] text-slate-400 dark:text-slate-500 ml-2">({pag.peringkat || 'Leader'})</span>
                               </div>
-                              <span className="text-[10px] bg-orange-100 text-orange-800 px-1.5 py-0.5 rounded font-semibold">
+                              <span className="text-[10px] bg-orange-100 dark:bg-orange-950/60 text-orange-800 dark:text-orange-300 px-1.5 py-0.5 rounded font-semibold">
                                 {pag.rawBranchName || 'Pilih'}
                               </span>
                             </button>
@@ -1544,7 +1544,7 @@ export default function AdminUsersPage() {
                       )}
                     </div>
                   )}
-                  <p className="text-[10px] text-orange-700 mt-1 leading-tight">
+                  <p className="text-[10px] text-orange-700 dark:text-orange-400 mt-1 leading-tight">
                     Officer akan mewarisi hak akses dan lingkup data pohon yang identik dengan agen pemiliknya.
                   </p>
                 </div>
@@ -1552,7 +1552,7 @@ export default function AdminUsersPage() {
 
               {/* Password Baru (Opsional) */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Ubah Password (Opsional)
                 </label>
                 <div className="relative">
@@ -1561,36 +1561,36 @@ export default function AdminUsersPage() {
                     placeholder="Kosongkan jika tidak ingin mengubah password..."
                     value={editNewPassword}
                     onChange={(e) => setEditNewPassword(e.target.value)}
-                    className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 pl-9 pr-16 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full text-xs font-mono bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 pl-9 pr-16 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
-                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                  <Lock className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                   <button
                     type="button"
                     onClick={() => setShowEditPassword(!showEditPassword)}
-                    className="absolute right-2.5 top-2 text-[10px] font-bold text-slate-500 hover:text-slate-800 bg-slate-200 px-2 py-0.5 rounded"
+                    className="absolute right-2.5 top-2 text-[10px] font-bold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded cursor-pointer"
                   >
                     {showEditPassword ? 'Sembunyi' : 'Lihat'}
                   </button>
                 </div>
-                <p className="text-[10px] text-slate-400 mt-1">
+                <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">
                   Minimal 6 karakter jika ingin mereset password pengguna ini secara langsung.
                 </p>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsEditModalOpen(false)}
                   disabled={isEditSubmitting}
-                  className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition"
+                  className="px-4 py-2.5 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={isEditSubmitting}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-md transition"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-md transition cursor-pointer"
                 >
                   {isEditSubmitting ? (
                     <>
@@ -1613,42 +1613,42 @@ export default function AdminUsersPage() {
       {/* ── MODAL: RESET PASSWORD ─────────────────────────────────────────────── */}
       {isResetPasswordModalOpen && selectedUserForReset && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 border border-slate-100">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-md w-full p-6 border border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
-                <span className="p-2 rounded-xl bg-blue-50 text-blue-600">
+                <span className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
                   <KeyRound className="w-5 h-5" />
                 </span>
                 <div>
-                  <h3 className="font-bold text-slate-900 text-sm">Reset Password Pengguna</h3>
-                  <p className="text-[11px] text-slate-500">{selectedUserForReset.name} ({selectedUserForReset.email})</p>
+                  <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Reset Password Pengguna</h3>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">{selectedUserForReset.name} ({selectedUserForReset.email})</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsResetPasswordModalOpen(false)}
-                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-600"
+                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {modalError && (
-              <div className="mt-3 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+              <div className="mt-3 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
                 <span>{modalError}</span>
               </div>
             )}
 
             {modalSuccess && (
-              <div className="mt-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <div className="mt-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>{modalSuccess}</span>
               </div>
             )}
 
             <form onSubmit={handleResetPassword} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Password Baru (Min. 6 Karakter)
                 </label>
                 <input
@@ -1657,22 +1657,22 @@ export default function AdminUsersPage() {
                   placeholder="Masukkan password baru..."
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                  className="w-full text-xs font-mono bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsResetPasswordModalOpen(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting || !newPassword}
-                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-sm transition"
+                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-sm transition cursor-pointer"
                 >
                   {isSubmitting ? 'Menyimpan...' : 'Perbarui Password'}
                 </button>

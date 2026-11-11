@@ -88,7 +88,7 @@ export function HierarchyNodeCard({
 
     if (s === 'TIDAK AKTIF') {
       return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-200 text-slate-700 border border-slate-300">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
           <span className="w-2 h-2 rounded-full bg-slate-500" />
           Tidak Aktif
         </span>
@@ -96,7 +96,7 @@ export function HierarchyNodeCard({
     }
 
     return (
-      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
         {node.statusKeagenan}
       </span>
     );
@@ -106,12 +106,12 @@ export function HierarchyNodeCard({
     <div
       className={`rounded-xl border transition-all duration-150 shadow-sm ${
         node.uplineStatus === 'PENDING_UPLINE'
-          ? 'bg-amber-50/40 border-amber-300'
+          ? 'bg-amber-50/40 dark:bg-amber-950/30 border-amber-300 dark:border-amber-800/80'
           : node.uplineStatus === 'UNREGISTERED_IN_MASTER'
-          ? 'bg-rose-50/40 border-rose-300'
+          ? 'bg-rose-50/40 dark:bg-rose-950/30 border-rose-300 dark:border-rose-800/80'
           : level === 0
-          ? 'bg-white border-blue-300 ring-1 ring-blue-200'
-          : 'bg-white border-slate-200 hover:border-slate-300'
+          ? 'bg-white dark:bg-slate-900 border-blue-300 dark:border-blue-700 ring-1 ring-blue-200 dark:ring-blue-900/50'
+          : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
       }`}
     >
       <div className="p-4">
@@ -121,14 +121,14 @@ export function HierarchyNodeCard({
             {getStatusBadge()}
             {getStatusKeagenanBadge()}
             {node.peringkat && (
-              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
-                <Award className="w-3 h-3 text-slate-500" />
+              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">
+                <Award className="w-3 h-3 text-slate-500 dark:text-slate-400" />
                 {node.peringkat}
               </span>
             )}
             {node.rawBranchName && (
-              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
-                <Building className="w-3 h-3 text-slate-500" />
+              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">
+                <Building className="w-3 h-3 text-slate-500 dark:text-slate-400" />
                 {node.rawBranchName}
               </span>
             )}
@@ -139,17 +139,17 @@ export function HierarchyNodeCard({
               <button
                 type="button"
                 onClick={onToggleExpand}
-                className="flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 transition"
+                className="flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition"
                 title={isExpanded ? 'Tutup Cabang' : 'Buka Cabang'}
               >
                 {isExpanded ? (
                   <>
-                    <ChevronDown className="w-3.5 h-3.5 text-slate-600" />
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400" />
                     <span>Tutup</span>
                   </>
                 ) : (
                   <>
-                    <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400" />
                     <span>Buka ({node.children.length})</span>
                   </>
                 )}
@@ -160,7 +160,7 @@ export function HierarchyNodeCard({
               <button
                 type="button"
                 onClick={() => onSelectAgent(node.agentCode)}
-                className="flex items-center gap-1 text-[11px] font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-2 py-1 rounded transition"
+                className="flex items-center gap-1 text-[11px] font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/50 px-2 py-1 rounded transition"
                 title="Jadikan Root Hirarki"
               >
                 <span>Fokus</span>
@@ -175,10 +175,10 @@ export function HierarchyNodeCard({
           <div
             className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
               node.uplineStatus === 'PENDING_UPLINE'
-                ? 'bg-amber-100 text-amber-800'
+                ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300'
                 : node.uplineStatus === 'UNREGISTERED_IN_MASTER'
-                ? 'bg-rose-100 text-rose-800'
-                : 'bg-blue-100 text-blue-700'
+                ? 'bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300'
+                : 'bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300'
             }`}
           >
             <User className="w-5 h-5" />
@@ -186,28 +186,28 @@ export function HierarchyNodeCard({
 
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-sm font-bold text-slate-900 tracking-tight">
+              <span className="font-mono text-sm font-bold text-slate-900 dark:text-slate-100 tracking-tight">
                 {node.agentCode}
               </span>
-              <span className="text-slate-400">·</span>
-              <h3 className="text-sm font-semibold text-slate-900 truncate">
+              <span className="text-slate-400 dark:text-slate-600">·</span>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 truncate">
                 {node.name}
               </h3>
             </div>
 
             {/* Metrics Row */}
-            <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-100 text-xs">
+            <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-semibold block">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">
                   Status Keagenan
                 </span>
                 <span
                   className={`font-bold ${
                     node.statusKeagenan?.trim().toUpperCase() === 'CUT'
-                      ? 'text-rose-600'
+                      ? 'text-rose-600 dark:text-rose-400'
                       : node.statusKeagenan?.trim().toUpperCase() === 'AKTIF'
-                      ? 'text-emerald-700'
-                      : 'text-slate-800'
+                      ? 'text-emerald-700 dark:text-emerald-400'
+                      : 'text-slate-800 dark:text-slate-200'
                   }`}
                 >
                   {node.statusKeagenan || '-'}
@@ -215,28 +215,28 @@ export function HierarchyNodeCard({
               </div>
 
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-semibold block">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">
                   Total Produksi
                 </span>
-                <span className="font-bold text-slate-900">
+                <span className="font-bold text-slate-900 dark:text-slate-100">
                   {formatIDR(node.totalProduction)}
                 </span>
               </div>
 
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-semibold block">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">
                   Polis Aktif
                 </span>
-                <span className="font-bold text-slate-900">
+                <span className="font-bold text-slate-900 dark:text-slate-100">
                   {node.policyCount} polis
                 </span>
               </div>
 
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-semibold block">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block">
                   Total Downline
                 </span>
-                <span className="font-bold text-blue-600">
+                <span className="font-bold text-blue-600 dark:text-blue-400">
                   {node.downlinesCount} agen
                 </span>
               </div>

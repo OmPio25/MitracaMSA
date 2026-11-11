@@ -163,14 +163,14 @@ export default function HierarchyPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="p-2 rounded-lg bg-blue-100 text-blue-700">
+              <span className="p-2 rounded-lg bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300">
                 <GitFork className="w-5 h-5" />
               </span>
-              <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
                 Pohon Hirarki Agensi
               </h1>
             </div>
-            <p className="text-sm text-slate-600 mt-1">
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
               Visualisasi struktur upline-downline agensi, kalkulasi akumulasi produksi premi, dan pelacakan status self-healing real-time.
             </p>
           </div>
@@ -193,11 +193,11 @@ export default function HierarchyPage() {
 
       {/* Error Message */}
       {errorMessage && (
-        <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+        <div className="mb-6 p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-200 flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
           <div>
             <p className="text-sm font-bold">Gagal Memuat Hirarki</p>
-            <p className="text-xs text-rose-700 mt-0.5">{errorMessage}</p>
+            <p className="text-xs text-rose-700 dark:text-rose-300 mt-0.5">{errorMessage}</p>
           </div>
         </div>
       )}
@@ -205,22 +205,22 @@ export default function HierarchyPage() {
       {/* Content Area */}
       {!hasAppliedFilter && !isLoading ? (
         /* Responsive Empty State Placeholder */
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 text-center shadow-sm">
-          <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-4 border border-blue-100 shadow-inner">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 sm:p-12 text-center shadow-sm">
+          <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto mb-4 border border-blue-100 dark:border-blue-800 shadow-inner">
             <GitFork className="w-8 h-8" />
           </div>
-          <h3 className="text-lg font-bold text-slate-900">
+          <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
             Pohon Hirarki Belum Diterapkan
           </h3>
-          <p className="text-slate-600 text-sm max-w-xl mx-auto mt-2 leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-sm max-w-xl mx-auto mt-2 leading-relaxed">
             Untuk menjaga halaman tetap responsif dan menghindari beban berlebih pada browser terhadap{' '}
-            <span className="font-semibold text-slate-900">14.000+ data agen</span>, visualisasi pohon hirarki baru akan dimuat setelah Anda menentukan parameter dan menekan tombol{' '}
-            <span className="font-semibold text-blue-600">"Terapkan Filter"</span> di atas.
+            <span className="font-semibold text-slate-900 dark:text-slate-100">14.000+ data agen</span>, visualisasi pohon hirarki baru akan dimuat setelah Anda menentukan parameter dan menekan tombol{' '}
+            <span className="font-semibold text-blue-600 dark:text-blue-400">"Terapkan Filter"</span> di atas.
           </p>
 
           {/* Quick Action Shortcuts */}
-          <div className="mt-8 pt-8 border-t border-slate-100">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">
+          <div className="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
+            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">
               Atau Mulai Langsung Dengan Shortcut Cepat:
             </p>
 
@@ -234,16 +234,16 @@ export default function HierarchyPage() {
                     setAgentCode('DIR001');
                     fetchHierarchy('SPECIFIC', 'DIR001', branch);
                   }}
-                  className="p-3.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left transition group cursor-pointer"
+                  className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-slate-800 text-left transition group cursor-pointer"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
+                    <span className="font-mono text-xs font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded">
                       DIR001
                     </span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition" />
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 transition" />
                   </div>
-                  <p className="text-xs font-semibold text-slate-900 mt-2">Pohon Ahmad Dahlan</p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">3 node bertingkat (Director)</p>
+                  <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 mt-2">Pohon Ahmad Dahlan</p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">3 node bertingkat (Director)</p>
                 </button>
               )}
 
@@ -256,18 +256,18 @@ export default function HierarchyPage() {
                   setAgentCode(targetCode);
                   fetchHierarchy('SPECIFIC', targetCode, branch);
                 }}
-                className="p-3.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left transition group cursor-pointer"
+                className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-slate-800 text-left transition group cursor-pointer"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
+                  <span className="font-mono text-xs font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded">
                     {userSession?.agentCode || userSession?.parentAgentCode || '871300'}
                   </span>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition" />
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 transition" />
                 </div>
-                <p className="text-xs font-semibold text-slate-900 mt-2">
+                <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 mt-2">
                   {userSession?.agentName || 'Pohon Ekasurya Halim'}
                 </p>
-                <p className="text-[11px] text-slate-500 mt-0.5">Pohon downline berjenjang lengkap</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Pohon downline berjenjang lengkap</p>
               </button>
 
               {/* Shortcut 3: Cabang (Hanya untuk Superadmin/Admin/Audit atau Cabang yang bersangkutan) */}
@@ -281,18 +281,18 @@ export default function HierarchyPage() {
                     setBranch(targetBranch);
                     fetchHierarchy('ALL_ROOT', '', targetBranch);
                   }}
-                  className="p-3.5 rounded-xl border border-blue-200 bg-blue-50/30 hover:border-blue-400 hover:bg-blue-50/60 text-left transition group cursor-pointer"
+                  className="p-3.5 rounded-xl border border-blue-200 dark:border-blue-800/80 bg-blue-50/30 dark:bg-blue-950/30 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50/60 dark:hover:bg-blue-950/50 text-left transition group cursor-pointer"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-blue-700 bg-blue-100/70 px-2 py-0.5 rounded">
+                    <span className="font-mono text-xs font-bold text-blue-700 dark:text-blue-300 bg-blue-100/70 dark:bg-blue-900/60 px-2 py-0.5 rounded">
                       {userSession?.branchCode ? `CABANG [${userSession.branchCode}]` : 'JATINEGARA'}
                     </span>
                     <ArrowRight className="w-3.5 h-3.5 text-blue-500 group-hover:translate-x-0.5 transition" />
                   </div>
-                  <p className="text-xs font-semibold text-slate-900 mt-2">
+                  <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 mt-2">
                     Cabang {userSession?.branchName || 'Jatinegara'}
                   </p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">Semua root & downline lengkap</p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Semua root & downline lengkap</p>
                 </button>
               )}
 
@@ -304,17 +304,17 @@ export default function HierarchyPage() {
                     setMode('PROBLEMATIC');
                     fetchHierarchy('PROBLEMATIC', '', branch);
                   }}
-                  className="p-3.5 rounded-xl border border-amber-200 bg-amber-50/40 hover:bg-amber-50 hover:border-amber-400 text-left transition group cursor-pointer"
+                  className="p-3.5 rounded-xl border border-amber-200 dark:border-amber-800/80 bg-amber-50/40 dark:bg-amber-950/30 hover:bg-amber-50 dark:hover:bg-amber-950/50 hover:border-amber-400 text-left transition group cursor-pointer"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-amber-800 flex items-center gap-1">
-                      <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />
+                    <span className="text-xs font-bold text-amber-800 dark:text-amber-300 flex items-center gap-1">
+                      <ShieldAlert className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                       Pending & Unregistered
                     </span>
-                    <ArrowRight className="w-3.5 h-3.5 text-amber-600 group-hover:translate-x-0.5 transition" />
+                    <ArrowRight className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 group-hover:translate-x-0.5 transition" />
                   </div>
-                  <p className="text-xs font-semibold text-amber-900 mt-2">Agen Bermasalah</p>
-                  <p className="text-[11px] text-amber-800 mt-0.5">Self-healing & auto-provision</p>
+                  <p className="text-xs font-semibold text-amber-900 dark:text-amber-200 mt-2">Agen Bermasalah</p>
+                  <p className="text-[11px] text-amber-800 dark:text-amber-400 mt-0.5">Self-healing & auto-provision</p>
                 </button>
               )}
             </div>
@@ -324,16 +324,16 @@ export default function HierarchyPage() {
         /* Loaded Hierarchy with View Switcher & Export Toolbar */
         <div className="space-y-4">
           {/* Top Bar: View Switcher and Export Buttons */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
             {/* View Switcher Tabs: Tab 1 -> Tree View, Tab 2 -> Bagan Organisasi */}
-            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
+            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
               <button
                 type="button"
                 onClick={() => setViewType('TREE')}
                 className={`flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-bold transition cursor-pointer ${
                   viewType === 'TREE'
-                    ? 'bg-white text-blue-700 shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-400 shadow-sm'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <ListTree className="w-4 h-4" />
@@ -345,8 +345,8 @@ export default function HierarchyPage() {
                 onClick={() => setViewType('ORG_CHART')}
                 className={`flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-bold transition cursor-pointer ${
                   viewType === 'ORG_CHART'
-                    ? 'bg-white text-blue-700 shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-400 shadow-sm'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <Network className="w-4 h-4" />
@@ -356,23 +356,23 @@ export default function HierarchyPage() {
 
             {/* Export Toolbar Buttons */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs text-slate-400 font-semibold hidden md:inline">Ekspor:</span>
+              <span className="text-xs text-slate-400 dark:text-slate-500 font-semibold hidden md:inline">Ekspor:</span>
 
               <button
                 type="button"
                 onClick={handleExportXlsx}
                 disabled={isExportingXlsx}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 transition cursor-pointer disabled:opacity-50 shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 transition cursor-pointer disabled:opacity-50 shadow-xs"
                 title="Unduh seluruh struktur hirarki agen ke format Excel (.xlsx)"
               >
                 {isExportingXlsx ? (
                   <>
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-emerald-600" />
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-emerald-600 dark:text-emerald-400" />
                     <span>Mengunduh...</span>
                   </>
                 ) : (
                   <>
-                    <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
+                    <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                     <span>Export Excel (.xlsx)</span>
                   </>
                 )}
@@ -382,17 +382,17 @@ export default function HierarchyPage() {
                 type="button"
                 onClick={handleExportPdf}
                 disabled={isExportingPdf}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-300 transition cursor-pointer disabled:opacity-50 shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 dark:hover:bg-rose-900/60 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-800 transition cursor-pointer disabled:opacity-50 shadow-xs"
                 title="Cetak & simpan laporan hirarki agen ke format PDF (.pdf)"
               >
                 {isExportingPdf ? (
                   <>
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-rose-600" />
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-rose-600 dark:text-rose-400" />
                     <span>Membuat PDF...</span>
                   </>
                 ) : (
                   <>
-                    <FileText className="w-3.5 h-3.5 text-rose-600" />
+                    <FileText className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
                     <span>Export PDF (.pdf)</span>
                   </>
                 )}

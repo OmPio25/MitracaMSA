@@ -128,28 +128,28 @@ export function UploadZoneWithTemplates() {
     <div className="w-full max-w-5xl mx-auto space-y-8 p-6">
       {/* ── Section 1: Template Downloads ────────────────────────────────────── */}
       <div>
-        <h2 className="text-xl font-bold tracking-tight text-slate-900">
+        <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
           Format Upload Sesuai Data Sumber
         </h2>
-        <p className="text-sm text-slate-500 mt-1">
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           Unduh format file Excel dengan nama kolom fixed yang telah distandarisasi untuk sistem.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           {/* Card 1: DataAgent */}
-          <div className="border rounded-xl p-4 bg-white shadow-sm hover:shadow transition-shadow flex flex-col justify-between">
+          <div className="border border-slate-200 dark:border-slate-800 rounded-xl p-4 bg-white dark:bg-slate-900/90 shadow-sm hover:shadow transition-shadow flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 text-blue-600 font-semibold text-sm">
+              <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold text-sm">
                 <FileSpreadsheet className="h-5 w-5" />
                 <span>1. DataAgent.xlsx</span>
               </div>
-              <p className="text-xs text-slate-600 mt-2 line-clamp-2">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 line-clamp-2">
                 Header: KODEAGEN, NAMAAGEN, NAMACABANG, PROFID, STATUSKEAGENAN, KodeUpline, PERINGKAT.
               </p>
             </div>
             <button
               onClick={() => handleDownloadTemplate('DATA_AGENT')}
-              className="mt-4 inline-flex items-center justify-center gap-2 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 py-2 px-3 rounded-lg transition-colors"
+              className="mt-4 inline-flex items-center justify-center gap-2 text-xs font-medium text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 py-2 px-3 rounded-lg transition-colors cursor-pointer"
             >
               <Download className="h-4 w-4" />
               Download Template
@@ -157,19 +157,19 @@ export function UploadZoneWithTemplates() {
           </div>
 
           {/* Card 2: MasterProduksi */}
-          <div className="border rounded-xl p-4 bg-white shadow-sm hover:shadow transition-shadow flex flex-col justify-between">
+          <div className="border border-slate-200 dark:border-slate-800 rounded-xl p-4 bg-white dark:bg-slate-900/90 shadow-sm hover:shadow transition-shadow flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 text-emerald-600 font-semibold text-sm">
+              <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold text-sm">
                 <FileSpreadsheet className="h-5 w-5" />
                 <span>2. MasterProduksi.xlsx</span>
               </div>
-              <p className="text-xs text-slate-600 mt-2 line-clamp-2">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 line-clamp-2">
                 Header: Bulan, Policy No, Nilai Premi, TSI, Object Information 1..15, dll.
               </p>
             </div>
             <button
               onClick={() => handleDownloadTemplate('MASTER_PRODUKSI')}
-              className="mt-4 inline-flex items-center justify-center gap-2 text-xs font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 py-2 px-3 rounded-lg transition-colors"
+              className="mt-4 inline-flex items-center justify-center gap-2 text-xs font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 py-2 px-3 rounded-lg transition-colors cursor-pointer"
             >
               <Download className="h-4 w-4" />
               Download Template
@@ -177,19 +177,19 @@ export function UploadZoneWithTemplates() {
           </div>
 
           {/* Card 3: MasterClaim */}
-          <div className="border rounded-xl p-4 bg-white shadow-sm hover:shadow transition-shadow flex flex-col justify-between">
+          <div className="border border-slate-200 dark:border-slate-800 rounded-xl p-4 bg-white dark:bg-slate-900/90 shadow-sm hover:shadow transition-shadow flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 text-purple-600 font-semibold text-sm">
+              <div className="flex items-center gap-2 text-purple-600 dark:text-purple-400 font-semibold text-sm">
                 <FileSpreadsheet className="h-5 w-5" />
                 <span>3. MasterClaim.xlsx</span>
               </div>
-              <p className="text-xs text-slate-600 mt-2 line-clamp-2">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 line-clamp-2">
                 Header: Agent ID, Claim No, Policy No, Gross Claim, Date Of Settlement, dll.
               </p>
             </div>
             <button
               onClick={() => handleDownloadTemplate('MASTER_CLAIM')}
-              className="mt-4 inline-flex items-center justify-center gap-2 text-xs font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 py-2 px-3 rounded-lg transition-colors"
+              className="mt-4 inline-flex items-center justify-center gap-2 text-xs font-medium text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/60 py-2 px-3 rounded-lg transition-colors cursor-pointer"
             >
               <Download className="h-4 w-4" />
               Download Template
@@ -200,7 +200,7 @@ export function UploadZoneWithTemplates() {
 
       {/* ── Section 2: Drag & Drop Ingestion ─────────────────────────────────── */}
       <div>
-        <h3 className="text-base font-semibold text-slate-900 mb-2">
+        <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2">
           Upload File (Auto-Detect & Auto-Mapping Database)
         </h3>
         
@@ -208,26 +208,26 @@ export function UploadZoneWithTemplates() {
           {...getRootProps()}
           className={`border-2 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-colors ${
             isDragActive
-              ? 'border-blue-500 bg-blue-50/50'
-              : 'border-slate-300 hover:border-slate-400 bg-slate-50/50'
+              ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-950/40'
+              : 'border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 bg-slate-50/50 dark:bg-slate-900/40'
           } ${isUploading ? 'opacity-60 cursor-not-allowed' : ''}`}
         >
           <input {...getInputProps()} />
 
           {isUploading ? (
             <div className="flex flex-col items-center gap-4 w-full max-w-lg mx-auto py-2">
-              <Loader2 className="h-10 w-10 text-blue-600 animate-spin" />
+              <Loader2 className="h-10 w-10 text-blue-600 dark:text-blue-400 animate-spin" />
               <div className="w-full text-center space-y-3">
-                <p className="text-sm font-semibold text-slate-800">
+                <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
                   {progress && progress.processedRows > 0
                     ? `Memproses data: ${progress.processedRows.toLocaleString('id-ID')} baris...`
                     : 'Mempersiapkan data dan memuat validasi sistem...'}
                 </p>
 
                 {/* Live Progress Bar with Animated Pulse */}
-                <div className="w-full bg-slate-200 h-3 rounded-full overflow-hidden shadow-inner">
+                <div className="w-full bg-slate-200 dark:bg-slate-800 h-3 rounded-full overflow-hidden shadow-inner">
                   <div
-                    className="bg-blue-600 h-full rounded-full transition-all duration-300 ease-out"
+                    className="bg-blue-600 dark:bg-blue-500 h-full rounded-full transition-all duration-300 ease-out"
                     style={{
                       width: progress && progress.totalRows > 0
                         ? `${Math.max(5, Math.min(100, Math.round((progress.processedRows / progress.totalRows) * 100)))}%`
@@ -237,18 +237,18 @@ export function UploadZoneWithTemplates() {
                 </div>
 
                 {progress && progress.processedRows > 0 && (
-                  <div className="flex items-center justify-between text-xs text-slate-600 px-1 pt-1">
+                  <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 px-1 pt-1">
                     <span className="flex items-center gap-1">
                       <span className="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-                      Sukses: <strong className="text-emerald-700 font-semibold">{progress.successRows.toLocaleString('id-ID')}</strong>
+                      Sukses: <strong className="text-emerald-700 dark:text-emerald-400 font-semibold">{progress.successRows.toLocaleString('id-ID')}</strong>
                     </span>
                     {progress.skippedRows > 0 && (
                       <span className="flex items-center gap-1">
                         <span className="inline-block w-2 h-2 rounded-full bg-amber-500"></span>
-                        Duplikat: <strong className="text-amber-700 font-semibold">{progress.skippedRows.toLocaleString('id-ID')}</strong>
+                        Duplikat: <strong className="text-amber-700 dark:text-amber-400 font-semibold">{progress.skippedRows.toLocaleString('id-ID')}</strong>
                       </span>
                     )}
-                    <span className="font-semibold text-blue-700">
+                    <span className="font-semibold text-blue-700 dark:text-blue-400">
                       {progress.processedRows.toLocaleString('id-ID')} baris
                     </span>
                   </div>
@@ -257,14 +257,14 @@ export function UploadZoneWithTemplates() {
             </div>
           ) : (
             <div className="flex flex-col items-center gap-3">
-              <div className="p-3 bg-white rounded-full shadow-sm border">
-                <UploadCloud className="h-8 w-8 text-blue-600" />
+              <div className="p-3 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700">
+                <UploadCloud className="h-8 w-8 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-slate-800">
+                <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
                   Tarik & lepas file Excel di sini, atau klik untuk memilih
                 </p>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Sistem otomatis mendeteksi apakah file adalah DataAgent, MasterProduksi, atau MasterClaim.
                 </p>
               </div>
@@ -275,8 +275,8 @@ export function UploadZoneWithTemplates() {
 
       {/* ── Section 3: Result & Contextual Feedback ──────────────────────────── */}
       {errorMessage && (
-        <div className="p-4 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3 text-red-800 text-sm">
-          <XCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
+        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-900/60 flex items-start gap-3 text-red-800 dark:text-red-300 text-sm">
+          <XCircle className="h-5 w-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
           <div>
             <span className="font-semibold">Upload Ditolak:</span> {errorMessage}
           </div>
@@ -284,16 +284,16 @@ export function UploadZoneWithTemplates() {
       )}
 
       {result && (
-        <div className="border rounded-xl p-5 bg-white shadow-sm space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b">
+        <div className="border border-slate-200 dark:border-slate-800 rounded-xl p-5 bg-white dark:bg-slate-900/90 shadow-sm space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-emerald-600" />
-              <span className="font-semibold text-slate-800">
+              <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+              <span className="font-semibold text-slate-800 dark:text-slate-200">
                 Auto-Mapping Berhasil: {result.detectedType}
               </span>
             </div>
             <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${
-              result.status === 'COMPLETED' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+              result.status === 'COMPLETED' ? 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60' : 'bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60'
             }`}>
               Status: {result.status}
             </span>
@@ -301,22 +301,22 @@ export function UploadZoneWithTemplates() {
 
           {/* Smart Dynamic Mapping Highlights */}
           {result.smartMapping && (
-            <div className="p-3 bg-blue-50/70 border border-blue-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-blue-900">
+            <div className="p-3 bg-blue-50/70 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900/60 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-blue-900 dark:text-blue-200">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
                 <span>
                   <strong>Smart Dynamic Mapping:</strong> {result.smartMapping.mappedCount} kolom berhasil dipetakan secara otomatis.
                 </span>
               </div>
-              <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-blue-800">
+              <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-blue-800 dark:text-blue-300">
                 {result.smartMapping.fallbackCount > 0 && (
-                  <span className="bg-white px-2 py-0.5 rounded border border-blue-200 font-semibold">
+                  <span className="bg-white dark:bg-slate-900 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800 font-semibold">
                     Fallback Periode Aktif
                   </span>
                 )}
                 {result.smartMapping.unmappedCount > 0 && (
                   <span
-                    className="bg-white px-2 py-0.5 rounded border border-blue-200 font-semibold"
+                    className="bg-white dark:bg-slate-900 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800 font-semibold"
                     title={`Kolom ekstra tersimpan ke metadata: ${result.smartMapping.unmappedColumns.join(', ')}`}
                   >
                     +{result.smartMapping.unmappedCount} Kolom Ekstra Diamankan di JSONB
@@ -327,23 +327,23 @@ export function UploadZoneWithTemplates() {
           )}
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div className="bg-slate-50 p-3 rounded-lg border">
-              <div className="text-xs text-slate-500">Total Baris</div>
-              <div className="text-lg font-bold text-slate-800">{result.totalRows}</div>
+            <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
+              <div className="text-xs text-slate-500 dark:text-slate-400">Total Baris</div>
+              <div className="text-lg font-bold text-slate-800 dark:text-slate-100">{result.totalRows}</div>
             </div>
-            <div className="bg-emerald-50 p-3 rounded-lg border border-emerald-100">
-              <div className="text-xs text-emerald-600">Berhasil Utuh</div>
-              <div className="text-lg font-bold text-emerald-700">{result.successRows}</div>
+            <div className="bg-emerald-50 dark:bg-emerald-950/40 p-3 rounded-lg border border-emerald-100 dark:border-emerald-900/50">
+              <div className="text-xs text-emerald-600 dark:text-emerald-400">Berhasil Utuh</div>
+              <div className="text-lg font-bold text-emerald-700 dark:text-emerald-300">{result.successRows}</div>
             </div>
-            <div className="bg-amber-50 p-3 rounded-lg border border-amber-100">
-              <div className="text-xs text-amber-600">
+            <div className="bg-amber-50 dark:bg-amber-950/40 p-3 rounded-lg border border-amber-100 dark:border-amber-900/50">
+              <div className="text-xs text-amber-600 dark:text-amber-400">
                 {result.detectedType === 'DATA_AGENT' ? 'Pending Upline' : 'Auto-Provision Agent'}
               </div>
-              <div className="text-lg font-bold text-amber-700">{result.warningRows}</div>
+              <div className="text-lg font-bold text-amber-700 dark:text-amber-300">{result.warningRows}</div>
             </div>
-            <div className="bg-red-50 p-3 rounded-lg border border-red-100">
-              <div className="text-xs text-red-600">Gagal Validasi</div>
-              <div className="text-lg font-bold text-red-700">{result.failedRows}</div>
+            <div className="bg-red-50 dark:bg-red-950/40 p-3 rounded-lg border border-red-100 dark:border-red-900/50">
+              <div className="text-xs text-red-600 dark:text-red-400">Gagal Validasi</div>
+              <div className="text-lg font-bold text-red-700 dark:text-red-300">{result.failedRows}</div>
             </div>
           </div>
 

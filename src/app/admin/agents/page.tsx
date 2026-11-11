@@ -520,14 +520,14 @@ export default function MasterAgentsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-blue-100/80 text-blue-700">
+            <div className="p-2.5 rounded-xl bg-blue-100/80 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300">
               <UserCheck className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+              <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
                 Master Agen
               </h1>
-              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
                 Kelola profil keagenan, mutasi upline, validasi struktur pohon hirarki, dan pemeliharaan status agen.
               </p>
             </div>
@@ -547,14 +547,14 @@ export default function MasterAgentsPage() {
 
       {/* ── ALERT MESSAGES ─────────────────────────────────────────────────── */}
       {successMessage && (
-        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm flex items-center justify-between shadow-xs animate-in fade-in duration-200">
+        <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs sm:text-sm flex items-center justify-between shadow-xs animate-in fade-in duration-200">
           <div className="flex items-center gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span>{successMessage}</span>
           </div>
           <button
             onClick={() => setSuccessMessage(null)}
-            className="text-emerald-500 hover:text-emerald-700 p-1"
+            className="text-emerald-500 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-200 p-1"
           >
             <X className="w-4 h-4" />
           </button>
@@ -562,14 +562,14 @@ export default function MasterAgentsPage() {
       )}
 
       {errorMessage && (
-        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm flex items-center justify-between shadow-xs animate-in fade-in duration-200">
+        <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-200 text-xs sm:text-sm flex items-center justify-between shadow-xs animate-in fade-in duration-200">
           <div className="flex items-center gap-2.5">
-            <XCircle className="w-4 h-4 text-rose-600 shrink-0" />
+            <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
             <span>{errorMessage}</span>
           </div>
           <button
             onClick={() => setErrorMessage(null)}
-            className="text-rose-500 hover:text-rose-700 p-1"
+            className="text-rose-500 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-200 p-1"
           >
             <X className="w-4 h-4" />
           </button>
@@ -579,46 +579,46 @@ export default function MasterAgentsPage() {
       {/* ── 4 KPI CARDS ───────────────────────────────────────────────────── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Card 1: Total Agen */}
-        <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-between">
+        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-center justify-between">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               Total Master Agen
             </p>
-            <p className="text-xl sm:text-2xl font-black text-slate-900 mt-1">
+            <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 mt-1">
               {stats.totalAgents.toLocaleString('id-ID')}
             </p>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
             <Users className="w-5 h-5" />
           </div>
         </div>
 
         {/* Card 2: Status Keagenan (3 Info: Aktif, Non Aktif, Cut) */}
-        <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-1.5 mb-2">
-            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-1.5 mb-2">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               Status Keagenan
             </p>
-            <div className="w-5 h-5 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <div className="w-5 h-5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
               <CheckCircle2 className="w-3.5 h-3.5" />
             </div>
           </div>
           <div className="grid grid-cols-3 gap-1 text-center">
-            <div className="p-1 rounded-xl bg-emerald-50/70 border border-emerald-100/90">
-              <span className="text-[9px] font-bold text-emerald-700 block uppercase truncate">Aktif</span>
-              <span className="text-sm sm:text-base font-black text-emerald-800">
+            <div className="p-1 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-100/90 dark:border-emerald-900/40">
+              <span className="text-[9px] font-bold text-emerald-700 dark:text-emerald-400 block uppercase truncate">Aktif</span>
+              <span className="text-sm sm:text-base font-black text-emerald-800 dark:text-emerald-300">
                 {(stats.activeCount || 0).toLocaleString('id-ID')}
               </span>
             </div>
-            <div className="p-1 rounded-xl bg-slate-50 border border-slate-200/90">
-              <span className="text-[9px] font-bold text-slate-500 block uppercase truncate">Non Aktif</span>
-              <span className="text-sm sm:text-base font-black text-slate-700">
+            <div className="p-1 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700">
+              <span className="text-[9px] font-bold text-slate-500 dark:text-slate-400 block uppercase truncate">Non Aktif</span>
+              <span className="text-sm sm:text-base font-black text-slate-700 dark:text-slate-200">
                 {(stats.inactiveCount || 0).toLocaleString('id-ID')}
               </span>
             </div>
-            <div className="p-1 rounded-xl bg-rose-50/70 border border-rose-100/90">
-              <span className="text-[9px] font-bold text-rose-700 block uppercase truncate">Cut</span>
-              <span className="text-sm sm:text-base font-black text-rose-800">
+            <div className="p-1 rounded-xl bg-rose-50/70 dark:bg-rose-950/40 border border-rose-100/90 dark:border-rose-900/40">
+              <span className="text-[9px] font-bold text-rose-700 dark:text-rose-400 block uppercase truncate">Cut</span>
+              <span className="text-sm sm:text-base font-black text-rose-800 dark:text-rose-300">
                 {(stats.cutCount || 0).toLocaleString('id-ID')}
               </span>
             </div>
@@ -626,17 +626,17 @@ export default function MasterAgentsPage() {
         </div>
 
         {/* Card 3: Placeholder Agents */}
-        <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-between">
+        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-center justify-between">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               Agen Placeholder
             </p>
-            <p className="text-xl sm:text-2xl font-black text-amber-600 mt-1">
+            <p className="text-xl sm:text-2xl font-black text-amber-600 dark:text-amber-400 mt-1">
               {stats.placeholderAgents.toLocaleString('id-ID')}
             </p>
-            <p className="text-[10px] text-amber-600/80 mt-0.5">Auto-provisioned</p>
+            <p className="text-[10px] text-amber-600/80 dark:text-amber-400/80 mt-0.5">Auto-provisioned</p>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
             <AlertCircle className="w-5 h-5" />
           </div>
         </div>
@@ -644,49 +644,49 @@ export default function MasterAgentsPage() {
         {/* Card 4: Pending Upline */}
         <div
           onClick={handleOpenPendingUplineModal}
-          className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-between hover:border-purple-300 hover:shadow-md cursor-pointer transition group"
+          className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-center justify-between hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-md cursor-pointer transition group"
           title="Klik untuk melihat rincian agen yang pending upline"
         >
           <div>
             <div className="flex items-center gap-1.5">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-purple-600 transition">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">
                 Pending Upline
               </p>
-              <span className="text-[9px] font-bold px-1.5 py-0.5 bg-purple-100 text-purple-700 rounded-md">
+              <span className="text-[9px] font-bold px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 rounded-md">
                 Lihat Detail
               </span>
             </div>
-            <p className="text-xl sm:text-2xl font-black text-purple-600 mt-1">
+            <p className="text-xl sm:text-2xl font-black text-purple-600 dark:text-purple-400 mt-1">
               {stats.pendingUplineAgents.toLocaleString('id-ID')}
             </p>
-            <p className="text-[10px] text-purple-600/80 mt-0.5 flex items-center gap-1">
+            <p className="text-[10px] text-purple-600/80 dark:text-purple-400/80 mt-0.5 flex items-center gap-1">
               <span>Buka daftar agen</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
             </p>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition flex items-center justify-center">
             <GitFork className="w-5 h-5" />
           </div>
         </div>
       </div>
 
       {/* ── FILTER & SEARCH BAR ────────────────────────────────────────────── */}
-      <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
+      <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {/* Search Input */}
           <div className="lg:col-span-2 relative">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Cari Kode Agen, Nama, PROF ID, Upline..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-8 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+              className="w-full pl-9 pr-8 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -701,7 +701,7 @@ export default function MasterAgentsPage() {
                 setBranchFilter(e.target.value);
                 setPage(1);
               }}
-              className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+              className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
             >
               <option value="ALL">Semua Cabang</option>
               {branches.map((b) => (
@@ -720,7 +720,7 @@ export default function MasterAgentsPage() {
                 setStatusFilter(e.target.value);
                 setPage(1);
               }}
-              className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+              className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
             >
               <option value="ALL">Semua Status Keagenan</option>
               <option value="AKTIF">Aktif</option>
@@ -737,7 +737,7 @@ export default function MasterAgentsPage() {
                 setUplineStatusFilter(e.target.value);
                 setPage(1);
               }}
-              className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+              className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
             >
               <option value="ALL">Semua Status Pohon</option>
               <option value="LINKED">LINKED (Terhubung)</option>
@@ -748,9 +748,9 @@ export default function MasterAgentsPage() {
         </div>
 
         {/* Secondary Filter & Reset */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
+        <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-3">
-            <span className="font-semibold text-slate-600">Filter Tambahan:</span>
+            <span className="font-semibold text-slate-600 dark:text-slate-400">Filter Tambahan:</span>
             <label className="flex items-center gap-1.5 cursor-pointer">
               <input
                 type="radio"
@@ -775,7 +775,7 @@ export default function MasterAgentsPage() {
                 }}
                 className="w-3.5 h-3.5 text-blue-600"
               />
-              <span className="text-amber-700 font-medium">Hanya Placeholder</span>
+              <span className="text-amber-700 dark:text-amber-400 font-medium">Hanya Placeholder</span>
             </label>
             <label className="flex items-center gap-1.5 cursor-pointer">
               <input
@@ -802,7 +802,7 @@ export default function MasterAgentsPage() {
               setPlaceholderFilter('ALL');
               setPage(1);
             }}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
           >
             <RefreshCw className="w-3 h-3" />
             <span>Reset Filter</span>
@@ -811,11 +811,11 @@ export default function MasterAgentsPage() {
       </div>
 
       {/* ── DATA TABLE ────────────────────────────────────────────────────── */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-slate-50/80 border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider text-[10px]">
+              <tr className="bg-slate-50/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider text-[10px]">
                 <th className="py-3 px-4">Kode Agen</th>
                 <th className="py-3 px-4">Nama Agen & Profile ID</th>
                 <th className="py-3 px-4">Peringkat</th>
@@ -826,10 +826,10 @@ export default function MasterAgentsPage() {
                 <th className="py-3 px-4 text-center">Aksi</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
               {isLoading ? (
                 <tr>
-                  <td colSpan={8} className="py-12 text-center text-slate-400">
+                  <td colSpan={8} className="py-12 text-center text-slate-400 dark:text-slate-500">
                     <div className="flex flex-col items-center justify-center gap-2">
                       <RefreshCw className="w-6 h-6 animate-spin text-blue-600" />
                       <span>Memuat data master agen...</span>
@@ -838,11 +838,11 @@ export default function MasterAgentsPage() {
                 </tr>
               ) : agents.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-12 text-center text-slate-400">
+                  <td colSpan={8} className="py-12 text-center text-slate-400 dark:text-slate-500">
                     <div className="flex flex-col items-center justify-center gap-2">
-                      <UserCheck className="w-8 h-8 text-slate-300" />
-                      <span className="font-medium text-slate-600">Tidak ada agen yang sesuai filter</span>
-                      <span className="text-[11px] text-slate-400">
+                      <UserCheck className="w-8 h-8 text-slate-300 dark:text-slate-600" />
+                      <span className="font-medium text-slate-600 dark:text-slate-300">Tidak ada agen yang sesuai filter</span>
+                      <span className="text-[11px] text-slate-400 dark:text-slate-500">
                         Coba sesuaikan kata kunci pencarian atau reset filter di atas.
                       </span>
                     </div>
@@ -852,15 +852,15 @@ export default function MasterAgentsPage() {
                 agents.map((agent) => (
                   <tr
                     key={agent.id}
-                    className="hover:bg-slate-50/60 transition group"
+                    className="hover:bg-slate-50/60 dark:hover:bg-slate-800/50 transition group"
                   >
                     {/* Kode Agen */}
-                    <td className="py-3 px-4 font-mono font-bold text-slate-900">
+                    <td className="py-3 px-4 font-mono font-bold text-slate-900 dark:text-slate-100">
                       <div className="flex items-center gap-1.5">
                         <span>{agent.agentCode}</span>
                         {agent.isPlaceholder && (
                           <span
-                            className="px-1.5 py-0.5 rounded text-[9px] bg-amber-100 text-amber-800 font-sans font-semibold"
+                            className="px-1.5 py-0.5 rounded text-[9px] bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 font-sans font-semibold"
                             title="Auto-provisioned dari produksi/klaim"
                           >
                             PH
@@ -871,9 +871,9 @@ export default function MasterAgentsPage() {
 
                     {/* Nama Agen & Profile ID */}
                     <td className="py-3 px-4">
-                      <div className="font-semibold text-slate-800">{agent.name}</div>
+                      <div className="font-semibold text-slate-800 dark:text-slate-200">{agent.name}</div>
                       {agent.profId && (
-                        <div className="text-[10px] text-slate-400 font-mono">
+                        <div className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
                           Profile ID: {agent.profId}
                         </div>
                       )}
@@ -881,7 +881,7 @@ export default function MasterAgentsPage() {
 
                     {/* Peringkat */}
                     <td className="py-3 px-4">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                         <Award className="w-3 h-3 text-amber-500" />
                         <span>{agent.peringkat || 'Partner'}</span>
                       </span>
@@ -889,8 +889,8 @@ export default function MasterAgentsPage() {
 
                     {/* Cabang */}
                     <td className="py-3 px-4">
-                      <div className="flex items-center gap-1.5 text-slate-700 font-medium">
-                        <Building2 className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <div className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300 font-medium">
+                        <Building2 className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
                         <span>{agent.branchName || agent.rawBranchName || '-'}</span>
                       </div>
                     </td>
@@ -898,32 +898,32 @@ export default function MasterAgentsPage() {
                     {/* Upline Langsung */}
                     <td className="py-3 px-4">
                       {agent.uplineAgentCode ? (
-                        <div className="text-slate-800">
+                        <div className="text-slate-800 dark:text-slate-200">
                           <span className="font-mono font-bold text-[11px]">
                             {agent.uplineAgentCode}
                           </span>
                           {agent.uplineName && (
-                            <span className="text-[10px] text-slate-400 block truncate max-w-[140px]">
+                            <span className="text-[10px] text-slate-400 dark:text-slate-500 block truncate max-w-[140px]">
                               {agent.uplineName}
                             </span>
                           )}
                         </div>
                       ) : (
-                        <span className="text-slate-400 italic text-[11px]">- ROOT -</span>
+                        <span className="text-slate-400 dark:text-slate-500 italic text-[11px]">- ROOT -</span>
                       )}
                     </td>
 
                     {/* Status Pohon */}
                     <td className="py-3 px-4">
                       {agent.uplineStatus === 'LINKED' && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                           <span>LINKED</span>
                         </span>
                       )}
                       {agent.uplineStatus === 'PENDING_UPLINE' && (
                         <span
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300"
                           title="Menunggu upline terdaftar di master"
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
@@ -931,7 +931,7 @@ export default function MasterAgentsPage() {
                         </span>
                       )}
                       {agent.uplineStatus === 'ROOT' && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300">
                           <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                           <span>ROOT</span>
                         </span>
@@ -949,14 +949,14 @@ export default function MasterAgentsPage() {
                         <button
                           onClick={() => handleOpenDetailModal(agent)}
                           title="Inspeksi Detail & Downline"
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition"
+                          className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/60 transition"
                         >
                           <Eye className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleOpenEditModal(agent)}
                           title="Edit Profil & Mutasi Upline"
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-amber-600 hover:bg-amber-50 transition"
+                          className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/60 transition"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
@@ -967,7 +967,7 @@ export default function MasterAgentsPage() {
                               setIsDeactivateModalOpen(true);
                             }}
                             title="Ubah Status ke Non Aktif"
-                            className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition"
+                            className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/60 transition"
                           >
                             <Power className="w-3.5 h-3.5" />
                           </button>
@@ -975,7 +975,7 @@ export default function MasterAgentsPage() {
                           <button
                             onClick={() => handleToggleAgentStatus(agent, 'Aktif')}
                             title="Aktifkan Kembali Agen"
-                            className="p-1.5 rounded-lg text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition"
+                            className="p-1.5 rounded-lg text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 transition"
                           >
                             <Power className="w-3.5 h-3.5" />
                           </button>
@@ -990,34 +990,34 @@ export default function MasterAgentsPage() {
         </div>
 
         {/* ── PAGINATION CONTROLS ───────────────────────────────────────────── */}
-        <div className="p-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+        <div className="p-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
           <div>
             Menampilkan{' '}
-            <span className="font-bold text-slate-800">
+            <span className="font-bold text-slate-800 dark:text-slate-200">
               {agents.length > 0 ? (page - 1) * limit + 1 : 0}
             </span>{' '}
             -{' '}
-            <span className="font-bold text-slate-800">
+            <span className="font-bold text-slate-800 dark:text-slate-200">
               {Math.min(page * limit, totalCount)}
             </span>{' '}
-            dari <span className="font-bold text-slate-800">{totalCount}</span> agen
+            dari <span className="font-bold text-slate-800 dark:text-slate-200">{totalCount}</span> agen
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page <= 1 || isLoading}
-              className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+              className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="font-semibold text-slate-700 px-2">
+            <span className="font-semibold text-slate-700 dark:text-slate-300 px-2">
               Halaman {page} dari {totalPages}
             </span>
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page >= totalPages || isLoading}
-              className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+              className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -1028,17 +1028,17 @@ export default function MasterAgentsPage() {
       {/* ── MODAL: TAMBAH / EDIT AGEN ───────────────────────────────────────── */}
       {isFormModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-xl w-full border border-slate-200 shadow-2xl p-6 space-y-5 my-8">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-xl w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-5 my-8">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
+                <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400">
                   <UserCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base text-slate-900">
+                  <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                     {formMode === 'CREATE' ? 'Tambah Agen Baru' : `Edit Agen: ${selectedAgent?.agentCode}`}
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     {formMode === 'CREATE'
                       ? 'Lengkapi data profil keagenan dan penempatan upline.'
                       : 'Perbarui profil agen, status keagenan, atau lakukan mutasi upline.'}
@@ -1047,7 +1047,7 @@ export default function MasterAgentsPage() {
               </div>
               <button
                 onClick={() => setIsFormModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-100"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1057,7 +1057,7 @@ export default function MasterAgentsPage() {
               {/* Row 1: Kode Agen & Nama */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                     Kode Agen <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -1069,12 +1069,12 @@ export default function MasterAgentsPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, agentCode: e.target.value.toUpperCase() })
                     }
-                    className="w-full px-3 py-2 text-xs font-mono font-bold bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 disabled:opacity-60 disabled:cursor-not-allowed uppercase"
+                    className="w-full px-3 py-2 text-xs font-mono font-bold bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 disabled:opacity-60 disabled:cursor-not-allowed uppercase"
                   />
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                     Nama Lengkap Agen <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -1083,7 +1083,7 @@ export default function MasterAgentsPage() {
                     placeholder="Nama lengkap sesuai KTP / AAJI"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
                 </div>
               </div>
@@ -1091,7 +1091,7 @@ export default function MasterAgentsPage() {
               {/* Row 2: Profile ID & Cabang */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                     Profile ID
                   </label>
                   <input
@@ -1099,22 +1099,22 @@ export default function MasterAgentsPage() {
                     placeholder="Contoh: M8BW00001"
                     value={formData.profId}
                     onChange={(e) => setFormData({ ...formData, profId: e.target.value })}
-                    className="w-full px-3 py-2 text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full px-3 py-2 text-xs font-mono bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                     Kantor Cabang Resmi
                   </label>
                   <select
                     value={formData.branchId}
                     onChange={(e) => setFormData({ ...formData, branchId: e.target.value })}
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   >
                     <option value="">-- Pilih Cabang --</option>
                     {branches.map((b) => (
-                      <option key={b.id} value={b.id}>
+                      <option key={b.id} value={b.id} className="dark:bg-slate-900">
                         {b.name} ({b.code})
                       </option>
                     ))}
@@ -1125,16 +1125,16 @@ export default function MasterAgentsPage() {
               {/* Row 3: Peringkat & Status Keagenan */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                     Peringkat / Jenjang Karir
                   </label>
                   <select
                     value={formData.peringkat}
                     onChange={(e) => setFormData({ ...formData, peringkat: e.target.value })}
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-semibold"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-semibold"
                   >
                     {RANK_OPTIONS.map((r) => (
-                      <option key={r} value={r}>
+                      <option key={r} value={r} className="dark:bg-slate-900">
                         {r}
                       </option>
                     ))}
@@ -1142,16 +1142,16 @@ export default function MasterAgentsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                     Status Keagenan
                   </label>
                   <select
                     value={formData.statusKeagenan}
                     onChange={(e) => setFormData({ ...formData, statusKeagenan: e.target.value })}
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-bold"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-bold"
                   >
                     {STATUS_KEAGENAN_OPTIONS.map((st) => (
-                      <option key={st} value={st}>
+                      <option key={st} value={st} className="dark:bg-slate-900">
                         {st}
                       </option>
                     ))}
@@ -1160,13 +1160,13 @@ export default function MasterAgentsPage() {
               </div>
 
               {/* Row 4: Upline Selector & Picker */}
-              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+              <div className="p-3.5 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                    <GitFork className="w-3.5 h-3.5 text-blue-600" />
+                  <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                    <GitFork className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                     <span>Penempatan Upline (Silsilah Pohon)</span>
                   </label>
-                  <div className="flex items-center gap-3 text-xs">
+                  <div className="flex items-center gap-3 text-xs text-slate-700 dark:text-slate-300">
                     <label className="flex items-center gap-1 cursor-pointer">
                       <input
                         type="radio"
@@ -1188,7 +1188,7 @@ export default function MasterAgentsPage() {
                         onChange={() => setFormData({ ...formData, uplineMode: 'SELECT' })}
                         className="text-blue-600"
                       />
-                      <span className="font-bold text-blue-700">Pilih Upline</span>
+                      <span className="font-bold text-blue-700 dark:text-blue-400">Pilih Upline</span>
                     </label>
                   </div>
                 </div>
@@ -1196,12 +1196,12 @@ export default function MasterAgentsPage() {
                 {formData.uplineMode === 'SELECT' && (
                   <div className="space-y-2">
                     {selectedUplineObj ? (
-                      <div className="flex items-center justify-between p-2.5 bg-white border border-blue-200 rounded-xl text-xs">
+                      <div className="flex items-center justify-between p-2.5 bg-white dark:bg-slate-900 border border-blue-200 dark:border-blue-900/50 rounded-xl text-xs">
                         <div className="flex items-center gap-2">
-                          <span className="font-mono font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
+                          <span className="font-mono font-bold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded">
                             {selectedUplineObj.agentCode}
                           </span>
-                          <span className="font-semibold text-slate-800">
+                          <span className="font-semibold text-slate-800 dark:text-slate-200">
                             {selectedUplineObj.name}
                           </span>
                           {selectedUplineObj.peringkat && (
@@ -1217,7 +1217,7 @@ export default function MasterAgentsPage() {
                             setFormData({ ...formData, uplineAgentCode: '' });
                             setUplineSearchQuery('');
                           }}
-                          className="text-slate-400 hover:text-rose-600 p-1"
+                          className="text-slate-400 hover:text-rose-600 p-1 cursor-pointer"
                         >
                           <X className="w-4 h-4" />
                         </button>
@@ -1232,7 +1232,7 @@ export default function MasterAgentsPage() {
                             setUplineSearchQuery(e.target.value);
                             setFormData({ ...formData, uplineAgentCode: e.target.value.toUpperCase() });
                           }}
-                          className="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                          className="w-full px-3 py-2 text-xs bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                         />
                         {isSearchingUpline && (
                           <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px]">
@@ -1242,7 +1242,7 @@ export default function MasterAgentsPage() {
 
                         {/* Autocomplete Dropdown */}
                         {isUplineDropdownOpen && uplineSearchResults.length > 0 && (
-                          <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-48 overflow-y-auto divide-y divide-slate-100">
+                          <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 max-h-48 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
                             {uplineSearchResults.map((up) => (
                               <div
                                 key={up.id}
@@ -1251,13 +1251,13 @@ export default function MasterAgentsPage() {
                                   setFormData({ ...formData, uplineAgentCode: up.agentCode });
                                   setIsUplineDropdownOpen(false);
                                 }}
-                                className="p-2.5 hover:bg-blue-50 cursor-pointer flex items-center justify-between text-xs transition"
+                                className="p-2.5 hover:bg-blue-50 dark:hover:bg-blue-950/40 cursor-pointer flex items-center justify-between text-xs transition"
                               >
                                 <div>
-                                  <span className="font-mono font-bold text-blue-700">
+                                  <span className="font-mono font-bold text-blue-700 dark:text-blue-400">
                                     {up.agentCode}
                                   </span>{' '}
-                                  - <span className="font-semibold text-slate-800">{up.name}</span>
+                                  - <span className="font-semibold text-slate-800 dark:text-slate-200">{up.name}</span>
                                 </div>
                                 <span className="text-[10px] text-slate-400">
                                   {up.peringkat || 'AGENT'}
@@ -1270,7 +1270,7 @@ export default function MasterAgentsPage() {
                     )}
 
                     {formMode === 'EDIT' && (
-                      <p className="text-[10px] text-amber-700 flex items-center gap-1">
+                      <p className="text-[10px] text-amber-700 dark:text-amber-400 flex items-center gap-1">
                         <AlertCircle className="w-3 h-3 shrink-0" />
                         <span>
                           Perhatian: Mengubah upline akan otomatis menghitung ulang jalur hirarki (materialized path) seluruh downline di bawahnya.
@@ -1284,7 +1284,7 @@ export default function MasterAgentsPage() {
               {/* Row 5: Kontak Email & Telepon */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                     Email
                   </label>
                   <input
@@ -1292,12 +1292,12 @@ export default function MasterAgentsPage() {
                     placeholder="email@agen.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                     Nomor Telepon
                   </label>
                   <input
@@ -1305,17 +1305,17 @@ export default function MasterAgentsPage() {
                     placeholder="08123456789"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
                 </div>
               </div>
 
               {/* Form Buttons */}
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsFormModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
+                  className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer"
                 >
                   Batal
                 </button>
@@ -1342,46 +1342,46 @@ export default function MasterAgentsPage() {
       {/* ── MODAL: DETAIL & DOWNLINE INSPECTOR ───────────────────────────────── */}
       {isDetailModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-2xl w-full border border-slate-200 shadow-2xl p-6 space-y-5 my-8">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-5 my-8">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-purple-50 text-purple-600">
+                <div className="p-2 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400">
                   <UserCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base text-slate-900">
+                  <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                     Inspeksi Profil & Silsilah Agen
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     Rincian silsilah upline ke atas, jalur materialized path, dan daftar downline langsung.
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsDetailModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-100"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {isLoadingDetail || !detailData ? (
-              <div className="py-12 flex flex-col items-center justify-center gap-2 text-slate-400">
+              <div className="py-12 flex flex-col items-center justify-center gap-2 text-slate-400 dark:text-slate-500">
                 <RefreshCw className="w-6 h-6 animate-spin text-blue-600" />
                 <span>Memuat detail profil agen...</span>
               </div>
             ) : (
               <div className="space-y-4">
                 {/* Header Profil */}
-                <div className="p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100/80 flex items-center justify-between">
+                <div className="p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/30 border border-blue-100/80 dark:border-blue-900/40 flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-black text-sm text-blue-900 bg-white px-2 py-0.5 rounded shadow-xs">
+                      <span className="font-mono font-black text-sm text-blue-900 dark:text-blue-300 bg-white dark:bg-slate-800 px-2 py-0.5 rounded shadow-xs">
                         {detailData.agentCode}
                       </span>
-                      <h4 className="font-bold text-slate-900 text-sm">{detailData.name}</h4>
+                      <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{detailData.name}</h4>
                     </div>
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600 mt-1">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600 dark:text-slate-300 mt-1">
                       <span>Peringkat: <strong>{detailData.peringkat || 'Partner'}</strong></span>
                       <span>•</span>
                       <span>Profile ID: <strong className="font-mono">{detailData.profId || '-'}</strong></span>
@@ -1395,24 +1395,24 @@ export default function MasterAgentsPage() {
                 </div>
 
                 {/* Silsilah Jalur Upline (Ancestor Chain) */}
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1.5 flex items-center gap-1.5">
-                    <GitFork className="w-3.5 h-3.5 text-blue-600" />
+                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5 flex items-center gap-1.5">
+                    <GitFork className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                     <span>Jalur Hirarki Keagenan (Materialized Path)</span>
                   </p>
                   <div className="flex flex-wrap items-center gap-1.5 text-xs">
                     {detailData.ancestorCodes.length === 0 ? (
-                      <span className="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-mono font-bold">
+                      <span className="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-950/70 text-blue-800 dark:text-blue-300 font-mono font-bold">
                         ROOT LEADER (Level 0)
                       </span>
                     ) : (
                       <>
                         {detailData.ancestorCodes.map((code, idx) => (
                           <span key={idx} className="flex items-center gap-1 font-mono">
-                            <span className="px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-700 font-bold">
+                            <span className="px-2 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold">
                               {code}
                             </span>
-                            <ArrowRight className="w-3 h-3 text-slate-400" />
+                            <ArrowRight className="w-3 h-3 text-slate-400 dark:text-slate-500" />
                           </span>
                         ))}
                         <span className="px-2 py-0.5 rounded bg-blue-600 text-white font-mono font-bold">
@@ -1425,52 +1425,52 @@ export default function MasterAgentsPage() {
 
                 {/* Ringkasan Portofolio Pribadi */}
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3 rounded-xl bg-white border border-slate-200">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  <div className="p-3 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                       Portofolio Produksi Polis
                     </p>
-                    <p className="text-base font-black text-slate-900 mt-0.5">
+                    <p className="text-base font-black text-slate-900 dark:text-slate-100 mt-0.5">
                       {detailData.productionSummary.totalPolicies} Polis
                     </p>
-                    <p className="text-xs font-semibold text-blue-600">
+                    <p className="text-xs font-semibold text-blue-600 dark:text-blue-400">
                       {formatIDR(detailData.productionSummary.totalPremi)}
                     </p>
                   </div>
-                  <div className="p-3 rounded-xl bg-white border border-slate-200">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  <div className="p-3 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                       Riwayat Beban Klaim
                     </p>
-                    <p className="text-base font-black text-slate-900 mt-0.5">
+                    <p className="text-base font-black text-slate-900 dark:text-slate-100 mt-0.5">
                       {detailData.claimSummary.totalClaims} Kasus Klaim
                     </p>
-                    <p className="text-xs font-semibold text-rose-600">
+                    <p className="text-xs font-semibold text-rose-600 dark:text-rose-400">
                       {formatIDR(detailData.claimSummary.totalClaimAmount)}
                     </p>
                   </div>
                 </div>
 
                 {/* Daftar Downline Langsung */}
-                <div className="border border-slate-200 rounded-xl overflow-hidden">
-                  <div className="p-3 bg-slate-50 border-b border-slate-200 font-bold text-xs text-slate-700 flex items-center justify-between">
+                <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+                  <div className="p-3 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 font-bold text-xs text-slate-700 dark:text-slate-300 flex items-center justify-between">
                     <span>Downline Langsung (Tingkat 1)</span>
-                    <span className="text-[11px] font-semibold text-slate-500">
+                    <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
                       Total: {detailData.directDownlines.length} Agen
                     </span>
                   </div>
-                  <div className="max-h-48 overflow-y-auto divide-y divide-slate-100 text-xs">
+                  <div className="max-h-48 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800 text-xs">
                     {detailData.directDownlines.length === 0 ? (
-                      <div className="py-6 text-center text-slate-400">
+                      <div className="py-6 text-center text-slate-400 dark:text-slate-500">
                         Belum memiliki bawahan / downline langsung.
                       </div>
                     ) : (
                       detailData.directDownlines.map((dl) => (
-                        <div key={dl.id} className="p-2.5 flex items-center justify-between hover:bg-slate-50">
+                        <div key={dl.id} className="p-2.5 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50">
                           <div>
-                            <span className="font-mono font-bold text-blue-700">{dl.agentCode}</span>{' '}
-                            - <span className="font-semibold text-slate-800">{dl.name}</span>
+                            <span className="font-mono font-bold text-blue-700 dark:text-blue-400">{dl.agentCode}</span>{' '}
+                            - <span className="font-semibold text-slate-800 dark:text-slate-200">{dl.name}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="text-[10px] text-slate-500">{dl.peringkat || 'Partner'}</span>
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400">{dl.peringkat || 'Partner'}</span>
                             {renderStatusKeagenanBadge(dl.statusKeagenan)}
                           </div>
                         </div>
@@ -1481,10 +1481,10 @@ export default function MasterAgentsPage() {
               </div>
             )}
 
-            <div className="flex justify-end pt-2 border-t border-slate-100">
+            <div className="flex justify-end pt-2 border-t border-slate-100 dark:border-slate-800">
               <button
                 onClick={() => setIsDetailModalOpen(false)}
-                className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
+                className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer"
               >
                 Tutup
               </button>
@@ -1496,34 +1496,34 @@ export default function MasterAgentsPage() {
       {/* ── MODAL: KONFIRMASI NONAKTIFKAN AGEN ──────────────────────────────── */}
       {isDeactivateModalOpen && agentToDeactivate && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-md w-full border border-slate-200 shadow-2xl p-6 space-y-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-rose-50 text-rose-600">
+              <div className="p-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400">
                 <Power className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-base text-slate-900">
+                <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                   Nonaktifkan Agen?
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Tindakan ini akan mengubah status keagenan menjadi nonaktif.
                 </p>
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1">
+            <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 space-y-1">
               <div>
-                Kode Agen: <strong>{agentToDeactivate.agentCode}</strong>
+                Kode Agen: <strong className="text-slate-900 dark:text-slate-100">{agentToDeactivate.agentCode}</strong>
               </div>
               <div>
-                Nama Agen: <strong>{agentToDeactivate.name}</strong>
+                Nama Agen: <strong className="text-slate-900 dark:text-slate-100">{agentToDeactivate.name}</strong>
               </div>
               <div>
-                Cabang: <strong>{agentToDeactivate.branchName || agentToDeactivate.rawBranchName || '-'}</strong>
+                Cabang: <strong className="text-slate-900 dark:text-slate-100">{agentToDeactivate.branchName || agentToDeactivate.rawBranchName || '-'}</strong>
               </div>
             </div>
 
-            <p className="text-[11px] text-slate-500">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400">
               Catatan: Status keagenan akan diubah menjadi <strong>Non Aktif</strong>. Data agen tetap berada di direktori master, seluruh riwayat polis/klaim tetap tersimpan utuh, dan agen dapat diaktifkan kembali kapan saja.
             </p>
 
@@ -1534,7 +1534,7 @@ export default function MasterAgentsPage() {
                   setIsDeactivateModalOpen(false);
                   setAgentToDeactivate(null);
                 }}
-                className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
+                className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition cursor-pointer"
               >
                 Batal
               </button>
@@ -1554,21 +1554,21 @@ export default function MasterAgentsPage() {
       {/* ── MODAL RINCIAN PENDING UPLINE ──────────────────────────────────── */}
       {isPendingUplineModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-purple-50/50">
+            <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-purple-50/50 dark:bg-purple-950/20">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-purple-100 text-purple-700">
+                <div className="p-2.5 rounded-xl bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-400">
                   <GitFork className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+                  <h3 className="text-base font-black text-slate-900 dark:text-slate-100 flex items-center gap-2">
                     <span>Daftar Agen Berstatus Pending Upline</span>
-                    <span className="px-2 py-0.5 bg-purple-200 text-purple-800 text-[11px] font-extrabold rounded-full">
+                    <span className="px-2 py-0.5 bg-purple-200 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300 text-[11px] font-extrabold rounded-full">
                       {pendingUplineAgentsList.length} Agen
                     </span>
                   </h3>
-                  <p className="text-xs text-slate-500 mt-0.5">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Agen berikut memiliki kode upline yang belum terdaftar di master data. Sistem self-healing akan otomatis menghubungkan saat data upline diimpor.
                   </p>
                 </div>
@@ -1576,7 +1576,7 @@ export default function MasterAgentsPage() {
               <button
                 type="button"
                 onClick={() => setIsPendingUplineModalOpen(false)}
-                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1585,20 +1585,20 @@ export default function MasterAgentsPage() {
             {/* Modal Body */}
             <div className="p-6 overflow-y-auto space-y-4">
               {isLoadingPendingUplineList ? (
-                <div className="py-16 text-center text-slate-400">
-                  <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2 text-purple-600" />
+                <div className="py-16 text-center text-slate-400 dark:text-slate-500">
+                  <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2 text-purple-600 dark:text-purple-400" />
                   <p className="font-semibold text-sm">Mengambil daftar agen pending upline...</p>
                 </div>
               ) : pendingUplineAgentsList.length === 0 ? (
-                <div className="py-12 text-center text-slate-500">
+                <div className="py-12 text-center text-slate-500 dark:text-slate-400">
                   <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto mb-2" />
-                  <p className="font-bold text-sm text-slate-800">Tidak ada agen berstatus Pending Upline!</p>
-                  <p className="text-xs text-slate-400 mt-1">Seluruh hierarki agen telah terhubung sempurna.</p>
+                  <p className="font-bold text-sm text-slate-800 dark:text-slate-200">Tidak ada agen berstatus Pending Upline!</p>
+                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">Seluruh hierarki agen telah terhubung sempurna.</p>
                 </div>
               ) : (
-                <div className="overflow-x-auto border border-slate-200 rounded-2xl">
+                <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-2xl">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-slate-50/80 border-b border-slate-200 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    <thead className="bg-slate-50/80 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                       <tr>
                         <th className="py-2.5 px-3">No</th>
                         <th className="py-2.5 px-3">Kode Agen</th>
@@ -1609,27 +1609,27 @@ export default function MasterAgentsPage() {
                         <th className="py-2.5 px-3 text-center">Aksi</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                       {pendingUplineAgentsList.map((ag, idx) => (
-                        <tr key={ag.id} className="hover:bg-purple-50/30 transition">
-                          <td className="py-2.5 px-3 text-slate-400 font-mono">{idx + 1}</td>
-                          <td className="py-2.5 px-3 font-mono font-bold text-slate-900">
+                        <tr key={ag.id} className="hover:bg-purple-50/30 dark:hover:bg-purple-950/20 transition">
+                          <td className="py-2.5 px-3 text-slate-400 dark:text-slate-500 font-mono">{idx + 1}</td>
+                          <td className="py-2.5 px-3 font-mono font-bold text-slate-900 dark:text-slate-100">
                             {ag.agentCode}
                           </td>
-                          <td className="py-2.5 px-3 font-semibold text-slate-800">
+                          <td className="py-2.5 px-3 font-semibold text-slate-800 dark:text-slate-200">
                             {ag.name}
                           </td>
                           <td className="py-2.5 px-3">
-                            <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-semibold text-[10px]">
+                            <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold text-[10px]">
                               {ag.peringkat}
                             </span>
                           </td>
-                          <td className="py-2.5 px-3 text-slate-600">
+                          <td className="py-2.5 px-3 text-slate-600 dark:text-slate-400">
                             {ag.branchName || ag.rawBranchName || '-'}
                           </td>
                           <td className="py-2.5 px-3">
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 font-mono font-bold text-[11px] border border-purple-200">
-                              <AlertCircle className="w-3 h-3 text-purple-600" />
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 font-mono font-bold text-[11px] border border-purple-200 dark:border-purple-800">
+                              <AlertCircle className="w-3 h-3 text-purple-600 dark:text-purple-400" />
                               {ag.uplineAgentCode || '-'}
                             </span>
                           </td>
@@ -1641,7 +1641,7 @@ export default function MasterAgentsPage() {
                                   setIsPendingUplineModalOpen(false);
                                   handleOpenEditModal(ag);
                                 }}
-                                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 font-bold text-[10px] transition cursor-pointer"
+                                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/60 font-bold text-[10px] transition cursor-pointer"
                                 title="Edit / Hubungkan Upline"
                               >
                                 <Edit2 className="w-3 h-3" />
@@ -1658,7 +1658,7 @@ export default function MasterAgentsPage() {
             </div>
 
             {/* Modal Footer */}
-            <div className="px-6 py-3.5 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
+            <div className="px-6 py-3.5 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 flex items-center justify-between">
               <button
                 type="button"
                 onClick={() => {
@@ -1666,7 +1666,7 @@ export default function MasterAgentsPage() {
                   setPage(1);
                   setIsPendingUplineModalOpen(false);
                 }}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-purple-700 bg-purple-100/70 hover:bg-purple-200/70 border border-purple-200 transition cursor-pointer flex items-center gap-1.5"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-950/60 hover:bg-purple-200/70 dark:hover:bg-purple-900/60 border border-purple-200 dark:border-purple-800 transition cursor-pointer flex items-center gap-1.5"
               >
                 <Filter className="w-3.5 h-3.5" />
                 <span>Terapkan Filter di Tabel Utama</span>
@@ -1675,7 +1675,7 @@ export default function MasterAgentsPage() {
               <button
                 type="button"
                 onClick={() => setIsPendingUplineModalOpen(false)}
-                className="px-5 py-2 rounded-xl text-xs font-bold text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 transition cursor-pointer"
+                className="px-5 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition cursor-pointer"
               >
                 Tutup
               </button>

@@ -20,9 +20,12 @@ import {
   ShieldCheck,
   UserCheck,
   X,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { useNavigation } from './navigation-context';
 import { useAppBranding } from '@/context/branding-context';
+import { useTheme } from '@/context/theme-context';
 import { UserSessionPayload } from '@/lib/auth/session';
 import { APP_VERSION } from '@/lib/constants/version';
 
@@ -30,6 +33,7 @@ export function FloatingSidebar() {
   const pathname = usePathname();
   const { branding } = useAppBranding();
   const { isCollapsed, toggleCollapse, isMobileOpen, setIsMobileOpen } = useNavigation();
+  const { theme, toggleTheme } = useTheme();
 
   const [session, setSession] = useState<UserSessionPayload | null>(null);
   const [isLoadingSession, setIsLoadingSession] = useState(true);
@@ -138,16 +142,16 @@ export function FloatingSidebar() {
             title: 'Kelola User',
             href: '/admin/users',
             icon: Users,
-            iconColor: 'text-purple-600',
-            activeBg: 'bg-purple-50 text-purple-700 font-bold',
+            iconColor: 'text-purple-600 dark:text-purple-400',
+            activeBg: 'bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 font-bold border border-transparent dark:border-purple-800/50',
             isActive: pathname?.startsWith('/admin/users'),
           },
           {
             title: 'Identitas Aplikasi',
             href: '/settings/app',
             icon: Sparkles,
-            iconColor: 'text-purple-600',
-            activeBg: 'bg-purple-50 text-purple-700 font-bold',
+            iconColor: 'text-purple-600 dark:text-purple-400',
+            activeBg: 'bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 font-bold border border-transparent dark:border-purple-800/50',
             isActive: pathname?.startsWith('/settings/app'),
           },
         ]
@@ -158,16 +162,16 @@ export function FloatingSidebar() {
             title: 'Master Cabang',
             href: '/admin/branches',
             icon: Building2,
-            iconColor: 'text-blue-600',
-            activeBg: 'bg-blue-50 text-blue-700 font-bold',
+            iconColor: 'text-blue-600 dark:text-blue-400',
+            activeBg: 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-bold border border-transparent dark:border-blue-800/50',
             isActive: pathname?.startsWith('/admin/branches'),
           },
           {
             title: 'Master Agen',
             href: '/admin/agents',
             icon: UserCheck,
-            iconColor: 'text-blue-600',
-            activeBg: 'bg-blue-50 text-blue-700 font-bold',
+            iconColor: 'text-blue-600 dark:text-blue-400',
+            activeBg: 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-bold border border-transparent dark:border-blue-800/50',
             isActive: pathname?.startsWith('/admin/agents'),
           },
         ]
@@ -178,8 +182,8 @@ export function FloatingSidebar() {
             title: 'Log Audit Trail',
             href: '/admin/audit-logs',
             icon: ShieldCheck,
-            iconColor: 'text-blue-600',
-            activeBg: 'bg-blue-50 text-blue-700 font-bold',
+            iconColor: 'text-blue-600 dark:text-blue-400',
+            activeBg: 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-bold border border-transparent dark:border-blue-800/50',
             isActive: pathname?.startsWith('/admin/audit-logs'),
           },
         ]
@@ -200,8 +204,8 @@ export function FloatingSidebar() {
                 : 'Portal Agen & Asisten',
             href: '/agent/portal',
             icon: ShieldCheck,
-            iconColor: 'text-blue-600',
-            activeBg: 'bg-blue-50 text-blue-700 font-bold',
+            iconColor: 'text-blue-600 dark:text-blue-400',
+            activeBg: 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-bold border border-transparent dark:border-blue-800/50',
             isActive: pathname?.startsWith('/agent/portal'),
           },
         ]
@@ -210,8 +214,8 @@ export function FloatingSidebar() {
       title: 'Ganti Password',
       href: '/settings/change-password',
       icon: KeyRound,
-      iconColor: 'text-amber-500',
-      activeBg: 'bg-amber-50 text-amber-800 font-bold',
+      iconColor: 'text-amber-500 dark:text-amber-400',
+      activeBg: 'bg-amber-50 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 font-bold border border-transparent dark:border-amber-800/50',
       isActive: pathname?.startsWith('/settings/change-password'),
     },
   ];
@@ -228,7 +232,7 @@ export function FloatingSidebar() {
 
       {/* Floating Sidebar Container */}
       <aside
-        className={`fixed left-3 sm:left-4 top-3 sm:top-4 bottom-3 sm:bottom-4 z-40 bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-xl shadow-slate-900/5 flex flex-col transition-all duration-300 ease-in-out select-none ${
+        className={`fixed left-3 sm:left-4 top-3 sm:top-4 bottom-3 sm:bottom-4 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-slate-900/5 dark:shadow-black/50 flex flex-col transition-all duration-300 ease-in-out select-none ${
           isCollapsed ? 'w-20' : 'w-64'
         } ${
           isMobileOpen
@@ -240,7 +244,7 @@ export function FloatingSidebar() {
         <button
           onClick={toggleCollapse}
           title={isCollapsed ? 'Perlebar Menu (Expand)' : 'Perkecil Menu (Collapse)'}
-          className="hidden md:flex absolute -right-3 top-6 w-6 h-6 rounded-full bg-white border border-slate-200/90 shadow-md text-slate-500 hover:text-blue-600 hover:scale-110 active:scale-95 transition z-50 items-center justify-center cursor-pointer"
+          className="hidden md:flex absolute -right-3 top-6 w-6 h-6 rounded-full bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 shadow-md text-slate-500 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-110 active:scale-95 transition z-50 items-center justify-center cursor-pointer"
           aria-label={isCollapsed ? 'Perlebar Menu' : 'Perkecil Menu'}
         >
           {isCollapsed ? (
@@ -252,7 +256,7 @@ export function FloatingSidebar() {
 
         {/* ── 1. HEADER BRAND & LOGO ────────────────────────────────────────── */}
         <div
-          className={`p-4 border-b border-slate-100 flex items-center shrink-0 ${
+          className={`p-4 border-b border-slate-100 dark:border-slate-800 flex items-center shrink-0 ${
             isCollapsed ? 'justify-center' : 'justify-between'
           }`}
         >
@@ -264,7 +268,7 @@ export function FloatingSidebar() {
             title={branding.appName || 'MitracaMSA'}
           >
             {branding.logoType === 'image' && branding.logoUrl ? (
-              <div className="w-9 h-9 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-center p-0.5 overflow-hidden group-hover:scale-105 transition shrink-0">
+              <div className="w-9 h-9 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs flex items-center justify-center p-0.5 overflow-hidden group-hover:scale-105 transition shrink-0">
                 <img
                   src={branding.logoUrl}
                   alt={branding.appName}
@@ -280,14 +284,14 @@ export function FloatingSidebar() {
             {!isCollapsed && (
               <div className="flex flex-col min-w-0 animate-in fade-in duration-200">
                 <div className="flex items-center gap-1.5">
-                  <span className="font-extrabold text-slate-900 tracking-tight text-base leading-tight truncate">
+                  <span className="font-extrabold text-slate-900 dark:text-white tracking-tight text-base leading-tight truncate">
                     {branding.appName || 'MitracaMSA'}
                   </span>
-                  <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-100 text-slate-600 border border-slate-200 shrink-0">
+                  <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shrink-0">
                     v{APP_VERSION}
                   </span>
                 </div>
-                <span className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase truncate">
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold tracking-wider uppercase truncate">
                   {branding.appSubtitle || 'Agency Management'}
                 </span>
               </div>
@@ -298,7 +302,7 @@ export function FloatingSidebar() {
           <button
             onClick={() => setIsMobileOpen(false)}
             title="Tutup Menu"
-            className="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition shrink-0"
+            className="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -321,13 +325,13 @@ export function FloatingSidebar() {
                 title={item.title}
                 className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition group active:scale-95 ${
                   item.isActive
-                    ? 'bg-blue-50 text-blue-700 font-bold shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    ? 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-400 border border-transparent dark:border-blue-800/50 font-bold shadow-xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/80'
                 } ${isCollapsed ? 'justify-center' : ''}`}
               >
                 <Icon
                   className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                    item.isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'
+                    item.isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200'
                   }`}
                 />
                 {!isCollapsed && <span className="truncate">{item.title}</span>}
@@ -351,13 +355,13 @@ export function FloatingSidebar() {
               title="Upload Modul"
               className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition group active:scale-95 ${
                 pathname === '/'
-                  ? 'bg-blue-50 text-blue-700 font-bold shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  ? 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-400 border border-transparent dark:border-blue-800/50 font-bold shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/80'
               } ${isCollapsed ? 'justify-center' : ''}`}
             >
               <UploadCloud
                 className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                  pathname === '/' ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'
+                  pathname === '/' ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200'
                 }`}
               />
               {!isCollapsed && <span className="truncate">Upload Modul</span>}
@@ -373,7 +377,7 @@ export function FloatingSidebar() {
           )}
 
           {/* Divider */}
-          <div className="my-2 border-t border-slate-100" />
+          <div className="my-2 border-t border-slate-100 dark:border-slate-800" />
 
           {/* ── 3. GRUP MENU PENGATURAN & ADMINISTRASI (OPSI 2: ADAPTIVE COLLAPSED) ───────────────────────── */}
           <div>
@@ -391,12 +395,12 @@ export function FloatingSidebar() {
                       className={`relative flex items-center justify-center p-2.5 rounded-xl text-xs font-semibold transition group active:scale-95 ${
                         item.isActive
                           ? item.activeBg
-                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/80'
                       }`}
                     >
                       <Icon
                         className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                          item.isActive ? item.iconColor : 'text-slate-400 group-hover:text-slate-600'
+                          item.isActive ? item.iconColor : 'text-slate-400 dark:text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200'
                         }`}
                       />
 
@@ -417,8 +421,8 @@ export function FloatingSidebar() {
                   onClick={() => setIsSettingsOpen(!isSettingsOpen)}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition ${
                     isSettingsActive
-                      ? 'text-blue-700 bg-blue-50/50'
-                      : 'text-slate-400 hover:text-slate-700 hover:bg-slate-50'
+                      ? 'text-blue-700 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-950/40'
+                      : 'text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -445,7 +449,7 @@ export function FloatingSidebar() {
                           className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs transition active:scale-95 ${
                             item.isActive
                               ? item.activeBg
-                              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                              : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/80'
                           }`}
                         >
                           <Icon className={`w-3.5 h-3.5 shrink-0 ${item.iconColor}`} />
@@ -460,12 +464,53 @@ export function FloatingSidebar() {
           </div>
         </div>
 
-        {/* ── 4. FOOTER: PROFIL PENGGUNA & LOGOUT ───────────────────────────── */}
+        {/* ── 4. FOOTER: THEME SWITCHER, PROFIL PENGGUNA & LOGOUT ─────────── */}
         <div
-          className={`p-3 border-t border-slate-100 bg-slate-50/50 rounded-b-2xl shrink-0 ${
+          className={`p-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/60 rounded-b-2xl shrink-0 ${
             isCollapsed ? 'overflow-visible' : ''
           }`}
         >
+          {/* Quick Theme Switcher Button */}
+          {!isCollapsed ? (
+            <button
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Beralih ke Mode Terang' : 'Beralih ke Mode Gelap'}
+              className="w-full flex items-center justify-between px-2.5 py-1.5 mb-2.5 rounded-xl text-xs font-medium transition bg-white dark:bg-slate-800/90 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 text-slate-700 dark:text-slate-200 shadow-2xs active:scale-98"
+            >
+              <div className="flex items-center gap-2">
+                {theme === 'dark' ? (
+                  <Moon className="w-3.5 h-3.5 text-amber-400" />
+                ) : (
+                  <Sun className="w-3.5 h-3.5 text-amber-500" />
+                )}
+                <span className="font-semibold text-[11px]">
+                  {theme === 'dark' ? 'Mode Gelap' : 'Mode Terang'}
+                </span>
+              </div>
+              <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+                {theme === 'dark' ? 'Dark' : 'Light'}
+              </span>
+            </button>
+          ) : (
+            <div className="flex justify-center mb-2">
+              <button
+                onClick={toggleTheme}
+                title={theme === 'dark' ? 'Mode Terang' : 'Mode Gelap'}
+                className="relative flex items-center justify-center p-2 rounded-xl text-xs font-semibold transition group active:scale-95 text-slate-500 hover:text-amber-500 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-4 h-4 text-amber-400" />
+                ) : (
+                  <Moon className="w-4 h-4 text-slate-500 group-hover:text-amber-500" />
+                )}
+                <div className="absolute left-full ml-3 px-2.5 py-1.5 bg-slate-900 text-white text-xs font-semibold rounded-lg shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-150 z-50 whitespace-nowrap flex items-center">
+                  {theme === 'dark' ? '☀️ Mode Terang' : '🌙 Mode Gelap'}
+                  <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-slate-900 rotate-45" />
+                </div>
+              </button>
+            </div>
+          )}
+
           {session ? (
             <div
               className={`flex ${
@@ -497,10 +542,10 @@ export function FloatingSidebar() {
 
                 {!isCollapsed && (
                   <div className="flex flex-col min-w-0">
-                    <span className="text-xs font-bold text-slate-800 truncate" title={session.name}>
+                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate" title={session.name}>
                       {session.name}
                     </span>
-                    <span className="text-[10px] text-slate-400 font-medium truncate">
+                    <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium truncate">
                       {session.role === 'KACAB' || session.role === 'PIC_CABANG'
                         ? session.branchName || session.branchCode || 'Cabang'
                         : session.role === 'AGENT' || session.role === 'OFFICER_AGENT'
@@ -516,7 +561,7 @@ export function FloatingSidebar() {
                 <button
                   onClick={handleLogout}
                   title="Logout dari Sesi"
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition active:scale-95"
                 >
                   <LogOut className="w-4 h-4" />
                 </button>

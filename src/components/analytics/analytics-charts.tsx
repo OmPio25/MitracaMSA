@@ -154,26 +154,26 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
       {/* ─────────────────────────────────────────────────────────────────────
           1. Grafik Tren Bulanan: Dual Line Chart (Premi MM vs Klaim MM)
       ──────────────────────────────────────────────────────────────────────── */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm relative flex flex-col justify-between">
+      <div className="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm relative flex flex-col justify-between">
         <div>
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2">
-              <span className="p-1.5 rounded-lg bg-blue-50 text-blue-600">
+              <span className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400">
                 <TrendingUp className="w-4 h-4" />
               </span>
               <div>
-                <h3 className="font-bold text-slate-900 text-sm">Tren Bulanan: Premi MM vs Klaim MM</h3>
-                <p className="text-[11px] text-slate-500">Dual Line Chart pergerakan transaksi MM (Non-MM dikecualikan)</p>
+                <h3 className="font-bold text-slate-900 dark:text-white text-sm">Tren Bulanan: Premi MM vs Klaim MM</h3>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">Dual Line Chart pergerakan transaksi MM (Non-MM dikecualikan)</p>
               </div>
             </div>
 
             <div className="flex items-center gap-4 text-xs">
-              <span className="flex items-center gap-1.5 font-bold text-blue-600">
-                <span className="w-3 h-1 bg-blue-600 rounded-full" />
+              <span className="flex items-center gap-1.5 font-bold text-blue-600 dark:text-blue-400">
+                <span className="w-3 h-1 bg-blue-600 dark:bg-blue-400 rounded-full" />
                 Premi MM
               </span>
-              <span className="flex items-center gap-1.5 font-bold text-rose-600">
-                <span className="w-3 h-1 bg-rose-600 rounded-full" />
+              <span className="flex items-center gap-1.5 font-bold text-rose-600 dark:text-rose-400">
+                <span className="w-3 h-1 bg-rose-600 dark:bg-rose-400 rounded-full" />
                 Klaim MM
               </span>
             </div>
@@ -384,22 +384,22 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
       {/* ─────────────────────────────────────────────────────────────────────
           2. Distribusi Kinerja Produk: Donut / Pie Chart Interaktif
       ──────────────────────────────────────────────────────────────────────── */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm relative flex flex-col justify-between">
+      <div className="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm relative flex flex-col justify-between">
         <div>
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2">
-              <span className="p-1.5 rounded-lg bg-indigo-50 text-indigo-600">
+              <span className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400">
                 <PieChartIcon className="w-4 h-4" />
               </span>
               <div>
-                <h3 className="font-bold text-slate-900 text-sm">Distribusi Kinerja Lini Produk (Donut Chart)</h3>
-                <p className="text-[11px] text-slate-500">Pangsa premi & perbandingan loss ratio produk MM</p>
+                <h3 className="font-bold text-slate-900 dark:text-white text-sm">Distribusi Kinerja Lini Produk (Donut Chart)</h3>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">Pangsa premi & perbandingan loss ratio produk MM</p>
               </div>
             </div>
           </div>
 
           {productBreakdown.length === 0 ? (
-            <div className="h-64 flex items-center justify-center text-xs text-slate-400">
+            <div className="h-64 flex items-center justify-center text-xs text-slate-400 dark:text-slate-500">
               Tidak ada data produk pada periode ini.
             </div>
           ) : (
@@ -433,11 +433,11 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
 
                 {/* Donut Center Display */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
-                  <span className="text-[10px] uppercase font-bold text-slate-400">Total Premi MM</span>
-                  <span className="text-sm font-black text-slate-900 font-mono">
+                  <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">Total Premi MM</span>
+                  <span className="text-sm font-black text-slate-900 dark:text-white font-mono">
                     {formatIDRCompact(totalProductPremi)}
                   </span>
-                  <span className="text-[10px] text-slate-500">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400">
                     {productBreakdown.length} Lini Produk
                   </span>
                 </div>
@@ -490,8 +490,8 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
                       key={prod.product}
                       className={`p-2 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
                         isHovered
-                          ? 'bg-slate-100 border-slate-300 shadow-xs'
-                          : 'bg-white border-slate-100 hover:bg-slate-50'
+                          ? 'bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 shadow-xs'
+                          : 'bg-white dark:bg-slate-950/60 border-slate-100 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800/60'
                       }`}
                       onMouseEnter={() => setHoveredProductIndex(idx)}
                       onMouseLeave={() => setHoveredProductIndex(null)}
@@ -502,10 +502,10 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
                           style={{ backgroundColor: slice?.color || '#94a3b8' }}
                         />
                         <div className="min-w-0">
-                          <p className="font-bold text-slate-800 truncate max-w-[140px]" title={prod.product}>
+                          <p className="font-bold text-slate-800 dark:text-slate-200 truncate max-w-[140px]" title={prod.product}>
                             {prod.product}
                           </p>
-                          <span className="text-[10px] text-slate-500 font-mono">
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                             {formatIDRCompact(prod.premi)} ({slice?.pctShare}%)
                           </span>
                         </div>
@@ -526,9 +526,9 @@ export function AnalyticsCharts({ monthlyTrend, productBreakdown }: AnalyticsCha
           )}
         </div>
 
-        <div className="pt-2 text-[10px] text-slate-400 flex items-center justify-between border-t border-slate-100 mt-2">
+        <div className="pt-2 text-[10px] text-slate-400 dark:text-slate-500 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 mt-2">
           <span>Arahkan kursor pada lingkaran pie untuk detail rincian produk.</span>
-          <span className="font-medium text-slate-500">Mitraca Analytics</span>
+          <span className="font-medium text-slate-500 dark:text-slate-400">Mitraca Analytics</span>
         </div>
       </div>
     </div>

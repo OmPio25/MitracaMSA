@@ -29,9 +29,12 @@ import {
   Smartphone,
   Monitor,
   Check,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { UserSessionPayload } from '@/lib/auth/session';
 import { useAppBranding } from '@/context/branding-context';
+import { useTheme } from '@/context/theme-context';
 import { hexToRgba, isColorDark, getCardBlurClass } from '@/lib/branding/glassmorphism';
 
 const BG_PRESETS = [
@@ -80,9 +83,13 @@ const BLUR_OPTIONS = [
 export default function AppBrandingSettingsPage() {
   const router = useRouter();
   const { branding, updateBranding, refreshBranding } = useAppBranding();
+  const { theme: currentGlobalTheme, setTheme: setGlobalTheme } = useTheme();
 
   const [session, setSession] = useState<UserSessionPayload | null>(null);
   const [loadingSession, setLoadingSession] = useState(true);
+
+  // Form states: 0. Tema Antarmuka Aplikasi (Light / Dark)
+  const [appTheme, setAppTheme] = useState<'light' | 'dark'>('light');
 
   // Form states: 1. Identitas & Logo
   const [appName, setAppName] = useState('');
@@ -167,8 +174,9 @@ export default function AppBrandingSettingsPage() {
       setCardBlur(branding.cardBlur || 'xl');
       setCardMobileOpacity(typeof branding.cardMobileOpacity === 'number' ? branding.cardMobileOpacity : 85);
       setCardDesktopOpacity(typeof branding.cardDesktopOpacity === 'number' ? branding.cardDesktopOpacity : 90);
+      setAppTheme(branding.defaultTheme || (currentGlobalTheme as any) || 'light');
     }
-  }, [branding]);
+  }, [branding, currentGlobalTheme]);
 
   // Handle Logo File Upload (Convert to Base64)
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -293,6 +301,8 @@ export default function AppBrandingSettingsPage() {
     setCardBlur('xl');
     setCardMobileOpacity(85);
     setCardDesktopOpacity(90);
+    setAppTheme('light');
+    setGlobalTheme('light');
     setIsResetConfirmOpen(false);
     setSuccessMessage('Konfigurasi dikembalikan ke standar awal. Klik "Simpan Perubahan" untuk menerapkan permanen.');
   };
@@ -327,6 +337,7 @@ export default function AppBrandingSettingsPage() {
         cardBlur,
         cardMobileOpacity,
         cardDesktopOpacity,
+        defaultTheme: appTheme,
       };
 
       const res = await fetch('/api/settings/app', {
@@ -342,6 +353,7 @@ export default function AppBrandingSettingsPage() {
       }
 
       updateBranding(payload);
+      setGlobalTheme(appTheme);
       await refreshBranding();
 
       setSuccessMessage('Pengaturan identitas, logo, background, dan warna kartu berhasil disimpan!');
@@ -417,39 +429,39 @@ export default function AppBrandingSettingsPage() {
   const isDarkPreviewCard = isColorDark(cardColor);
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[calc(100vh-4rem)] bg-slate-50 dark:bg-[#0b0f19] py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Breadcrumb & Header Title */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2">
           <div>
-            <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
-              <Link href="/analytics" className="hover:text-blue-600 transition">
+            <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1">
+              <Link href="/analytics" className="hover:text-blue-600 dark:hover:text-blue-400 transition">
                 Dashboard
               </Link>
               <span>/</span>
-              <span className="text-slate-700 font-medium">Pengaturan</span>
+              <span className="text-slate-700 dark:text-slate-300 font-medium">Pengaturan</span>
               <span>/</span>
-              <span className="text-purple-600 font-semibold">Identitas, Logo, Background & Warna Kartu</span>
+              <span className="text-purple-600 dark:text-purple-400 font-semibold">Identitas, Logo, Background & Warna Kartu</span>
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2.5">
-              <Sparkles className="w-6 h-6 text-purple-600" />
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
+              <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />
               Pengaturan Identitas & Tampilan Layar
             </h1>
-            <p className="text-sm text-slate-500 mt-0.5">
-              Sesuaikan nama aplikasi, logo resmi, latar belakang, serta warna & efek kaca (*Glassmorphism*) kartu login.
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+              Sesuaikan nama aplikasi, logo resmi, tema sistem (Light/Dark), latar belakang, serta warna & efek kaca (*Glassmorphism*) kartu login.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-100 text-purple-800 border border-purple-200 text-xs font-bold">
-              <ShieldCheck className="w-4 h-4 text-purple-600" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-100 dark:bg-purple-950/70 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-800/60 text-xs font-bold">
+              <ShieldCheck className="w-4 h-4 text-purple-600 dark:text-purple-400" />
               Role: SUPERADMIN
             </span>
           </div>
         </div>
 
         {/* Settings Navigation Tabs */}
-        <div className="flex items-center gap-2 border-b border-slate-200 pb-3 overflow-x-auto text-xs font-semibold">
+        <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3 overflow-x-auto text-xs font-semibold">
           <Link
             href="/settings/app"
             className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-purple-600 text-white shadow-sm font-bold"
@@ -459,31 +471,31 @@ export default function AppBrandingSettingsPage() {
           </Link>
           <Link
             href="/settings/change-password"
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition"
           >
             <KeyRound className="w-4 h-4 text-amber-500" />
             <span>Ganti Password</span>
           </Link>
           <Link
             href="/admin/users"
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition"
           >
-            <Users className="w-4 h-4 text-purple-600" />
+            <Users className="w-4 h-4 text-purple-600 dark:text-purple-400" />
             <span>Kelola User</span>
           </Link>
           <Link
             href="/admin/branches"
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition"
           >
-            <Building2 className="w-4 h-4 text-blue-600" />
+            <Building2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span>Master Cabang</span>
           </Link>
         </div>
 
         {/* Success Alert */}
         {successMessage && (
-          <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-start gap-3 shadow-sm animate-in fade-in duration-200">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-300 text-xs flex items-start gap-3 shadow-sm animate-in fade-in duration-200">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
             <div className="flex-1">
               <span className="font-bold text-sm block mb-0.5">Berhasil Diperbarui</span>
               <p>{successMessage}</p>
@@ -493,8 +505,8 @@ export default function AppBrandingSettingsPage() {
 
         {/* Error Alert */}
         {errorMessage && (
-          <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-3 shadow-sm animate-in fade-in duration-200">
-            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+          <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800/60 text-rose-800 dark:text-rose-300 text-xs flex items-start gap-3 shadow-sm animate-in fade-in duration-200">
+            <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
             <div className="flex-1">
               <span className="font-bold text-sm block mb-0.5">Perhatian</span>
               <p>{errorMessage}</p>
@@ -505,23 +517,23 @@ export default function AppBrandingSettingsPage() {
         {/* Main Content Grid: Form (Left 7 Cols) & Live Preview (Right 5 Cols) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Form Configuration Card */}
-          <div className="lg:col-span-7 bg-white rounded-3xl shadow-sm border border-slate-200 p-6 sm:p-7 space-y-6">
+          <div className="lg:col-span-7 bg-white dark:bg-slate-900/90 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 sm:p-7 space-y-6">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* BAGIAN 1: Identitas Aplikasi */}
               <div className="space-y-4">
-                <div className="border-b border-slate-100 pb-3">
-                  <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                    <Type className="w-4 h-4 text-purple-600" />
+                <div className="border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Type className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                     1. Identitas & Nama Aplikasi
                   </h2>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                       Nama Aplikasi <span className="text-rose-500">*</span>
                     </label>
-                    <span className="text-[11px] text-slate-400 font-medium">{appName.length}/100</span>
+                    <span className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">{appName.length}/100</span>
                   </div>
                   <input
                     type="text"
@@ -530,16 +542,16 @@ export default function AppBrandingSettingsPage() {
                     value={appName}
                     onChange={(e) => setAppName(e.target.value)}
                     placeholder="Contoh: MitracaMSA atau Mega Agency Portal"
-                    className="w-full text-sm bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition font-medium"
+                    className="w-full text-sm bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition font-medium"
                   />
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                       Sub-Judul / Tagline
                     </label>
-                    <span className="text-[11px] text-slate-400 font-medium">{appSubtitle.length}/150</span>
+                    <span className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">{appSubtitle.length}/150</span>
                   </div>
                   <input
                     type="text"
@@ -547,15 +559,15 @@ export default function AppBrandingSettingsPage() {
                     value={appSubtitle}
                     onChange={(e) => setAppSubtitle(e.target.value)}
                     placeholder="Contoh: Agency Management System"
-                    className="w-full text-sm bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition font-medium"
+                    className="w-full text-sm bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition font-medium"
                   />
                 </div>
               </div>
 
               {/* BAGIAN 2: Format Logo */}
               <div className="space-y-4 pt-2">
-                <div className="border-b border-slate-100 pb-3">
-                  <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <div className="border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <ImageIcon className="w-4 h-4 text-purple-600" />
                     2. Format & File Logo
                   </h2>
@@ -702,12 +714,136 @@ export default function AppBrandingSettingsPage() {
                 )}
               </div>
 
-              {/* BAGIAN 3: Background Halaman Login */}
+              {/* BAGIAN 3: Tema Antarmuka Aplikasi (Light / Dark Mode) */}
               <div className="space-y-4 pt-2">
-                <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
-                  <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-purple-600" />
-                    3. Latar Belakang Halaman Login
+                <div className="border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center justify-between">
+                  <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Sun className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    3. Tema Antarmuka Aplikasi (Global)
+                  </h2>
+                  <span className="text-[11px] text-purple-700 dark:text-purple-300 font-semibold bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800/60 px-2 py-0.5 rounded-full">
+                    {appTheme === 'dark' ? '🌙 Dark Active' : '☀️ Light Active'}
+                  </span>
+                </div>
+
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Pilih gaya tema visual untuk seluruh halaman aplikasi (Dashboard, Analitik, Polis & Klaim, Hirarki, Master Agen, dan Audit Log).
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {/* Option: Light Mode */}
+                  <div
+                    onClick={() => {
+                      setAppTheme('light');
+                      setGlobalTheme('light');
+                    }}
+                    className={`p-4 rounded-2xl border-2 transition cursor-pointer relative overflow-hidden flex flex-col justify-between ${
+                      appTheme === 'light'
+                        ? 'border-purple-600 bg-purple-50/50 dark:bg-purple-950/40 shadow-sm ring-1 ring-purple-600/30'
+                        : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-white dark:bg-slate-900/60'
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                            <Sun className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <span className="text-xs font-bold text-slate-900 dark:text-white block">
+                              Tema Terang (Light)
+                            </span>
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                              Clean · High Contrast
+                            </span>
+                          </div>
+                        </div>
+                        {appTheme === 'light' && (
+                          <div className="w-5 h-5 rounded-full bg-purple-600 text-white flex items-center justify-center">
+                            <Check className="w-3 h-3" />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Mini Preview Slate Card */}
+                      <div className="mt-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 pointer-events-none">
+                        <div className="flex items-center justify-between">
+                          <div className="w-12 h-2 rounded bg-slate-300" />
+                          <div className="w-6 h-2 rounded bg-blue-500" />
+                        </div>
+                        <div className="w-full h-3 rounded bg-white border border-slate-200" />
+                        <div className="flex gap-1">
+                          <div className="w-1/2 h-2 rounded bg-slate-200" />
+                          <div className="w-1/2 h-2 rounded bg-emerald-200" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Option: Dark Mode */}
+                  <div
+                    onClick={() => {
+                      setAppTheme('dark');
+                      setGlobalTheme('dark');
+                    }}
+                    className={`p-4 rounded-2xl border-2 transition cursor-pointer relative overflow-hidden flex flex-col justify-between ${
+                      appTheme === 'dark'
+                        ? 'border-purple-600 bg-purple-50/50 dark:bg-purple-950/40 shadow-sm ring-1 ring-purple-600/30'
+                        : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-white dark:bg-slate-900/60'
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-xl bg-indigo-950 text-amber-400 flex items-center justify-center font-bold border border-indigo-800/60">
+                            <Moon className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <span className="text-xs font-bold text-slate-900 dark:text-white block">
+                              Tema Gelap (Obsidian)
+                            </span>
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                              Deep Slate · Anti Silau
+                            </span>
+                          </div>
+                        </div>
+                        {appTheme === 'dark' && (
+                          <div className="w-5 h-5 rounded-full bg-purple-600 text-white flex items-center justify-center">
+                            <Check className="w-3 h-3" />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Mini Preview Dark Card */}
+                      <div className="mt-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5 pointer-events-none">
+                        <div className="flex items-center justify-between">
+                          <div className="w-12 h-2 rounded bg-slate-700" />
+                          <div className="w-6 h-2 rounded bg-blue-400" />
+                        </div>
+                        <div className="w-full h-3 rounded bg-slate-900 border border-slate-800" />
+                        <div className="flex gap-1">
+                          <div className="w-1/2 h-2 rounded bg-slate-800" />
+                          <div className="w-1/2 h-2 rounded bg-emerald-900/60" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 flex items-start gap-2">
+                  <Info className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
+                  <p>
+                    <strong>Pengecualian Khusus:</strong> Pilihan tema ini berlaku otomatis untuk seluruh modul aplikasi. Halaman Login memiliki setelan latar belakang dan transparansi kaca tersendiri yang dikonfigurasi secara manual pada bagian di bawah.
+                  </p>
+                </div>
+              </div>
+
+              {/* BAGIAN 4: Background Halaman Login */}
+              <div className="space-y-4 pt-2">
+                <div className="border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center justify-between">
+                  <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Layers className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    4. Latar Belakang Halaman Login
                   </h2>
                 </div>
 
@@ -884,15 +1020,15 @@ export default function AppBrandingSettingsPage() {
                 )}
               </div>
 
-              {/* BAGIAN 4: Kustomisasi Kartu Glassmorphism (Warna, Blur, Transparansi) */}
+              {/* BAGIAN 5: Kustomisasi Kartu Glassmorphism (Warna, Blur, Transparansi) */}
               <div className="space-y-4 pt-2">
-                <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
-                  <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                    <Palette className="w-4 h-4 text-purple-600" />
-                    4. Warna & Efek Kaca Kartu Login (Glassmorphism)
+                <div className="border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center justify-between">
+                  <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Palette className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    5. Warna & Efek Kaca Kartu Login (Glassmorphism)
                   </h2>
-                  <span className="text-[10px] bg-purple-100 text-purple-700 font-extrabold px-2 py-0.5 rounded-full">
-                    Manual Setting
+                  <span className="text-[10px] bg-purple-100 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/60 font-extrabold px-2 py-0.5 rounded-full">
+                    Manual Setting Login
                   </span>
                 </div>
 
@@ -1213,16 +1349,21 @@ export default function AppBrandingSettingsPage() {
               </div>
             </div>
 
-            {/* Preview: Header Navigasi Atas (Light) */}
-            <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-4 space-y-2">
-              <div className="text-xs font-bold text-slate-700 flex items-center gap-1.5 border-b border-slate-100 pb-2">
-                <Eye className="w-3.5 h-3.5 text-blue-600" />
-                <span>Pratinjau Header Bar (Light Mode)</span>
+            {/* Preview: Header Navigasi Atas (Live Theme Dynamic) */}
+            <div className="bg-white dark:bg-slate-900/90 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 p-4 space-y-2">
+              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
+                <span className="flex items-center gap-1.5">
+                  <Eye className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                  Pratinjau Header Bar
+                </span>
+                <span className="text-[10px] font-semibold text-slate-400">
+                  {appTheme === 'dark' ? 'Mode Gelap (Obsidian)' : 'Mode Terang (Clean)'}
+                </span>
               </div>
-              <div className="p-3 bg-white border border-slate-200 rounded-2xl flex items-center justify-between shadow-xs">
+              <div className="p-3 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center justify-between shadow-xs">
                 <div className="flex items-center gap-2">
                   {logoType === 'image' && logoUrl ? (
-                    <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 p-0.5 overflow-hidden">
+                    <div className="w-8 h-8 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-0.5 overflow-hidden">
                       <img src={logoUrl} alt={appName} className="w-full h-full object-contain" />
                     </div>
                   ) : (
@@ -1231,15 +1372,15 @@ export default function AppBrandingSettingsPage() {
                     </div>
                   )}
                   <div>
-                    <span className="text-xs font-extrabold text-slate-900 block truncate max-w-[160px] leading-tight">
+                    <span className="text-xs font-extrabold text-slate-900 dark:text-white block truncate max-w-[160px] leading-tight">
                       {appName || 'Nama Aplikasi'}
                     </span>
-                    <span className="text-[9px] text-slate-400 uppercase font-semibold block truncate max-w-[160px]">
+                    <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase font-semibold block truncate max-w-[160px]">
                       {appSubtitle || 'Agency Management'}
                     </span>
                   </div>
                 </div>
-                <div className="text-[10px] font-semibold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
+                <div className="text-[10px] font-semibold bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 px-2 py-0.5 rounded-full">
                   Portal Aktif
                 </div>
               </div>
@@ -1249,22 +1390,22 @@ export default function AppBrandingSettingsPage() {
 
         {/* Modal Konfirmasi Reset Default */}
         {isResetConfirmOpen && (
-          <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 space-y-4 animate-in fade-in zoom-in-95 duration-150">
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto">
+          <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800 space-y-4 animate-in fade-in zoom-in-95 duration-150">
+              <div className="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60 flex items-center justify-center mx-auto">
                 <RotateCcw className="w-6 h-6" />
               </div>
               <div className="text-center">
-                <h3 className="text-base font-bold text-slate-900">Kembalikan ke Default?</h3>
-                <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-                  Nama aplikasi, logo, background, dan warna kartu akan dikembalikan ke pengaturan bawaan awal.
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">Kembalikan ke Default?</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
+                  Nama aplikasi, logo, tema sistem, background, dan warna kartu akan dikembalikan ke pengaturan bawaan awal.
                 </p>
               </div>
               <div className="flex gap-2 pt-2">
                 <button
                   type="button"
                   onClick={() => setIsResetConfirmOpen(false)}
-                  className="flex-1 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-100 transition cursor-pointer"
+                  className="flex-1 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
                 >
                   Batal
                 </button>

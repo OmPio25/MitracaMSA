@@ -107,7 +107,7 @@ export function HierarchyTreeView({
 
         {/* Children Subtree */}
         {hasChildren && isExpanded && (
-          <div className="relative pl-6 sm:pl-8 ml-4 sm:ml-6 border-l-2 border-slate-200 space-y-3 mt-3 before:absolute before:top-0 before:bottom-0 before:left-[-2px] before:w-0.5 before:bg-blue-300">
+          <div className="relative pl-6 sm:pl-8 ml-4 sm:ml-6 border-l-2 border-slate-200 dark:border-slate-800 space-y-3 mt-3 before:absolute before:top-0 before:bottom-0 before:left-[-2px] before:w-0.5 before:bg-blue-300 dark:before:bg-blue-600">
             {node.children.map((child) => renderNode(child, level + 1))}
           </div>
         )}
@@ -117,8 +117,8 @@ export function HierarchyTreeView({
 
   if (!tree || tree.length === 0) {
     return (
-      <div className="text-center py-12 bg-white rounded-xl border border-slate-200 p-8">
-        <p className="text-slate-500 text-sm">Tidak ada data agen yang sesuai dengan kriteria filter.</p>
+      <div className="text-center py-12 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8">
+        <p className="text-slate-500 dark:text-slate-400 text-sm">Tidak ada data agen yang sesuai dengan kriteria filter.</p>
       </div>
     );
   }
@@ -126,15 +126,15 @@ export function HierarchyTreeView({
   return (
     <div className="space-y-4">
       {/* Sub-toolbar: Search & Expand/Collapse */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800">
         <div className="relative flex-1 max-w-sm">
-          <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+          <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400 dark:text-slate-500" />
           <input
             type="text"
             placeholder="Cari dalam hasil (kode/nama/jabatan)..."
             value={localSearch}
             onChange={(e) => setLocalSearch(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -142,7 +142,7 @@ export function HierarchyTreeView({
           <button
             type="button"
             onClick={handleExpandAll}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition cursor-pointer"
           >
             <ChevronsUpDown className="w-3.5 h-3.5" />
             Buka Semua Cabang
@@ -150,7 +150,7 @@ export function HierarchyTreeView({
           <button
             type="button"
             onClick={handleCollapseAll}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition cursor-pointer"
           >
             <ChevronsDownUp className="w-3.5 h-3.5" />
             Tutup Semua Cabang
