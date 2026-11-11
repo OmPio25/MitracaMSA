@@ -118,18 +118,24 @@ export function FloatingSidebar() {
       title: 'Analitik & Loss Ratio',
       href: '/analytics',
       icon: TrendingUp,
+      color: 'text-emerald-500 dark:text-emerald-400',
+      activeBg: 'bg-emerald-50/80 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-800/60 font-bold shadow-xs',
       isActive: pathname?.startsWith('/analytics'),
     },
     {
       title: 'Pohon Hirarki',
       href: '/hierarchy',
       icon: GitFork,
+      color: 'text-indigo-500 dark:text-indigo-400',
+      activeBg: 'bg-indigo-50/80 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-200 border border-indigo-200 dark:border-indigo-800/60 font-bold shadow-xs',
       isActive: pathname?.startsWith('/hierarchy'),
     },
     {
       title: 'Polis & Klaim',
       href: '/explorer',
       icon: Layers,
+      color: 'text-amber-500 dark:text-amber-400',
+      activeBg: 'bg-amber-50/80 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 border border-amber-200 dark:border-amber-800/60 font-bold shadow-xs',
       isActive: pathname?.startsWith('/explorer'),
     },
   ];
@@ -142,16 +148,16 @@ export function FloatingSidebar() {
             title: 'Kelola User',
             href: '/admin/users',
             icon: Users,
-            iconColor: 'text-purple-600 dark:text-purple-400',
-            activeBg: 'bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 font-bold border border-transparent dark:border-purple-800/50',
+            iconColor: 'text-violet-500 dark:text-violet-400',
+            activeBg: 'bg-violet-50 dark:bg-violet-950/70 text-violet-700 dark:text-violet-300 font-bold border border-violet-200 dark:border-violet-800/50',
             isActive: pathname?.startsWith('/admin/users'),
           },
           {
             title: 'Identitas Aplikasi',
             href: '/settings/app',
             icon: Sparkles,
-            iconColor: 'text-purple-600 dark:text-purple-400',
-            activeBg: 'bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 font-bold border border-transparent dark:border-purple-800/50',
+            iconColor: 'text-fuchsia-500 dark:text-fuchsia-400',
+            activeBg: 'bg-fuchsia-50 dark:bg-fuchsia-950/70 text-fuchsia-700 dark:text-fuchsia-300 font-bold border border-fuchsia-200 dark:border-fuchsia-800/50',
             isActive: pathname?.startsWith('/settings/app'),
           },
         ]
@@ -162,16 +168,16 @@ export function FloatingSidebar() {
             title: 'Master Cabang',
             href: '/admin/branches',
             icon: Building2,
-            iconColor: 'text-blue-600 dark:text-blue-400',
-            activeBg: 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-bold border border-transparent dark:border-blue-800/50',
+            iconColor: 'text-blue-500 dark:text-blue-400',
+            activeBg: 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-bold border border-blue-200 dark:border-blue-800/50',
             isActive: pathname?.startsWith('/admin/branches'),
           },
           {
             title: 'Master Agen',
             href: '/admin/agents',
             icon: UserCheck,
-            iconColor: 'text-blue-600 dark:text-blue-400',
-            activeBg: 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-bold border border-transparent dark:border-blue-800/50',
+            iconColor: 'text-teal-500 dark:text-teal-400',
+            activeBg: 'bg-teal-50 dark:bg-teal-950/70 text-teal-700 dark:text-teal-300 font-bold border border-teal-200 dark:border-teal-800/50',
             isActive: pathname?.startsWith('/admin/agents'),
           },
         ]
@@ -182,8 +188,8 @@ export function FloatingSidebar() {
             title: 'Log Audit Trail',
             href: '/admin/audit-logs',
             icon: ShieldCheck,
-            iconColor: 'text-blue-600 dark:text-blue-400',
-            activeBg: 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-bold border border-transparent dark:border-blue-800/50',
+            iconColor: 'text-rose-500 dark:text-rose-400',
+            activeBg: 'bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 font-bold border border-rose-200 dark:border-rose-800/50',
             isActive: pathname?.startsWith('/admin/audit-logs'),
           },
         ]
@@ -204,8 +210,8 @@ export function FloatingSidebar() {
                 : 'Portal Agen & Asisten',
             href: '/agent/portal',
             icon: ShieldCheck,
-            iconColor: 'text-blue-600 dark:text-blue-400',
-            activeBg: 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-bold border border-transparent dark:border-blue-800/50',
+            iconColor: 'text-cyan-500 dark:text-cyan-400',
+            activeBg: 'bg-cyan-50 dark:bg-cyan-950/70 text-cyan-700 dark:text-cyan-300 font-bold border border-cyan-200 dark:border-cyan-800/50',
             isActive: pathname?.startsWith('/agent/portal'),
           },
         ]
@@ -215,7 +221,7 @@ export function FloatingSidebar() {
       href: '/settings/change-password',
       icon: KeyRound,
       iconColor: 'text-amber-500 dark:text-amber-400',
-      activeBg: 'bg-amber-50 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 font-bold border border-transparent dark:border-amber-800/50',
+      activeBg: 'bg-amber-50 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 font-bold border border-amber-200 dark:border-amber-800/50',
       isActive: pathname?.startsWith('/settings/change-password'),
     },
   ];
@@ -325,13 +331,13 @@ export function FloatingSidebar() {
                 title={item.title}
                 className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition group active:scale-95 ${
                   item.isActive
-                    ? 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-400 border border-transparent dark:border-blue-800/50 font-bold shadow-xs'
+                    ? item.activeBg
                     : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/80'
                 } ${isCollapsed ? 'justify-center' : ''}`}
               >
                 <Icon
-                  className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                    item.isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200'
+                  className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${item.color} ${
+                    item.isActive ? 'opacity-100' : 'opacity-85 group-hover:opacity-100'
                   }`}
                 />
                 {!isCollapsed && <span className="truncate">{item.title}</span>}
@@ -355,13 +361,13 @@ export function FloatingSidebar() {
               title="Upload Modul"
               className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition group active:scale-95 ${
                 pathname === '/'
-                  ? 'bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-400 border border-transparent dark:border-blue-800/50 font-bold shadow-xs'
+                  ? 'bg-sky-50/80 dark:bg-sky-950/60 text-sky-800 dark:text-sky-200 border border-sky-200 dark:border-sky-800/60 font-bold shadow-xs'
                   : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/80'
               } ${isCollapsed ? 'justify-center' : ''}`}
             >
               <UploadCloud
-                className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                  pathname === '/' ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200'
+                className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 text-sky-500 dark:text-sky-400 ${
+                  pathname === '/' ? 'opacity-100' : 'opacity-85 group-hover:opacity-100'
                 }`}
               />
               {!isCollapsed && <span className="truncate">Upload Modul</span>}
@@ -399,8 +405,8 @@ export function FloatingSidebar() {
                       }`}
                     >
                       <Icon
-                        className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                          item.isActive ? item.iconColor : 'text-slate-400 dark:text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200'
+                        className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${item.iconColor} ${
+                          item.isActive ? 'opacity-100' : 'opacity-85 group-hover:opacity-100'
                         }`}
                       />
 
@@ -426,7 +432,7 @@ export function FloatingSidebar() {
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <Settings className="w-3.5 h-3.5" />
+                    <Settings className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                     <span>Pengaturan</span>
                   </div>
                   <ChevronDown
@@ -452,7 +458,9 @@ export function FloatingSidebar() {
                               : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/80'
                           }`}
                         >
-                          <Icon className={`w-3.5 h-3.5 shrink-0 ${item.iconColor}`} />
+                          <Icon className={`w-3.5 h-3.5 shrink-0 transition-transform group-hover:scale-110 ${item.iconColor} ${
+                            item.isActive ? 'opacity-100' : 'opacity-85 group-hover:opacity-100'
+                          }`} />
                           <span className="truncate">{item.title}</span>
                         </Link>
                       );
