@@ -147,15 +147,15 @@ export function AnalyticsFilter({
           <select
             value={cutoffYear}
             onChange={(e) => setCutoffYear(e.target.value)}
-            className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950/80 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+            className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition cursor-pointer"
           >
             {availableCutoffs.map((c) => (
-              <option key={c.year} value={String(c.year)}>
+              <option key={c.year} value={String(c.year)} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
                 {c.label}
               </option>
             ))}
-            <option value="ALL">Semua Periode (All Time)</option>
-            <option value="CUSTOM">Kustom Tanggal Rentang</option>
+            <option value="ALL" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Semua Periode (All Time)</option>
+            <option value="CUSTOM" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Kustom Tanggal Rentang</option>
           </select>
           {activeCutoffInfo && cutoffYear !== 'ALL' && cutoffYear !== 'CUSTOM' && (
             <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-1">
@@ -188,13 +188,13 @@ export function AnalyticsFilter({
             <select
               value={maxDepth}
               onChange={(e) => setMaxDepth && setMaxDepth(e.target.value)}
-              className="w-full text-xs font-bold bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 rounded-lg px-3 py-2 text-amber-950 dark:text-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition"
+              className="w-full text-xs font-bold bg-amber-50 dark:bg-slate-900 border border-amber-300 dark:border-amber-800/80 rounded-lg px-3 py-2 text-amber-950 dark:text-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition cursor-pointer"
             >
-              <option value="1">Maks. Level 1 (Direct Downline Saja)</option>
-              <option value="2">Maks. Level 2 (Direct + Level 2)</option>
-              <option value="3">Maks. Level 3 (Kedalaman 3 Tingkat)</option>
-              <option value="4">Maks. Level 4 (Default Maksimal)</option>
-              <option value="ALL">Semua Level (Tanpa Batas)</option>
+              <option value="1" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Maks. Level 1 (Direct Downline Saja)</option>
+              <option value="2" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Maks. Level 2 (Direct + Level 2)</option>
+              <option value="3" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Maks. Level 3 (Kedalaman 3 Tingkat)</option>
+              <option value="4" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Maks. Level 4 (Default Maksimal)</option>
+              <option value="ALL" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Semua Level (Tanpa Batas)</option>
             </select>
             <span className="block text-[10px] text-amber-700 dark:text-amber-400 mt-1">Mengatur batas kedalaman level downline group</span>
           </div>
@@ -206,11 +206,11 @@ export function AnalyticsFilter({
             <select
               value={selectedBranchId}
               onChange={(e) => setSelectedBranchId(e.target.value)}
-              className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+              className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition cursor-pointer"
             >
-              <option value="">Semua Cabang (Nasional)</option>
+              <option value="" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Semua Cabang (Nasional)</option>
               {branches.map((b) => (
-                <option key={b.id} value={b.id}>
+                <option key={b.id} value={b.id} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
                   {b.code} — {b.name}
                 </option>
               ))}
@@ -267,11 +267,11 @@ export function AnalyticsFilter({
           <select
             value={selectedUwYear}
             onChange={(e) => setSelectedUwYear(e.target.value)}
-            className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+            className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition cursor-pointer"
           >
-            <option value="">Semua UW Year</option>
+            <option value="" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Semua UW Year</option>
             {availableUwYears.map((uw) => (
-              <option key={uw} value={uw}>
+              <option key={uw} value={uw} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
                 Tahun Underwriting {uw}
               </option>
             ))}
