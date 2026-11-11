@@ -4,6 +4,7 @@ import { productionRecords, agents, branches } from '@/db/schema';
 import { sql, eq, and, or, ilike, gte, lte, desc, asc, SQL } from 'drizzle-orm';
 import { getServerSession } from '@/lib/auth/session';
 import { getProductionScopeFilter } from '@/lib/auth/rbac-filter';
+import { getCutoffPeriod } from '@/lib/analytics/loss-ratio';
 
 export const dynamic = 'force-dynamic';
 
@@ -45,8 +46,18 @@ export async function GET(req: NextRequest) {
     const product = (searchParams.get('product') || '').trim();
     const branchId = (searchParams.get('branchId') || '').trim();
     const agentCode = (searchParams.get('agentCode') || '').trim();
-    const startDate = (searchParams.get('startDate') || '').trim();
-    const endDate = (searchParams.get('endDate') || '').trim();
+    const cutoffParam = (searchParams.get('cutoffYear') || '').trim();
+    let startDate = (searchParams.get('startDate') || '').trim();
+    let endDate = (searchParams.get('endDate') || '').trim();
+
+    if (!startDate && !endDate && cutoffParam && cutoffParam !== 'ALL' && cutoffParam !== 'CUSTOM') {
+      const year = parseInt(cutoffParam, 10);
+      if (!isNaN(year)) {
+        const period = getCutoffPeriod(year);
+        startDate = period.startDate;
+        endDate = period.endDate;
+      }
+    }
 
     const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
     const limit = Math.min(100, Math.max(5, parseInt(searchParams.get('limit') || '20', 10)));

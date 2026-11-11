@@ -28,8 +28,10 @@ import {
   Info,
   UserCheck,
   Check,
+  RotateCcw,
 } from 'lucide-react';
 import { useAppBranding } from '@/context/branding-context';
+import { getAvailableCutoffYears, getCurrentCutoffYear, getCutoffPeriod } from '@/lib/analytics/loss-ratio';
 
 export default function ExplorerPage() {
   const { branding } = useAppBranding();
@@ -46,9 +48,35 @@ export default function ExplorerPage() {
   const [selectedPolicyCategory, setSelectedPolicyCategory] = useState<'ALL' | 'MM' | 'NON_MM'>('ALL');
   const [selectedUwYear, setSelectedUwYear] = useState('ALL');
   const [selectedClaimCategory, setSelectedClaimCategory] = useState<'ALL' | 'MM' | 'NON_MM'>('ALL');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+
+  // Cutoff Period states (selaras dengan filter halaman Analytic)
+  const defaultCutoffYear = useMemo(() => String(getCurrentCutoffYear()), []);
+  const [cutoffYear, setCutoffYear] = useState<string>(defaultCutoffYear);
+  const [availableCutoffs] = useState(getAvailableCutoffYears(6));
+  const [customStartDate, setCustomStartDate] = useState('');
+  const [customEndDate, setCustomEndDate] = useState('');
+
+  // Tanggal efektif yang diturunkan dari Cutoff / All / Custom
+  const { startDate, endDate } = useMemo(() => {
+    if (cutoffYear === 'ALL') {
+      return { startDate: '', endDate: '' };
+    }
+    if (cutoffYear === 'CUSTOM') {
+      return { startDate: customStartDate, endDate: customEndDate };
+    }
+    const yearNum = parseInt(cutoffYear, 10);
+    if (!isNaN(yearNum)) {
+      const p = getCutoffPeriod(yearNum);
+      return { startDate: p.startDate, endDate: p.endDate };
+    }
+    return { startDate: '', endDate: '' };
+  }, [cutoffYear, customStartDate, customEndDate]);
+
+  // Info Cutoff aktif untuk label rentang
+  const activeCutoffInfo = useMemo(() => {
+    return availableCutoffs.find((c) => String(c.year) === cutoffYear);
+  }, [availableCutoffs, cutoffYear]);
 
   // Pagination states
   const [page, setPage] = useState(1);
@@ -210,6 +238,7 @@ export default function ExplorerPage() {
       if (selectedPolicyCategory !== 'ALL') params.set('category', selectedPolicyCategory);
       if (startDate) params.set('startDate', startDate);
       if (endDate) params.set('endDate', endDate);
+      if (cutoffYear) params.set('cutoffYear', cutoffYear);
 
       const res = await fetch(`/api/explorer/policies?${params.toString()}`);
       if (!res.ok) {
@@ -247,6 +276,7 @@ export default function ExplorerPage() {
       if (selectedClaimCategory !== 'ALL') params.set('category', selectedClaimCategory);
       if (startDate) params.set('startDate', startDate);
       if (endDate) params.set('endDate', endDate);
+      if (cutoffYear) params.set('cutoffYear', cutoffYear);
 
       const res = await fetch(`/api/explorer/claims?${params.toString()}`);
       if (!res.ok) {
@@ -283,8 +313,9 @@ export default function ExplorerPage() {
     setSelectedPolicyCategory('ALL');
     setSelectedUwYear('ALL');
     setSelectedClaimCategory('ALL');
-    setStartDate('');
-    setEndDate('');
+    setCutoffYear(defaultCutoffYear);
+    setCustomStartDate('');
+    setCustomEndDate('');
     setPage(1);
   };
 
@@ -402,6 +433,7 @@ export default function ExplorerPage() {
       if (selectedProduct !== 'ALL') params.set('product', selectedProduct);
       if (startDate) params.set('startDate', startDate);
       if (endDate) params.set('endDate', endDate);
+      if (cutoffYear) params.set('cutoffYear', cutoffYear);
 
       if (activeTab === 'POLICIES') {
         if (selectedStatus !== 'ALL') params.set('status', selectedStatus);
@@ -669,13 +701,21 @@ export default function ExplorerPage() {
             >
               <Filter className="w-4 h-4" />
               <span>Filter Lengkap</span>
+              {/* Active period label pill */}
+              <span className="hidden sm:inline-block text-[10px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-800/60">
+                {cutoffYear === 'ALL'
+                  ? 'Semua Periode'
+                  : cutoffYear === 'CUSTOM'
+                  ? 'Kustom'
+                  : `Cutoff ${cutoffYear}`}
+              </span>
               {(selectedProduct !== 'ALL' ||
                 selectedStatus !== 'ALL' ||
                 selectedUwYear !== 'ALL' ||
                 (activeTab === 'POLICIES' && selectedPolicyCategory !== 'ALL') ||
                 (activeTab === 'CLAIMS' && selectedClaimCategory !== 'ALL') ||
-                startDate ||
-                endDate) && (
+                cutoffYear !== defaultCutoffYear ||
+                (cutoffYear === 'CUSTOM' && (customStartDate || customEndDate))) && (
                 <span className="w-2 h-2 rounded-full bg-blue-600" />
               )}
             </button>
@@ -683,155 +723,199 @@ export default function ExplorerPage() {
 
           {/* Advanced Filter Collapse Box */}
           {showAdvancedFilters && (
-            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 animate-in fade-in duration-200">
-              {/* Product Filter */}
-              <div>
-                <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
-                  Nama Produk
-                </label>
-                <select
-                  value={selectedProduct}
-                  onChange={(e) => {
-                    setSelectedProduct(e.target.value);
-                    setPage(1);
-                  }}
-                  className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
-                >
-                  <option value="ALL">Semua Produk</option>
-                  {(activeTab === 'POLICIES' ? policyProducts : claimProducts).map((p) => (
-                    <option key={p} value={p}>
-                      {p}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Status Filter (Policies) OR UW Year Filter (Claims) */}
-              {activeTab === 'POLICIES' ? (
-                <>
-                  <div>
-                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
-                      Status Polis
-                    </label>
-                    <select
-                      value={selectedStatus}
-                      onChange={(e) => {
-                        setSelectedStatus(e.target.value);
-                        setPage(1);
-                      }}
-                      className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
-                    >
-                      <option value="ALL">Semua Status</option>
-                      {policyStatuses.map((s) => (
-                        <option key={s} value={s}>
-                          {s}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
-                      Kategori Polis
-                    </label>
-                    <select
-                      value={selectedPolicyCategory}
-                      onChange={(e) => {
-                        setSelectedPolicyCategory(e.target.value as any);
-                        setPage(1);
-                      }}
-                      className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
-                    >
-                      <option value="ALL">Semua (MM & Non-MM)</option>
-                      <option value="MM">Polis MM (Lengkap)</option>
-                      <option value="NON_MM">Polis Non-MM (Tanpa Agen)</option>
-                    </select>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div>
-                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
-                      Underwriting Year (UW)
-                    </label>
-                    <select
-                      value={selectedUwYear}
-                      onChange={(e) => {
-                        setSelectedUwYear(e.target.value);
-                        setPage(1);
-                      }}
-                      className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
-                    >
-                      <option value="ALL">Semua UW Year</option>
-                      {claimUwYears.map((y) => (
-                        <option key={y} value={y}>
-                          Tahun {y}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
-                      Kategori Klaim
-                    </label>
-                    <select
-                      value={selectedClaimCategory}
-                      onChange={(e) => {
-                        setSelectedClaimCategory(e.target.value as any);
-                        setPage(1);
-                      }}
-                      className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-rose-500/20 font-medium"
-                    >
-                      <option value="ALL">Semua (MM & Non-MM)</option>
-                      <option value="MM">Klaim MM (Lengkap)</option>
-                      <option value="NON_MM">Klaim Non-MM (Tanpa Agen)</option>
-                    </select>
-                  </div>
-                </>
-              )}
-
-              {/* Start Date */}
-              <div>
-                <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
-                  {activeTab === 'POLICIES' ? 'Mulai Polis Dari' : 'Settlement Klaim Dari'}
-                </label>
-                <input
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => {
-                    setStartDate(e.target.value);
-                    setPage(1);
-                  }}
-                  className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
-                />
-              </div>
-
-              {/* End Date */}
-              <div>
-                <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
-                  Sampai Dengan
-                </label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="date"
-                    value={endDate}
+            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3 animate-in fade-in duration-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                {/* 1. Product Filter */}
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
+                    Nama Produk
+                  </label>
+                  <select
+                    value={selectedProduct}
                     onChange={(e) => {
-                      setEndDate(e.target.value);
+                      setSelectedProduct(e.target.value);
                       setPage(1);
                     }}
-                    className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium"
-                  />
+                    className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium cursor-pointer"
+                  >
+                    <option value="ALL">Semua Produk</option>
+                    {(activeTab === 'POLICIES' ? policyProducts : claimProducts).map((p) => (
+                      <option key={p} value={p}>
+                        {p}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* 2 & 3. Status/UW Year + Category Filter */}
+                {activeTab === 'POLICIES' ? (
+                  <>
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
+                        Status Polis
+                      </label>
+                      <select
+                        value={selectedStatus}
+                        onChange={(e) => {
+                          setSelectedStatus(e.target.value);
+                          setPage(1);
+                        }}
+                        className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium cursor-pointer"
+                      >
+                        <option value="ALL">Semua Status</option>
+                        {policyStatuses.map((s) => (
+                          <option key={s} value={s}>
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
+                        Kategori Polis
+                      </label>
+                      <select
+                        value={selectedPolicyCategory}
+                        onChange={(e) => {
+                          setSelectedPolicyCategory(e.target.value as any);
+                          setPage(1);
+                        }}
+                        className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium cursor-pointer"
+                      >
+                        <option value="ALL">Semua (MM & Non-MM)</option>
+                        <option value="MM">Polis MM (Lengkap)</option>
+                        <option value="NON_MM">Polis Non-MM (Tanpa Agen)</option>
+                      </select>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
+                        Underwriting Year (UW)
+                      </label>
+                      <select
+                        value={selectedUwYear}
+                        onChange={(e) => {
+                          setSelectedUwYear(e.target.value);
+                          setPage(1);
+                        }}
+                        className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium cursor-pointer"
+                      >
+                        <option value="ALL">Semua UW Year</option>
+                        {claimUwYears.map((y) => (
+                          <option key={y} value={y}>
+                            Tahun {y}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">
+                        Kategori Klaim
+                      </label>
+                      <select
+                        value={selectedClaimCategory}
+                        onChange={(e) => {
+                          setSelectedClaimCategory(e.target.value as any);
+                          setPage(1);
+                        }}
+                        className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-rose-500/20 font-medium cursor-pointer"
+                      >
+                        <option value="ALL">Semua (MM & Non-MM)</option>
+                        <option value="MM">Klaim MM (Lengkap)</option>
+                        <option value="NON_MM">Klaim Non-MM (Tanpa Agen)</option>
+                      </select>
+                    </div>
+                  </>
+                )}
+
+                {/* 4. Filter Periode / Cutoff (Sama seperti Analitik) */}
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center justify-between">
+                    <span>Periode / Cutoff</span>
+                    {cutoffYear !== 'ALL' && cutoffYear !== 'CUSTOM' && (
+                      <span className="text-[10px] text-blue-600 dark:text-blue-400 font-semibold bg-blue-50 dark:bg-blue-950/70 px-1.5 py-0.5 rounded">
+                        Fixed Cycle
+                      </span>
+                    )}
+                  </label>
+                  <select
+                    value={cutoffYear}
+                    onChange={(e) => {
+                      setCutoffYear(e.target.value);
+                      setPage(1);
+                    }}
+                    className="w-full text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium cursor-pointer"
+                  >
+                    {availableCutoffs.map((c) => (
+                      <option key={c.year} value={String(c.year)} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                        {c.label}
+                      </option>
+                    ))}
+                    <option value="ALL" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                      Semua Periode (All Time)
+                    </option>
+                    <option value="CUSTOM" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                      Kustom Tanggal Rentang
+                    </option>
+                  </select>
+                  {activeCutoffInfo && cutoffYear !== 'ALL' && cutoffYear !== 'CUSTOM' && (
+                    <span className="block text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-medium truncate" title={`Rentang: ${activeCutoffInfo.startDate} s/d ${activeCutoffInfo.endDate}`}>
+                      Rentang: {activeCutoffInfo.startDate} s/d {activeCutoffInfo.endDate}
+                    </span>
+                  )}
+                </div>
+
+                {/* 5. Reset Action */}
+                <div className="flex flex-col justify-end">
                   <button
                     type="button"
                     onClick={handleResetFilters}
-                    className="px-3 py-2 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-900/50 transition shrink-0"
-                    title="Reset Filter"
+                    className="w-full flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl border border-rose-200 dark:border-rose-900/50 transition cursor-pointer"
+                    title="Kembalikan semua filter ke pengaturan awal"
                   >
-                    Reset
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>Reset Filter</span>
                   </button>
                 </div>
               </div>
+
+              {/* Row Kustom Tanggal jika memilih CUSTOM */}
+              {cutoffYear === 'CUSTOM' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-slate-100 dark:border-slate-800 bg-blue-50/40 dark:bg-blue-950/30 p-3 rounded-xl border border-blue-100 dark:border-blue-900/50 animate-in fade-in duration-150">
+                  <div>
+                    <label className="block text-[11px] font-bold text-blue-950 dark:text-blue-300 uppercase tracking-wider mb-1">
+                      {activeTab === 'POLICIES' ? 'Tanggal Mulai Polis (Dari)' : 'Settlement Klaim Dari'}
+                    </label>
+                    <input
+                      type="date"
+                      value={customStartDate}
+                      onChange={(e) => {
+                        setCustomStartDate(e.target.value);
+                        setPage(1);
+                      }}
+                      className="w-full text-xs bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium cursor-pointer"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-blue-950 dark:text-blue-300 uppercase tracking-wider mb-1">
+                      {activeTab === 'POLICIES' ? 'Sampai Dengan' : 'Settlement Klaim Sampai'}
+                    </label>
+                    <input
+                      type="date"
+                      value={customEndDate}
+                      onChange={(e) => {
+                        setCustomEndDate(e.target.value);
+                        setPage(1);
+                      }}
+                      className="w-full text-xs bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-medium cursor-pointer"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
