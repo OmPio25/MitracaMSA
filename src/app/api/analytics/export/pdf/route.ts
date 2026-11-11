@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateAnalyticsPdf } from '@/lib/export/pdf-analytics-generator';
+import { formatDate } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,7 +45,7 @@ export async function GET(req: NextRequest) {
       isAgentRole: Boolean(data.isAgentRole),
       filterInfo: {
         cutoffLabel: data.filter.cutoffPeriod?.label || 'Semua Periode',
-        dateRange: `${data.filter.startDate || '-'} s/d ${data.filter.endDate || '-'}`,
+        dateRange: `${formatDate(data.filter.startDate)} s/d ${formatDate(data.filter.endDate)}`,
         branchName: branchDisplayName,
         agentCode: data.filter.agentCode || undefined,
         uwYear: data.filter.uwYear || undefined,

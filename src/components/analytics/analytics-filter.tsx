@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { formatDate } from '@/lib/utils';
 import {
   Calendar,
   Building,
@@ -117,7 +118,7 @@ export function AnalyticsFilter({
             <h2 className="font-bold text-slate-900 dark:text-slate-100 text-base">Filter Periode & Parameter Underwriting</h2>
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Sistem otomatis menerapkan filter <span className="font-semibold text-slate-700 dark:text-slate-300">Cutoff Year</span> (14 November tahun lalu s/d 13 November tahun ini).
+            Sistem otomatis menerapkan filter <span className="font-semibold text-slate-700 dark:text-slate-300">Cutoff Year</span> (14-11 tahun lalu s/d 13-11 tahun ini).
           </p>
         </div>
 
@@ -159,7 +160,7 @@ export function AnalyticsFilter({
           </select>
           {activeCutoffInfo && cutoffYear !== 'ALL' && cutoffYear !== 'CUSTOM' && (
             <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-              Rentang: {activeCutoffInfo.startDate} s/d {activeCutoffInfo.endDate}
+              Rentang: {formatDate(activeCutoffInfo.startDate)} s/d {formatDate(activeCutoffInfo.endDate)}
             </span>
           )}
         </div>

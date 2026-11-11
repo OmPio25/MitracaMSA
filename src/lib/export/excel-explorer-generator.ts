@@ -1,4 +1,5 @@
 import ExcelJS from 'exceljs';
+import { formatDate } from '@/lib/utils';
 
 export async function generatePoliciesExcelWorkbook(policies: any[]): Promise<Buffer> {
   const workbook = new ExcelJS.Workbook();
@@ -95,8 +96,8 @@ export async function generatePoliciesExcelWorkbook(policies: any[]): Promise<Bu
       p.spauNo || '-',
       p.policyStatus || '-',
       p.period || p.bulan || '-',
-      p.startPeriod || '-',
-      p.endPeriod || '-',
+      formatDate(p.startPeriod),
+      formatDate(p.endPeriod),
       p.insuredName || '-',
       p.product || '-',
       p.coverage || '-',
@@ -223,7 +224,7 @@ export async function generateClaimsExcelWorkbook(claimsList: any[]): Promise<Bu
     row.values = [
       c.claimNo || '-',
       c.policyNo || '-',
-      c.dateOfSettlement || '-',
+      formatDate(c.dateOfSettlement),
       c.uwYear || '-',
       c.period || '-',
       parseFloat(c.grossClaim || '0'),

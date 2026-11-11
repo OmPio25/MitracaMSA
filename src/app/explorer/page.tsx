@@ -31,7 +31,7 @@ import {
   RotateCcw,
 } from 'lucide-react';
 import { useAppBranding } from '@/context/branding-context';
-import { getAvailableCutoffYears, getCurrentCutoffYear, getCutoffPeriod } from '@/lib/analytics/loss-ratio';
+import { getAvailableCutoffYears, getCurrentCutoffYear, getCutoffPeriod, formatDate } from '@/lib/analytics/loss-ratio';
 
 export default function ExplorerPage() {
   const { branding } = useAppBranding();
@@ -863,8 +863,8 @@ export default function ExplorerPage() {
                     </option>
                   </select>
                   {activeCutoffInfo && cutoffYear !== 'ALL' && cutoffYear !== 'CUSTOM' && (
-                    <span className="block text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-medium truncate" title={`Rentang: ${activeCutoffInfo.startDate} s/d ${activeCutoffInfo.endDate}`}>
-                      Rentang: {activeCutoffInfo.startDate} s/d {activeCutoffInfo.endDate}
+                    <span className="block text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-medium truncate" title={`Rentang: ${formatDate(activeCutoffInfo.startDate)} s/d ${formatDate(activeCutoffInfo.endDate)}`}>
+                      Rentang: {formatDate(activeCutoffInfo.startDate)} s/d {formatDate(activeCutoffInfo.endDate)}
                     </span>
                   )}
                 </div>
@@ -1010,8 +1010,8 @@ export default function ExplorerPage() {
                           </td>
 
                           <td className="py-3 px-4 text-slate-600 dark:text-slate-400 whitespace-nowrap">
-                            <span className="block font-medium text-slate-800 dark:text-slate-200">{row.startPeriod || '-'}</span>
-                            <span className="text-[10px] text-slate-400 dark:text-slate-500 block">s/d {row.endPeriod || '-'}</span>
+                            <span className="block font-medium text-slate-800 dark:text-slate-200">{formatDate(row.startPeriod)}</span>
+                            <span className="text-[10px] text-slate-400 dark:text-slate-500 block">s/d {formatDate(row.endPeriod)}</span>
                           </td>
 
                           <td className="py-3 px-4 font-semibold text-slate-800 dark:text-slate-200">
@@ -1162,7 +1162,7 @@ export default function ExplorerPage() {
                         </td>
 
                         <td className="py-3 px-4 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap">
-                          {row.dateOfSettlement || '-'}
+                          {formatDate(row.dateOfSettlement)}
                         </td>
 
                         <td className="py-3 px-4 text-center">
@@ -1393,14 +1393,14 @@ export default function ExplorerPage() {
                     <div>
                       <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Masa Pertanggungan</span>
                       <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 block">
-                        {selectedPolicyDetail.startPeriod || '-'}
+                        {formatDate(selectedPolicyDetail.startPeriod)}
                       </span>
-                      <span className="text-[10px] text-slate-400 dark:text-slate-500 block">s/d {selectedPolicyDetail.endPeriod || '-'}</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 block">s/d {formatDate(selectedPolicyDetail.endPeriod)}</span>
                     </div>
                     <div>
                       <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Bulan / Periode</span>
                       <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 block">
-                        {selectedPolicyDetail.bulan} ({selectedPolicyDetail.period})
+                        {selectedPolicyDetail.bulan} ({formatDate(selectedPolicyDetail.period)})
                       </span>
                     </div>
                   </div>
@@ -1572,7 +1572,7 @@ export default function ExplorerPage() {
                                   </span>
                                 )}
                                 <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold bg-slate-100 dark:bg-slate-800 px-1.5 py-0.2 rounded">
-                                  Settled: {claim.dateOfSettlement || '-'}
+                                  Settled: {formatDate(claim.dateOfSettlement)}
                                 </span>
                               </div>
                               <p className="text-slate-600 dark:text-slate-400 text-[11px] mt-0.5">Sebab: {claim.causeOfLoss || '-'}</p>
@@ -1615,7 +1615,7 @@ export default function ExplorerPage() {
                     <div>
                       <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Tgl Settlement</span>
                       <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 block">
-                        {selectedClaimDetail.dateOfSettlement || '-'}
+                        {formatDate(selectedClaimDetail.dateOfSettlement)}
                       </span>
                     </div>
                     <div>

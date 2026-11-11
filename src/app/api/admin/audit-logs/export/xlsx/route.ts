@@ -3,6 +3,7 @@ import { db } from '@/db';
 import { auditLogs } from '@/db/schema';
 import { desc, and, gte, lte, or, ilike, eq } from 'drizzle-orm';
 import { getServerSession } from '@/lib/auth/session';
+import { formatDateTime } from '@/lib/utils';
 import ExcelJS from 'exceljs';
 
 export const dynamic = 'force-dynamic';
@@ -139,7 +140,7 @@ export async function GET(req: NextRequest) {
 
     // 3. Data Rows
     logs.forEach((item, idx) => {
-      const timeStr = new Date(item.createdAt).toLocaleString('id-ID');
+      const timeStr = formatDateTime(item.createdAt);
       const row = sheet.addRow([
         idx + 1,
         timeStr,

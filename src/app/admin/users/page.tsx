@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { formatDateTime } from '@/lib/utils';
 import {
   Users,
   UserPlus,
@@ -823,7 +824,7 @@ export default function AdminUsersPage() {
 
                     <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400">
                       {u.lastLoginAt
-                        ? new Date(u.lastLoginAt).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' })
+                        ? formatDateTime(u.lastLoginAt, false)
                         : 'Belum pernah login'}
                     </td>
 

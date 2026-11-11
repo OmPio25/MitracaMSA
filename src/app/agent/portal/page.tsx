@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useTransition } from 'react';
+import { formatDate as normalizeDate, formatDateTime } from '@/lib/utils';
 import {
   UserCheck,
   Users,
@@ -268,13 +269,9 @@ export default function AgentPortalPage() {
     }).format(val || 0);
   };
 
-  // Helper format Date
+  // Helper format Date (Normalisasi dd-mm-yyyy)
   const formatDate = (dateStr?: string | null) => {
-    if (!dateStr) return '-';
-    return new Intl.DateTimeFormat('id-ID', {
-      dateStyle: 'medium',
-      timeStyle: 'short',
-    }).format(new Date(dateStr));
+    return normalizeDate(dateStr);
   };
 
   // Helper render Peringkat Badge
@@ -1371,7 +1368,7 @@ export default function AgentPortalPage() {
 
                     {/* Login Terakhir */}
                     <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400 text-[11px]">
-                      {formatDate(assistant.lastLoginAt)}
+                      {formatDateTime(assistant.lastLoginAt, false)}
                     </td>
 
                     {/* Tanggal Dibuat */}

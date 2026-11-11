@@ -3,6 +3,8 @@
  * Berdasarkan Parameter Underwriting & Cutoff System
  */
 
+export { formatDate, formatDateTime } from '@/lib/utils';
+
 export interface CutoffPeriod {
   year: number;
   label: string;
@@ -29,14 +31,14 @@ export function getCurrentCutoffYear(refDate = new Date()): number {
 
 /**
  * Menghasilkan objek rentang tanggal Cutoff untuk tahun tertentu.
- * Fixed formula: 14 November (year - 1) s/d 13 November (year)
+ * Fixed formula: 14-11-(year - 1) s/d 13-11-(year)
  */
 export function getCutoffPeriod(year: number): CutoffPeriod {
   const startYear = year - 1;
   const endYear = year;
   return {
     year,
-    label: `Cutoff ${year} (14 Nov ${startYear} - 13 Nov ${endYear})`,
+    label: `Cutoff ${year} (14-11-${startYear} s/d 13-11-${endYear})`,
     startDate: `${startYear}-11-14`,
     endDate: `${endYear}-11-13`,
   };
