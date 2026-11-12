@@ -12,7 +12,7 @@ async function testAll() {
     'Submit date': '2026-01-20',
     'Agent ID': 'AGT-01',
   };
-  const mapped1 = mapMasterProduksiRow(sampleRow1);
+  const mapped1 = mapMasterProduksiRow(sampleRow1, 1);
   console.log('Mapping with "Submit date":', mapped1.success, 'issueDate:', mapped1.data?.issueDate);
 
   const sampleRow2 = {
@@ -22,7 +22,7 @@ async function testAll() {
     'BOOKING_DATE': '15-02-2026',
     'Agent ID': 'AGT-01',
   };
-  const mapped2 = mapMasterProduksiRow(sampleRow2);
+  const mapped2 = mapMasterProduksiRow(sampleRow2, 2);
   console.log('Mapping with "BOOKING_DATE":', mapped2.success, 'issueDate:', mapped2.data?.issueDate);
 
   const sampleRow3 = {
@@ -32,7 +32,7 @@ async function testAll() {
     'Tanggal Terbit': '2026/03/10',
     'Agent ID': 'AGT-01',
   };
-  const mapped3 = mapMasterProduksiRow(sampleRow3);
+  const mapped3 = mapMasterProduksiRow(sampleRow3, 3);
   console.log('Mapping with "Tanggal Terbit":', mapped3.success, 'issueDate:', mapped3.data?.issueDate);
 
   if (mapped1.data?.issueDate === '2026-01-20' &&
@@ -56,7 +56,7 @@ async function testAll() {
       AND EXISTS (SELECT 1 FROM claims cl WHERE cl.agent_id = a.id AND cl.deleted_at IS NULL)
     LIMIT 1;
   `);
-  const sampleAgent = (agentQuery.rows || agentQuery)[0];
+  const sampleAgent = ((agentQuery as any).rows || agentQuery)[0];
 
   console.log('Selected agent:', sampleAgent);
 

@@ -1125,7 +1125,7 @@ export default function AgentPortalPage() {
                     {lrValue}%
                   </p>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                    Rasio Klaim CutOff {kpi.cutoffYear || 2026}
+                    Rasio Klaim {kpi.cutoffYear || 2026}
                   </p>
                   <div className="mt-2.5 pt-2 border-t border-slate-200/60 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 truncate">
                     Beban Klaim: <span className="font-semibold text-slate-900 dark:text-slate-200">{formatIDR(kpi.personalCutoffGrossClaim ?? kpi.personalGrossClaim)}</span>
@@ -1138,43 +1138,64 @@ export default function AgentPortalPage() {
 
           {/* Card 3: Jaringan Tim Downline */}
           <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Jaringan Tim
-              </span>
-              <div className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                <Users className="w-4 h-4" />
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Jaringan Tim
+                </span>
+                <div className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+                  <Users className="w-4 h-4" />
+                </div>
+              </div>
+              <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-purple-50 dark:bg-purple-950/60 text-[10px] font-medium text-purple-700 dark:text-purple-300 mb-2">
+                (Silsilah Hirarki Tim)
               </div>
             </div>
             <div>
-              <p className="text-xl sm:text-2xl font-black text-purple-700 dark:text-purple-400">
-                {kpi.directDownlinesCount}{' '}
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Downline L1</span>
+              <p className="text-xl sm:text-2xl font-black text-purple-700 dark:text-purple-400 tracking-tight">
+                {kpi.directDownlinesCount}
               </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
-                Total Jaringan: <strong className="text-slate-800 dark:text-slate-200">{kpi.totalNetworkDownlinesCount} Agen</strong>
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mt-0.5">
+                Downline Langsung (Level 1)
               </p>
+              <div className="flex items-center gap-1.5 mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+                <span className="text-slate-600 dark:text-slate-300">
+                  Total Jaringan: <strong className="text-slate-900 dark:text-slate-100">{kpi.totalNetworkDownlinesCount} Agen</strong>
+                </span>
+              </div>
             </div>
           </div>
 
           {/* Card 4: Staf Asisten (Officer Agent) */}
           <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Staf Asisten
-              </span>
-              <div className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                <UserCheck className="w-4 h-4" />
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Staf Asisten
+                </span>
+                <div className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                  <UserCheck className="w-4 h-4" />
+                </div>
+              </div>
+              <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-[10px] font-medium text-emerald-700 dark:text-emerald-300 mb-2">
+                (Officer Agent Resmi)
               </div>
             </div>
             <div>
-              <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100">
+              <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
                 {kpi.activeAssistants}{' '}
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">/ {kpi.totalAssistants} Aktif</span>
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Asisten</span>
               </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
-                Status Operasional: <strong className="text-emerald-600 dark:text-emerald-400">Siap Melayani</strong>
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mt-0.5">
+                Staf Aktif ({kpi.totalAssistants} Terdaftar)
               </p>
+              <div className="flex items-center gap-1.5 mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+                <span className="text-slate-600 dark:text-slate-300">
+                  Status: <strong className={kpi.activeAssistants > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-amber-600 dark:text-amber-400"}>
+                    {kpi.activeAssistants > 0 ? 'Siap Melayani Operasional' : 'Belum Ada Asisten Aktif'}
+                  </strong>
+                </span>
+              </div>
             </div>
           </div>
         </div>

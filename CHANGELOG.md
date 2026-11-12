@@ -9,6 +9,23 @@ Skema Penomoran Versi:
 
 ---
 
+## [0.0.1.10] - 2026-11-12
+### Diubah
+- **Portal Mandiri Agen (`/agent/portal`)**:
+  - **KPI Card Loss Ratio Pribadi**: Label subjudul diubah dari `Rasio Klaim CutOff 2026` menjadi **`Rasio Klaim 2026`** (menghilangkan kata 'CutOff' agar konsisten dengan `Premi 2026` dan `Jumlah Polis 2026`).
+  - **KPI Card Jaringan Tim (Opsi A)**:
+    - Menghilangkan ruang kosong vertikal di atas jumlah downline.
+    - Menambahkan sub-badge konteks `(Silsilah Hirarki Tim)` di bawah judul.
+    - Menyelaraskan hierarki tipografi: Angka Hero `{kpi.directDownlinesCount}` dengan label `Downline Langsung (Level 1)`.
+    - Menambahkan garis pembatas `border-t` dengan informasi `Total Jaringan: {kpi.totalNetworkDownlinesCount} Agen`.
+  - **KPI Card Staf Asisten (Opsi A)**:
+    - Menghilangkan ruang kosong vertikal di atas jumlah asisten.
+    - Menambahkan sub-badge konteks `(Officer Agent Resmi)` di bawah judul.
+    - Menyelaraskan hierarki tipografi: Angka Hero `{kpi.activeAssistants} Asisten` dengan label `Staf Aktif ({kpi.totalAssistants} Terdaftar)`.
+    - Menambahkan garis pembatas `border-t` dengan indikator status operasional layanan.
+
+---
+
 ## [0.0.1.9] - 2026-11-12
 ### Ditambahkan
 - Kolom `issue_date` (`date`) dan indeks `production_records_issue_date_idx` pada tabel database `production_records` untuk mencatat tanggal terbit riil polis (*submit date* / *booking date* / *tanggal terbit*).
