@@ -9,6 +9,30 @@ Skema Penomoran Versi:
 
 ---
 
+## [0.0.1.9] - 2026-11-12
+### Ditambahkan
+- Kolom `issue_date` (`date`) dan indeks `production_records_issue_date_idx` pada tabel database `production_records` untuk mencatat tanggal terbit riil polis (*submit date* / *booking date* / *tanggal terbit*).
+- Dukungan pemetaan otomatis (*smart mapping*) pada template upload `MASTER_PRODUKSI` untuk membaca alias `"Submit date"`, `"BOOKING_DATE"`, `"tanggal terbit"`, `"issue date"`, dan variasi lainnya langsung tersimpan ke kolom `issue_date`.
+- Indikator tanggal terbit pada tabel Polis di Explorer (`/explorer`), dialog rincian polis, serta ekspor file Excel Data Polis.
+- Script pengujian komprehensif `src/scripts/test-agent-kpi-cutoff.ts` untuk verifikasi otomatis kalkulasi cutoff dan pemetaan upload.
+
+### Diubah
+- **Portal Mandiri Agen (`/agent/portal`)**:
+  - **KPI Card Polis Pribadi**:
+    - Angka Utama (Hero): Menampilkan **Premi 2026** (total premi polis produksi agen pada siklus Cutoff tahun berjalan).
+    - Subteks: Menampilkan **Jumlah Polis 2026** (total nomor polis unik / `COUNT(DISTINCT policy_no)` pada siklus Cutoff tahun berjalan).
+    - Ditambahkan penanda siklus tanggal cutoff aktif `(14-11-2025 s/d 13-11-2026)` di bawah judul card.
+  - **KPI Card Loss Ratio Pribadi**:
+    - Angka Utama (Hero): Menampilkan **Loss Ratio Pribadi Cutoff 2026** ($\frac{\text{Beban Klaim Cutoff}}{\text{Premi Cutoff}} \times 100\%$).
+    - Standarisasi ambang batas warna underwriting Analitik: 🟢 Sehat (`< 35%`), 🟡 Waspada (`= 35%`), 🔴 Kritis (`> 35%`).
+    - Subteks: Menampilkan Beban Klaim Cutoff dan jumlah berkas klaim diselesaikan pada periode berjalan.
+- **Pembaruan Aturan CutOff Seluruh Sistem**:
+  - Formula perhitungan produksi polis pada siklus Cutoff kini secara seragam mengacu pada tanggal terbit polis: `COALESCE(issue_date, start_period) BETWEEN startDate AND endDate`.
+  - Formula perhitungan klaim pada siklus Cutoff mengacu pada tanggal penyelesaian: `date_of_settlement BETWEEN startDate AND endDate`.
+  - Berlaku di `/agent/portal`, `/explorer` (filter polis & klaim), dan `/analytics` (GWP, Loss Ratio, dan tren bulanan).
+
+---
+
 ## [0.0.1.8] - 2026-11-11
 ### Ditambahkan
 - Fungsi utilitas `formatDate(dateInput, fallback)` dan `formatDateTime(dateInput, withSeconds, fallback)` di `src/lib/utils.ts` untuk normalisasi tanggal ke `dd-mm-yyyy` bebas dari bug pergeseran zona waktu (*timezone shift*).

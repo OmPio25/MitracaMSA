@@ -83,11 +83,9 @@ export async function GET(req: NextRequest) {
       startDate = customStart;
       endDate = customEnd;
     } else if (activeCutoffYear) {
-      // Data produksi dan klaim dinormalisasi per bulan pada kolom 'period' (YYYY-MM-01).
-      // Siklus Cutoff 14 Nov (Tahun-1) s/d 13 Nov (Tahun) dimulai dari data transaksi bulan November (Tahun-1).
-      // Menggunakan 'YYYY-11-01' memastikan bulan November tahun lalu masuk sebagai bulan pertama (Nov-YY).
-      startDate = `${activeCutoffYear - 1}-11-01`;
-      endDate = `${activeCutoffYear}-11-30`;
+      const period = getCutoffPeriod(activeCutoffYear);
+      startDate = period.startDate;
+      endDate = period.endDate;
     }
 
     // 2. Resolve Agent Subtree jika agentCode diberikan
@@ -161,10 +159,10 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 3. Query Agregasi Produksi (Production Records - Strict Produksi MM)
+    // 3. Query Agregasi Produksi (Production Records - Strict Produksi MM berbasis Tanggal Terbit issue_date / start_period)
     const prodConditions = [sql`pr.deleted_at IS NULL`, sql`pr.is_mm = true`];
     if (startDate && endDate) {
-      prodConditions.push(sql`pr.period >= ${startDate}::date AND pr.period <= ${endDate}::date`);
+      prodConditions.push(sql`COALESCE(pr.issue_date, pr.start_period) >= ${startDate}::date AND COALESCE(pr.issue_date, pr.start_period) <= ${endDate}::date`);
     }
     if (branchId) {
       prodConditions.push(sql`pr.branch_id = ${branchId}::uuid`);
@@ -195,10 +193,10 @@ export async function GET(req: NextRequest) {
       WHERE ${prodWhereSql}
     `);
 
-    // 4. Query Agregasi Klaim (Claims - Strict Klaim MM)
+    // 4. Query Agregasi Klaim (Claims - Strict Klaim MM berbasis date_of_settlement)
     const claimConditions = [sql`cl.deleted_at IS NULL`, sql`cl.is_mm = true`];
     if (startDate && endDate) {
-      claimConditions.push(sql`cl.period >= ${startDate}::date AND cl.period <= ${endDate}::date`);
+      claimConditions.push(sql`cl.date_of_settlement >= ${startDate}::date AND cl.date_of_settlement <= ${endDate}::date`);
     }
     if (branchId) {
       claimConditions.push(sql`COALESCE(cl.branch_id, ag.branch_id) = ${branchId}::uuid`);
@@ -244,7 +242,7 @@ export async function GET(req: NextRequest) {
       // All Produksi (MM + Non-MM)
       const allProdConditions = [sql`pr.deleted_at IS NULL`];
       if (startDate && endDate) {
-        allProdConditions.push(sql`pr.period >= ${startDate}::date AND pr.period <= ${endDate}::date`);
+        allProdConditions.push(sql`COALESCE(pr.issue_date, pr.start_period) >= ${startDate}::date AND COALESCE(pr.issue_date, pr.start_period) <= ${endDate}::date`);
       }
       if (branchId) {
         allProdConditions.push(sql`pr.branch_id = ${branchId}::uuid`);
@@ -263,7 +261,7 @@ export async function GET(req: NextRequest) {
       // All Klaim (MM + Non-MM)
       const allClaimConditions = [sql`cl.deleted_at IS NULL`];
       if (startDate && endDate) {
-        allClaimConditions.push(sql`cl.period >= ${startDate}::date AND cl.period <= ${endDate}::date`);
+        allClaimConditions.push(sql`cl.date_of_settlement >= ${startDate}::date AND cl.date_of_settlement <= ${endDate}::date`);
       }
       if (branchId) {
         allClaimConditions.push(sql`COALESCE(cl.branch_id, ag.branch_id) = ${branchId}::uuid`);
@@ -311,20 +309,20 @@ export async function GET(req: NextRequest) {
     }>(sql`
       WITH monthly_prod AS (
         SELECT 
-          TO_CHAR(pr.period, 'YYYY-MM') AS period_month,
+          TO_CHAR(COALESCE(pr.issue_date, pr.start_period), 'YYYY-MM') AS period_month,
           COALESCE(SUM(pr.nilai_premi), 0)::numeric(18,2) AS premi
         FROM production_records pr
         WHERE ${prodWhereSql}
-        GROUP BY TO_CHAR(pr.period, 'YYYY-MM')
+        GROUP BY TO_CHAR(COALESCE(pr.issue_date, pr.start_period), 'YYYY-MM')
       ),
       monthly_claim AS (
         SELECT 
-          TO_CHAR(cl.period, 'YYYY-MM') AS period_month,
+          TO_CHAR(cl.date_of_settlement, 'YYYY-MM') AS period_month,
           COALESCE(SUM(cl.gross_claim), 0)::numeric(18,2) AS claim
         FROM claims cl
         LEFT JOIN agents ag ON cl.agent_id = ag.id
         WHERE ${claimWhereSql}
-        GROUP BY TO_CHAR(cl.period, 'YYYY-MM')
+        GROUP BY TO_CHAR(cl.date_of_settlement, 'YYYY-MM')
       )
       SELECT 
         COALESCE(p.period_month, c.period_month) AS period_month,
@@ -627,7 +625,7 @@ export async function GET(req: NextRequest) {
     if (targetAgentInfo) {
       const personalProdConditions = [sql`deleted_at IS NULL`, sql`agent_id = ${targetAgentInfo.id}::uuid`];
       if (startDate && endDate) {
-        personalProdConditions.push(sql`period >= ${startDate}::date AND period <= ${endDate}::date`);
+        personalProdConditions.push(sql`COALESCE(issue_date, start_period) >= ${startDate}::date AND COALESCE(issue_date, start_period) <= ${endDate}::date`);
       }
       if (productParam) {
         personalProdConditions.push(sql`product ILIKE ${'%' + productParam + '%'}`);
@@ -648,7 +646,7 @@ export async function GET(req: NextRequest) {
         sql`agent_id = ${targetAgentInfo.id}::uuid`
       ];
       if (startDate && endDate) {
-        personalClaimConditions.push(sql`period >= ${startDate}::date AND period <= ${endDate}::date`);
+        personalClaimConditions.push(sql`date_of_settlement >= ${startDate}::date AND date_of_settlement <= ${endDate}::date`);
       }
       if (uwYearParam) {
         personalClaimConditions.push(sql`uw_year = ${uwYearParam}`);
@@ -721,19 +719,19 @@ export async function GET(req: NextRequest) {
       }>(sql`
         WITH monthly_prod AS (
           SELECT 
-            TO_CHAR(period, 'YYYY-MM') AS period_month,
+            TO_CHAR(COALESCE(issue_date, start_period), 'YYYY-MM') AS period_month,
             COALESCE(SUM(nilai_premi), 0)::numeric(18,2) AS premi
           FROM production_records
           WHERE ${sql.join(personalProdConditions, sql` AND `)}
-          GROUP BY TO_CHAR(period, 'YYYY-MM')
+          GROUP BY TO_CHAR(COALESCE(issue_date, start_period), 'YYYY-MM')
         ),
         monthly_claim AS (
           SELECT 
-            TO_CHAR(period, 'YYYY-MM') AS period_month,
+            TO_CHAR(date_of_settlement, 'YYYY-MM') AS period_month,
             COALESCE(SUM(gross_claim), 0)::numeric(18,2) AS claim
           FROM claims
           WHERE ${sql.join(personalClaimConditions, sql` AND `)}
-          GROUP BY TO_CHAR(period, 'YYYY-MM')
+          GROUP BY TO_CHAR(date_of_settlement, 'YYYY-MM')
         )
         SELECT 
           COALESCE(p.period_month, c.period_month) AS period_month,
@@ -1005,7 +1003,7 @@ export async function GET(req: NextRequest) {
           sql`agent_id IN (${sql.join(agentFilterIds.map((id) => sql`${id}::uuid`), sql`, `)})`
         ];
         if (startDate && endDate) {
-          groupProdConditions.push(sql`period >= ${startDate}::date AND period <= ${endDate}::date`);
+          groupProdConditions.push(sql`COALESCE(issue_date, start_period) >= ${startDate}::date AND COALESCE(issue_date, start_period) <= ${endDate}::date`);
         }
         if (productParam) {
           groupProdConditions.push(sql`product ILIKE ${'%' + productParam + '%'}`);
@@ -1026,7 +1024,7 @@ export async function GET(req: NextRequest) {
           sql`agent_id IN (${sql.join(agentFilterIds.map((id) => sql`${id}::uuid`), sql`, `)})`
         ];
         if (startDate && endDate) {
-          groupClaimConditions.push(sql`period >= ${startDate}::date AND period <= ${endDate}::date`);
+          groupClaimConditions.push(sql`date_of_settlement >= ${startDate}::date AND date_of_settlement <= ${endDate}::date`);
         }
         if (uwYearParam) {
           groupClaimConditions.push(sql`uw_year = ${uwYearParam}`);
@@ -1068,19 +1066,19 @@ export async function GET(req: NextRequest) {
         }>(sql`
           WITH monthly_prod AS (
             SELECT 
-              TO_CHAR(period, 'YYYY-MM') AS period_month,
+              TO_CHAR(COALESCE(issue_date, start_period), 'YYYY-MM') AS period_month,
               COALESCE(SUM(nilai_premi), 0)::numeric(18,2) AS premi
             FROM production_records
             WHERE ${sql.join(groupProdConditions, sql` AND `)}
-            GROUP BY TO_CHAR(period, 'YYYY-MM')
+            GROUP BY TO_CHAR(COALESCE(issue_date, start_period), 'YYYY-MM')
           ),
           monthly_claim AS (
             SELECT 
-              TO_CHAR(period, 'YYYY-MM') AS period_month,
+              TO_CHAR(date_of_settlement, 'YYYY-MM') AS period_month,
               COALESCE(SUM(gross_claim), 0)::numeric(18,2) AS claim
             FROM claims
             WHERE ${sql.join(groupClaimConditions, sql` AND `)}
-            GROUP BY TO_CHAR(period, 'YYYY-MM')
+            GROUP BY TO_CHAR(date_of_settlement, 'YYYY-MM')
           )
           SELECT 
             COALESCE(p.period_month, c.period_month) AS period_month,

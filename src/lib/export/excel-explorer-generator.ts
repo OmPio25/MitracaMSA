@@ -29,6 +29,7 @@ export async function generatePoliciesExcelWorkbook(policies: any[]): Promise<Bu
     'No. SPAU',
     'Status Polis',
     'Periode Akuntansi',
+    'Tanggal Terbit',
     'Mulai Polis',
     'Akhir Polis',
     'Nama Tertanggung',
@@ -67,6 +68,7 @@ export async function generatePoliciesExcelWorkbook(policies: any[]): Promise<Bu
     { width: 18 }, // No SPAU
     { width: 14 }, // Status
     { width: 16 }, // Periode
+    { width: 14 }, // Terbit
     { width: 14 }, // Mulai
     { width: 14 }, // Akhir
     { width: 28 }, // Tertanggung
@@ -96,6 +98,7 @@ export async function generatePoliciesExcelWorkbook(policies: any[]): Promise<Bu
       p.spauNo || '-',
       p.policyStatus || '-',
       p.period || p.bulan || '-',
+      formatDate(p.issueDate),
       formatDate(p.startPeriod),
       formatDate(p.endPeriod),
       p.insuredName || '-',

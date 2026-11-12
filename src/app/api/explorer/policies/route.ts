@@ -124,12 +124,12 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // 7. Date Range Filter (based on startPeriod or period)
+    // 7. Date Range Filter (based on tanggal terbit polis issueDate with fallback to startPeriod)
     if (startDate) {
-      conditions.push(gte(productionRecords.startPeriod, startDate));
+      conditions.push(sql`COALESCE(${productionRecords.issueDate}, ${productionRecords.startPeriod}) >= ${startDate}::date`);
     }
     if (endDate) {
-      conditions.push(lte(productionRecords.startPeriod, endDate));
+      conditions.push(sql`COALESCE(${productionRecords.issueDate}, ${productionRecords.startPeriod}) <= ${endDate}::date`);
     }
 
     const whereClause = and(...conditions);
@@ -182,6 +182,7 @@ export async function GET(req: NextRequest) {
           policyStatus: productionRecords.policyStatus,
           bulan: productionRecords.bulan,
           period: productionRecords.period,
+          issueDate: productionRecords.issueDate,
           startPeriod: productionRecords.startPeriod,
           endPeriod: productionRecords.endPeriod,
           insuredName: productionRecords.insuredName,

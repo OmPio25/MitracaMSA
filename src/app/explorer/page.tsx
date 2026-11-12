@@ -1012,6 +1012,11 @@ export default function ExplorerPage() {
                           <td className="py-3 px-4 text-slate-600 dark:text-slate-400 whitespace-nowrap">
                             <span className="block font-medium text-slate-800 dark:text-slate-200">{formatDate(row.startPeriod)}</span>
                             <span className="text-[10px] text-slate-400 dark:text-slate-500 block">s/d {formatDate(row.endPeriod)}</span>
+                            {row.issueDate && (
+                              <span className="text-[10px] text-blue-600 dark:text-blue-400 block font-semibold">
+                                Terbit: {formatDate(row.issueDate)}
+                              </span>
+                            )}
                           </td>
 
                           <td className="py-3 px-4 font-semibold text-slate-800 dark:text-slate-200">
@@ -1388,6 +1393,12 @@ export default function ExplorerPage() {
                       <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">SPAU No</span>
                       <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200 truncate block">
                         {selectedPolicyDetail.spauNo || '-'}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 block">Tanggal Terbit</span>
+                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 block">
+                        {selectedPolicyDetail.issueDate ? formatDate(selectedPolicyDetail.issueDate) : '-'}
                       </span>
                     </div>
                     <div>

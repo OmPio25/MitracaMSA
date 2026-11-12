@@ -3,6 +3,7 @@ import { db } from '@/db';
 import { agents, branches, users, productionRecords, claims } from '@/db/schema';
 import { eq, sql } from 'drizzle-orm';
 import { getServerSession } from '@/lib/auth/session';
+import { getCurrentCutoffYear, getCutoffPeriod } from '@/lib/analytics/loss-ratio';
 
 export const dynamic = 'force-dynamic';
 
@@ -303,22 +304,56 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // 2. Hitung KPI Personal (Produksi Polis & Premi Pribadi)
+    // 2. Hitung Siklus CutOff Aktif (Default: Tahun Berjalan, misal 2026: 14-11-2025 s/d 13-11-2026)
+    const cutoffYear = getCurrentCutoffYear();
+    const cutoffPeriod = getCutoffPeriod(cutoffYear);
+
+    // 3. Hitung KPI Personal Produksi (Cutoff Berbasis Tanggal Terbit Polis issue_date & Fallback start_period)
     const personalProdResult = await db.execute(sql`
       SELECT 
-        COUNT(*)::int AS "personalPolicyCount",
+        -- Cutoff Metrics (Tahun Berjalan)
+        COUNT(DISTINCT CASE 
+          WHEN COALESCE(issue_date, start_period) >= ${cutoffPeriod.startDate}::date 
+           AND COALESCE(issue_date, start_period) <= ${cutoffPeriod.endDate}::date 
+          THEN policy_no 
+        END)::int AS "personalCutoffPolicyCount",
+        COALESCE(SUM(CASE 
+          WHEN COALESCE(issue_date, start_period) >= ${cutoffPeriod.startDate}::date 
+           AND COALESCE(issue_date, start_period) <= ${cutoffPeriod.endDate}::date 
+          THEN nilai_premi 
+          ELSE 0 
+        END), 0)::numeric(18, 2) AS "personalCutoffGrossPremium",
+
+        -- All-time Metrics (Historis Kumulatif)
+        COUNT(DISTINCT policy_no)::int AS "personalPolicyCount",
         COALESCE(SUM(nilai_premi), 0)::numeric(18, 2) AS "personalGrossPremium"
       FROM production_records
       WHERE agent_id = ${targetAgentId}::uuid
         AND deleted_at IS NULL;
     `);
     const personalProdRows = (personalProdResult as any)?.rows || personalProdResult || [];
+    const personalCutoffPolicyCount = Number(personalProdRows[0]?.personalCutoffPolicyCount || 0);
+    const personalCutoffGrossPremium = Number(personalProdRows[0]?.personalCutoffGrossPremium || 0);
     const personalPolicyCount = Number(personalProdRows[0]?.personalPolicyCount || 0);
     const personalGrossPremium = Number(personalProdRows[0]?.personalGrossPremium || 0);
 
-    // 3. Hitung KPI Klaim & Loss Ratio Personal
+    // 4. Hitung KPI Personal Klaim & Loss Ratio (Cutoff Berbasis date_of_settlement)
     const personalClaimResult = await db.execute(sql`
       SELECT 
+        -- Cutoff Metrics (Tahun Berjalan)
+        COUNT(DISTINCT CASE 
+          WHEN date_of_settlement >= ${cutoffPeriod.startDate}::date 
+           AND date_of_settlement <= ${cutoffPeriod.endDate}::date 
+          THEN claim_no 
+        END)::int AS "personalCutoffClaimCount",
+        COALESCE(SUM(CASE 
+          WHEN date_of_settlement >= ${cutoffPeriod.startDate}::date 
+           AND date_of_settlement <= ${cutoffPeriod.endDate}::date 
+          THEN gross_claim 
+          ELSE 0 
+        END), 0)::numeric(18, 2) AS "personalCutoffGrossClaim",
+
+        -- All-time Metrics (Historis Kumulatif)
         COUNT(*)::int AS "personalClaimCount",
         COALESCE(SUM(gross_claim), 0)::numeric(18, 2) AS "personalGrossClaim"
       FROM claims
@@ -326,8 +361,14 @@ export async function GET(req: NextRequest) {
         AND deleted_at IS NULL;
     `);
     const personalClaimRows = (personalClaimResult as any)?.rows || personalClaimResult || [];
+    const personalCutoffClaimCount = Number(personalClaimRows[0]?.personalCutoffClaimCount || 0);
+    const personalCutoffGrossClaim = Number(personalClaimRows[0]?.personalCutoffGrossClaim || 0);
     const personalClaimCount = Number(personalClaimRows[0]?.personalClaimCount || 0);
     const personalGrossClaim = Number(personalClaimRows[0]?.personalGrossClaim || 0);
+
+    const personalCutoffLossRatio = personalCutoffGrossPremium > 0
+      ? Number(((personalCutoffGrossClaim / personalCutoffGrossPremium) * 100).toFixed(2))
+      : 0;
 
     const personalLossRatio = personalGrossPremium > 0
       ? Number(((personalGrossClaim / personalGrossPremium) * 100).toFixed(2))
@@ -377,6 +418,14 @@ export async function GET(req: NextRequest) {
         createdAt: agent.createdAt,
       },
       kpi: {
+        cutoffYear,
+        cutoffStartDate: cutoffPeriod.startDate,
+        cutoffEndDate: cutoffPeriod.endDate,
+        personalCutoffPolicyCount,
+        personalCutoffGrossPremium,
+        personalCutoffClaimCount,
+        personalCutoffGrossClaim,
+        personalCutoffLossRatio,
         personalPolicyCount,
         personalGrossPremium,
         personalClaimCount,
@@ -386,6 +435,12 @@ export async function GET(req: NextRequest) {
         totalNetworkDownlinesCount,
         totalAssistants,
         activeAssistants,
+      },
+      cutoff: {
+        year: cutoffYear,
+        label: cutoffPeriod.label,
+        startDate: cutoffPeriod.startDate,
+        endDate: cutoffPeriod.endDate,
       },
       callerRole: role,
       isOwner: role === 'AGENT',

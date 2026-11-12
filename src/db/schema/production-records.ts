@@ -36,6 +36,7 @@ export const productionRecords = pgTable('production_records', {
   // NOTE: policy_no is NON-UNIQUE across periods to support endorsements & installment payments
   policyNo: varchar('policy_no', { length: 100 }).notNull(),  // Policy No
   
+  issueDate: date('issue_date'),                              // Tanggal Terbit Polis / Booking Date / Submit Date
   startPeriod: date('start_period'),                          // Start Period
   endPeriod: date('end_period'),                              // End Period
   insuredName: text('insured_name'),                          // Insured Name
@@ -67,6 +68,7 @@ export const productionRecords = pgTable('production_records', {
   policyPeriodIdx: index('prod_policy_period_idx').on(table.policyNo, table.period),
   branchIdx: index('prod_branch_idx').on(table.branchId),
   sourceAgentIdx: index('prod_source_agent_idx').on(table.sourceAgentId),
+  issueDateIdx: index('production_records_issue_date_idx').on(table.issueDate),
   isMmIdx: index('production_records_is_mm_idx').on(table.isMm),
   objectDetailsGinIdx: index('prod_object_details_gin_idx').using('gin', table.objectDetails),
   deletedAtIdx: index('prod_deleted_at_idx').on(table.deletedAt),

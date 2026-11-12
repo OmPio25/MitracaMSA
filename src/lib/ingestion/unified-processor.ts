@@ -460,6 +460,7 @@ async function processChunk(
                 nilaiDiskon: productionRecords.nilaiDiskon,
                 nilaiAkusisi: productionRecords.nilaiAkusisi,
                 objectDetails: productionRecords.objectDetails,
+                issueDate: productionRecords.issueDate,
                 startPeriod: productionRecords.startPeriod,
                 endPeriod: productionRecords.endPeriod,
               })
@@ -574,6 +575,7 @@ async function processChunk(
                 await db
                   .update(productionRecords)
                   .set({
+                    issueDate: d.issueDate ? (d.issueDate as any) : undefined,
                     startPeriod: d.startPeriod as any,
                     endPeriod: d.endPeriod as any,
                     updatedAt: new Date(),
@@ -616,6 +618,7 @@ async function processChunk(
                   spauType: d.spauType,
                   spauNo: d.spauNo,
                   policyNo: d.policyNo,
+                  issueDate: d.issueDate as any,
                   startPeriod: d.startPeriod as any,
                   endPeriod: d.endPeriod as any,
                   insuredName: d.insuredName,
@@ -680,6 +683,7 @@ async function processChunk(
                   spauType: d.spauType,
                   spauNo: d.spauNo,
                   policyNo: d.policyNo,
+                  issueDate: d.issueDate as any,
                   startPeriod: d.startPeriod as any,
                   endPeriod: d.endPeriod as any,
                   insuredName: d.insuredName,
@@ -742,6 +746,7 @@ async function processChunk(
               spauType: d.spauType,
               spauNo: d.spauNo,
               policyNo: d.policyNo,
+              issueDate: d.issueDate as any,
               startPeriod: d.startPeriod as any,
               endPeriod: d.endPeriod as any,
               insuredName: d.insuredName,

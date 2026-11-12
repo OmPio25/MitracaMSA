@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useTransition } from 'react';
 import { formatDate as normalizeDate, formatDateTime } from '@/lib/utils';
+import { evaluateLossRatio } from '@/lib/analytics/loss-ratio';
 import {
   UserCheck,
   Users,
@@ -53,6 +54,14 @@ interface AgentProfile {
 }
 
 interface AgentKPI {
+  cutoffYear?: number;
+  cutoffStartDate?: string;
+  cutoffEndDate?: string;
+  personalCutoffGrossPremium?: number;
+  personalCutoffPolicyCount?: number;
+  personalCutoffGrossClaim?: number;
+  personalCutoffClaimCount?: number;
+  personalCutoffLossRatio?: number;
   personalPolicyCount: number;
   personalGrossPremium: number;
   personalClaimCount: number;
@@ -1060,60 +1069,72 @@ export default function AgentPortalPage() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 animate-in fade-in duration-300">
           {/* Card 1: Portofolio Polis Pribadi */}
           <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Polis Pribadi
-              </span>
-              <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
-                <Layers className="w-4 h-4" />
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Polis Pribadi
+                </span>
+                <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                  <Layers className="w-4 h-4" />
+                </div>
               </div>
+              {kpi.cutoffStartDate && kpi.cutoffEndDate && (
+                <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800/80 text-[10px] font-medium text-slate-500 dark:text-slate-400 mb-2">
+                  ({normalizeDate(kpi.cutoffStartDate)} s/d {normalizeDate(kpi.cutoffEndDate)})
+                </div>
+              )}
             </div>
             <div>
-              <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100">
-                {kpi.personalPolicyCount.toLocaleString('id-ID')}{' '}
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Polis</span>
+              <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
+                {formatIDR(kpi.personalCutoffGrossPremium ?? kpi.personalGrossPremium)}
               </p>
-              <p className="text-xs font-bold text-blue-600 dark:text-blue-400 mt-1 truncate">
-                {formatIDR(kpi.personalGrossPremium)}
+              <p className="text-[11px] font-bold text-blue-600 dark:text-blue-400 mt-0.5">
+                Premi {kpi.cutoffYear || 2026}
               </p>
+              <div className="flex items-center gap-1.5 mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+                <span className="font-bold text-slate-800 dark:text-slate-200">
+                  {(kpi.personalCutoffPolicyCount ?? kpi.personalPolicyCount).toLocaleString('id-ID')} Polis {kpi.cutoffYear || 2026}
+                </span>
+              </div>
             </div>
           </div>
 
           {/* Card 2: Klaim & Loss Ratio Pribadi */}
-          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Loss Ratio Pribadi
-              </span>
-              <div
-                className={`w-7 h-7 rounded-lg flex items-center justify-center ${
-                  kpi.personalLossRatio <= 50
-                    ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400'
-                    : kpi.personalLossRatio <= 65
-                    ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400'
-                    : 'bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400'
-                }`}
-              >
-                <TrendingUp className="w-4 h-4" />
+          {(() => {
+            const lrValue = kpi.personalCutoffLossRatio ?? kpi.personalLossRatio;
+            const lrEval = evaluateLossRatio(lrValue);
+            return (
+              <div className={`p-4 rounded-2xl border shadow-xs flex flex-col justify-between ${lrEval.bgClass} dark:bg-slate-900 ${lrEval.borderClass} dark:border-slate-800`}>
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                      Loss Ratio Pribadi
+                    </span>
+                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${lrEval.badgeClass}`}>
+                      {lrEval.label}
+                    </span>
+                  </div>
+                  {kpi.cutoffStartDate && kpi.cutoffEndDate && (
+                    <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-slate-100/80 dark:bg-slate-800/80 text-[10px] font-medium text-slate-500 dark:text-slate-400 mb-2">
+                      ({normalizeDate(kpi.cutoffStartDate)} s/d {normalizeDate(kpi.cutoffEndDate)})
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <p className={`text-xl sm:text-2xl font-black tracking-tight ${lrEval.textClass}`}>
+                    {lrValue}%
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    Rasio Klaim CutOff {kpi.cutoffYear || 2026}
+                  </p>
+                  <div className="mt-2.5 pt-2 border-t border-slate-200/60 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 truncate">
+                    Beban Klaim: <span className="font-semibold text-slate-900 dark:text-slate-200">{formatIDR(kpi.personalCutoffGrossClaim ?? kpi.personalGrossClaim)}</span>
+                    <span className="text-[11px] text-slate-400 ml-1">({kpi.personalCutoffClaimCount ?? kpi.personalClaimCount} klaim)</span>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div>
-              <p
-                className={`text-xl sm:text-2xl font-black ${
-                  kpi.personalLossRatio <= 50
-                    ? 'text-emerald-700 dark:text-emerald-400'
-                    : kpi.personalLossRatio <= 65
-                    ? 'text-amber-700 dark:text-amber-400'
-                    : 'text-rose-700 dark:text-rose-400'
-                }`}
-              >
-                {kpi.personalLossRatio}%
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
-                Beban Klaim: <span className="font-semibold text-slate-800 dark:text-slate-200">{formatIDR(kpi.personalGrossClaim)}</span>
-              </p>
-            </div>
-          </div>
+            );
+          })()}
 
           {/* Card 3: Jaringan Tim Downline */}
           <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between">

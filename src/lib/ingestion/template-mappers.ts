@@ -145,6 +145,7 @@ export interface SanitizedMasterProduksi {
   spauType: string | null;
   spauNo: string | null;
   policyNo: string;
+  issueDate: string | null;
   startPeriod: string | null;
   endPeriod: string | null;
   insuredName: string | null;
@@ -248,7 +249,8 @@ export function mapMasterProduksiRow(
   [
     'policy no', 'agent id', 'bulan', 'policy status', 'profile id', 'agent name',
     'agent status', 'branch', 'representative', 'product', 'coverage', 'renewed',
-    'prev policy', 'spau type', 'spau no', 'start period', 'end period', 'insured name',
+    'prev policy', 'spau type', 'spau no', 'tanggal terbit', 'submit date', 'booking_date',
+    'booking date', 'issue date', 'tgl terbit', 'start period', 'end period', 'insured name',
     'currency of tsi', 'rate of tsi', 'tsi', 'tsi in idr', 'nilai premi', 'nilai komisi',
     'nilai diskon', 'nilai akusisi', 'premi', 'cabang', 'komisi', 'diskon', 'akuisisi',
     'nama produk', 'stat', 'nama', 'tahun'
@@ -275,6 +277,10 @@ export function mapMasterProduksiRow(
   const rawPrevPolicy = getValueByMapping(row, 'Prev Policy', columnMapping, ['polis lama', 'policy no ori']);
   const rawSpauType = getValueByMapping(row, 'SPAU Type', columnMapping, ['jenis spau', 'polis type', 'type']);
   const rawSpauNo = getValueByMapping(row, 'SPAU No', columnMapping, ['no spau', 'sppa no', 'no sppa', 'sppa']);
+  const rawIssueDate = getValueByMapping(row, 'Tanggal Terbit', columnMapping, [
+    'tanggal terbit', 'tgl terbit', 'submit date', 'submit_date', 'booking_date', 'booking date',
+    'issue date', 'issued date', 'tgl submit', 'tanggal submit', 'tgl booking', 'policy issue date', 'date issued'
+  ]);
   const rawStartPeriod = getValueByMapping(row, 'Start Period', columnMapping, ['periode awal', 'tgl mulai', 'inception date']);
   const rawEndPeriod = getValueByMapping(row, 'End Period', columnMapping, ['periode akhir', 'tgl akhir', 'expiry date']);
   const rawInsuredName = getValueByMapping(row, 'Insured Name', columnMapping, ['nama tertanggung', 'tertanggung', 'nama']);
@@ -306,6 +312,7 @@ export function mapMasterProduksiRow(
       spauType: rawSpauType ? String(rawSpauType).trim() : null,
       spauNo: rawSpauNo ? String(rawSpauNo).trim() : null,
       policyNo,
+      issueDate: rawIssueDate ? parseExactDate(rawIssueDate) : null,
       startPeriod: rawStartPeriod ? parseExactDate(rawStartPeriod) : null,
       endPeriod: rawEndPeriod ? parseExactDate(rawEndPeriod) : null,
       insuredName: rawInsuredName ? String(rawInsuredName).trim() : null,

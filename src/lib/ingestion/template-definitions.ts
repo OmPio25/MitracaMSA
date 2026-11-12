@@ -203,6 +203,20 @@ export const TEMPLATE_DEFINITIONS: Record<TemplateType, TemplateDefinition> = {
         aliases: ['policy no', 'no policy', 'no polis', 'nomor polis', 'policy number', 'policy_no', 'policyno'],
       },
       {
+        header: 'Tanggal Terbit',
+        required: false,
+        description: 'Tanggal polis diterbitkan / booking / submit date',
+        exampleValue: '2026-01-15',
+        aliases: [
+          'tanggal terbit', 'tgl terbit', 'tgl_terbit', 'tanggal_terbit',
+          'submit date', 'submit_date', 'submitdate',
+          'booking_date', 'booking date', 'bookingdate',
+          'issue date', 'issue_date', 'issued date', 'issued_date',
+          'tgl submit', 'tanggal submit', 'tgl booking', 'tanggal booking',
+          'policy issue date', 'date issued',
+        ],
+      },
+      {
         header: 'Start Period',
         required: false,
         description: 'Tanggal awal pertanggungan',
