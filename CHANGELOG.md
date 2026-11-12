@@ -9,6 +9,18 @@ Skema Penomoran Versi:
 
 ---
 
+## [0.0.1.11] - 2026-11-12
+### Ditambahkan
+- Alur otomatisasi **CI/CD Pipeline** menggunakan GitHub Actions di `.github/workflows/ci.yml` yang berjalan otomatis pada setiap `push` dan `pull_request` ke branch `main`.
+- Berkas konfigurasi linter `.eslintrc.json` (`next/core-web-vitals`).
+- Script package `typecheck` (`tsc --noEmit`) dan `test:cutoff` pada `package.json`.
+- Dependensi dev `eslint` dan `eslint-config-next` terpasang.
+
+### Diubah
+- Perbaikan unescaped quote entities di `src/app/agent/portal/page.tsx` dan `src/app/hierarchy/page.tsx` agar lolos verifikasi linter 100%.
+
+---
+
 ## [0.0.1.10] - 2026-11-12
 ### Diubah
 - **Portal Mandiri Agen (`/agent/portal`)**:

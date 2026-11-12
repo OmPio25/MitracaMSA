@@ -215,7 +215,7 @@ export default function HierarchyPage() {
           <p className="text-slate-600 dark:text-slate-400 text-sm max-w-xl mx-auto mt-2 leading-relaxed">
             Untuk menjaga halaman tetap responsif dan menghindari beban berlebih pada browser terhadap{' '}
             <span className="font-semibold text-slate-900 dark:text-slate-100">14.000+ data agen</span>, visualisasi pohon hirarki baru akan dimuat setelah Anda menentukan parameter dan menekan tombol{' '}
-            <span className="font-semibold text-blue-600 dark:text-blue-400">"Terapkan Filter"</span> di atas.
+            <span className="font-semibold text-blue-600 dark:text-blue-400">&quot;Terapkan Filter&quot;</span> di atas.
           </p>
 
           {/* Quick Action Shortcuts */}

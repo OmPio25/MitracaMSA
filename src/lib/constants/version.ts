@@ -7,5 +7,5 @@
  * - Live Production: 1.0.0
  */
 
-export const APP_VERSION = '0.0.1.10';
+export const APP_VERSION = '0.0.1.11';
 export const APP_STAGE = 'Development';

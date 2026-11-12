@@ -1323,7 +1323,7 @@ export default function AgentPortalPage() {
                       </p>
                       {canManage && !isReadOnly && !searchTerm && (
                         <p className="text-slate-400 dark:text-slate-500 text-[11px] max-w-sm">
-                          Klik tombol <strong>"Tambah Asisten Baru"</strong> di atas untuk mendaftarkan staf operasional.
+                          Klik tombol <strong>&quot;Tambah Asisten Baru&quot;</strong> di atas untuk mendaftarkan staf operasional.
                         </p>
                       )}
                     </div>
