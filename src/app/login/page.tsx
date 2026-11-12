@@ -91,7 +91,7 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { branding } = useAppBranding();
-  const redirectPath = searchParams.get('redirect') || '/analytics';
+  const redirectParam = searchParams.get('redirect');
 
   const cardColor = branding.cardColor || '#ffffff';
   const cardMobileOpacity = branding.cardMobileOpacity ?? 85;
@@ -145,10 +145,20 @@ function LoginForm() {
         throw new Error(data.error || 'Login gagal');
       }
 
-      // Berhasil login, arahkan ke halaman Analitik & Loss Ratio (/analytics) untuk semua peran pengguna
-      let target = redirectPath;
-      if (redirectPath === '/' || redirectPath === '/hierarchy') {
-        target = '/analytics';
+      // Tentukan target pendaratan pasca-login berbasis peran (Role-Based Landing Matrix)
+      // - AGENT & OFFICER_AGENT -> /agent/portal
+      // - KACAB & PIC_CABANG -> /analytics
+      // - SUPERADMIN, ADMIN, AUDIT -> /analytics
+      const userRole = data.user?.role;
+      const isAgentRole = userRole === 'AGENT' || userRole === 'OFFICER_AGENT';
+      const defaultLanding = isAgentRole ? '/agent/portal' : '/analytics';
+
+      let target: string;
+      if (redirectParam && redirectParam !== '/' && redirectParam !== '/analytics') {
+        // Hormati deep-link jika ada halaman tujuan spesifik (misal: /explorer, /hierarchy, dll)
+        target = redirectParam;
+      } else {
+        target = defaultLanding;
       }
 
       window.location.href = target;

@@ -116,7 +116,12 @@ export async function middleware(req: NextRequest) {
         { status: 403 }
       );
     }
-    // Alihkan peran non-admin dari root upload langsung ke dashboard Analitik & Loss Ratio
+    // Alihkan peran non-admin dari root upload sesuai matriks pendaratan peran:
+    // - AGENT & OFFICER_AGENT diarahkan ke /agent/portal
+    // - KACAB, PIC_CABANG, AUDIT diarahkan ke /analytics
+    if (role === 'AGENT' || role === 'OFFICER_AGENT') {
+      return NextResponse.redirect(new URL('/agent/portal', req.url));
+    }
     return NextResponse.redirect(new URL('/analytics', req.url));
   }
 

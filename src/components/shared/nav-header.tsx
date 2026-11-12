@@ -92,6 +92,7 @@ export function NavHeader() {
   const canAccessUpload = role === 'SUPERADMIN' || role === 'ADMIN';
   const isSuperAdmin = role === 'SUPERADMIN';
   const isAdmin = role === 'ADMIN';
+  const defaultHomeHref = role === 'AGENT' || role === 'OFFICER_AGENT' ? '/agent/portal' : '/analytics';
 
   const isSettingsActive =
     pathname?.startsWith('/settings') || pathname?.startsWith('/admin');
@@ -122,7 +123,7 @@ export function NavHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
-            <Link href="/analytics" className="flex items-center gap-2.5 group">
+            <Link href={defaultHomeHref} className="flex items-center gap-2.5 group">
               {branding.logoType === 'image' && branding.logoUrl ? (
                 <div className="w-9 h-9 rounded-lg bg-white border border-slate-200 shadow-sm flex items-center justify-center p-0.5 overflow-hidden group-hover:shadow transition shrink-0">
                   <img

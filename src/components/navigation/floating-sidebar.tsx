@@ -91,6 +91,7 @@ export function FloatingSidebar() {
   const canAccessUpload = role === 'SUPERADMIN' || role === 'ADMIN';
   const isSuperAdmin = role === 'SUPERADMIN';
   const isAdmin = role === 'ADMIN';
+  const defaultHomeHref = role === 'AGENT' || role === 'OFFICER_AGENT' ? '/agent/portal' : '/analytics';
 
   const getRoleBadgeStyle = (r?: string) => {
     switch (r) {
@@ -267,7 +268,7 @@ export function FloatingSidebar() {
           }`}
         >
           <Link
-            href="/analytics"
+            href={defaultHomeHref}
             className={`flex items-center gap-3 group min-w-0 ${
               isCollapsed ? 'justify-center' : 'overflow-hidden'
             }`}

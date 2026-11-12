@@ -1,6 +1,6 @@
 {
   "name": "mitracamsa",
-  "version": "0.0.1.11",
+  "version": "0.0.1.12",
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
