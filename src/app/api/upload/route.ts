@@ -5,9 +5,8 @@ import { randomUUID } from 'node:crypto';
 import { db } from '@/db';
 import { uploadBatches } from '@/db/schema';
 import { eq, desc } from 'drizzle-orm';
-import { processUploadedExcelFile } from '@/lib/ingestion/unified-processor';
+import { enqueueUploadJob, getUploadQueueStats } from '@/lib/ingestion/job-queue';
 import { getServerSession } from '@/lib/auth/session';
-import { logActivity } from '@/lib/audit/audit-logger';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300; // 5 minutes max processing
@@ -63,6 +62,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       active: batch.status === 'PROCESSING' || batch.status === 'QUEUED',
+      queue: getUploadQueueStats(),
       batch,
     });
   } catch (error: any) {
@@ -108,52 +108,55 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
     await writeFile(tempFilePath, buffer);
 
-    // Run unified ingestion engine (auto-detects template, auto-maps fixed headers)
-    const result = await processUploadedExcelFile(
-      tempFilePath,
-      file.name,
-      file.size,
-      session?.userId || null
-    );
+    // Buat record antrian batch (QUEUED) terlebih dahulu dan jalankan worker latar belakang
+    const [queuedBatch] = await db
+      .insert(uploadBatches)
+      .values({
+        batchType: 'DATA_AGENT', // Diperbarui saat auto-detect berjalan di worker
+        fileName: file.name,
+        fileSize: file.size,
+        uploadedBy: session?.userId || null,
+        status: 'QUEUED',
+      })
+      .returning();
 
-    // Catat audit log aktivitas upload batch
-    await logActivity({
+    enqueueUploadJob({
+      batchId: queuedBatch.id,
+      filePath: tempFilePath,
+      fileName: file.name,
+      fileSize: file.size,
       userId: session?.userId || null,
       userName: session?.name || 'Administrator',
       userEmail: session?.email || null,
       userRole: session?.role || 'ADMIN',
-      action: 'UPLOAD_BATCH_PROCESSED',
-      category: 'UPLOAD',
-      status: (result as any).status === 'FAILED' ? 'FAILED' : 'SUCCESS',
-      description: `Unggah file Excel '${file.name}' (${result.detectedType}): ${result.totalRows} baris diproses (${result.successRows} sukses, ${result.failedRows} gagal)`,
-      req,
-      metadata: {
-        batchId: result.batchId,
-        fileName: file.name,
-        fileSize: file.size,
-        detectedType: result.detectedType,
-        totalRows: result.totalRows,
-        successRows: result.successRows,
-        failedRows: result.failedRows,
-      },
     });
 
-    return NextResponse.json({
-      success: true,
-      message: `File berhasil diproses sebagai ${result.detectedType}.`,
-      data: result,
-    });
-  } catch (error: any) {
+    // Clear tempFilePath reference so catch/finally only cleans up on pre-enqueue errors
+    tempFilePath = null;
+
     return NextResponse.json(
       {
-        success: false,
-        error: error.message || 'Terjadi kesalahan sistem saat memproses file Excel.',
+        success: true,
+        queued: true,
+        message: 'File masuk antrian pemrosesan latar belakang.',
+        data: {
+          batchId: queuedBatch.id,
+          status: queuedBatch.status,
+          fileName: queuedBatch.fileName,
+        },
       },
-      { status: 500 }
+      { status: 202 }
     );
-  } finally {
+  } catch (error: any) {
     if (tempFilePath) {
       await unlink(tempFilePath).catch(() => {});
     }
+    return NextResponse.json(
+      {
+        success: false,
+        error: error.message || 'Terjadi kesalahan sistem saat mengunggah file Excel.',
+      },
+      { status: 500 }
+    );
   }
 }

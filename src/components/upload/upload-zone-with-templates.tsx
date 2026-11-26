@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { 
   Download, 
@@ -50,13 +50,76 @@ interface ProgressInfo {
 export function UploadZoneWithTemplates() {
   const [isUploading, setIsUploading] = useState(false);
   const [progress, setProgress] = useState<ProgressInfo | null>(null);
+  const [queueStatus, setQueueStatus] = useState<'QUEUED' | 'PROCESSING' | null>(null);
   const [result, setResult] = useState<UploadResult | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const eventSourceRef = useRef<EventSource | null>(null);
+
+  useEffect(() => {
+    return () => {
+      eventSourceRef.current?.close();
+    };
+  }, []);
 
   // Template download trigger
   const handleDownloadTemplate = (type: 'DATA_AGENT' | 'MASTER_PRODUKSI' | 'MASTER_CLAIM') => {
     window.open(`/api/upload/template?type=${type}`, '_blank');
   };
+
+  const subscribeToProgress = useCallback((batchId: string) => {
+    eventSourceRef.current?.close();
+    const es = new EventSource(`/api/upload/progress?batchId=${encodeURIComponent(batchId)}`);
+    eventSourceRef.current = es;
+
+    es.onmessage = (event) => {
+      try {
+        const payload = JSON.parse(event.data);
+        if (payload.type === 'ERROR') {
+          setErrorMessage(payload.error || 'Gagal memproses file.');
+          setIsUploading(false);
+          setProgress(null);
+          setQueueStatus(null);
+          es.close();
+          return;
+        }
+
+        if (payload.batch) {
+          setQueueStatus(payload.batch.status === 'QUEUED' ? 'QUEUED' : 'PROCESSING');
+          setProgress({
+            totalRows: payload.batch.totalRows,
+            processedRows: payload.batch.processedRows,
+            successRows: payload.batch.successRows,
+            skippedRows: payload.batch.skippedRows,
+            warningRows: payload.batch.warningRows,
+            failedRows: payload.batch.failedRows,
+          });
+        }
+
+        if (payload.type === 'DONE') {
+          if (payload.batch?.status === 'FAILED') {
+            const failMsg = payload.result?.warningDetails?.explanation || 'Proses ingestion gagal.';
+            setErrorMessage(failMsg);
+          } else if (payload.result) {
+            setResult(payload.result);
+          }
+          setIsUploading(false);
+          setProgress(null);
+          setQueueStatus(null);
+          es.close();
+        }
+      } catch {
+        // ignore malformed SSE chunk
+      }
+    };
+
+    es.onerror = () => {
+      setErrorMessage('Koneksi pemantauan progres SSE terputus. Cek status batch terbaru.');
+      setIsUploading(false);
+      setProgress(null);
+      setQueueStatus(null);
+      es.close();
+    };
+  }, []);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return;
@@ -64,33 +127,12 @@ export function UploadZoneWithTemplates() {
 
     setIsUploading(true);
     setProgress(null);
+    setQueueStatus('QUEUED');
     setResult(null);
     setErrorMessage(null);
 
     const formData = new FormData();
     formData.append('file', file);
-
-    // Live progress polling while uploading
-    const pollInterval = setInterval(async () => {
-      try {
-        const res = await fetch('/api/upload');
-        if (res.ok) {
-          const data = await res.json();
-          if (data.batch && data.active) {
-            setProgress({
-              totalRows: data.batch.totalRows,
-              processedRows: data.batch.processedRows,
-              successRows: data.batch.successRows,
-              skippedRows: data.batch.skippedRows,
-              warningRows: data.batch.warningRows,
-              failedRows: data.batch.failedRows,
-            });
-          }
-        }
-      } catch {
-        // ignore polling errors
-      }
-    }, 800);
 
     try {
       const response = await fetch('/api/upload', {
@@ -104,15 +146,21 @@ export function UploadZoneWithTemplates() {
         throw new Error(json.error || 'Gagal memproses file.');
       }
 
-      setResult(json.data);
+      if (json.queued && json.data?.batchId) {
+        subscribeToProgress(json.data.batchId);
+      } else {
+        setResult(json.data);
+        setIsUploading(false);
+        setProgress(null);
+        setQueueStatus(null);
+      }
     } catch (err: any) {
       setErrorMessage(err.message || 'Terjadi kesalahan saat upload.');
-    } finally {
-      clearInterval(pollInterval);
       setIsUploading(false);
       setProgress(null);
+      setQueueStatus(null);
     }
-  }, []);
+  }, [subscribeToProgress]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -221,6 +269,8 @@ export function UploadZoneWithTemplates() {
                 <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
                   {progress && progress.processedRows > 0
                     ? `Memproses data: ${progress.processedRows.toLocaleString('id-ID')} baris...`
+                    : queueStatus === 'QUEUED'
+                    ? 'File masuk antrian latar belakang (SSE)...'
                     : 'Mempersiapkan data dan memuat validasi sistem...'}
                 </p>
 

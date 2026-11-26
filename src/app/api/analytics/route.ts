@@ -9,6 +9,7 @@ import {
   evaluateLossRatio,
 } from '@/lib/analytics/loss-ratio';
 import { getServerSession } from '@/lib/auth/session';
+import { hasBranchSummaryMaterializedView } from '@/lib/db/performance-views';
 
 export const dynamic = 'force-dynamic';
 
@@ -159,7 +160,20 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 3. Query Agregasi Produksi (Production Records - Strict Produksi MM berbasis Tanggal Terbit issue_date / start_period)
+    // 3. Query Agregasi Produksi & Klaim
+    // Fast-path: gunakan Materialized View `mv_branch_cutoff_summary` jika filter standar
+    // (tanpa customStart/customEnd, tanpa product/uwYear/agentCode, dan bukan role Agent)
+    const canUseMaterializedView =
+      !customStart &&
+      !customEnd &&
+      !productParam &&
+      !uwYearParam &&
+      !agentCodeParam &&
+      !isAgentRole &&
+      (await hasBranchSummaryMaterializedView());
+
+    const mvCutoffYear = activeCutoffYear ?? 0;
+
     const prodConditions = [sql`pr.deleted_at IS NULL`, sql`pr.is_mm = true`];
     if (startDate && endDate) {
       prodConditions.push(sql`COALESCE(pr.issue_date, pr.start_period) >= ${startDate}::date AND COALESCE(pr.issue_date, pr.start_period) <= ${endDate}::date`);
@@ -176,24 +190,6 @@ export async function GET(req: NextRequest) {
 
     const prodWhereSql = sql.join(prodConditions, sql` AND `);
 
-    const [prodKpi] = await db.execute<{
-      total_premi: string;
-      total_komisi: string;
-      total_akusisi: string;
-      total_policies: string;
-      total_records: string;
-    }>(sql`
-      SELECT 
-        COALESCE(SUM(pr.nilai_premi), 0)::numeric(18,2) AS total_premi,
-        COALESCE(SUM(pr.nilai_komisi), 0)::numeric(18,2) AS total_komisi,
-        COALESCE(SUM(pr.nilai_akusisi), 0)::numeric(18,2) AS total_akusisi,
-        COUNT(DISTINCT pr.policy_no)::integer AS total_policies,
-        COUNT(pr.id)::integer AS total_records
-      FROM production_records pr
-      WHERE ${prodWhereSql}
-    `);
-
-    // 4. Query Agregasi Klaim (Claims - Strict Klaim MM berbasis date_of_settlement)
     const claimConditions = [sql`cl.deleted_at IS NULL`, sql`cl.is_mm = true`];
     if (startDate && endDate) {
       claimConditions.push(sql`cl.date_of_settlement >= ${startDate}::date AND cl.date_of_settlement <= ${endDate}::date`);
@@ -213,85 +209,147 @@ export async function GET(req: NextRequest) {
 
     const claimWhereSql = sql.join(claimConditions, sql` AND `);
 
-    const [claimKpi] = await db.execute<{
-      total_claim: string;
-      total_indemnity: string;
-      total_deductible: string;
-      total_salvage: string;
-      total_claims_count: string;
-      total_records: string;
-    }>(sql`
-      SELECT 
-        COALESCE(SUM(cl.gross_claim), 0)::numeric(18,2) AS total_claim,
-        COALESCE(SUM(cl.indemnity), 0)::numeric(18,2) AS total_indemnity,
-        COALESCE(SUM(cl.deductible), 0)::numeric(18,2) AS total_deductible,
-        COALESCE(SUM(cl.salvage), 0)::numeric(18,2) AS total_salvage,
-        COUNT(DISTINCT cl.claim_no)::integer AS total_claims_count,
-        COUNT(cl.id)::integer AS total_records
-      FROM claims cl
-      LEFT JOIN agents ag ON cl.agent_id = ag.id
-      WHERE ${claimWhereSql}
-    `);
-
-    // 4b. ALL LR Agregasi (MM + Non-MM) untuk role manajemen selain Agent/Officer
+    let totalPremi = 0;
+    let totalClaim = 0;
+    let totalKomisi = 0;
+    let totalPolicies = 0;
+    let totalClaimsCount = 0;
     let totalPremiAll = 0;
     let totalClaimAll = 0;
     let allLossRatio: number | null = null;
+    let mvServed = false;
 
-    if (!isAgentRole) {
-      // All Produksi (MM + Non-MM)
-      const allProdConditions = [sql`pr.deleted_at IS NULL`];
-      if (startDate && endDate) {
-        allProdConditions.push(sql`COALESCE(pr.issue_date, pr.start_period) >= ${startDate}::date AND COALESCE(pr.issue_date, pr.start_period) <= ${endDate}::date`);
-      }
-      if (branchId) {
-        allProdConditions.push(sql`pr.branch_id = ${branchId}::uuid`);
-      }
-      if (productParam) {
-        allProdConditions.push(sql`pr.product ILIKE ${'%' + productParam + '%'}`);
-      }
-
-      const [allProdKpi] = await db.execute<{ total_premi_all: string }>(sql`
-        SELECT COALESCE(SUM(pr.nilai_premi), 0)::numeric(18,2) AS total_premi_all
-        FROM production_records pr
-        WHERE ${sql.join(allProdConditions, sql` AND `)}
-      `);
-      totalPremiAll = parseFloat(allProdKpi?.total_premi_all || '0');
-
-      // All Klaim (MM + Non-MM)
-      const allClaimConditions = [sql`cl.deleted_at IS NULL`];
-      if (startDate && endDate) {
-        allClaimConditions.push(sql`cl.date_of_settlement >= ${startDate}::date AND cl.date_of_settlement <= ${endDate}::date`);
-      }
-      if (branchId) {
-        allClaimConditions.push(sql`COALESCE(cl.branch_id, ag.branch_id) = ${branchId}::uuid`);
-      }
-      if (uwYearParam) {
-        allClaimConditions.push(sql`cl.uw_year = ${uwYearParam}`);
-      }
-      if (productParam) {
-        allClaimConditions.push(sql`cl.nama_produk ILIKE ${'%' + productParam + '%'}`);
-      }
-
-      const [allClaimKpi] = await db.execute<{
-        total_claim_all: string;
+    if (canUseMaterializedView) {
+      const mvBranchFilter = branchId ? sql`AND mv.branch_id = ${branchId}::uuid` : sql``;
+      const mvKpiRows = await db.execute<{
+        is_mm: boolean;
+        total_premi: string;
+        total_komisi: string;
+        policy_count: string;
+        total_claim: string;
+        claim_count: string;
       }>(sql`
-        SELECT 
-          COALESCE(SUM(cl.gross_claim), 0)::numeric(18,2) AS total_claim_all
-        FROM claims cl
-        LEFT JOIN agents ag ON cl.agent_id = ag.id
-        WHERE ${sql.join(allClaimConditions, sql` AND `)}
+        SELECT
+          mv.is_mm,
+          COALESCE(SUM(mv.total_premi), 0)::numeric(18,2) AS total_premi,
+          COALESCE(SUM(mv.total_komisi), 0)::numeric(18,2) AS total_komisi,
+          COALESCE(SUM(mv.policy_count), 0)::integer AS policy_count,
+          COALESCE(SUM(mv.total_claim), 0)::numeric(18,2) AS total_claim,
+          COALESCE(SUM(mv.claim_count), 0)::integer AS claim_count
+        FROM mv_branch_cutoff_summary mv
+        WHERE mv.cutoff_year = ${mvCutoffYear}
+        ${mvBranchFilter}
+        GROUP BY mv.is_mm
       `);
 
-      totalClaimAll = parseFloat(allClaimKpi?.total_claim_all || '0');
+      if (mvKpiRows.length > 0) {
+        mvServed = true;
+        for (const r of mvKpiRows) {
+          const p = parseFloat(r.total_premi || '0');
+          const c = parseFloat(r.total_claim || '0');
+          totalPremiAll += p;
+          totalClaimAll += c;
+          if (r.is_mm) {
+            totalPremi = p;
+            totalClaim = c;
+            totalKomisi = Math.abs(parseFloat(r.total_komisi || '0'));
+            totalPolicies = Number(r.policy_count || 0);
+            totalClaimsCount = Number(r.claim_count || 0);
+          }
+        }
+      }
     }
 
-    // Hitung Metrik Eksekutif
-    const totalPremi = parseFloat(prodKpi?.total_premi || '0');
-    const totalClaim = parseFloat(claimKpi?.total_claim || '0');
-    const totalKomisi = Math.abs(parseFloat(prodKpi?.total_komisi || '0'));
-    const totalPolicies = Number(prodKpi?.total_policies || 0);
-    const totalClaimsCount = Number(claimKpi?.total_claims_count || 0);
+    if (!mvServed) {
+      const [prodKpi] = await db.execute<{
+        total_premi: string;
+        total_komisi: string;
+        total_akusisi: string;
+        total_policies: string;
+        total_records: string;
+      }>(sql`
+        SELECT 
+          COALESCE(SUM(pr.nilai_premi), 0)::numeric(18,2) AS total_premi,
+          COALESCE(SUM(pr.nilai_komisi), 0)::numeric(18,2) AS total_komisi,
+          COALESCE(SUM(pr.nilai_akusisi), 0)::numeric(18,2) AS total_akusisi,
+          COUNT(DISTINCT pr.policy_no)::integer AS total_policies,
+          COUNT(pr.id)::integer AS total_records
+        FROM production_records pr
+        WHERE ${prodWhereSql}
+      `);
+
+      const [claimKpi] = await db.execute<{
+        total_claim: string;
+        total_indemnity: string;
+        total_deductible: string;
+        total_salvage: string;
+        total_claims_count: string;
+        total_records: string;
+      }>(sql`
+        SELECT 
+          COALESCE(SUM(cl.gross_claim), 0)::numeric(18,2) AS total_claim,
+          COALESCE(SUM(cl.indemnity), 0)::numeric(18,2) AS total_indemnity,
+          COALESCE(SUM(cl.deductible), 0)::numeric(18,2) AS total_deductible,
+          COALESCE(SUM(cl.salvage), 0)::numeric(18,2) AS total_salvage,
+          COUNT(DISTINCT cl.claim_no)::integer AS total_claims_count,
+          COUNT(cl.id)::integer AS total_records
+        FROM claims cl
+        LEFT JOIN agents ag ON cl.agent_id = ag.id
+        WHERE ${claimWhereSql}
+      `);
+
+      if (!isAgentRole) {
+        const allProdConditions = [sql`pr.deleted_at IS NULL`];
+        if (startDate && endDate) {
+          allProdConditions.push(sql`COALESCE(pr.issue_date, pr.start_period) >= ${startDate}::date AND COALESCE(pr.issue_date, pr.start_period) <= ${endDate}::date`);
+        }
+        if (branchId) {
+          allProdConditions.push(sql`pr.branch_id = ${branchId}::uuid`);
+        }
+        if (productParam) {
+          allProdConditions.push(sql`pr.product ILIKE ${'%' + productParam + '%'}`);
+        }
+
+        const [allProdKpi] = await db.execute<{ total_premi_all: string }>(sql`
+          SELECT COALESCE(SUM(pr.nilai_premi), 0)::numeric(18,2) AS total_premi_all
+          FROM production_records pr
+          WHERE ${sql.join(allProdConditions, sql` AND `)}
+        `);
+        totalPremiAll = parseFloat(allProdKpi?.total_premi_all || '0');
+
+        const allClaimConditions = [sql`cl.deleted_at IS NULL`];
+        if (startDate && endDate) {
+          allClaimConditions.push(sql`cl.date_of_settlement >= ${startDate}::date AND cl.date_of_settlement <= ${endDate}::date`);
+        }
+        if (branchId) {
+          allClaimConditions.push(sql`COALESCE(cl.branch_id, ag.branch_id) = ${branchId}::uuid`);
+        }
+        if (uwYearParam) {
+          allClaimConditions.push(sql`cl.uw_year = ${uwYearParam}`);
+        }
+        if (productParam) {
+          allClaimConditions.push(sql`cl.nama_produk ILIKE ${'%' + productParam + '%'}`);
+        }
+
+        const [allClaimKpi] = await db.execute<{
+          total_claim_all: string;
+        }>(sql`
+          SELECT 
+            COALESCE(SUM(cl.gross_claim), 0)::numeric(18,2) AS total_claim_all
+          FROM claims cl
+          LEFT JOIN agents ag ON cl.agent_id = ag.id
+          WHERE ${sql.join(allClaimConditions, sql` AND `)}
+        `);
+
+        totalClaimAll = parseFloat(allClaimKpi?.total_claim_all || '0');
+      }
+
+      totalPremi = parseFloat(prodKpi?.total_premi || '0');
+      totalClaim = parseFloat(claimKpi?.total_claim || '0');
+      totalKomisi = Math.abs(parseFloat(prodKpi?.total_komisi || '0'));
+      totalPolicies = Number(prodKpi?.total_policies || 0);
+      totalClaimsCount = Number(claimKpi?.total_claims_count || 0);
+    }
 
     const rawLossRatio = totalPremi > 0 ? (totalClaim / totalPremi) * 100 : null;
     const lossRatioEvaluation = evaluateLossRatio(rawLossRatio);
@@ -346,49 +404,75 @@ export async function GET(req: NextRequest) {
       };
     });
 
-    // 6. Kinerja Berdasarkan Cabang (Branch Performance)
-    const branchPerformanceData = await db.execute<{
-      branch_id: string;
-      branch_code: string;
-      branch_name: string;
-      total_premi: string;
-      policy_count: string;
-      total_claim: string;
-      claim_count: string;
-    }>(sql`
-      WITH b_prod AS (
-        SELECT 
-          pr.branch_id,
-          COALESCE(SUM(pr.nilai_premi), 0)::numeric(18,2) AS total_premi,
-          COUNT(DISTINCT pr.policy_no)::integer AS policy_count
-        FROM production_records pr
-        WHERE ${prodWhereSql}
-        GROUP BY pr.branch_id
-      ),
-      b_claim AS (
-        SELECT 
-          COALESCE(cl.branch_id, ag.branch_id) AS branch_id,
-          COALESCE(SUM(cl.gross_claim), 0)::numeric(18,2) AS total_claim,
-          COUNT(DISTINCT cl.claim_no)::integer AS claim_count
-        FROM claims cl
-        LEFT JOIN agents ag ON cl.agent_id = ag.id
-        WHERE ${claimWhereSql}
-        GROUP BY COALESCE(cl.branch_id, ag.branch_id)
-      )
-      SELECT 
-        COALESCE(b.id::text, 'UNMAPPED') AS branch_id,
-        COALESCE(b.code, '-') AS branch_code,
-        COALESCE(b.name, 'Cabang Belum Terpetakan') AS branch_name,
-        COALESCE(bp.total_premi, 0)::numeric(18,2) AS total_premi,
-        COALESCE(bp.policy_count, 0)::integer AS policy_count,
-        COALESCE(bc.total_claim, 0)::numeric(18,2) AS total_claim,
-        COALESCE(bc.claim_count, 0)::integer AS claim_count
-      FROM branches b
-      LEFT JOIN b_prod bp ON bp.branch_id = b.id
-      LEFT JOIN b_claim bc ON bc.branch_id = b.id
-      WHERE (COALESCE(bp.total_premi, 0) > 0 OR COALESCE(bc.total_claim, 0) > 0)
-      ORDER BY total_premi DESC, total_claim DESC
-    `);
+    // 6. Kinerja Berdasarkan Cabang (Branch Performance - pakai Materialized View jika mvServed)
+    const branchPerformanceData = mvServed
+      ? await db.execute<{
+          branch_id: string;
+          branch_code: string;
+          branch_name: string;
+          total_premi: string;
+          policy_count: string;
+          total_claim: string;
+          claim_count: string;
+        }>(sql`
+          SELECT
+            b.id::text AS branch_id,
+            b.code AS branch_code,
+            b.name AS branch_name,
+            COALESCE(mv.total_premi, 0)::numeric(18,2) AS total_premi,
+            COALESCE(mv.policy_count, 0)::integer AS policy_count,
+            COALESCE(mv.total_claim, 0)::numeric(18,2) AS total_claim,
+            COALESCE(mv.claim_count, 0)::integer AS claim_count
+          FROM branches b
+          JOIN mv_branch_cutoff_summary mv
+            ON mv.branch_id = b.id
+            AND mv.cutoff_year = ${mvCutoffYear}
+            AND mv.is_mm = true
+          ${branchId ? sql`WHERE b.id = ${branchId}::uuid` : sql``}
+          ORDER BY total_premi DESC, total_claim DESC
+        `)
+      : await db.execute<{
+          branch_id: string;
+          branch_code: string;
+          branch_name: string;
+          total_premi: string;
+          policy_count: string;
+          total_claim: string;
+          claim_count: string;
+        }>(sql`
+          WITH b_prod AS (
+            SELECT 
+              pr.branch_id,
+              COALESCE(SUM(pr.nilai_premi), 0)::numeric(18,2) AS total_premi,
+              COUNT(DISTINCT pr.policy_no)::integer AS policy_count
+            FROM production_records pr
+            WHERE ${prodWhereSql}
+            GROUP BY pr.branch_id
+          ),
+          b_claim AS (
+            SELECT 
+              COALESCE(cl.branch_id, ag.branch_id) AS branch_id,
+              COALESCE(SUM(cl.gross_claim), 0)::numeric(18,2) AS total_claim,
+              COUNT(DISTINCT cl.claim_no)::integer AS claim_count
+            FROM claims cl
+            LEFT JOIN agents ag ON cl.agent_id = ag.id
+            WHERE ${claimWhereSql}
+            GROUP BY COALESCE(cl.branch_id, ag.branch_id)
+          )
+          SELECT 
+            COALESCE(b.id::text, 'UNMAPPED') AS branch_id,
+            COALESCE(b.code, '-') AS branch_code,
+            COALESCE(b.name, 'Cabang Belum Terpetakan') AS branch_name,
+            COALESCE(bp.total_premi, 0)::numeric(18,2) AS total_premi,
+            COALESCE(bp.policy_count, 0)::integer AS policy_count,
+            COALESCE(bc.total_claim, 0)::numeric(18,2) AS total_claim,
+            COALESCE(bc.claim_count, 0)::integer AS claim_count
+          FROM branches b
+          LEFT JOIN b_prod bp ON bp.branch_id = b.id
+          LEFT JOIN b_claim bc ON bc.branch_id = b.id
+          WHERE (COALESCE(bp.total_premi, 0) > 0 OR COALESCE(bc.total_claim, 0) > 0)
+          ORDER BY total_premi DESC, total_claim DESC
+        `);
 
     const branchPerformance = branchPerformanceData.map((row) => {
       const p = parseFloat(row.total_premi || '0');

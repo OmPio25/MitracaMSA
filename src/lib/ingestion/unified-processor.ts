@@ -20,6 +20,7 @@ import { getOrCreateBranch, getOrCreateAgentPlaceholder, ProvisioningCache } fro
 import { executeSelfHealingPass } from './self-healing';
 import { extractCellValue } from './sanitizer';
 import { parsePolicyNo } from './policy-parser';
+import { refreshAnalyticsMaterializedViews } from '@/lib/db/performance-views';
 
 const BATCH_SIZE = 1000;
 
@@ -53,20 +54,31 @@ export async function processUploadedExcelFile(
   filePath: string,
   fileName: string,
   fileSize: number,
-  userId: string | null
+  userId: string | null,
+  existingBatchId?: string
 ): Promise<IngestionJobResult> {
-  // 1. Initial Batch Record (Status: PROCESSING)
-  const [batch] = await db
-    .insert(uploadBatches)
-    .values({
-      batchType: 'DATA_AGENT', // Placeholder until auto-detected
-      fileName,
-      fileSize,
-      uploadedBy: userId,
-      status: 'PROCESSING',
-      startedAt: new Date(),
-    })
-    .returning();
+  // 1. Initial Batch Record (Update QUEUED batch or insert new PROCESSING batch)
+  const [batch] = existingBatchId
+    ? await db
+        .update(uploadBatches)
+        .set({
+          status: 'PROCESSING',
+          startedAt: new Date(),
+          updatedAt: new Date(),
+        })
+        .where(eq(uploadBatches.id, existingBatchId))
+        .returning()
+    : await db
+        .insert(uploadBatches)
+        .values({
+          batchType: 'DATA_AGENT', // Placeholder until auto-detected
+          fileName,
+          fileSize,
+          uploadedBy: userId,
+          status: 'PROCESSING',
+          startedAt: new Date(),
+        })
+        .returning();
 
   let detectedType: string | null = null;
   let detectedColumnMapping: Record<string, string> = {};
@@ -239,6 +251,9 @@ export async function processUploadedExcelFile(
         },
       })
       .where(eq(uploadBatches.id, batch.id));
+
+    // Refresh Materialized Views secara non-blocking agar dashboard tetap instan (<50ms)
+    await refreshAnalyticsMaterializedViews().catch(() => false);
 
     return {
       batchId: batch.id,
