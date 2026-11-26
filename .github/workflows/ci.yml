@@ -31,6 +31,11 @@ jobs:
       - name: ESLint Code Quality Check
         run: npm run lint
 
+      - name: Automated Logic & Regression Tests
+        env:
+          JWT_SECRET: "ci_jwt_secret_minimum_32_characters_for_build"
+        run: npm run test:ci
+
       - name: Next.js Production Build Test
         env:
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mitracamsa_ci"

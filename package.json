@@ -8,6 +8,7 @@
     "start": "next start -H 0.0.0.0",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test:ci": "tsx src/scripts/ci-unit-tests.ts",
     "test:cutoff": "tsx src/scripts/test-agent-kpi-cutoff.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
